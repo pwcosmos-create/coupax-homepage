@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% block title %}{{ site_name }} | ETF 데이터 제공{% endblock %}
+{% block title_scoped %}ETF 데이터 제공{% endblock %}
+{% block meta_description %}운용사·공시·증권사 출처 ETF 정보를 수집·재가공하여 제공하는 데이터 서비스(베타) 안내입니다. 투자 권유가 아닙니다.{% endblock %}
+{% block og_title %}{{ site_name }} | ETF 데이터 제공{% endblock %}
+{% block og_description %}ETF 정보 수집·재가공·제공 모델을 소개하는 베타 페이지입니다.{% endblock %}
+{% block canonical_url %}{{ url_for('data_product_etf', _external=True) }}{% endblock %}
+
+{% block content %}
+<section class="hero-box product-hero">
+  <h1>ETF 데이터 제공</h1>
+  <p><strong>수집 → 재가공 → 제공</strong>(라이선스·계약 범위 내 배포)으로, 월배당·분배·보수·시총 등 ETF 관련 정보를 정제한 데이터셋·리포트·API 형태로 전달하는 모델을 준비 중입니다.</p>
+  <p class="hero-meta">베타 단계입니다.</p>
+</section>
+
+<section class="doc-wrap product-block">
+  <h2>왜 재가공인가</h2>
+  <p>원천 데이터는 운용사 공시, DART, 거래소, 증권사 API 등에 흩어져 있고 표기 단위·갱신 주기가 제각각입니다. 동일 스키마로 통일하고 결측·이상치를 검증한 뒤, 월별 시트·배치 파일·REST 엔드포인트 등 <strong>소비하기 쉬운 형태</strong>로 만드는 과정이 곧 재가공입니다.</p>
+</section>
+
+<section class="doc-wrap product-block">
+  <h2>파이프라인 개요</h2>
+  <ol class="product-pipeline">
+    <li><strong>수집</strong> — 운용사 홈페이지·공시, 거래소, 증권사 Open API(키는 서버 환경 변수로만 보관).</li>
+    <li><strong>재가공</strong> — 스키마 매핑, 단위 통일(예: 1좌당 분배금), 월·연 합계 검산, 메타데이터(상장일·총보수 등) 병합.</li>
+    <li><strong>산출물</strong> — 정적 JSON/CSV, 주간·월간 스냅샷 리포트, 또는 사내망·VPC 내 API(고객 약관에 맞게).</li>
+    <li><strong>제공·라이선스</strong> — 구독·건당 전달·B2B 라이선스 등 계약 형태는 협의합니다. 본 사이트는 결제 모듈을 운영하지 않습니다.</li>
+  </ol>
+</section>
+
+<section class="doc-wrap product-block">
+  <h2>제공 형태(예시)</h2>
+  <p class="etf-hub-lead">아래는 논의용 틀입니다. 실제 범위·갱신 주기·SLA는 문의 시 조정합니다.</p>
+  <div class="product-tier-grid">
+    <div class="product-tier-card">
+      <h3>스냅샷</h3>
+      <p class="product-tier-desc">특정 시점 ETF 월배당·지표 표를 CSV/JSON으로 일회성 제공.</p>
+    </div>
+    <div class="product-tier-card product-tier-featured">
+      <h3>정기 갱신</h3>
+      <p class="product-tier-desc">주·월 단위로 재가공 데이터를 갱신해 전달. 내부 분석·리서치용.</p>
+    </div>
+    <div class="product-tier-card">
+      <h3>API / 연동</h3>
+      <p class="product-tier-desc">귀사 시스템에 맞춘 read-only API 또는 SFTP 배치(보안·약관 별도 협의).</p>
+    </div>
+  </div>
+  <p class="product-cta-wrap">
+    <a href="{{ url_for('etf_hub') }}" class="btn btn-gray">ETF·월배당 페이지 보기</a>
+  </p>
+</section>
+
+<section class="doc-wrap product-block product-legal">
+  <h2>법무·컴플라이언스 유의</h2>
+  <ul class="etf-hub-bullets">
+    <li>제공하는 것은 <strong>정보·데이터</strong>이며 <strong>투자 권유·투자자문</strong>이 아닙니다. 최종 투자 판단은 수요 기관·개인의 책임입니다.</li>
+    <li>원천 데이터의 <strong>저작권·이용약관·재배포 제한</strong>을 준수해야 합니다. 증권사 API는 약관상 <strong>제3자 제공·재배포 금지</strong> 조항이 흔합니다.</li>
+    <li>국내에서는 <strong>금융투자업·신용정보·개인정보</strong> 등 관련 법령이 적용될 수 있으니, <strong>유료·상업적 제공</strong> 전 반드시 전문가 검토를 권장합니다.</li>
+  </ul>
+</section>
+{% endblock %}

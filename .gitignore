@@ -1,0 +1,26 @@
+# Environment and local secrets
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+
+# Board app local SQLite
+board/board.db
+
+# Local runtime/session artifacts that may contain tokens
+njob_session.json
+mybox_html.txt
+njob_send_search.html
+pm2_list.json
+pm2_info.txt
+
+# IDE/OS
+.vscode/
+*.log
+
+# Deploy artifact
+board/coupax-board-deploy.zip

@@ -1,0 +1,186 @@
+<section id="etf" class="hero-box etf-hub-hero">
+  <h1 class="etf-hub-main-title">ETF·월배당</h1>
+  <p>사이트에 올라온 <strong>ETF 관련 글</strong>을 주제별로 묶고, <strong>월배당 ETF</strong> 참고 표·외부 링크를 같은 페이지에서 확인합니다.</p>
+  <p class="hero-meta">ETF 관련 글 <strong>{{ etf_count }}</strong>건 · <a href="{{ url_for('index') }}" class="hero-inline-link">홈</a> · <a href="{{ url_for('blog') }}" class="hero-inline-link">블로그</a> · <a href="{{ url_for('write') }}" class="hero-inline-link">새 글 등록</a> · <a href="{{ url_for('data_product_etf') }}" class="hero-inline-link">수집·재가공 데이터 제공</a></p>
+</section>
+
+<section class="doc-wrap etf-hub-block">
+  <h2 class="etf-hub-h2">월배당 ETF, 무엇부터 보나요?</h2>
+  <ul class="etf-hub-bullets">
+    <li><strong>분배 주기</strong>는 &ldquo;매월&rdquo;이 아니라도 &ldquo;월 단위로 지급을 지향&rdquo;하는 경우가 있어, <strong>간이투자설명서·운용사 공지</strong>로 확인하는 것이 안전합니다.</li>
+    <li><strong>분배율</strong>만 보지 말고 <strong>순자산가치(NAV) 변동·총보수·과세</strong>를 같이 보는 편이 좋습니다.</li>
+    <li>해외 자산·커버드콜형은 <strong>환율·옵션 전략</strong> 때문에 변동성 구조가 단순 주식형과 다를 수 있습니다.</li>
+  </ul>
+</section>
+
+<section class="doc-wrap etf-hub-block">
+  <h2 class="etf-hub-h2">배당·종목 조회 (외부 링크)</h2>
+  <p class="etf-hub-lead">아래는 이 사이트와 무관한 <strong>제3자 ETF·배당 정보 서비스</strong>입니다. 데이터 정확성·최신 여부는 각 사이트 기준으로 확인하세요.</p>
+  <div class="etf-ext-grid">
+    {% for item in etf_external_links %}
+    <a class="etf-ext-card" href="{{ item.url }}" target="_blank" rel="noopener noreferrer">
+      <span class="etf-ext-card-title">{{ item.title }}</span>
+      <span class="etf-ext-card-url">{{ item.url }}</span>
+      <span class="etf-ext-card-desc">{{ item.description }}</span>
+      <span class="etf-ext-card-cta">새 창에서 열기 →</span>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="doc-wrap etf-hub-block">
+  <h2 class="etf-hub-h2">월배당 트래킹 시트 ({{ dividend_sheet.year }}년)</h2>
+  {% if dividend_sheet.pipeline_note %}
+  <p class="etf-hub-lead">{{ dividend_sheet.pipeline_note }}</p>
+  {% endif %}
+  {% if dividend_sheet.data_sources %}
+  <ul class="etf-hub-bullets etf-hub-bullets-tight">
+    {% for line in dividend_sheet.data_sources %}
+    <li>{{ line }}</li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+  {% if dividend_sheet.dividend_unit %}
+  <p class="etf-hub-lead">{{ dividend_sheet.dividend_unit }}</p>
+  {% endif %}
+  {% if dividend_sheet.note %}
+  <p class="etf-hub-lead">{{ dividend_sheet.note }}</p>
+  {% endif %}
+  {% if dividend_sheet.rows %}
+  <div class="table-scroll sheet-scroll">
+    <table class="board-table sheet-table">
+      <thead>
+        <tr class="sheet-head-group">
+          <th colspan="8">ETF 정보</th>
+          <th colspan="13">{{ dividend_sheet.year }}년</th>
+          <th colspan="4">참고 지표</th>
+        </tr>
+        <tr class="sheet-head-cols">
+          <th class="center sheet-col-no">NO.</th>
+          <th class="sheet-col-brand">브랜드</th>
+          <th class="sheet-col-name">ETF명</th>
+          <th class="center sheet-col-code">코드</th>
+          <th class="center">주기</th>
+          <th class="center">상장일</th>
+          <th class="center">시가총액</th>
+          <th class="center">총 보수</th>
+          <th class="center sheet-col-m">1월</th>
+          <th class="center sheet-col-m">2월</th>
+          <th class="center sheet-col-m">3월</th>
+          <th class="center sheet-col-m">4월</th>
+          <th class="center sheet-col-m">5월</th>
+          <th class="center sheet-col-m">6월</th>
+          <th class="center sheet-col-m">7월</th>
+          <th class="center sheet-col-m">8월</th>
+          <th class="center sheet-col-m">9월</th>
+          <th class="center sheet-col-m">10월</th>
+          <th class="center sheet-col-m">11월</th>
+          <th class="center sheet-col-m">12월</th>
+          <th class="center">총합</th>
+          <th class="center">현재가</th>
+          <th class="center sheet-col-pct">{{ dividend_sheet.year }}년<br>배당수익률</th>
+          <th class="center sheet-col-pct">{{ dividend_sheet.year }}년<br>주가수익률</th>
+          <th class="center sheet-col-pct sheet-th-total">{{ dividend_sheet.year }}년<br>총 수익률</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in dividend_sheet.rows %}
+        {% set months = row.months if row.months is defined else [] %}
+        <tr>
+          <td class="center">{{ row.get('no', '—') }}</td>
+          <td>{{ row.get('brand', '—') }}</td>
+          <td class="sheet-name-cell">{{ row.get('name', '—') }}</td>
+          <td class="center mono">{{ row.get('code', '—') }}</td>
+          <td class="center">{{ row.get('cycle', '—') }}</td>
+          <td class="center">{{ row.get('listed', '—') }}</td>
+          <td class="center">{{ row.get('market_cap', '—') }}</td>
+          <td class="center">{{ row.get('expense_ratio', '—') }}</td>
+          {% for i in range(12) %}
+          <td class="center sheet-num">
+            {% if months|length > i and months[i] is not none %}{{ months[i] }}{% else %}—{% endif %}
+          </td>
+          {% endfor %}
+          <td class="center sheet-num sheet-total">{{ row.get('dividend_total', '—') }}</td>
+          <td class="center sheet-num">{% if row.current_price is defined and row.current_price is not none %}{{ row.current_price|intcomma }}{% else %}—{% endif %}</td>
+          <td class="center sheet-pct">{% if row.dividend_yield_pct is defined and row.dividend_yield_pct is not none %}{{ '%.2f'|format(row.dividend_yield_pct) }}%{% else %}—{% endif %}</td>
+          <td class="center sheet-pct sheet-pct-price">{% if row.price_return_pct is defined and row.price_return_pct is not none %}{{ '%.2f'|format(row.price_return_pct) }}%{% else %}—{% endif %}</td>
+          <td class="center sheet-pct sheet-pct-total">{% if row.total_return_pct is defined and row.total_return_pct is not none %}{{ '%.2f'|format(row.total_return_pct) }}%{% else %}—{% endif %}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <p class="etf-disclaimer">수치는 운용사·공시·증권사 API 등에서 수집·재가공한 결과를 <code>board/data/monthly_dividend_etfs.json</code>에 넣어 불러옵니다. 시세·분배·수익률은 시점마다 달라지며 투자 권유가 아닙니다. 갱신 자동화는 <code>board/scripts/sync_dividend_sheet.py</code>를 참고하세요.</p>
+  {% else %}
+  <p class="etf-hub-empty"><code>board/data/monthly_dividend_etfs.json</code>에 <code>rows</code> 배열을 채우면 이 표에 표시됩니다.</p>
+  {% endif %}
+</section>
+
+<section class="doc-wrap etf-hub-block">
+  <h2 class="etf-hub-h2">사이트에서 &ldquo;월배당&rdquo;을 다룬 글</h2>
+  {% if monthly_posts %}
+  <ul class="hub-link-list">
+    {% for post in monthly_posts %}
+    <li>
+      <a href="{{ url_for('view', post_id=post['id']) }}">{{ post['title'] }}</a>
+      <span class="hub-meta">{{ post['created'] }}</span>
+    </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+  <p class="etf-hub-empty">아직 제목·본문에 &ldquo;월배당&rdquo;이 포함된 글이 없습니다. 글쓰기에서 월배당 주제를 올리면 이 목록에 자동으로 나타납니다.</p>
+  {% endif %}
+</section>
+
+{% if themed_posts %}
+<section class="doc-wrap etf-hub-block">
+  <h2 class="etf-hub-h2">ETF 글 주제별 모음</h2>
+  {% for theme, posts in themed_posts %}
+  <div class="theme-block">
+    <h3 class="theme-block-title">{{ theme }}</h3>
+    <ul class="hub-link-list">
+      {% for post in posts %}
+      <li>
+        <a href="{{ url_for('view', post_id=post['id']) }}">{{ post['title'] }}</a>
+        <span class="hub-meta">{{ post['created'] }}</span>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endfor %}
+</section>
+{% endif %}
+
+<section class="etf-hub-block">
+  <div class="page-header">
+    <h2>ETF 관련 글 전체 <span class="count">{{ etf_count }}</span></h2>
+  </div>
+  <table class="board-table">
+    <thead>
+      <tr>
+        <th class="col-no">번호</th>
+        <th class="col-title">제목</th>
+        <th class="col-author">작성자</th>
+        <th class="col-date">날짜</th>
+        <th class="col-views">조회</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% if etf_posts %}
+        {% for post in etf_posts %}
+        <tr>
+          <td class="center">{{ post['id'] }}</td>
+          <td>
+            <a href="{{ url_for('view', post_id=post['id']) }}" class="post-link">{{ post['title'] }}</a>
+          </td>
+          <td class="center">{{ post['author'] }}</td>
+          <td class="center">{{ post['created'] }}</td>
+          <td class="center">{{ post['views'] }}</td>
+        </tr>
+        {% endfor %}
+      {% else %}
+        <tr><td colspan="5" class="empty">ETF 관련 글이 없습니다.</td></tr>
+      {% endif %}
+    </tbody>
+  </table>
+</section>

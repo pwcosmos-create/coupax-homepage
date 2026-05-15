@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{% block title %}게시판{% endblock %}</title>
+<meta name="description" content="{% block meta_description %}{{ site_name }} - 금융, 절세, 연금 관련 실전 정보 아카이브{% endblock %}">
+<link rel="canonical" href="{% block canonical_url %}{{ request.url }}{% endblock %}">
+<meta property="og:site_name" content="{{ site_name }}">
+<meta property="og:type" content="{% block og_type %}website{% endblock %}">
+<meta property="og:title" content="{% block og_title %}{% block title_scoped %}{{ site_name }}{% endblock %}{% endblock %}">
+<meta property="og:description" content="{% block og_description %}{{ site_name }} - 금융, 절세, 연금 관련 실전 정보 아카이브{% endblock %}">
+<meta property="og:url" content="{{ request.url }}">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="{% block twitter_title %}{{ self.og_title() }}{% endblock %}">
+<meta name="twitter:description" content="{% block twitter_description %}{{ self.og_description() }}{% endblock %}">
+{% if adsense_client %}
+<meta name="google-adsense-account" content="{{ adsense_client }}">
+{% endif %}
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+{% if adsense_client %}
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={{ adsense_client }}" crossorigin="anonymous"></script>
+{% endif %}
+{% block extra_head %}{% endblock %}
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <a href="{{ url_for('index') }}" class="logo">{{ site_name }}</a>
+    <nav class="top-nav">
+      <a href="{{ url_for('index') }}">홈</a>
+      <a href="{{ url_for('blog') }}">블로그</a>
+      <a href="{{ url_for('etf_hub') }}">ETF·월배당</a>
+      <a href="{{ url_for('data_product_etf') }}">ETF 데이터 제공</a>
+      <a href="{{ url_for('about') }}">소개</a>
+      <a href="{{ url_for('contact') }}">문의</a>
+    </nav>
+  </header>
+
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <div class="alert alert-{{ category }}">{{ message }}</div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer>
+    <p>{{ site_name }} &copy; 2026</p>
+    <p class="footer-links">
+      <a href="{{ url_for('about') }}">소개</a>
+      <a href="{{ url_for('contact') }}">문의</a>
+      <a href="{{ url_for('privacy') }}">개인정보처리방침</a>
+      <a href="{{ url_for('terms') }}">이용약관</a>
+    </p>
+  </footer>
+</div>
+</body>
+</html>

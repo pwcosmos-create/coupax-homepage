@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block title %}{{ site_name }} | ETF·월배당{% endblock %}
+{% block title_scoped %}{{ site_name }} | ETF·월배당 모음{% endblock %}
+{% block meta_description %}ETF 관련 글 모음, 월배당 ETF 참고 표, 외부 배당·종목 조회 링크. 투자 권유가 아닌 정보 정리 페이지입니다.{% endblock %}
+{% block canonical_url %}{{ url_for('etf_hub', _external=True) }}{% endblock %}
+{% block og_title %}{{ site_name }} | ETF·월배당 모음{% endblock %}
+{% block og_description %}ETF 글 주제별 모음과 월배당 참고 데이터, 외부 링크를 한 페이지에서 확인합니다.{% endblock %}
+{% block content %}
+{% include '_etf_hub_sections.html' %}
+{% endblock %}

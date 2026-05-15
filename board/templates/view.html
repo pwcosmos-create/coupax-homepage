@@ -1,0 +1,123 @@
+{% extends 'base.html' %}
+{% block title %}{{ post['title'] }}{% endblock %}
+{% block title_scoped %}{{ post['title'] }} | {{ site_name }}{% endblock %}
+{% block meta_description %}{{ (post['content'] | replace('\n', ' '))[:150] }}{% endblock %}
+{% block canonical_url %}{{ url_for('view', post_id=post['id'], _external=True) }}{% endblock %}
+{% block og_type %}article{% endblock %}
+{% block og_title %}{{ post['title'] }} | {{ site_name }}{% endblock %}
+{% block og_description %}{{ (post['content'] | replace('\n', ' '))[:150] }}{% endblock %}
+{% block extra_head %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": {{ post['title'] | tojson }},
+  "author": {
+    "@type": "Person",
+    "name": {{ post['author'] | tojson }}
+  },
+  "datePublished": {{ post['created'] | tojson }},
+  "dateModified": {{ post['created'] | tojson }},
+  "mainEntityOfPage": {{ url_for('view', post_id=post['id'], _external=True) | tojson }},
+  "publisher": {
+    "@type": "Organization",
+    "name": {{ site_name | tojson }}
+  }
+}
+</script>
+{% endblock %}
+
+{% block content %}
+<div class="post-view">
+  <div class="post-meta">
+    <h2 class="post-title">{{ post['title'] }}</h2>
+    <div class="meta-row">
+      <span>작성자: <strong>{{ post['author'] }}</strong></span>
+      <span>날짜: {{ post['created'] }}</span>
+      <span>조회: {{ post['views'] }}</span>
+    </div>
+  </div>
+
+  <div class="post-content">{{ post['content'] | replace('\n', '<br>') | safe }}</div>
+
+  <section class="author-box">
+    <h4>작성자 안내</h4>
+    <p><strong>{{ post['author'] }}</strong> · {{ site_name }} 편집팀</p>
+    <p>실무에 적용 가능한 금융 정보를 근거 기반으로 정리합니다.</p>
+  </section>
+
+  <div class="post-actions">
+    <a href="{{ url_for('blog') }}" class="btn btn-gray">목록</a>
+    <a href="{{ url_for('edit', post_id=post['id']) }}" class="btn">수정</a>
+
+    <button class="btn btn-danger" onclick="document.getElementById('delete-form').style.display='block'">삭제</button>
+    <form id="delete-form" method="post" action="{{ url_for('delete', post_id=post['id']) }}" style="display:none; margin-top:8px;">
+      <input type="password" name="password" placeholder="비밀번호 확인" class="inline-input" required>
+      <button type="submit" class="btn btn-danger">확인</button>
+      <button type="button" class="btn btn-gray" onclick="document.getElementById('delete-form').style.display='none'">취소</button>
+    </form>
+  </div>
+</div>
+
+<div class="related-section">
+  <h3>관련 글</h3>
+  {% if related_posts %}
+    <ul class="related-list">
+    {% for rp in related_posts %}
+      <li><a href="{{ url_for('view', post_id=rp['id']) }}">{{ rp['title'] }}</a> <span>{{ rp['created'] }}</span></li>
+    {% endfor %}
+    </ul>
+  {% else %}
+    <p class="empty">관련 글이 없습니다.</p>
+  {% endif %}
+</div>
+
+<!-- 댓글 목록 -->
+<div class="comment-section">
+  <h3>댓글 <span class="count">{{ comments | length }}</span></h3>
+
+  {% for comment in comments %}
+  <div class="comment-item">
+    <div class="comment-meta">
+      <strong>{{ comment['author'] }}</strong>
+      <span class="comment-date">{{ comment['created'] }}</span>
+      <button class="btn-text btn-danger-text"
+              onclick="toggleDelForm('del-{{ comment['id'] }}')">삭제</button>
+    </div>
+    <div class="comment-body">{{ comment['content'] | replace('\n', '<br>') | safe }}</div>
+    <form id="del-{{ comment['id'] }}" method="post"
+          action="{{ url_for('delete_comment', comment_id=comment['id']) }}"
+          style="display:none; margin-top:6px;">
+      <input type="password" name="password" placeholder="댓글 비밀번호" class="inline-input" required>
+      <button type="submit" class="btn btn-danger btn-sm">삭제</button>
+      <button type="button" class="btn btn-gray btn-sm"
+              onclick="toggleDelForm('del-{{ comment['id'] }}')">취소</button>
+    </form>
+  </div>
+  {% else %}
+    <p class="empty">첫 댓글을 남겨보세요.</p>
+  {% endfor %}
+</div>
+
+<!-- 댓글 작성 -->
+<div class="comment-write">
+  <h4>댓글 작성</h4>
+  <form method="post" action="{{ url_for('add_comment', post_id=post['id']) }}">
+    <div class="comment-top">
+      <input type="text" name="author" placeholder="작성자" required maxlength="20" class="input-sm">
+      <input type="password" name="password" placeholder="비밀번호" required class="input-sm">
+    </div>
+    <textarea name="content" rows="3" placeholder="댓글을 입력하세요." required maxlength="500"></textarea>
+    <div class="form-footer">
+      <button type="submit" class="btn btn-primary">댓글 등록</button>
+    </div>
+  </form>
+</div>
+
+<script>
+function toggleDelForm(id) {
+  const el = document.getElementById(id);
+  el.style.display = el.style.display === 'none' ? 'block' : 'none';
+}
+</script>
+{% endblock %}

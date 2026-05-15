@@ -1,0 +1,30 @@
+{
+  "year": 2026,
+  "dividend_unit": "1좌당 분배금(원), 재가공 후 반영",
+  "pipeline_note": "표의 수치는 운용사 홈페이지·공시(DART 등), 거래소, 증권사 Open API(시세·분배·잔고 등)에서 수집한 원천 데이터를 단위 통일·검증·합계 산출 등으로 재가공한 뒤 이 JSON에 입력합니다. API 키는 서버 환경 변수로만 관리하세요.",
+  "data_sources": [
+    "운용사: 간이투자설명서·분배 공지·펀드 공시",
+    "공시: 전자공시(DART) 등 법정 공시 자료",
+    "증권사: Open API·HTS 조회(발급 키·이용 약관 준수)",
+    "거래소: 상장 정보·종목코드·시가총액 등"
+  ],
+  "note": "이 파일을 갱신하면 /etf 페이지 표에 반영됩니다. 월별 합과 연 총합·수익률은 재가공 규칙에 맞게 맞추세요. 투자 권유가 아닙니다.",
+  "rows": [
+    {
+      "no": 102,
+      "brand": "PLUS",
+      "name": "PLUS 미국배당프리미엄데일리커버드콜",
+      "code": "485680",
+      "cycle": "월배",
+      "listed": "24.10.02",
+      "market_cap": "6,202억",
+      "expense_ratio": "0.05%",
+      "months": [160, 152, 180, 274, null, null, null, null, null, null, null, null],
+      "dividend_total": 882,
+      "current_price": 16120,
+      "dividend_yield_pct": 5.54,
+      "price_return_pct": 24.27,
+      "total_return_pct": 31.15
+    }
+  ]
+}

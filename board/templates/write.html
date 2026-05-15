@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %}글쓰기{% endblock %}
+{% block extra_head %}
+<meta name="robots" content="noindex,nofollow">
+{% endblock %}
+
+{% block content %}
+<div class="form-wrap">
+  <h2>글쓰기</h2>
+  <form method="post" action="{{ url_for('write') }}">
+    <div class="form-row">
+      <label>제목</label>
+      <input type="text" name="title" required maxlength="100" placeholder="제목을 입력하세요.">
+    </div>
+    <div class="form-row half">
+      <div>
+        <label>작성자</label>
+        <input type="text" name="author" required maxlength="20" placeholder="작성자">
+      </div>
+      <div>
+        <label>비밀번호 <small>(수정/삭제 시 필요)</small></label>
+        <input type="password" name="password" required placeholder="비밀번호">
+      </div>
+    </div>
+    <div class="form-row">
+      <label>내용</label>
+      <textarea name="content" rows="12" required placeholder="내용을 입력하세요."></textarea>
+    </div>
+    <div class="form-footer">
+      <a href="{{ url_for('blog') }}" class="btn btn-gray">취소</a>
+      <button type="submit" class="btn btn-primary">등록</button>
+    </div>
+  </form>
+</div>
+{% endblock %}

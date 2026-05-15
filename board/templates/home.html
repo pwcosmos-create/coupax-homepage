@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block title %}{{ site_name }} - 금융 정보 아카이브{% endblock %}
+{% block title_scoped %}{{ site_name }}{% endblock %}
+{% block meta_description %}{{ site_name }} — 금융·절세·연금 블로그와 ETF·월배당 참고 페이지로 나뉘어 있습니다.{% endblock %}
+{% block og_title %}{{ site_name }}{% endblock %}
+{% block og_description %}금융 콘텐츠 블로그와 ETF·월배당 모음을 선택해 들어가세요.{% endblock %}
+{% block extra_head %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": {{ site_name | tojson }},
+  "url": {{ url_for('index', _external=True) | tojson }}
+}
+</script>
+{% endblock %}
+
+{% block content %}
+<section class="hero-box">
+  <h1>{{ site_name }}</h1>
+  <p>ETF, 연금, 절세, 청약, 예적금 정보를 실제 실행 중심으로 정리합니다.</p>
+  <p class="hero-meta">총 <strong>{{ total }}</strong>개 글 · 아래에서 들어갈 영역을 고르세요.</p>
+</section>
+
+<div class="home-split" role="navigation" aria-label="주요 섹션">
+  <a class="home-tile" href="{{ url_for('blog') }}">
+    <h2>블로그</h2>
+    <p>전체 글 목록, 검색, 페이지 이동</p>
+    <span class="home-tile-cta">이동 →</span>
+  </a>
+  <a class="home-tile" href="{{ url_for('etf_hub') }}">
+    <h2>ETF·월배당</h2>
+    <p>ETF 관련 글 모음, 월배당 표, 외부 참고 링크</p>
+    <span class="home-tile-cta">이동 →</span>
+  </a>
+</div>
+{% endblock %}

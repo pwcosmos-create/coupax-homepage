@@ -124,22 +124,14 @@ header {
   white-space: nowrap;
   flex-shrink: 0;
 }
-.blog-toolbar {
-  display: flex;
+.search-form-with-write {
+  margin-bottom: 12px;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  margin-bottom: 12px;
 }
-.blog-toolbar .search-form {
-  margin-bottom: 0;
-  flex: 1;
-  min-width: 200px;
-}
-.blog-toolbar-write {
+.search-form-with-write .btn-primary {
   font-weight: 600;
-  white-space: nowrap;
+  margin-left: 4px;
 }
 .empty-write-link {
   display: inline-block;

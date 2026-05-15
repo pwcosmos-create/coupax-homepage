@@ -28,18 +28,15 @@
 </section>
 
 <div class="page-header">
-  <h2>최신 글 목록 <span class="count">{{ total }}</span></h2>
-  <a href="{{ url_for('write') }}" class="btn btn-primary">+ 글 작성</a>
+  <h2>작성하신 글 목록 <span class="count">{{ total }}</span></h2>
 </div>
 
-<div class="blog-toolbar">
-  <form class="search-form" method="get" action="{{ url_for('blog') }}">
-    <input type="text" name="q" value="{{ q }}" placeholder="제목 또는 작성자 검색">
-    <button type="submit" class="btn">검색</button>
-    {% if q %}<a href="{{ url_for('blog') }}" class="btn btn-gray">전체보기</a>{% endif %}
-  </form>
-  <a href="{{ url_for('write') }}" class="btn btn-primary blog-toolbar-write">글 작성하기</a>
-</div>
+<form class="search-form search-form-with-write" method="get" action="{{ url_for('blog') }}">
+  <input type="text" name="q" value="{{ q }}" placeholder="제목 또는 작성자 검색">
+  <button type="submit" class="btn">검색</button>
+  {% if q %}<a href="{{ url_for('blog') }}" class="btn btn-gray">전체보기</a>{% endif %}
+  <a href="{{ url_for('write') }}" class="btn btn-primary">+ 글 작성</a>
+</form>
 
 <table class="board-table">
   <thead>

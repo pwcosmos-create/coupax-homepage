@@ -64,7 +64,7 @@ def sum_months(months: list[float | None]) -> int | None:
 
 def fetch_row_months(code: str) -> tuple[list[float | None], int | None, str]:
     code = code.strip().upper()
-    time.sleep(0.4)
+    time.sleep(0.35)
     try:
         info = fetch_json(INFO_URL.format(code=code))
     except urllib.error.HTTPError as e:
@@ -126,7 +126,8 @@ def apply_to_sheet(sheet: dict[str, Any], dry_run: bool) -> int:
     if not dry_run:
         sheet["note"] = (
             f"국내 월배당 ETF {len(rows)}종. {YEAR}년 월별 분배금(1좌당 원)은 "
-            "search-etf.com(get_etf_stock_info) 기준 자동 반영. 미지급 월은 null. 투자 권유가 아닙니다."
+            "search-etf.com(get_etf_stock_info) 기준 자동 반영. 미지급 월은 null. "
+            "수익률·시총 등 메타는 kisstock CSV와 병합. 투자 권유가 아닙니다."
         )
         SHEET_PATH.write_text(json.dumps(sheet, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     return with_data

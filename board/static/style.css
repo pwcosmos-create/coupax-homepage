@@ -31,6 +31,18 @@ header {
   font-size: 13px;
 }
 .top-nav a:hover { color: #4f6ef7; }
+.top-nav .nav-write {
+  display: inline-block;
+  padding: 5px 12px;
+  border-radius: 5px;
+  background: #4f6ef7;
+  color: #fff !important;
+  font-weight: 600;
+}
+.top-nav .nav-write:hover {
+  background: #3a5de0;
+  color: #fff !important;
+}
 .logo {
   font-size: 22px;
   font-weight: 700;
@@ -98,6 +110,53 @@ header {
 .hero-inline-link:hover { text-decoration: underline; }
 
 .hero-box-tight { margin-bottom: 20px; }
+.hero-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 14px;
+}
+.btn-write-hero {
+  padding: 10px 20px;
+  font-size: 15px;
+  font-weight: 600;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.blog-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+.blog-toolbar .search-form {
+  margin-bottom: 0;
+  flex: 1;
+  min-width: 200px;
+}
+.blog-toolbar-write {
+  font-weight: 600;
+  white-space: nowrap;
+}
+.empty-write-link {
+  display: inline-block;
+  margin-top: 8px;
+  color: #4f6ef7;
+  font-weight: 600;
+  text-decoration: none;
+}
+.empty-write-link:hover { text-decoration: underline; }
+.home-tile-write {
+  border-color: #4f6ef7;
+  background: linear-gradient(180deg, #f8f9ff 0%, #fff 100%);
+}
+.home-tile-cta-accent {
+  color: #4f6ef7;
+  font-weight: 700;
+}
 
 .home-split {
   display: grid;

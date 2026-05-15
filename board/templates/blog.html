@@ -17,21 +17,29 @@
 
 {% block content %}
 <section class="hero-box hero-box-tight">
-  <h1>블로그</h1>
-  <p>{{ site_name }}의 전체 글입니다. 제목·작성자로 검색할 수 있습니다.</p>
-  <p class="hero-meta">총 {{ total }}개 글 · <a href="{{ url_for('index') }}" class="hero-inline-link">홈</a> · <a href="{{ url_for('etf_hub') }}" class="hero-inline-link">ETF·월배당</a> · <a href="{{ url_for('write') }}" class="hero-inline-link">글쓰기</a></p>
+  <div class="hero-row">
+    <div>
+      <h1>블로그</h1>
+      <p>{{ site_name }}의 전체 글입니다. 제목·작성자로 검색할 수 있습니다.</p>
+      <p class="hero-meta">총 {{ total }}개 글 · <a href="{{ url_for('index') }}" class="hero-inline-link">홈</a> · <a href="{{ url_for('etf_hub') }}" class="hero-inline-link">ETF·월배당</a></p>
+    </div>
+    <a href="{{ url_for('write') }}" class="btn btn-primary btn-write-hero">+ 새 글 작성</a>
+  </div>
 </section>
 
 <div class="page-header">
   <h2>최신 글 목록 <span class="count">{{ total }}</span></h2>
-  <a href="{{ url_for('write') }}" class="btn btn-primary">글쓰기</a>
+  <a href="{{ url_for('write') }}" class="btn btn-primary">+ 글 작성</a>
 </div>
 
-<form class="search-form" method="get" action="{{ url_for('blog') }}">
-  <input type="text" name="q" value="{{ q }}" placeholder="제목 또는 작성자 검색">
-  <button type="submit" class="btn">검색</button>
-  {% if q %}<a href="{{ url_for('blog') }}" class="btn btn-gray">전체보기</a>{% endif %}
-</form>
+<div class="blog-toolbar">
+  <form class="search-form" method="get" action="{{ url_for('blog') }}">
+    <input type="text" name="q" value="{{ q }}" placeholder="제목 또는 작성자 검색">
+    <button type="submit" class="btn">검색</button>
+    {% if q %}<a href="{{ url_for('blog') }}" class="btn btn-gray">전체보기</a>{% endif %}
+  </form>
+  <a href="{{ url_for('write') }}" class="btn btn-primary blog-toolbar-write">글 작성하기</a>
+</div>
 
 <table class="board-table">
   <thead>
@@ -57,7 +65,7 @@
       </tr>
       {% endfor %}
     {% else %}
-      <tr><td colspan="5" class="empty">게시글이 없습니다.</td></tr>
+      <tr><td colspan="5" class="empty">게시글이 없습니다. <a href="{{ url_for('write') }}" class="empty-write-link">첫 글 작성하기 →</a></td></tr>
     {% endif %}
   </tbody>
 </table>

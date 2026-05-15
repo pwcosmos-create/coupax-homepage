@@ -19,11 +19,12 @@
 <section class="hero-box hero-box-tight">
   <h1>블로그</h1>
   <p>{{ site_name }}의 전체 글입니다. 제목·작성자로 검색할 수 있습니다.</p>
-  <p class="hero-meta">총 {{ total }}개 글 · <a href="{{ url_for('index') }}" class="hero-inline-link">홈</a> · <a href="{{ url_for('etf_hub') }}" class="hero-inline-link">ETF·월배당</a></p>
+  <p class="hero-meta">총 {{ total }}개 글 · <a href="{{ url_for('index') }}" class="hero-inline-link">홈</a> · <a href="{{ url_for('etf_hub') }}" class="hero-inline-link">ETF·월배당</a> · <a href="{{ url_for('write') }}" class="hero-inline-link">글쓰기</a></p>
 </section>
 
 <div class="page-header">
   <h2>최신 글 목록 <span class="count">{{ total }}</span></h2>
+  <a href="{{ url_for('write') }}" class="btn btn-primary">글쓰기</a>
 </div>
 
 <form class="search-form" method="get" action="{{ url_for('blog') }}">

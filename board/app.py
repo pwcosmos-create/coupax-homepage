@@ -503,7 +503,6 @@ def sitemap():
         url_for('contact', _external=True),
         url_for('privacy', _external=True),
         url_for('terms', _external=True),
-        url_for('write', _external=True),
     ]
     post_urls = [url_for('view', post_id=row['id'], _external=True) for row in posts]
     urls = pages + post_urls

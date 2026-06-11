@@ -25,10 +25,15 @@ app.config.update(
 )
 
 
+_CSRF_EXEMPT_ENDPOINTS = frozenset({"agent_office_local_code_sync"})
+
+
 @app.before_request
 def _security_before_request():
     security_utils.ensure_csrf_token()
     if request.method in security_utils.UNSAFE_METHODS:
+        if request.endpoint in _CSRF_EXEMPT_ENDPOINTS:
+            return
         security_utils.validate_csrf_request()
 
 
@@ -2915,7 +2920,6 @@ def agent_office_chief_dev_delete(card_id: int):
     return jsonify({"error": "Card not found"}), 404
 
 @app.route("/api/agents/office/local-code-sync", methods=["POST"])
-@csrf.exempt
 def agent_office_local_code_sync():
     # 보안 강화를 위해 인증 키 확인 로직 (옵션)
     secret = request.headers.get("X-Local-Sync-Secret")

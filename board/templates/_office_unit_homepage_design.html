@@ -1,0 +1,244 @@
+<div class="office-unit office-unit--homepage-design" id="office-unit-homepage-design" hidden aria-label="홈페이지 디자인">
+<div class="agent-office-layout page-homepage-design-office">
+  <aside class="agent-office-roster" aria-label="디자인 에이전트">
+    <h2>출근 명단</h2>
+    <ul class="roster-list" id="design-roster-list">
+      <li>
+        <button type="button" class="roster-btn is-active" data-filter-agent="" data-agent-id="">전체 대화</button>
+      </li>
+      {% for a in design_agents %}
+      <li class="roster-item" data-agent-id="{{ a.id }}">
+        <div class="roster-row">
+          <button type="button" class="roster-btn roster-btn--pick" data-filter-agent="{{ a.id }}" data-agent-id="{{ a.id }}">
+            <span class="roster-emoji">{{ a.emoji or '🎨' }}</span>
+            <span class="roster-name">{{ a.name }}</span>
+            <span class="roster-role">{{ a.role }}</span>
+          </button>
+          <label class="mode-on-switch{% if a.mode_on %} is-on{% endif %}" title="상시 작업 ON/OFF">
+            <input type="checkbox" class="agent-mode-on" data-agent-id="{{ a.id }}"
+                   {% if a.mode_on %}checked{% endif %}
+                   {% if not office_control_enabled %}disabled{% endif %}
+                   aria-label="{{ a.name }} ON/OFF">
+            <span class="mode-on-slider" aria-hidden="true"></span>
+            <span class="mode-on-label">{% if a.mode_on %}ON{% else %}OFF{% endif %}</span>
+          </label>
+        </div>
+        <p class="roster-cycle">주기: {{ a | agent_interval }}</p>
+        {% if a.last_run_at %}
+        <p class="roster-run">최근: {{ a.last_run_at }} · {{ a.last_status or '—' }}</p>
+        {% endif %}
+      </li>
+      {% endfor %}
+    </ul>
+  </aside>
+
+  <div class="agent-office-center">
+    {% with pixel_unit='homepage-design', pixel_label=division_meta['homepage-design'].team_leader, pixel_emoji=division_meta['homepage-design'].emoji %}{% include '_pixel_office.html' %}{% endwith %}
+    <section class="office-design-hero" aria-label="홈페이지 디자인 개요">
+      <h2>🎨 홈페이지 디자인</h2>
+      <p class="office-design-lead">
+        <strong>coupax.co.kr</strong> 공개 화면·랜딩·컴포넌트·반응형을 정리하는 비공개 프로젝트입니다.
+        <a href="{{ url_for('index') }}" target="_blank" rel="noopener">공개 홈 미리보기 ↗</a>
+        · <a href="https://stock.coupax.co.kr/workisus/" target="_blank" rel="noopener">원키스 US ↗</a>
+      </p>
+      <ul class="office-design-tokens" aria-label="디자인 토큰">
+        <li><span class="office-swatch office-swatch--midnight" aria-hidden="true"></span> Midnight Blue <code>#0A1931</code></li>
+        <li><span class="office-swatch office-swatch--copper" aria-hidden="true"></span> Deep Copper <code>#B8860B</code></li>
+        <li><span class="office-swatch office-swatch--sky" aria-hidden="true"></span> Clear Sky Blue <code>#ADD8E6</code></li>
+        <li><span class="office-swatch office-swatch--brand" aria-hidden="true"></span> UI Accent <code>#4f6ef7</code></li>
+      </ul>
+      <div class="office-design-checklist">
+        <h3>작업 범위</h3>
+        <ul>
+          <li>헤더·네비·푸터 · 홈·블로그 카드</li>
+          <li>질문창·대화 UI · 사무실(비공개) 레이아웃</li>
+          <li>모바일 375px~ · 타이포·CTA 통일</li>
+          <li>디자인 시스템 핸드오프 ↔ <code>style.css</code> 반영</li>
+          <li><strong>원키스 US</strong> — stock 다창 HTS(3001~3005)·주문·차트 UI</li>
+        </ul>
+      </div>
+      <div class="office-design-debate-topics">
+        <h3>위원회 토론 주제 <span class="office-design-auto-badge" id="design-debate-auto-badge">자동 ON</span></h3>
+        <p class="office-design-topic-hint">
+          <strong>45분마다</strong> 디자인 위원회가 신규 주제를 자동 생성·토론·확정합니다 (기본 1건/회).
+          정적 6건 이후에도 축 36종·변형으로 계속 추가됩니다.
+        </p>
+        <h4 class="office-design-topic-sub">다음 대기</h4>
+        <ul class="office-design-topic-list" id="design-debate-pending-list">
+          <li class="wiki-empty">불러오는 중…</li>
+        </ul>
+        <h4 class="office-design-topic-sub">최근 생성</h4>
+        <ul class="office-design-topic-list" id="design-debate-recent-list">
+          <li class="wiki-empty">—</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="gemma-knowledge-panel office-knowledge-hub" aria-label="홈페이지 디자인 학습 카드">
+      <h2>재사용 플레이북 <span class="wiki-count" id="design-wiki-count">Wiki {{ design_knowledge.wiki_count }}</span></h2>
+      <p class="wiki-panel-lead">
+        도메인 <code>homepage-design</code> · 전체 <strong id="design-learn-total">{{ design_learn.total }}</strong> ·
+        대기 <strong id="design-learn-pending">{{ design_learn.pending }}</strong> ·
+        확정 <strong id="design-learn-confirmed">{{ design_learn.confirmed }}</strong> ·
+        토론 <strong id="design-learn-debate">{{ design_learn.debate_cards or 0 }}</strong>
+        · <code>CURSOR_HOMEPAGE_DESIGN_LEARN.md</code>
+      </p>
+      <div class="office-knowledge-tabs" role="tablist">
+        <button type="button" class="office-knowledge-tab" role="tab" data-tab="wiki" aria-selected="false">
+          Wiki <span class="office-knowledge-tab-count" id="design-tab-wiki-count">({{ design_knowledge.wiki_count }})</span>
+        </button>
+        <button type="button" class="office-knowledge-tab is-active" role="tab" data-tab="learn" aria-selected="true">
+          카드 <span class="office-knowledge-tab-count" id="design-tab-learn-count">({{ design_learn.total }})</span>
+        </button>
+      </div>
+      <div class="office-scroll-panel office-knowledge-panel-pane" data-pane="wiki" role="tabpanel" hidden>
+        <ul class="wiki-card-list" id="design-wiki-card-list">
+          {% for w in design_knowledge.recent_wiki | reverse %}
+          <li class="wiki-card-item">
+            <span class="wiki-card-id">{{ w.id }}</span>
+            <strong class="wiki-card-title">{{ w.title }}</strong>
+            <p class="wiki-card-summary">{{ w.summary }}</p>
+          </li>
+          {% else %}
+          <li class="wiki-empty">확정 카드가 Wiki에 쌓입니다.</li>
+          {% endfor %}
+        </ul>
+      </div>
+      <div class="office-scroll-panel office-knowledge-panel-pane is-active" data-pane="learn" role="tabpanel">
+        <form id="design-learn-form" class="saju-learn-form saju-learn-form--hub">
+          <label>제목 <input type="text" name="title" id="design-learn-title" maxlength="120" placeholder="예: 홈 히어로 CTA Copper"></label>
+          <label>본문 <textarea name="body" id="design-learn-body" rows="4" required maxlength="24000"
+                    placeholder="토큰·레이아웃·컴포넌트 결정. 연락처·실명은 넣지 마세요."></textarea></label>
+          <div class="kiwoom-compose-actions">
+            <button type="submit" class="btn btn-primary btn-sm" id="design-learn-submit">학습 카드 저장</button>
+            <button type="button" class="btn btn-gray btn-sm" id="design-seed-catalog-btn">카탈로그+토론 시드</button>
+            <button type="button" class="btn btn-gray btn-sm" id="design-web-research-btn">웹 검색 토론</button>
+            <span class="saju-learn-hint" id="design-learn-status"></span>
+          </div>
+        </form>
+        <ul class="saju-learn-card-list" id="design-learn-card-list">
+          {% for c in design_learn.cards %}
+          <li class="saju-learn-card saju-learn-card--{{ c.status }}" data-card-id="{{ c.id }}">
+            <div class="saju-learn-card-head">
+              <span class="saju-learn-card-id">#{{ c.id }}</span>
+              <span class="saju-learn-card-status">{{ '확정' if c.status == 'confirmed' else '검수 대기' }}</span>
+              <time>{{ c.ts }}</time>
+            </div>
+            <h4 class="saju-learn-card-title">{{ c.title }}</h4>
+            <p class="saju-learn-card-summary">{{ c.summary }}</p>
+            {% if c.tags %}<p class="saju-learn-card-tags">{% for t in c.tags %}<span>{{ t }}</span>{% endfor %}</p>{% endif %}
+            <details><summary>본문</summary><pre class="saju-learn-card-body">{{ c.body[:4000] }}</pre></details>
+            {% if c.wiki_id %}<p class="wiki-card-meta">{{ c.wiki_id }}</p>{% endif %}
+            {% if c.status == 'pending' %}
+            <div class="saju-learn-card-actions">
+              <button type="button" class="btn btn-primary btn-sm btn-design-confirm" data-card-id="{{ c.id }}">확정</button>
+              <button type="button" class="btn btn-gray btn-sm btn-design-delete" data-card-id="{{ c.id }}">삭제</button>
+            </div>
+            {% endif %}
+          </li>
+          {% else %}
+          <li class="saju-learn-empty">카탈로그 시드 또는 직접 입력으로 플레이북 카드를 만드세요.</li>
+          {% endfor %}
+        </ul>
+      </div>
+      <p class="saju-learn-actions">
+        <a class="btn btn-gray btn-sm" href="{{ url_for('agent_office_homepage_design_learn_export') }}">확정분 JSON</a>
+        <button type="button" class="btn btn-gray btn-sm" id="design-learn-refresh-btn">카드 새로고침</button>
+      </p>
+    </section>
+
+    <section class="office-instruct-panel" aria-label="작업 지시">
+      <h2>작업 지시</h2>
+      <p class="office-instruct-lead">레이아웃·색·컴포넌트·목업 반영 지시를 남기면 담당 젬마가 처리하고 대화 로그에 보고합니다.</p>
+      <form id="design-office-instruct-form" class="office-instruct-form" method="post" action="{{ url_for('agent_office_instruct_form') }}">
+        {% include '_csrf_field.html' %}
+        <input type="hidden" name="division" value="homepage-design">
+        <div class="instruct-row">
+          <label>담당
+            <select name="assign_to" id="design-instruct-assign-to">
+              <option value="all">전체</option>
+              {% for a in design_agents %}
+              <option value="{{ a.id }}">{{ a.emoji }} {{ a.name }}</option>
+              {% endfor %}
+            </select>
+          </label>
+          <label>우선순위
+            <select name="priority" id="design-instruct-priority">
+              <option value="normal">보통</option>
+              <option value="high">긴급</option>
+            </select>
+          </label>
+        </div>
+        <label class="instruct-title-label">제목 <span class="optional">(선택)</span>
+          <input type="text" name="title" id="design-instruct-title" maxlength="120" placeholder="예: 홈 히어로 카드 간격 조정">
+        </label>
+        <label>지시 내용
+          <textarea id="design-instruct-body" name="body" rows="4" required maxlength="4000"
+                    placeholder="예: 모바일에서 프로젝트 탭을 2열 그리드로 바꾸고 CTA 색을 Deep Copper로 맞춰 주세요."></textarea>
+        </label>
+        <button type="submit" class="btn btn-primary" id="design-instruct-submit">지시 전달</button>
+      </form>
+      <div class="office-task-queue">
+        <h3>지시 목록 <span class="task-count" id="design-task-count">{{ design_tasks | length }}</span></h3>
+        <ul class="task-list" id="design-task-list">
+          {% for t in design_tasks %}
+          <li class="task-item task-item--{{ t.status or 'queued' }}" data-task-id="{{ t.id }}">
+            <div class="task-item-head">
+              <span class="task-id">#{{ loop.index }}</span>
+              <span class="task-global-id">({{ t.id }})</span>
+              <span class="task-status">{{ task_status_labels.get(t.status, t.status) }}</span>
+              <time class="task-ts">{{ t.ts }}</time>
+            </div>
+            {% if t.title %}<p class="task-title">{{ t.title }}</p>{% endif %}
+            <p class="task-body">{{ t.body }}</p>
+            {% if t.result %}<pre class="task-result">{{ t.result }}</pre>{% endif %}
+          </li>
+          {% else %}
+          <li class="task-empty">디자인 관련 지시가 없습니다.</li>
+          {% endfor %}
+        </ul>
+      </div>
+    </section>
+  </div>
+
+  <aside class="agent-office-feed" aria-label="디자인 대화 로그">
+    <div class="office-feed-panel-head">
+      <h2>대화 로그</h2>
+      <p class="office-feed-lead">
+        <span class="office-live-status is-on" id="design-office-live-status">실시간</span>
+      </p>
+    </div>
+    <div class="office-feed-toolbar">
+      <label class="feed-filter-label">종류
+        <select id="design-feed-kind-filter" class="input-sm">
+          <option value="">전체</option>
+          <option value="task">작업</option>
+          <option value="conclusion">결론</option>
+          <option value="system">시스템</option>
+        </select>
+      </label>
+    </div>
+    <div class="office-feed-scroll" id="design-agent-office-feed">
+      {% for m in design_messages %}
+      {% set from_a = roster.get(m.from) %}
+      {% set to_a = roster.get(m.to) if m.to else None %}
+      <article class="office-msg office-msg--{{ m.kind or 'task' }}" data-from="{{ m.from }}" data-to="{{ m.to or '' }}" data-kind="{{ m.kind or '' }}" data-msg-id="{{ m.id }}">
+        <header class="office-msg-head">
+          <span class="office-msg-avatar">{{ (from_a.emoji if from_a else '🤖') }}</span>
+          <span class="office-msg-from">{{ (from_a.name if from_a else m.from) }}</span>
+          {% if m.to %}
+          <span class="office-msg-arrow">→</span>
+          <span class="office-msg-to">{{ (to_a.name if to_a else m.to) }}</span>
+          {% endif %}
+          <span class="office-msg-kind">{{ kind_labels.get(m.kind, m.kind) }}</span>
+          <time class="office-msg-ts">{{ m.ts }}</time>
+        </header>
+        <p class="office-msg-text">{{ m.text }}</p>
+      </article>
+      {% else %}
+      <p class="office-empty">아직 홈페이지 디자인 로그가 없습니다.</p>
+      {% endfor %}
+    </div>
+  </aside>
+</div>
+</div>

@@ -1,0 +1,242 @@
+<div class="office-unit office-unit--chief-dev" id="office-unit-chief-dev" hidden aria-label="수석 개발자">
+  <div class="agent-office-layout">
+    <!-- Roster sidebar -->
+    <aside class="agent-office-roster" aria-label="수석 개발자 에이전트">
+      <h2>출근 명단</h2>
+      <ul class="roster-list" id="chief-roster-list">
+        <li>
+          <button type="button" class="roster-btn is-active" data-filter-agent="" data-agent-id="">
+            전체 대화 보기
+          </button>
+        </li>
+        {% for a in chief_dev_agents %}
+        <li class="roster-item" data-agent-id="{{ a.id }}">
+          <div class="roster-row">
+            <button type="button" class="roster-btn roster-btn--pick" data-filter-agent="{{ a.id }}" data-agent-id="{{ a.id }}">
+              <span class="roster-emoji">{{ a.emoji or '🤖' }}</span>
+              <span class="roster-name">{{ a.name }}</span>
+              <span class="roster-role">{{ a.role }}</span>
+            </button>
+            <label class="mode-on-switch{% if a.mode_on %} is-on{% endif %}" title="상시 작업 ON/OFF">
+              <input type="checkbox" class="agent-mode-on" data-agent-id="{{ a.id }}"
+                     {% if a.mode_on %}checked{% endif %}
+                     {% if not office_control_enabled %}disabled{% endif %}
+                     aria-label="{{ a.name }} ON/OFF">
+              <span class="mode-on-slider" aria-hidden="true"></span>
+              <span class="mode-on-label">{% if a.mode_on %}ON{% else %}OFF{% endif %}</span>
+            </label>
+          </div>
+          <p class="roster-cycle">주기: {{ a | agent_interval }}</p>
+          {% if a.last_run_at %}
+          <p class="roster-run">최근: {{ a.last_run_at }} · {{ a.last_status or '—' }}</p>
+          {% endif %}
+        </li>
+        {% else %}
+        <li>수석 개발자 에이전트가 없습니다.</li>
+        {% endfor %}
+      </ul>
+    </aside>
+
+    <div class="agent-office-center">
+      {% with pixel_unit='chief-dev', pixel_label=division_meta['chief-dev'].team_leader, pixel_emoji=division_meta['chief-dev'].emoji %}{% include '_pixel_office.html' %}{% endwith %}
+      <div class="office-feed-panel-head" aria-hidden="true">
+        <h2>수석 개발자 대화 로그</h2>
+        <p class="office-feed-lead">학습 및 코드 리뷰, 모니터링 로그가 표시됩니다.</p>
+        
+        <div class="office-mission-box" style="margin-top: 16px; padding: 16px; background: rgba(59, 130, 246, 0.1); border: 1px solid rgba(59, 130, 246, 0.2); border-radius: 8px;">
+          <h3 style="margin-top: 0; color: #60a5fa; font-size: 1.05rem; display: flex; align-items: center; gap: 8px;">
+            <span>🎯</span> 수석 개발자실 미션 및 에이전트 역할
+          </h3>
+          <p style="font-size: 0.95rem; line-height: 1.5; margin-bottom: 12px;">
+            이곳은 향후 <strong>과금 없이 온디바이스(On-device) 환경</strong>에서 구동될 젬마24 AI에 
+            수석 개발자 수준의 실무 지식을 24시간 끊임없이 학습시키고 저장하는 공간입니다. 
+            축적된 지식은 추후 판매용 솔루션이나 자동화 파이프라인의 핵심 두뇌로 활용됩니다.
+          </p>
+          <ul style="font-size: 0.9rem; line-height: 1.6; color: #d1d5db; margin: 0; padding-left: 20px;">
+            <li><strong>수석 아키텍트 젬마 (주기 120분):</strong> 백엔드 구조 최적화 및 코드베이스 인덱싱(전체 프로젝트 스캐닝)</li>
+            <li><strong>문서 수집기 젬마 (주기 60분):</strong> 지식 주입 출처 관리 및 최신 개발 스펙 벡터 DB(Vector DB) 저장</li>
+            <li><strong>웹 서치 젬마 (주기 60분):</strong> Tech Radar 탐색, 공식 문서 자동 크롤링, 해외 유명 블로그 지식 주입</li>
+            <li><strong>DevOps 관리 젬마 (주기 30분):</strong> 서버 리소스 모니터링 및 실시간 상태(Real-time Status) 추적</li>
+          </ul>
+          <p style="font-size: 0.9rem; line-height: 1.6; color: #a7f3d0; margin-top: 12px; margin-bottom: 0;">
+            <strong>💡 지식 주입 목표:</strong> React, Vite, Firebase 등의 기술 트렌드를 24시간 수집하고, 대표님의 전체 프로젝트(가계부 앱 등) 코드를 스캐닝하여 재사용성을 극대화합니다. 향후 축적된 지식량(Knowledge Stats)을 시각적으로 제공하여 <strong>'자동 진화형 개발 파트너'</strong> 역할을 수행할 것입니다.
+          </p>
+        </div>
+      </div>
+
+      <section class="office-instruct-panel" aria-label="작업 지시">
+        <h2>에이전트 작업 지시</h2>
+        <p class="office-instruct-lead">수석 개발자 에이전트에게 코드 리뷰, 시스템 모니터링, 문서 아키텍처 점검을 지시하세요.</p>
+        <form id="chief-dev-instruct-form" class="office-instruct-form" method="post" action="{{ url_for('agent_office_instruct_form') }}">
+          {% include '_csrf_field.html' %}
+          <input type="hidden" name="division" value="chief-dev">
+          <div class="instruct-row">
+            <label>
+              담당
+              <select name="assign_to" id="chief-dev-instruct-assign-to">
+                <option value="all">전체 에이전트</option>
+                {% for a in chief_dev_agents %}
+                <option value="{{ a.id }}">{{ a.emoji }} {{ a.name }}</option>
+                {% endfor %}
+              </select>
+            </label>
+            <label>
+              우선순위
+              <select name="priority" id="chief-dev-instruct-priority">
+                <option value="normal">보통</option>
+                <option value="high">긴급</option>
+              </select>
+            </label>
+          </div>
+          <label class="instruct-title-label">
+            제목 <span class="optional">(선택)</span>
+            <input type="text" name="title" id="chief-dev-instruct-title" maxlength="120" placeholder="한 줄 요약">
+          </label>
+          <label>
+            지시 내용
+            <textarea id="chief-dev-instruct-body" name="body" rows="4" required maxlength="4000"
+                      placeholder="예: app.py 파일의 최근 변경사항 중 보안 취약점이 있는지 점검해 주세요."></textarea>
+          </label>
+          <button type="submit" class="btn btn-primary" id="chief-dev-instruct-submit">지시 전달</button>
+          <span class="instruct-hint" id="chief-dev-instruct-status">전달 즉시 담당 에이전트가 처리하며, 완료 시 로그에 반영됩니다.</span>
+        </form>
+        <div class="office-task-queue">
+          <h3>지시 목록 <span class="task-count" id="chief-dev-task-count">{{ chief_dev_tasks | length }}</span></h3>
+          <ul class="task-list" id="chief-dev-task-list">
+            {% for t in chief_dev_tasks %}
+            <li class="task-item task-item--{{ t.status or 'queued' }} task-item--prio-{{ t.priority or 'normal' }}" data-task-id="{{ t.id }}">
+              <div class="task-item-head">
+                <span class="task-id">#{{ t.id }}</span>
+                <span class="task-status">{{ task_status_labels.get(t.status, t.status) }}</span>
+                {% if t.priority == 'high' %}<span class="task-priority">긴급</span>{% endif %}
+                <time class="task-ts">{{ t.ts }}</time>
+              </div>
+              <p class="task-assign">
+                → {% if t.resolved_to %}{{ roster.get(t.resolved_to).name if roster.get(t.resolved_to) else t.resolved_to }}{% elif t.assign_to == 'all' %}전체(자동){% else %}{{ roster.get(t.assign_to).name if roster.get(t.assign_to) else t.assign_to }}{% endif %}
+              </p>
+              {% if t.title %}<p class="task-title">{{ t.title }}</p>{% endif %}
+              <p class="task-body">{{ t.body }}</p>
+              {% if t.handled_by and t.status == 'done' %}
+              <p class="task-meta">처리: {{ roster.get(t.handled_by).name if roster.get(t.handled_by) else t.handled_by }}</p>
+              {% endif %}
+              {% if t.result %}
+              <pre class="task-result">{{ t.result }}</pre>
+              {% endif %}
+            </li>
+            {% else %}
+            <li class="task-empty" id="chief-dev-task-empty">아직 내린 지시가 없습니다.</li>
+            {% endfor %}
+          </ul>
+        </div>
+      </section>
+
+      <section class="agent-skills-panel" id="chief-dev-skills-panel" aria-label="에이전트 스킬">
+        <h2 id="chief-dev-skills-panel-title">에이전트 스킬</h2>
+        <p class="skills-panel-hint" id="chief-dev-skills-panel-hint">왼쪽 명단에서 에이전트를 선택하면 보유 스킬을 확인할 수 있습니다.</p>
+        <ul class="skills-list" id="chief-dev-skills-list"></ul>
+        <dl class="agent-meta-dl" id="chief-dev-agent-meta-dl" hidden>
+          <dt>작업 주기</dt>
+          <dd id="chief-dev-meta-interval">—</dd>
+          <dt>잡 종류</dt>
+          <dd id="chief-dev-meta-job">—</dd>
+          <dt>상시 ON</dt>
+          <dd id="chief-dev-meta-mode">—</dd>
+        </dl>
+      </section>
+
+      <div class="agent-office-toolbar" aria-label="메시지 필터">
+        <div class="kind-filters">
+          <button type="button" class="chief-dev-kind-btn is-active" data-filter-kind="">전체</button>
+          {% for key, label in kind_labels.items() %}
+          <button type="button" class="chief-dev-kind-btn" data-filter-kind="{{ key }}">{{ label }}</button>
+          {% endfor %}
+        </div>
+        <span class="office-live" id="chief-dev-office-live-status" title="2.5초마다 자동 갱신">● 실시간</span>
+        <button type="button" class="btn btn-gray btn-sm" id="chief-dev-office-refresh-btn">새로고침</button>
+      </div>
+
+      <div class="office-new-banner is-hidden" id="chief-dev-office-new-banner" role="status">
+        <button type="button" id="chief-dev-office-new-banner-btn">새 메시지 보기</button>
+      </div>
+
+      <div class="agent-office-feed" id="chief-dev-agent-office-feed" aria-live="polite">
+        {% for m in chief_dev_messages %}
+        {% set from_a = roster.get(m.from) %}
+        {% set to_a = roster.get(m.to) if m.to else none %}
+        <article
+          class="office-msg office-msg--{{ m.kind or 'task' }}"
+          data-msg-id="{{ m.id }}"
+          data-from="{{ m.from }}"
+          data-to="{{ m.to or '' }}"
+          data-kind="{{ m.kind or 'task' }}"
+        >
+          <header class="office-msg-head">
+            <span class="office-msg-avatar">{{ (from_a.emoji if from_a else '🤖') }}</span>
+            <span class="office-msg-from">{{ (from_a.name if from_a else m.from) }}</span>
+            {% if m.to %}
+            <span class="office-msg-arrow">→</span>
+            <span class="office-msg-to">{{ (to_a.name if to_a else m.to) }}</span>
+            {% endif %}
+            <span class="office-msg-kind">{{ kind_labels.get(m.kind, m.kind) }}</span>
+            <time class="office-msg-ts">{{ m.ts }}</time>
+          </header>
+          <p class="office-msg-text">{{ m.text }}</p>
+        </article>
+        {% else %}
+        <p class="office-empty">아직 수석 개발자 탭 대화 로그가 없습니다.</p>
+        {% endfor %}
+      </div>
+
+      <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.1); margin: 32px 0;">
+
+      <!-- 기존 지식 주입 폼 (하단으로 이동하여 보존) -->
+      <section class="office-instruct-panel" aria-label="지식 주입">
+        <h2>수석 개발자 지식 저장소 (Knowledge Cards)</h2>
+        <p class="office-instruct-lead">학습시킬 문서(Docs)의 URL을 입력하거나, 새롭게 습득한 지식(팁, 문제해결)을 직접 기록하세요.</p>
+        
+        <form id="chief-dev-inject-form" class="office-instruct-form" style="margin-bottom: 24px;">
+          <label class="instruct-title-label">
+            지식 출처 URL
+            <input type="url" id="chief-dev-url" name="url" placeholder="예: https://react.dev/reference/react">
+          </label>
+          <button type="submit" class="btn btn-primary" id="chief-dev-submit">URL 지식 주입</button>
+          <span class="instruct-hint" id="chief-dev-status">입력된 URL은 즉시 크롤링되어 로컬 Vector DB에 스니펫으로 쪼개져 저장됩니다.</span>
+        </form>
+
+        <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.1); margin: 24px 0;">
+
+        <form id="chief-dev-card-form" class="office-instruct-form">
+          <div class="instruct-row">
+            <label style="flex: 1;">
+              지식 태그
+              <input type="text" id="chief-dev-tag" name="tag" placeholder="예: React, Python, UI/UX" required>
+            </label>
+          </div>
+          <label class="instruct-title-label">
+            지식 카드 제목
+            <input type="text" id="chief-dev-title" name="title" required placeholder="예: Vite 빌드 속도 50% 향상 팁">
+          </label>
+          <label>
+            지식 내용 (상세)
+            <textarea id="chief-dev-body" name="body" rows="4" required placeholder="습득한 지식, 코드 조각, 해결책 등을 상세히 기록하세요."></textarea>
+          </label>
+          <button type="submit" class="btn btn-primary" id="chief-dev-card-submit">지식 카드 저장</button>
+          <span class="instruct-hint">저장된 카드는 하단 목록에 즉시 반영되며, 24시간 언제든 열람할 수 있습니다.</span>
+        </form>
+      </section>
+
+      <section class="chief-dev-cards-section" aria-label="저장된 지식 카드 목록" style="margin-top: 24px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+          <h2 style="margin: 0; font-size: 1.125rem;">저장된 지식 카드 <span id="chief-card-count" style="font-weight: 400; font-size: 0.9rem; color: #9ca3af; margin-left: 8px;">0건</span></h2>
+          <button type="button" class="btn btn-gray btn-sm" id="chief-dev-clear-cards">전체 비우기</button>
+        </div>
+        <div class="office-scroll-panel" style="max-height: 400px; overflow-y: auto; padding-right: 8px;">
+          <ul class="chief-learn-card-list" id="chief-learn-card-list" style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px;">
+            <li class="task-empty" id="chief-learn-empty" style="color: #9ca3af; font-size: 0.875rem; padding: 24px; text-align: center; border: 1px dashed rgba(255,255,255,0.2); border-radius: 8px;">아직 저장된 지식 카드가 없습니다. 위에 새로운 지식을 기록해 주세요.</li>
+          </ul>
+        </div>
+      </section>
+
+    </div>
+  </div>
+</div>

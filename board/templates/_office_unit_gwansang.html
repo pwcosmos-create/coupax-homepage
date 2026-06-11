@@ -1,0 +1,220 @@
+<div class="office-unit office-unit--gwansang" id="office-unit-gwansang-learn" hidden aria-label="관상 학습부">
+<div class="agent-office-layout page-gwansang-office">
+  <aside class="agent-office-roster" aria-label="관상 학습 에이전트">
+    <h2>출근 명단</h2>
+    <ul class="roster-list" id="gwansang-roster-list">
+      <li>
+        <button type="button" class="roster-btn is-active" data-filter-agent="" data-agent-id="">전체 대화</button>
+      </li>
+      {% for a in gwansang_agents %}
+      <li class="roster-item" data-agent-id="{{ a.id }}">
+        <div class="roster-row">
+          <button type="button" class="roster-btn roster-btn--pick" data-filter-agent="{{ a.id }}" data-agent-id="{{ a.id }}">
+            <span class="roster-emoji">{{ a.emoji or '👤' }}</span>
+            <span class="roster-name">{{ a.name }}</span>
+            <span class="roster-role">{{ a.role }}</span>
+          </button>
+          <label class="mode-on-switch{% if a.mode_on %} is-on{% endif %}" title="상시 작업 ON/OFF">
+            <input type="checkbox" class="agent-mode-on" data-agent-id="{{ a.id }}"
+                   {% if a.mode_on %}checked{% endif %}
+                   {% if not office_control_enabled %}disabled{% endif %}
+                   aria-label="{{ a.name }} ON/OFF">
+            <span class="mode-on-slider" aria-hidden="true"></span>
+            <span class="mode-on-label">{% if a.mode_on %}ON{% else %}OFF{% endif %}</span>
+          </label>
+        </div>
+        <p class="roster-cycle">주기: {{ a | agent_interval }}</p>
+        {% if a.last_run_at %}
+        <p class="roster-run">최근: {{ a.last_run_at }} · {{ a.last_status or '—' }}</p>
+        {% endif %}
+      </li>
+      {% endfor %}
+    </ul>
+  </aside>
+
+  <div class="agent-office-center">
+    {% with pixel_unit='gwansang-learn', pixel_label=division_meta['gwansang-learn'].team_leader, pixel_emoji=division_meta['gwansang-learn'].emoji %}{% include '_pixel_office.html' %}{% endwith %}
+    <section class="office-design-hero office-gwansang-hero" aria-label="관상 학습 개요">
+      <h2>👤 관상 학습</h2>
+      <p class="office-design-lead">
+        <strong>오관·삼정·길상</strong> 관상 해석을 SEO 200자+ 학습 카드로 정리합니다.
+        단정적 예언·실명·연락처는 금지합니다.
+      </p>
+      <div class="office-design-checklist">
+        <h3>젬마 17종 (전원 ON)</h3>
+        <ul>
+          <li>👁️워치 · ✦큐레이터 · ✍️제작 · 📚카탈로그 · 🔍SEO · 🧩갭</li>
+          <li>📜학자 · 👤오관 · 🌟운세 · 📖리더 · 🗂️구조 · 🔒프라이버시</li>
+          <li>📡Wiki · 🛠️오류점검 · 📋일일결론 · ✅검수 · 🏷️태그</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="gemma-knowledge-panel office-knowledge-hub" aria-label="관상 학습 카드">
+      <h2>관상 학습 카드 <span class="wiki-count" id="gwansang-wiki-count">Wiki {{ gwansang_knowledge.wiki_count }}</span></h2>
+      <p class="wiki-panel-lead">
+        도메인 <code>gwansang-learn</code> · 전체 <strong id="gwansang-learn-total">{{ gwansang_learn.total }}</strong> ·
+        대기 <strong id="gwansang-learn-pending">{{ gwansang_learn.pending }}</strong> ·
+        확정 <strong id="gwansang-learn-confirmed">{{ gwansang_learn.confirmed }}</strong>
+        · <code>CURSOR_GWANSANG_LEARN.md</code>
+      </p>
+      <div class="office-knowledge-tabs" role="tablist">
+        <button type="button" class="office-knowledge-tab" role="tab" data-tab="wiki" aria-selected="false">
+          Wiki <span class="office-knowledge-tab-count" id="gwansang-tab-wiki-count">({{ gwansang_knowledge.wiki_count }})</span>
+        </button>
+        <button type="button" class="office-knowledge-tab is-active" role="tab" data-tab="learn" aria-selected="true">
+          카드 <span class="office-knowledge-tab-count" id="gwansang-tab-learn-count">({{ gwansang_learn.total }})</span>
+        </button>
+      </div>
+      <div class="office-scroll-panel office-knowledge-panel-pane" data-pane="wiki" role="tabpanel" hidden>
+        <ul class="wiki-card-list" id="gwansang-wiki-card-list">
+          {% for w in gwansang_knowledge.recent_wiki | reverse %}
+          <li class="wiki-card-item">
+            <span class="wiki-card-id">{{ w.id }}</span>
+            <strong class="wiki-card-title">{{ w.title }}</strong>
+            <p class="wiki-card-summary">{{ w.summary }}</p>
+          </li>
+          {% else %}
+          <li class="wiki-empty">확정 카드가 Wiki에 쌓입니다.</li>
+          {% endfor %}
+        </ul>
+      </div>
+      <div class="office-scroll-panel office-knowledge-panel-pane is-active" data-pane="learn" role="tabpanel">
+        <form id="gwansang-learn-form" class="saju-learn-form saju-learn-form--hub">
+          <label>제목 <input type="text" name="title" id="gwansang-learn-title" maxlength="120" placeholder="예: 관상·눈 — 눈꼬리와 인상"></label>
+          <label>본문 <textarea name="body" id="gwansang-learn-body" rows="4" required maxlength="24000"
+                    placeholder="SEO 200자 이상. 오관·삼정·길상 키워드를 자연스럽게 포함하세요."></textarea></label>
+          <div class="kiwoom-compose-actions">
+            <button type="submit" class="btn btn-primary btn-sm" id="gwansang-learn-submit">학습 카드 저장</button>
+            <button type="button" class="btn btn-gray btn-sm" id="gwansang-seed-catalog-btn">카탈로그 시드</button>
+            <button type="button" class="btn btn-gray btn-sm" id="gwansang-compose-gap-btn">갭 1장 제작</button>
+            <button type="button" class="btn btn-gray btn-sm" id="gwansang-web-research-btn">웹 검색 토론</button>
+            <span class="saju-learn-hint" id="gwansang-learn-status"></span>
+          </div>
+        </form>
+        <ul class="saju-learn-card-list" id="gwansang-learn-card-list">
+          {% for c in gwansang_learn.cards %}
+          <li class="saju-learn-card saju-learn-card--{{ c.status }}" data-card-id="{{ c.id }}">
+            <div class="saju-learn-card-head">
+              <span class="saju-learn-card-id">#{{ c.id }}</span>
+              <span class="saju-learn-card-status">{{ '확정' if c.status == 'confirmed' else '검수 대기' }}</span>
+              <time>{{ c.ts }}</time>
+            </div>
+            <h4 class="saju-learn-card-title">{{ c.title }}</h4>
+            <p class="saju-learn-card-summary">{{ c.summary }}</p>
+            {% if c.tags %}<p class="saju-learn-card-tags">{% for t in c.tags %}<span>{{ t }}</span>{% endfor %}</p>{% endif %}
+            <details><summary>본문</summary><pre class="saju-learn-card-body">{{ c.body[:4000] }}</pre></details>
+            {% if c.wiki_id %}<p class="wiki-card-meta">{{ c.wiki_id }}</p>{% endif %}
+            {% if c.status == 'pending' %}
+            <div class="saju-learn-card-actions">
+              <button type="button" class="btn btn-primary btn-sm btn-gwansang-confirm" data-card-id="{{ c.id }}">확정</button>
+              <button type="button" class="btn btn-gray btn-sm btn-gwansang-delete" data-card-id="{{ c.id }}">삭제</button>
+            </div>
+            {% endif %}
+          </li>
+          {% else %}
+          <li class="saju-learn-empty">카탈로그 시드 또는 젬마 갭 제작으로 관상 카드를 만드세요.</li>
+          {% endfor %}
+        </ul>
+      </div>
+      <p class="saju-learn-actions">
+        <a class="btn btn-gray btn-sm" href="{{ url_for('agent_office_gwansang_learn_export') }}">확정분 JSON</a>
+        <button type="button" class="btn btn-gray btn-sm" id="gwansang-learn-refresh-btn">카드 새로고침</button>
+      </p>
+    </section>
+
+    <section class="office-instruct-panel" aria-label="작업 지시">
+      <h2>작업 지시</h2>
+      <p class="office-instruct-lead">관상 부위·SEO 키워드·카드 보강 지시를 남기면 담당 젬마가 처리합니다.</p>
+      <form id="gwansang-office-instruct-form" class="office-instruct-form" method="post" action="{{ url_for('agent_office_instruct_form') }}">
+        {% include '_csrf_field.html' %}
+        <input type="hidden" name="division" value="gwansang-learn">
+        <div class="instruct-row">
+          <label>담당
+            <select name="assign_to" id="gwansang-instruct-assign-to">
+              <option value="all">전체</option>
+              {% for a in gwansang_agents %}
+              <option value="{{ a.id }}">{{ a.emoji }} {{ a.name }}</option>
+              {% endfor %}
+            </select>
+          </label>
+          <label>우선순위
+            <select name="priority" id="gwansang-instruct-priority">
+              <option value="normal">보통</option>
+              <option value="high">긴급</option>
+            </select>
+          </label>
+        </div>
+        <label class="instruct-title-label">제목 <span class="optional">(선택)</span>
+          <input type="text" name="title" id="gwansang-instruct-title" maxlength="120" placeholder="예: 코·재물운 카드 보강">
+        </label>
+        <label>지시 내용
+          <textarea id="gwansang-instruct-body" name="body" rows="4" required maxlength="4000"
+                    placeholder="예: 이마·삼정 카드에 SEO 키워드를 보강하고 200자 이상으로 확정해 주세요."></textarea>
+        </label>
+        <button type="submit" class="btn btn-primary" id="gwansang-instruct-submit">지시 전달</button>
+      </form>
+      <div class="office-task-queue">
+        <h3>지시 목록 <span class="task-count" id="gwansang-task-count">{{ gwansang_tasks | length }}</span></h3>
+        <ul class="task-list" id="gwansang-task-list">
+          {% for t in gwansang_tasks %}
+          <li class="task-item task-item--{{ t.status or 'queued' }}" data-task-id="{{ t.id }}">
+            <div class="task-item-head">
+              <span class="task-id">#{{ loop.index }}</span>
+              <span class="task-global-id">({{ t.id }})</span>
+              <span class="task-status">{{ task_status_labels.get(t.status, t.status) }}</span>
+              <time class="task-ts">{{ t.ts }}</time>
+            </div>
+            {% if t.title %}<p class="task-title">{{ t.title }}</p>{% endif %}
+            <p class="task-body">{{ t.body }}</p>
+            {% if t.result %}<pre class="task-result">{{ t.result }}</pre>{% endif %}
+          </li>
+          {% else %}
+          <li class="task-empty">관상 학습 관련 지시가 없습니다.</li>
+          {% endfor %}
+        </ul>
+      </div>
+    </section>
+  </div>
+
+  <aside class="agent-office-feed" aria-label="관상 학습 대화 로그">
+    <div class="office-feed-panel-head">
+      <h2>대화 로그</h2>
+      <p class="office-feed-lead">
+        <span class="office-live-status is-on" id="gwansang-office-live-status">실시간</span>
+      </p>
+    </div>
+    <div class="office-feed-toolbar">
+      <label class="feed-filter-label">종류
+        <select id="gwansang-feed-kind-filter" class="input-sm">
+          <option value="">전체</option>
+          <option value="task">작업</option>
+          <option value="conclusion">결론</option>
+          <option value="system">시스템</option>
+        </select>
+      </label>
+    </div>
+    <div class="office-feed-scroll" id="gwansang-agent-office-feed">
+      {% for m in gwansang_messages %}
+      {% set from_a = roster.get(m.from) %}
+      {% set to_a = roster.get(m.to) if m.to else None %}
+      <article class="office-msg office-msg--{{ m.kind or 'task' }}" data-from="{{ m.from }}" data-to="{{ m.to or '' }}" data-kind="{{ m.kind or '' }}" data-msg-id="{{ m.id }}">
+        <header class="office-msg-head">
+          <span class="office-msg-avatar">{{ (from_a.emoji if from_a else '🤖') }}</span>
+          <span class="office-msg-from">{{ (from_a.name if from_a else m.from) }}</span>
+          {% if m.to %}
+          <span class="office-msg-arrow">→</span>
+          <span class="office-msg-to">{{ (to_a.name if to_a else m.to) }}</span>
+          {% endif %}
+          <span class="office-msg-kind">{{ kind_labels.get(m.kind, m.kind) }}</span>
+          <time class="office-msg-ts">{{ m.ts }}</time>
+        </header>
+        <p class="office-msg-text">{{ m.text }}</p>
+      </article>
+      {% else %}
+      <p class="office-empty">아직 관상 학습 로그가 없습니다.</p>
+      {% endfor %}
+    </div>
+  </aside>
+</div>
+</div>

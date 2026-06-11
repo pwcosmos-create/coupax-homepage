@@ -1,0 +1,585 @@
+{% extends 'base.html' %}
+{% block title %}{{ site_name }} | 주제는 무엇이든 물어보세요{% endblock %}
+{% block title_scoped %}{{ site_name }} | 젬마24 사무실{% endblock %}
+{% block meta_description %}젬마24 비공개 사무실 — 주제는 무엇이든 물어보세요{% endblock %}
+{% block body_class %}agent-office-page{% endblock %}
+{% block extra_head %}
+<meta name="robots" content="noindex, nofollow">
+<link rel="stylesheet" href="{{ url_for('static', filename='agent_office.css') }}?v=20260604b">
+<link rel="stylesheet" href="{{ url_for('static', filename='pixel_office.css') }}?v=1">
+<link rel="stylesheet" href="{{ url_for('static', filename='kiwoom_chasu.css') }}?v=2">
+<link rel="stylesheet" href="{{ url_for('static', filename='stock_watch.css') }}?v=1">
+{% endblock %}
+
+{% block content %}
+<section class="agent-office-hero">
+  <p class="office-tagline">{{ office.office_tagline or '주제는 무엇이든 물어보세요' }}</p>
+  <h1>{{ office.office_name or '젬마24 에이전트 사무실' }}</h1>
+  <p class="agent-office-lead">{{ office.description }}</p>
+  {% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+  <div class="office-flash-wrap">
+    {% for category, message in messages %}
+    <p class="office-flash office-flash--{{ category }}">{{ message }}</p>
+    {% endfor %}
+  </div>
+  {% endif %}
+  {% endwith %}
+  <p class="agent-office-meta">
+    마지막 갱신: <strong id="office-updated-at">{{ office.updated_at or '—' }}</strong>
+    · 메시지 <strong id="office-msg-count">{{ messages | length }}</strong>건
+    · 상시 ON <strong id="office-on-count">{{ agents | selectattr('mode_on') | list | length }}</strong>명
+  </p>
+  <div class="office-master-switch {% if office_always_on %}is-on{% endif %}" id="office-master-switch">
+    <div class="office-master-copy">
+      <strong>사무실 전체 상시 ON</strong>
+      <span class="office-master-status" id="office-master-status">
+        {% if office_always_on %}가동 중 — 모든 에이전트가 주기 작업을 수행합니다{% else %}휴무 — 개별 ON 에이전트만 작업합니다{% endif %}
+      </span>
+    </div>
+    <label class="office-master-toggle" title="사무실 전체 상시 가동">
+      <input type="checkbox" id="office-always-on" {% if office_always_on %}checked{% endif %}
+             {% if not office_control_enabled %}disabled{% endif %} aria-label="사무실 전체 상시 ON">
+      <span class="office-master-slider" aria-hidden="true"></span>
+      <span class="office-master-on-text">ON</span>
+    </label>
+  </div>
+  <div class="agent-office-controls">
+    {% if office_control_enabled %}
+    <span class="control-hint">출근 명단 스위치로 에이전트별 ON/OFF를 바꿀 수 있습니다.</span>
+    {% endif %}
+    <label class="token-label token-label--optional">
+      API 제어 토큰 <span class="optional">(선택)</span>
+      <input type="password" id="office-control-token" class="input-sm" placeholder="외부 API용" autocomplete="off">
+    </label>
+  </div>
+  <p class="agent-office-disclaimer">
+    <strong>비공개 공간</strong> — 대표님과 젬마24만 접근합니다. 검색·사이트맵·공개 메뉴에 노출되지 않습니다.
+    <strong>상시 ON</strong>이면 cron <code>agent_office_worker.py</code>가 주기 작업합니다.
+    방문자 질문은 공개 <a href="{{ url_for('blog') }}">블로그 댓글</a>로 받습니다.
+  </p>
+  <form method="post" action="{{ url_for('agent_office_logout') }}" class="office-logout-form">
+    {% include '_csrf_field.html' %}
+    <button type="submit" class="btn btn-gray btn-sm">사무실 나가기</button>
+  </form>
+</section>
+
+<nav class="office-division-tabs" aria-label="사업부 팀장 선택">
+  <button type="button" class="office-division-tab is-active" data-office-unit="finance">{{ division_meta.finance.emoji }} {{ division_meta.finance.team_leader }}</button>
+  <button type="button" class="office-division-tab office-division-tab--chief-dev" data-office-unit="chief-dev">{{ division_meta['chief-dev'].emoji }} {{ division_meta['chief-dev'].team_leader }}{% if division_meta['chief-dev'].note %} ({{ division_meta['chief-dev'].note }}){% endif %}</button>
+  <button type="button" class="office-division-tab office-division-tab--saju" data-office-unit="saju-learn">{{ division_meta['saju-learn'].emoji }} {{ division_meta['saju-learn'].team_leader }} <span class="saju-learn-badge">{{ saju_learn.pending }} 대기</span></button>
+  <button type="button" class="office-division-tab office-division-tab--gwansang" data-office-unit="gwansang-learn">{{ division_meta['gwansang-learn'].emoji }} {{ division_meta['gwansang-learn'].team_leader }}
+    <span class="gwansang-learn-badge">{{ gwansang_learn.pending }} 대기</span></button>
+  <button type="button" class="office-division-tab office-division-tab--kiwoom" data-office-unit="kiwoom-chasu">{{ division_meta['kiwoom-chasu'].emoji }} {{ division_meta['kiwoom-chasu'].team_leader }}
+    <span class="kiwoom-learn-badge">{{ kiwoom_learn.pending }} 대기</span></button>
+  <button type="button" class="office-division-tab office-division-tab--stock" data-office-unit="stock-watch">{{ division_meta['stock-watch'].emoji }} {{ division_meta['stock-watch'].team_leader }}
+    <span class="stock-watch-badge" id="stock-watch-tab-badge">{% if stock_watch.updated_at %}{{ stock_watch.updated_at[-5:] }}{% else %}—{% endif %}</span></button>
+  <button type="button" class="office-division-tab office-division-tab--design" data-office-unit="homepage-design">{{ division_meta['homepage-design'].emoji }} {{ division_meta['homepage-design'].team_leader }}</button>
+  <button type="button" class="office-division-tab office-division-tab--workisus" data-office-unit="workisus-chasu">{{ division_meta['workisus-chasu'].emoji }} {{ division_meta['workisus-chasu'].team_leader }}
+    <span class="workisus-learn-badge">{{ workisus_learn.pending }} 대기</span></button>
+</nav>
+
+<div class="office-unit office-unit--finance is-active" id="office-unit-finance">
+<div class="agent-office-layout">
+  <aside class="agent-office-roster" aria-label="에이전트 목록">
+    <h2>출근 명단</h2>
+    <ul class="roster-list" id="roster-list">
+      <li>
+        <button type="button" class="roster-btn is-active" data-filter-agent="" data-agent-id="">
+          전체 대화 보기
+        </button>
+      </li>
+      {% for a in finance_agents %}
+      <li class="roster-item" data-agent-id="{{ a.id }}">
+        <div class="roster-row">
+          <button type="button" class="roster-btn roster-btn--pick" data-filter-agent="{{ a.id }}" data-agent-id="{{ a.id }}">
+            <span class="roster-emoji">{{ a.emoji or '🤖' }}</span>
+            <span class="roster-name">{{ a.name }}</span>
+            <span class="roster-role">{{ a.role }}</span>
+          </button>
+          <label class="mode-on-switch{% if a.mode_on %} is-on{% endif %}" title="상시 작업 ON/OFF">
+            <input type="checkbox" class="agent-mode-on" data-agent-id="{{ a.id }}"
+                   {% if a.mode_on %}checked{% endif %}
+                   {% if not office_control_enabled %}disabled{% endif %}
+                   aria-label="{{ a.name }} ON/OFF">
+            <span class="mode-on-slider" aria-hidden="true"></span>
+            <span class="mode-on-label">{% if a.mode_on %}ON{% else %}OFF{% endif %}</span>
+          </label>
+        </div>
+        <p class="roster-cycle">주기: {{ a | agent_interval }}</p>
+        {% if a.last_run_at %}
+        <p class="roster-run">최근: {{ a.last_run_at }} · {{ a.last_status or '—' }}</p>
+        {% endif %}
+      </li>
+      {% endfor %}
+    </ul>
+  </aside>
+
+  <div class="agent-office-center">
+    {% with pixel_unit='finance', pixel_label=division_meta.finance.team_leader, pixel_emoji=division_meta.finance.emoji %}{% include '_pixel_office.html' %}{% endwith %}
+    <div class="office-feed-panel-head" aria-hidden="true">
+      <h2>대화 로그</h2>
+      <p class="office-feed-lead">최신 메시지가 위에 표시됩니다.</p>
+    </div>
+    <section class="office-instruct-panel" aria-label="작업 지시">
+      <h2>작업 지시</h2>
+      <p class="office-instruct-lead">주제는 무엇이든 적어 주세요. 선택한 담당(또는 자동 배정) 에이전트가 <strong>연구</strong>하고 사서 젬마가 <strong>취합</strong>해 완료 보고를 대화 로그에 남깁니다.</p>
+      <form id="office-instruct-form" class="office-instruct-form" method="post"
+            action="{{ url_for('agent_office_instruct_form') }}">
+        {% include '_csrf_field.html' %}
+        <div class="instruct-row">
+          <label>
+            담당
+            <select name="assign_to" id="instruct-assign-to">
+              <option value="all">전체 에이전트</option>
+              {% for a in finance_agents %}
+              <option value="{{ a.id }}">{{ a.emoji }} {{ a.name }}</option>
+              {% endfor %}
+            </select>
+          </label>
+          <label>
+            우선순위
+            <select name="priority" id="instruct-priority">
+              <option value="normal">보통</option>
+              <option value="high">긴급</option>
+            </select>
+          </label>
+        </div>
+        <label class="instruct-title-label">
+          제목 <span class="optional">(선택)</span>
+          <input type="text" id="instruct-title" name="title" maxlength="120" placeholder="한 줄 요약">
+        </label>
+        <label>
+          지시 내용
+          <textarea id="instruct-body" name="body" rows="4" required maxlength="4000"
+                    placeholder="예: 오늘 금리 발표 관련 이슈를 조사해 Wiki 카드로 정리해 주세요."></textarea>
+        </label>
+        <button type="submit" class="btn btn-primary" id="instruct-submit">지시 전달</button>
+        <button type="button" class="btn btn-gray btn-sm" id="finance-web-research-btn">웹 검색 토론</button>
+        <span class="saju-learn-hint" id="finance-web-research-status"></span>
+        <span class="instruct-hint" id="instruct-status">전달 즉시 담당 에이전트가 조사·취합하며, 완료 시 지시 목록·대화 로그·<strong>Cursor 인박스</strong>(<code>CURSOR_OFFICE_INBOX.md</code>)에 반영됩니다. Cursor에서 <code>sync_cursor_office_inbox.py pull</code> 로 가져와 이 채팅 젬마24가 후속 처리합니다.</span>
+      </form>
+      <div class="office-task-queue">
+        <h3>지시 목록 <span class="task-count" id="task-count">{{ tasks | length }}</span>
+          <span class="task-queue-hint" id="finance-reserved-hint">· {{ reserved_queue_label }} <strong>{{ reserved_queue_active }}</strong>/{{ reserved_queue_target }}건 유지</span></h3>
+        <ul class="task-list" id="task-list">
+          {% for t in finance_tasks %}
+          <li class="task-item task-item--{{ t.status or 'queued' }} task-item--prio-{{ t.priority or 'normal' }}" data-task-id="{{ t.id }}">
+            <div class="task-item-head">
+              <span class="task-id">#{{ t.id }}</span>
+              {% if t.source == 'reserved' %}<span class="task-reserved-badge">예약</span>{% elif t.source in ('council_finance', 'council_saju') %}<span class="task-reserved-badge">위원회</span>{% endif %}
+              <span class="task-status">{{ task_status_labels.get(t.status, t.status) }}</span>
+              {% if t.priority == 'high' %}<span class="task-priority">긴급</span>{% endif %}
+              <time class="task-ts">{{ t.ts }}</time>
+            </div>
+            <p class="task-assign">
+              → {% if t.resolved_to %}{{ roster.get(t.resolved_to).name if roster.get(t.resolved_to) else t.resolved_to }}{% elif t.assign_to == 'all' %}전체(자동){% else %}{{ roster.get(t.assign_to).name if roster.get(t.assign_to) else t.assign_to }}{% endif %}
+              {% if t.synthesized_by %} · 취합 {{ roster.get(t.synthesized_by).name if roster.get(t.synthesized_by) else t.synthesized_by }}{% endif %}
+            </p>
+            {% if t.title %}<p class="task-title">{{ t.title }}</p>{% endif %}
+            <p class="task-body">{{ t.body }}</p>
+            {% if t.handled_by and t.status == 'done' %}
+            <p class="task-meta">처리: {{ roster.get(t.handled_by).name if roster.get(t.handled_by) else t.handled_by }}</p>
+            {% endif %}
+            {% if t.wiki_id %}
+            <p class="task-wiki-link">📗 {{ t.wiki_id }}</p>
+            {% endif %}
+            {% if t.blog_draft_id %}
+            <p class="task-blog-draft" data-post-id="{{ t.blog_draft_id }}">
+              📝 초안 #{{ t.blog_draft_id }}
+              <a href="{{ url_for('view', post_id=t.blog_draft_id) }}" target="_blank" rel="noopener">미리보기</a>
+              · <a href="{{ url_for('edit', post_id=t.blog_draft_id) }}" target="_blank" rel="noopener">수정</a>
+              · <button type="button" class="btn-draft-publish btn-sm" data-post-id="{{ t.blog_draft_id }}">발행 예약</button>
+            </p>
+            {% endif %}
+            {% if t.result %}
+            <pre class="task-result">{{ t.result }}</pre>
+            {% endif %}
+          </li>
+          {% else %}
+          <li class="task-empty" id="task-empty">아직 내린 지시가 없습니다.</li>
+          {% endfor %}
+        </ul>
+      </div>
+    </section>
+
+    <section class="gemma-knowledge-panel" aria-label="젬마 기억 10_Wiki">
+      <h2>젬마 기억 <span class="wiki-count">10_Wiki {{ knowledge.wiki_count }} · 20_Meta {{ knowledge.meta_count }}</span></h2>
+      <p class="wiki-panel-lead">작업 완료 보고 → 로컬 10_Wiki + <a href="https://github.com/pwcosmos-create/pwcosmos-swiki" target="_blank" rel="noopener">pwcosmos-swiki</a> 자동 push.
+        갱신 {{ knowledge.updated_at or '—' }}
+        {% if knowledge.swiki and knowledge.swiki.last_push %} · GitHub {{ knowledge.swiki.last_push }}{% endif %}
+        {% if knowledge.swiki and knowledge.swiki.last_error %} · <span class="wiki-sync-err">동기화: {{ knowledge.swiki.last_error }}</span>{% endif %}
+      </p>
+      <ul class="wiki-card-list" id="wiki-card-list">
+        {% for w in knowledge.recent_wiki | reverse %}
+        <li class="wiki-card-item">
+          <span class="wiki-card-id">{{ w.id }}</span>
+          <strong class="wiki-card-title">{{ w.title }}</strong>
+          <p class="wiki-card-summary">{{ w.summary }}</p>
+          <p class="wiki-card-meta">#{{ w.task_id }} · {{ w.ts }}{% if w.tags %} · {{ w.tags | join(', ') }}{% endif %}</p>
+        </li>
+        {% else %}
+        <li class="wiki-empty">아직 저장된 Wiki 카드가 없습니다. 작업이 완료되면 여기에 쌓입니다.</li>
+        {% endfor %}
+      </ul>
+    </section>
+
+    <section class="agent-skills-panel" id="agent-skills-panel" aria-label="에이전트 스킬">
+      <h2 id="skills-panel-title">에이전트 스킬</h2>
+      <p class="skills-panel-hint" id="skills-panel-hint">왼쪽 명단에서 에이전트를 선택하면 보유 스킬을 확인할 수 있습니다.</p>
+      <ul class="skills-list" id="skills-list"></ul>
+      <dl class="agent-meta-dl" id="agent-meta-dl" hidden>
+        <dt>작업 주기</dt>
+        <dd id="meta-interval">—</dd>
+        <dt>잡 종류</dt>
+        <dd id="meta-job">—</dd>
+        <dt>상시 ON</dt>
+        <dd id="meta-mode">—</dd>
+      </dl>
+    </section>
+
+    <div class="agent-office-toolbar" aria-label="메시지 필터">
+      <div class="kind-filters">
+        <button type="button" class="kind-btn is-active" data-filter-kind="">전체</button>
+        {% for key, label in kind_labels.items() %}
+        <button type="button" class="kind-btn" data-filter-kind="{{ key }}">{{ label }}</button>
+        {% endfor %}
+      </div>
+      <span class="office-live" id="office-live-status" title="4초마다 자동 갱신">● 실시간</span>
+      <button type="button" class="btn btn-gray btn-sm" id="office-refresh-btn">새로고침</button>
+    </div>
+
+    <div class="office-new-banner is-hidden" id="office-new-banner" role="status">
+      <button type="button" id="office-new-banner-btn">새 메시지 보기</button>
+    </div>
+
+    <div class="agent-office-feed" id="agent-office-feed" aria-live="polite">
+      {% for m in finance_messages %}
+      {% set from_a = roster.get(m.from) %}
+      {% set to_a = roster.get(m.to) if m.to else none %}
+      <article
+        class="office-msg office-msg--{{ m.kind or 'task' }}"
+        data-msg-id="{{ m.id }}"
+        data-from="{{ m.from }}"
+        data-to="{{ m.to or '' }}"
+        data-kind="{{ m.kind or 'task' }}"
+      >
+        <header class="office-msg-head">
+          <span class="office-msg-avatar">{{ (from_a.emoji if from_a else '🤖') }}</span>
+          <span class="office-msg-from">{{ (from_a.name if from_a else m.from) }}</span>
+          {% if m.to %}
+          <span class="office-msg-arrow">→</span>
+          <span class="office-msg-to">{{ (to_a.name if to_a else m.to) }}</span>
+          {% endif %}
+          <span class="office-msg-kind">{{ kind_labels.get(m.kind, m.kind) }}</span>
+          <time class="office-msg-ts">{{ m.ts }}</time>
+        </header>
+        <p class="office-msg-text">{{ m.text }}</p>
+      </article>
+      {% else %}
+      <p class="office-empty">아직 사무실 로그가 없습니다.</p>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+</div>
+
+<div class="office-unit office-unit--saju-learn" id="office-unit-saju-learn" hidden aria-label="사주 학습부">
+<div class="agent-office-layout">
+    <aside class="agent-office-roster" aria-label="사주 학습 에이전트">
+      <h2>출근 명단</h2>
+      <ul class="roster-list" id="saju-roster-list">
+        <li>
+          <button type="button" class="roster-btn is-active" data-filter-agent="" data-agent-id="">전체 대화 보기</button>
+        </li>
+        {% for a in saju_agents %}
+        <li class="roster-item" data-agent-id="{{ a.id }}">
+          <div class="roster-row">
+            <button type="button" class="roster-btn roster-btn--pick" data-filter-agent="{{ a.id }}" data-agent-id="{{ a.id }}">
+              <span class="roster-emoji">{{ a.emoji or '🤖' }}</span>
+              <span class="roster-name">{{ a.name }}</span>
+              <span class="roster-role">{{ a.role }}</span>
+            </button>
+            <label class="mode-on-switch{% if a.mode_on %} is-on{% endif %}" title="상시 작업 ON/OFF">
+              <input type="checkbox" class="agent-mode-on" data-agent-id="{{ a.id }}"
+                     {% if a.mode_on %}checked{% endif %}
+                     {% if not office_control_enabled %}disabled{% endif %}
+                     aria-label="{{ a.name }} ON/OFF">
+              <span class="mode-on-slider" aria-hidden="true"></span>
+              <span class="mode-on-label">{% if a.mode_on %}ON{% else %}OFF{% endif %}</span>
+            </label>
+          </div>
+          <p class="roster-cycle">주기: {{ a | agent_interval }}</p>
+          {% if a.last_run_at %}
+          <p class="roster-run">최근: {{ a.last_run_at }} · {{ a.last_status or '—' }}</p>
+          {% endif %}
+        </li>
+        {% endfor %}
+      </ul>
+    </aside>
+
+    <div class="agent-office-center">
+      {% with pixel_unit='saju-learn', pixel_label=division_meta['saju-learn'].team_leader, pixel_emoji=division_meta['saju-learn'].emoji %}{% include '_pixel_office.html' %}{% endwith %}
+      <div class="office-feed-panel-head" aria-hidden="true">
+        <h2>대화 로그</h2>
+        <p class="office-feed-lead">사주 학습부 메시지 · 최신이 위에 표시됩니다.</p>
+      </div>
+
+      <section class="office-instruct-panel" aria-label="작업 지시">
+        <h2>작업 지시</h2>
+        <p class="office-instruct-lead">명리·풀이 검수·태그·pack 지시를 내리면 담당 젬마가 처리하고 완료 보고를 대화 로그에 남깁니다. saju-v2 API는 연동하지 않습니다.</p>
+        <form id="saju-office-instruct-form" class="office-instruct-form" method="post" action="{{ url_for('agent_office_instruct_form') }}">
+          {% include '_csrf_field.html' %}
+          <input type="hidden" name="division" value="saju-learn">
+          <div class="instruct-row">
+            <label>
+              담당
+              <select name="assign_to" id="saju-instruct-assign-to">
+                <option value="all">전체 에이전트</option>
+                {% for a in saju_agents %}
+                <option value="{{ a.id }}">{{ a.emoji }} {{ a.name }}</option>
+                {% endfor %}
+              </select>
+            </label>
+            <label>
+              우선순위
+              <select name="priority" id="saju-instruct-priority">
+                <option value="normal">보통</option>
+                <option value="high">긴급</option>
+              </select>
+            </label>
+          </div>
+          <label class="instruct-title-label">
+            제목 <span class="optional">(선택)</span>
+            <input type="text" name="title" id="saju-instruct-title" maxlength="120" placeholder="한 줄 요약">
+          </label>
+          <label>
+            지시 내용
+            <textarea id="saju-instruct-body" name="body" rows="4" required maxlength="4000"
+                      placeholder="예: 대기 중 명리 카드 태그를 정리하고 pack에 반영해 주세요."></textarea>
+          </label>
+          <button type="submit" class="btn btn-primary" id="saju-instruct-submit">지시 전달</button>
+          <span class="instruct-hint" id="saju-instruct-status">전달 즉시 담당 에이전트가 처리하며, 완료 시 지시 목록·대화 로그·<code>CURSOR_SAJU_LEARN.md</code>에 반영됩니다.</span>
+        </form>
+        <div class="office-task-queue">
+          <h3>지시 목록 <span class="task-count" id="saju-task-count">{{ saju_tasks | length }}</span>
+            <span class="task-queue-hint" id="saju-reserved-hint">{% if saju_reserved_queue_mode == 'council_card' %}· {{ saju_reserved_queue_label }} 검증 <strong>{{ saju_council_verified }}</strong>/{{ saju_council_total }} · 진행 <strong>{{ saju_reserved_active }}</strong>/{{ saju_reserved_queue_target }}{% else %}· {{ saju_reserved_queue_label }} <strong>{{ saju_reserved_active }}</strong>/{{ saju_reserved_queue_target }}건 (자동 학습 큐){% endif %}</span></h3>
+          <ul class="task-list" id="saju-task-list">
+            {% for t in saju_tasks %}
+            <li class="task-item task-item--{{ t.status or 'queued' }} task-item--prio-{{ t.priority or 'normal' }}" data-task-id="{{ t.id }}">
+              <div class="task-item-head">
+                <span class="task-id">#{{ loop.index }}</span>
+                <span class="task-global-id" title="전체 사무실 지시 번호">({{ t.id }})</span>
+                {% if t.source == 'reserved_saju' %}<span class="task-reserved-badge">예약</span>{% elif t.source in ('council_saju', 'council_saju_card') %}<span class="task-reserved-badge">위원회</span>{% endif %}
+                <span class="task-status">{{ task_status_labels.get(t.status, t.status) }}</span>
+                {% if t.priority == 'high' %}<span class="task-priority">긴급</span>{% endif %}
+                <time class="task-ts">{{ t.ts }}</time>
+              </div>
+              <p class="task-assign">
+                → {% if t.resolved_to %}{{ roster.get(t.resolved_to).name if roster.get(t.resolved_to) else t.resolved_to }}{% elif t.assign_to == 'all' %}전체(자동){% else %}{{ roster.get(t.assign_to).name if roster.get(t.assign_to) else t.assign_to }}{% endif %}
+                {% if t.synthesized_by %} · 취합 {{ roster.get(t.synthesized_by).name if roster.get(t.synthesized_by) else t.synthesized_by }}{% endif %}
+              </p>
+              {% if t.title %}<p class="task-title">{{ t.title }}</p>{% endif %}
+              <p class="task-body">{{ t.body }}</p>
+              {% if t.handled_by and t.status == 'done' %}
+              <p class="task-meta">처리: {{ roster.get(t.handled_by).name if roster.get(t.handled_by) else t.handled_by }}</p>
+              {% endif %}
+              {% if t.wiki_id %}
+              <p class="task-wiki-link">📗 {{ t.wiki_id }}</p>
+              {% endif %}
+              {% if t.result %}
+              <pre class="task-result">{{ t.result }}</pre>
+              {% endif %}
+            </li>
+            {% else %}
+            <li class="task-empty" id="saju-task-empty">직접 내린 지시가 없습니다. 「예약」 배지가 붙은 항목은 명리 학습 자동 큐입니다.</li>
+            {% endfor %}
+          </ul>
+        </div>
+      </section>
+
+      <section class="gemma-knowledge-panel saju-knowledge-panel" aria-label="젬마 기억 사주">
+        <h2>젬마 기억 <span class="wiki-count" id="saju-wiki-count">10_Wiki {{ saju_knowledge.wiki_count }} · 20_Meta {{ saju_knowledge.meta_count }}</span></h2>
+        <p class="wiki-panel-lead">
+          사주 학습 도메인(<code>saju-learn</code>) · 카드 <strong id="saju-learn-total">{{ saju_learn.total }}</strong> ·
+          대기 <strong id="saju-learn-pending">{{ saju_learn.pending }}</strong> ·
+          확정 <strong id="saju-learn-confirmed">{{ saju_learn.confirmed }}</strong>
+          · Wiki 인증 <strong>{{ saju_knowledge.council_certified or 0 }}</strong>
+          · 검수반영 <strong>{{ saju_knowledge.council_review or 0 }}</strong>
+          · 갱신 {{ saju_knowledge.updated_at or '—' }}
+          · <code>CURSOR_SAJU_LEARN.md</code>
+        </p>
+        <ul class="wiki-card-list" id="saju-wiki-card-list">
+          {% for w in saju_knowledge.recent_wiki | reverse %}
+          <li class="wiki-card-item{% if w.council_tier == 'certified' %} wiki-card-item--cert{% elif w.council_tier == 'review' %} wiki-card-item--review{% elif w.council_tier == 'excluded' %} wiki-card-item--excluded{% endif %}">
+            <span class="wiki-card-id">{{ w.id }}</span>
+            {% if w.council_tier == 'certified' or w.council_pass %}
+            <span class="saju-wiki-tier saju-wiki-tier--cert" title="명리 위원회 PASS"><span class="saju-wiki-tier__icon" aria-hidden="true">✓</span>사주위원회 인증</span>
+            {% elif w.council_tier == 'review' %}
+            <span class="saju-wiki-tier saju-wiki-tier--review" title="지식 반영·PASS 대기"><span class="saju-wiki-tier__icon" aria-hidden="true">◷</span>사주위원회 검수 반영</span>
+            {% endif %}
+            <strong class="wiki-card-title">{{ w.title }}</strong>
+            <p class="wiki-card-summary">{{ w.summary }}</p>
+            <p class="wiki-card-meta">#{{ w.task_id }} · {{ w.ts }}{% if w.tags %} · {{ w.tags | join(', ') }}{% endif %}</p>
+          </li>
+          {% else %}
+          <li class="wiki-empty">아직 저장된 Wiki 카드가 없습니다. 풀이 확정·작업 완료 시 여기에 쌓입니다.</li>
+          {% endfor %}
+        </ul>
+      </section>
+
+      <section class="saju-learn-cards-section" aria-label="학습 카드 목록">
+        <div class="saju-learn-cards-head">
+          <h3 class="saju-learn-cards-title">학습 카드</h3>
+          <span class="saju-learn-cards-count" id="saju-learn-cards-count">표시 <strong>{{ saju_learn.cards | length }}</strong> / 전체 <strong id="saju-learn-total-inline">{{ saju_learn.total }}</strong>건</span>
+          <button type="button" class="btn btn-gray btn-sm" id="saju-learn-refresh-btn">카드 새로고침</button>
+        </div>
+        <div class="office-scroll-panel saju-learn-cards-scroll" id="saju-learn-cards-scroll">
+        <ul class="saju-learn-card-list" id="saju-learn-card-list">
+    {% for c in saju_learn.cards %}
+    <li class="saju-learn-card saju-learn-card--{{ c.status }}{% if c.council_status == 'pass' or c.council_pass %} saju-learn-card--council-certified{% endif %}" data-card-id="{{ c.id }}">
+      <div class="saju-learn-card-head">
+        <span class="saju-learn-card-id">#{{ c.id }}</span>
+        <span class="saju-learn-card-status">{{ '확정' if c.status == 'confirmed' else '검수 대기' }}</span>
+        {% if c.council_status == 'pass' or c.council_pass %}
+        <span class="saju-council-cert" title="명리 위원회 검증 PASS{% if c.council_at %} · {{ c.council_at }}{% endif %}"><span class="saju-council-cert__icon" aria-hidden="true">✓</span>사주위원회 인증</span>
+        {% elif c.council_status == 'fail' %}
+        <span class="saju-council-badge saju-council-badge--fail" title="명리위원회 FAIL">위원회 재검토</span>
+        {% endif %}
+        <time>{{ c.ts }}</time>
+        <span class="saju-learn-card-source">{{ c.source }}</span>
+      </div>
+      <h4 class="saju-learn-card-title">{{ c.title }}</h4>
+      <p class="saju-learn-card-summary">{{ c.summary }}</p>
+      {% if c.tags %}<p class="saju-learn-card-tags">{% for t in c.tags %}<span>{{ t }}</span>{% endfor %}</p>{% endif %}
+      <details class="saju-learn-card-body-wrap">
+        <summary>본문 보기</summary>
+        <pre class="saju-learn-card-body">{{ (c.body or '')[:4000] }}</pre>
+      </details>
+      {% if c.status == 'pending' %}
+      <div class="saju-learn-card-actions">
+        <button type="button" class="btn btn-primary btn-sm btn-saju-confirm" data-card-id="{{ c.id }}">확정 (학습 반영)</button>
+        <button type="button" class="btn btn-gray btn-sm btn-saju-delete" data-card-id="{{ c.id }}">삭제</button>
+      </div>
+      {% endif %}
+    </li>
+    {% else %}
+    <li class="saju-learn-empty">아직 풀이 카드가 없습니다. 위에 본문을 붙여 넣어 주세요.</li>
+    {% endfor %}
+        </ul>
+        </div>
+      </section>
+
+      <details class="saju-learn-ingest-panel" open>
+        <summary><span class="saju-ingest-summary-title">풀이 넣기</span></summary>
+      <section class="saju-learn-ingest">
+        <form id="saju-learn-form" class="saju-learn-form">
+          <label>제목 <input type="text" name="title" id="saju-learn-title" maxlength="120" placeholder="예: 일주 심층"></label>
+          <label>본문 <textarea name="body" id="saju-learn-body" rows="6" required maxlength="24000"
+                    placeholder="풀이만. PII 금지."></textarea></label>
+          <button type="submit" class="btn btn-primary" id="saju-learn-submit">학습 카드 저장</button>
+          <button type="button" class="btn btn-gray btn-sm" id="saju-web-research-btn">웹 검색 토론</button>
+          <span class="saju-learn-hint" id="saju-learn-status"></span>
+        </form>
+        <p class="saju-learn-actions">
+          <a class="btn btn-gray btn-sm" href="{{ url_for('agent_office_saju_learn_export') }}">확정분 JSON</a>
+          <span class="saju-learn-hint">위 목록에서 스크롤 · 인증 뱃지는 위원회 PASS 카드에 표시</span>
+        </p>
+      </section>
+      </details>
+
+      <section class="agent-skills-panel" id="saju-skills-panel" aria-label="에이전트 스킬">
+        <h2 id="saju-skills-panel-title">에이전트 스킬</h2>
+        <p class="skills-panel-hint" id="saju-skills-panel-hint">왼쪽 명단에서 에이전트를 선택하면 보유 스킬을 확인할 수 있습니다.</p>
+        <ul class="skills-list" id="saju-skills-list"></ul>
+        <dl class="agent-meta-dl" id="saju-agent-meta-dl" hidden>
+          <dt>작업 주기</dt>
+          <dd id="saju-meta-interval">—</dd>
+          <dt>잡 종류</dt>
+          <dd id="saju-meta-job">—</dd>
+          <dt>상시 ON</dt>
+          <dd id="saju-meta-mode">—</dd>
+        </dl>
+      </section>
+
+      <div class="agent-office-toolbar" aria-label="메시지 필터">
+        <div class="kind-filters">
+          <button type="button" class="saju-kind-btn is-active" data-filter-kind="">전체</button>
+          {% for key, label in kind_labels.items() %}
+          <button type="button" class="saju-kind-btn" data-filter-kind="{{ key }}">{{ label }}</button>
+          {% endfor %}
+        </div>
+        <span class="office-live" id="saju-office-live-status" title="2.5초마다 자동 갱신">● 실시간</span>
+        <button type="button" class="btn btn-gray btn-sm" id="saju-office-refresh-btn">새로고침</button>
+      </div>
+
+      <div class="office-new-banner is-hidden" id="saju-office-new-banner" role="status">
+        <button type="button" id="saju-office-new-banner-btn">새 메시지 보기</button>
+      </div>
+
+      <div class="agent-office-feed" id="saju-agent-office-feed" aria-live="polite">
+        {% for m in saju_messages %}
+        {% set from_a = roster.get(m.from) %}
+        {% set to_a = roster.get(m.to) if m.to else none %}
+        <article
+          class="office-msg office-msg--{{ m.kind or 'task' }}"
+          data-msg-id="{{ m.id }}"
+          data-from="{{ m.from }}"
+          data-to="{{ m.to or '' }}"
+          data-kind="{{ m.kind or 'task' }}"
+        >
+          <header class="office-msg-head">
+            <span class="office-msg-avatar">{{ (from_a.emoji if from_a else '🤖') }}</span>
+            <span class="office-msg-from">{{ (from_a.name if from_a else m.from) }}</span>
+            {% if m.to %}
+            <span class="office-msg-arrow">→</span>
+            <span class="office-msg-to">{{ (to_a.name if to_a else m.to) }}</span>
+            {% endif %}
+            <span class="office-msg-kind">{{ kind_labels.get(m.kind, m.kind) }}</span>
+            <time class="office-msg-ts">{{ m.ts }}</time>
+          </header>
+          <p class="office-msg-text">{{ m.text }}</p>
+        </article>
+        {% else %}
+        <p class="office-empty">아직 사주 학습부 로그가 없습니다.</p>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% include '_office_unit_kiwoom.html' %}
+{% include '_office_unit_stock_watch.html' %}
+{% include '_office_unit_homepage_design.html' %}
+{% include '_office_unit_workisus.html' %}
+{% include '_office_unit_gwansang.html' %}
+{% include '_office_unit_chief_dev.html' %}
+
+<script>
+  window.AGENT_OFFICE_KIND_LABELS = {{ kind_labels | tojson }};
+  window.AGENT_OFFICE_AGENTS = {{ finance_agents | tojson }};
+  window.AGENT_OFFICE_SAJU_AGENTS = {{ saju_agents | tojson }};
+  window.KIWOM_OFFICE_AGENTS = {{ kiwoom_agents | tojson }};
+  window.STOCK_OFFICE_AGENTS = {{ stock_agents | tojson }};
+  window.DESIGN_OFFICE_AGENTS = {{ design_agents | tojson }};
+  window.WORKISUS_OFFICE_AGENTS = {{ workisus_agents | tojson }};
+  window.GWANSANG_OFFICE_AGENTS = {{ gwansang_agents | tojson }};
+  window.CHIEF_DEV_OFFICE_AGENTS = {{ chief_dev_agents | tojson }};
+  window.DIVISION_TEAM_LEADERS = {{ division_meta | tojson }};
+  window.AGENT_OFFICE_ALL_AGENTS = {{ agents | tojson }};
+  window.AGENT_OFFICE_CONTROL_ENABLED = {{ office_control_enabled | tojson }};
+  window.AGENT_OFFICE_ALWAYS_ON = {{ office_always_on | tojson }};
+  window.AGENT_OFFICE_TASK_STATUS = {{ task_status_labels | tojson }};
+  window.CSRF_TOKEN = {{ csrf_token | tojson }};
+</script>
+<script src="{{ url_for('static', filename='agent_office.js') }}?v=20260529a" defer></script>
+<script src="{{ url_for('static', filename='kiwoom_office.js') }}?v=2" defer></script>
+<script src="{{ url_for('static', filename='stock_watch.js') }}?v=1" defer></script>
+<script src="{{ url_for('static', filename='homepage_design_office.js') }}?v=1" defer></script>
+<script src="{{ url_for('static', filename='workisus_office.js') }}?v=1" defer></script>
+<script src="{{ url_for('static', filename='gwansang_office.js') }}?v=1" defer></script>
+<script src="{{ url_for('static', filename='office_web_research.js') }}?v=1" defer></script>
+<script src="{{ url_for('static', filename='chief_dev_office.js') }}?v=3" defer></script>
+<script src="{{ url_for('static', filename='pixel_office.js') }}?v=1" defer></script>
+{% endblock %}

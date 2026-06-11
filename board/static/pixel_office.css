@@ -1,0 +1,184 @@
+/* Connect AI–style pixel office — per-division themed canvas */
+.pixel-office-panel {
+  order: 0;
+  margin: 0 0 4px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+}
+
+.pixel-office-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 14px;
+  background: rgba(0, 0, 0, 0.35);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.pixel-office-title {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: rgba(255, 255, 255, 0.92);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.pixel-office-title-emoji {
+  font-size: 15px;
+}
+
+.pixel-office-head-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.pixel-office-live {
+  font-size: 11px;
+  color: #4ade80;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.pixel-office-live.is-off {
+  color: #94a3b8;
+}
+
+.pixel-office-banner {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 4px;
+  background: linear-gradient(90deg, #ff6b9d, #c084fc);
+  color: #050816;
+  animation: pixel-banner-pulse 1.2s ease-in-out infinite;
+}
+
+.pixel-office-banner.is-hidden {
+  display: none;
+}
+
+@keyframes pixel-banner-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.85; transform: scale(1.02); }
+}
+
+.pixel-office-stage {
+  position: relative;
+  background: #050816;
+  min-height: 200px;
+  line-height: 0;
+}
+
+.pixel-office-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  min-height: 200px;
+  max-height: 480px;
+}
+
+.pixel-office-hint {
+  margin: 0;
+  padding: 6px 14px 8px;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.45);
+  background: rgba(0, 0, 0, 0.25);
+}
+
+/* Per-unit panel accents */
+.pixel-office-panel--finance { --po-accent: #b8860b; --po-glow: #add8e6; }
+.pixel-office-panel--chief-dev { --po-accent: #60a5fa; --po-glow: #a78bfa; }
+.pixel-office-panel--saju-learn { --po-accent: #c9a0dc; --po-glow: #f0e6ff; }
+.pixel-office-panel--gwansang-learn { --po-accent: #f4a896; --po-glow: #ffd4c8; }
+.pixel-office-panel--kiwoom-chasu { --po-accent: #4ade80; --po-glow: #bbf7d0; }
+.pixel-office-panel--stock-watch { --po-accent: #38bdf8; --po-glow: #7dd3fc; }
+.pixel-office-panel--homepage-design { --po-accent: #4f6ef7; --po-glow: #a5b4fc; }
+.pixel-office-panel--workisus-chasu { --po-accent: #f59e0b; --po-glow: #fcd34d; }
+
+.pixel-office-panel--finance .pixel-office-stage { background: linear-gradient(180deg, #0a1931 0%, #050816 100%); }
+.pixel-office-panel--chief-dev .pixel-office-stage { background: linear-gradient(180deg, #0f172a 0%, #050816 100%); }
+.pixel-office-panel--saju-learn .pixel-office-stage { background: linear-gradient(180deg, #1a0f24 0%, #050816 100%); }
+.pixel-office-panel--gwansang-learn .pixel-office-stage { background: linear-gradient(180deg, #1f1410 0%, #050816 100%); }
+.pixel-office-panel--kiwoom-chasu .pixel-office-stage { background: linear-gradient(180deg, #061408 0%, #050816 100%); }
+.pixel-office-panel--stock-watch .pixel-office-stage { background: linear-gradient(180deg, #030712 0%, #050816 100%); }
+.pixel-office-panel--homepage-design .pixel-office-stage { background: linear-gradient(180deg, #0a1931 0%, #050816 100%); }
+.pixel-office-panel--workisus-chasu .pixel-office-stage { background: linear-gradient(180deg, #1a1206 0%, #050816 100%); }
+
+/* SVG desk interactions (class toggled from JS) */
+.po-desk {
+  cursor: pointer;
+  transition: filter 0.2s ease;
+}
+
+.po-desk:hover {
+  filter: brightness(1.15);
+}
+
+.po-desk.is-selected .po-desk-surface {
+  stroke: var(--po-glow, #fff);
+  stroke-width: 2;
+}
+
+.po-desk.is-working .po-status-dot {
+  fill: #4ade80;
+  animation: po-pulse 1.4s ease-in-out infinite;
+}
+
+.po-desk.is-talking .po-chatter {
+  opacity: 1;
+}
+
+.po-desk.is-meeting .po-agent-body {
+  animation: po-walk 0.8s ease-in-out;
+}
+
+.po-desk.is-off .po-agent-emoji {
+  opacity: 0.35;
+  filter: grayscale(0.8);
+}
+
+@keyframes po-pulse {
+  0%, 100% { opacity: 1; r: 4; }
+  50% { opacity: 0.6; r: 5; }
+}
+
+@keyframes po-walk {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(8px); }
+}
+
+.po-chatter {
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  pointer-events: none;
+}
+
+.po-meeting-glow {
+  animation: po-meeting-glow 2s ease-in-out infinite;
+}
+
+@keyframes po-meeting-glow {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.7; }
+}
+
+@media (max-width: 768px) {
+  .pixel-office-stage {
+    min-height: 160px;
+  }
+  .pixel-office-svg {
+    min-height: 160px;
+    max-height: 220px;
+  }
+  .pixel-office-hint {
+    display: none;
+  }
+}

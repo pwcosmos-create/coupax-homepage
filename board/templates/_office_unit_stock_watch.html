@@ -1,0 +1,530 @@
+<div class="office-unit office-unit--stock-watch" id="office-unit-stock-watch" hidden aria-label="주식 시황부">
+<div class="agent-office-layout page-stock-watch-office">
+  <aside class="agent-office-roster" aria-label="주식 시황 에이전트">
+    <h2>출근 명단</h2>
+    <ul class="roster-list" id="stock-roster-list">
+      <li>
+        <button type="button" class="roster-btn is-active" data-filter-agent="" data-agent-id="">전체 대화</button>
+      </li>
+      {% for a in stock_agents %}
+      <li class="roster-item" data-agent-id="{{ a.id }}">
+        <div class="roster-row">
+          <button type="button" class="roster-btn roster-btn--pick" data-filter-agent="{{ a.id }}" data-agent-id="{{ a.id }}">
+            <span class="roster-emoji">{{ a.emoji or '📡' }}</span>
+            <span class="roster-name">{{ a.name }}</span>
+            <span class="roster-role">{{ a.role }}</span>
+          </button>
+          <label class="mode-on-switch{% if a.mode_on %} is-on{% endif %}" title="상시 작업 ON/OFF">
+            <input type="checkbox" class="agent-mode-on" data-agent-id="{{ a.id }}"
+                   {% if a.mode_on %}checked{% endif %}
+                   {% if not office_control_enabled %}disabled{% endif %}
+                   aria-label="{{ a.name }} ON/OFF">
+            <span class="mode-on-slider" aria-hidden="true"></span>
+            <span class="mode-on-label">{% if a.mode_on %}ON{% else %}OFF{% endif %}</span>
+          </label>
+        </div>
+        <p class="roster-cycle">주기: {{ a | agent_interval }}</p>
+        {% if a.last_run_at %}
+        <p class="roster-run">최근: {{ a.last_run_at }} · {{ a.last_status or '—' }}</p>
+        {% endif %}
+      </li>
+      {% endfor %}
+    </ul>
+  </aside>
+
+  <div class="agent-office-center">
+    {% with pixel_unit='stock-watch', pixel_label=division_meta['stock-watch'].team_leader, pixel_emoji=division_meta['stock-watch'].emoji %}{% include '_pixel_office.html' %}{% endwith %}
+    <section class="stock-watch-panel" aria-label="국내·미국 시세">
+      <div class="stock-watch-head">
+        <h2>🌐 주식 시황 <span class="stock-watch-updated" id="stock-watch-updated">{{ stock_watch.updated_at or '미수집' }}</span></h2>
+        <div class="stock-watch-actions">
+          <span class="stock-watch-live" id="stock-office-live-status">연결 중…</span>
+          <button type="button" class="btn btn-primary btn-sm" id="stock-watch-sync-btn">지금 수집</button>
+          <button type="button" class="btn btn-gray btn-sm" id="stock-comments-verify-btn">댓글 검증</button>
+          <button type="button" class="btn btn-gray btn-sm" id="stock-official-research-btn">공시·매크로·리포트·CEO</button>
+          <button type="button" class="btn btn-gray btn-sm" id="stock-web-research-btn">웹 검색 토론</button>
+          <span class="saju-learn-hint" id="stock-web-research-status"></span>
+        </div>
+      </div>
+      <p class="stock-watch-lead">
+        국내 <strong>코스피200·코스닥150</strong>(시총 순)과 미국 지수·관심종목을 30분마다 수집합니다.
+        RL 예측·조사 블록은 아래 카드에서 확인하세요.
+      </p>
+      {% if stock_watch.last_error %}
+      <p class="stock-watch-error">일부 심볼 수집 실패: {{ stock_watch.last_error }}</p>
+      {% endif %}
+
+      <div class="stock-summary-row" id="stock-summary-row" aria-label="시장 요약">
+        <div class="stock-stat-card" id="stock-stat-kospi">
+          <span class="stock-stat-label">KOSPI</span>
+          <span class="stock-stat-value" data-stat="kospi-price">—</span>
+          <span class="stock-stat-chg" data-stat="kospi-pct">—</span>
+        </div>
+        <div class="stock-stat-card" id="stock-stat-kosdaq">
+          <span class="stock-stat-label">KOSDAQ</span>
+          <span class="stock-stat-value" data-stat="kosdaq-price">—</span>
+          <span class="stock-stat-chg" data-stat="kosdaq-pct">—</span>
+        </div>
+        <div class="stock-stat-card stock-stat-card--muted">
+          <span class="stock-stat-label">코스피200</span>
+          <span class="stock-stat-value" id="stock-count-k200">{{ stock_watch.kr_kospi200 or 0 }}종목</span>
+        </div>
+        <div class="stock-stat-card stock-stat-card--muted">
+          <span class="stock-stat-label">코스닥150</span>
+          <span class="stock-stat-value" id="stock-count-k150">{{ stock_watch.kr_kosdaq150 or 0 }}종목</span>
+        </div>
+      </div>
+
+      <div class="stock-movers-bar" id="stock-movers-bar" hidden>
+        <span class="stock-movers-title">오늘 변동 TOP</span>
+        <ul class="stock-movers-list" id="stock-movers-list"></ul>
+      </div>
+
+      <div class="stock-watch-grid stock-watch-grid--markets">
+        <section class="stock-market-panel" aria-label="국내 시세">
+          <header class="stock-market-panel__head">
+            <h3>🇰🇷 국내</h3>
+            <span class="stock-row-count" id="stock-kr-row-count"></span>
+          </header>
+          <div class="stock-market-toolbar">
+            <div class="stock-tabs" role="tablist" aria-label="국내 구분">
+              <button type="button" class="stock-tab" data-kr-tab="indices" role="tab">지수</button>
+              <button type="button" class="stock-tab is-active" data-kr-tab="kospi200" role="tab">코스피200</button>
+              <button type="button" class="stock-tab" data-kr-tab="kosdaq150" role="tab">코스닥150</button>
+            </div>
+            <div class="stock-toolbar-right">
+              <input type="search" class="stock-search" id="stock-kr-search" placeholder="종목명·코드 검색" autocomplete="off" />
+              <select class="stock-sort" id="stock-kr-sort" aria-label="정렬">
+                <option value="chg_desc">등락률 ↓</option>
+                <option value="chg_asc">등락률 ↑</option>
+                <option value="name">이름순</option>
+              </select>
+            </div>
+          </div>
+          <div class="stock-table-scroll">
+            <table class="stock-quote-table stock-quote-table--dense" id="stock-kr-table">
+              <thead>
+                <tr>
+                  <th class="col-name">종목</th>
+                  <th class="col-price">가격</th>
+                  <th class="col-chg">등락</th>
+                </tr>
+              </thead>
+              <tbody id="stock-kr-tbody">
+                <tr><td colspan="3" class="stock-empty">시세 불러오는 중…</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="stock-market-panel stock-market-panel--us" aria-label="미국 시세">
+          <header class="stock-market-panel__head">
+            <h3>🇺🇸 미국</h3>
+            <span class="stock-row-count" id="stock-us-row-count"></span>
+          </header>
+          <div class="stock-us-indices" id="stock-us-indices"></div>
+          <div class="stock-table-scroll stock-table-scroll--short">
+            <table class="stock-quote-table stock-quote-table--dense" id="stock-us-table">
+              <thead>
+                <tr>
+                  <th class="col-name">종목</th>
+                  <th class="col-price">가격</th>
+                  <th class="col-chg">등락</th>
+                </tr>
+              </thead>
+              <tbody id="stock-us-tbody">
+                <tr><td colspan="3" class="stock-empty">시세 불러오는 중…</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+
+      <div class="stock-watch-alerts" id="stock-watch-alerts">
+        <h3>변동 알림</h3>
+        <ul id="stock-alerts-list">
+          {% for a in stock_watch.alerts %}
+          <li>{{ a.name or a.symbol }} — {{ a.note }}</li>
+          {% else %}
+          <li class="stock-empty">등락률 임계치 이상 변동 시 표시됩니다.</li>
+          {% endfor %}
+        </ul>
+      </div>
+
+      <div class="stock-insights-grid">
+        <section class="stock-insight-card" aria-label="차트젬마">
+          <h3>📊 차트젬마 <small id="stock-chart-ts">{{ (stock_watch.insights or {}).get('chart', {}).get('ts', '') }}</small></h3>
+          <ul class="stock-insight-list" id="stock-chart-list">
+            {% for it in (stock_watch.insights or {}).get('chart', {}).get('items', []) %}
+            <li><strong>{{ it.name }}</strong> <span class="stock-signal stock-signal--{{ it.signal }}">{{ it.signal }}</span> {{ it.note }}</li>
+            {% else %}
+            <li class="stock-empty">수집 후 1시간 내 추세 신호가 표시됩니다.</li>
+            {% endfor %}
+          </ul>
+        </section>
+        <section class="stock-insight-card stock-insight-card--rl" aria-label="RL예측젬마">
+          <header class="stock-rl-head">
+            <div>
+              <h3>🎯 RL 예측 <small id="stock-rl-ts">{{ (stock_watch.insights or {}).get('rl_predictions', {}).get('ts', '') }}</small></h3>
+              <p class="stock-rl-disclaimer">강화학습(ε-greedy) 다음 구간 방향 — <strong>투자 권유 아님</strong></p>
+            </div>
+            <div class="stock-rl-stats" id="stock-rl-stats" aria-live="polite"></div>
+          </header>
+          <div class="stock-rl-summary" id="stock-rl-summary"></div>
+          <div class="stock-market-toolbar stock-rl-toolbar">
+            <div class="stock-tabs" role="tablist" aria-label="RL 구분">
+              <button type="button" class="stock-tab is-active" data-rl-tab="all" role="tab">전체</button>
+              <button type="button" class="stock-tab" data-rl-tab="kospi200" role="tab">코스피200</button>
+              <button type="button" class="stock-tab" data-rl-tab="kosdaq150" role="tab">코스닥150</button>
+              <button type="button" class="stock-tab" data-rl-tab="up" role="tab">상승</button>
+              <button type="button" class="stock-tab" data-rl-tab="down" role="tab">하락</button>
+            </div>
+            <div class="stock-toolbar-right">
+              <input type="search" class="stock-search" id="stock-rl-search" placeholder="종목 검색" autocomplete="off" />
+              <select class="stock-sort" id="stock-rl-sort" aria-label="RL 정렬">
+                <option value="conf_desc">신뢰도 ↓</option>
+                <option value="chg_desc">당일 등락 ↓</option>
+                <option value="name">이름순</option>
+              </select>
+              <span class="stock-row-count" id="stock-rl-row-count"></span>
+            </div>
+          </div>
+          <div class="stock-table-scroll stock-table-scroll--rl">
+            <table class="stock-rl-table stock-quote-table--dense" id="stock-rl-table">
+              <thead>
+                <tr>
+                  <th class="col-name">종목</th>
+                  <th class="col-pred">예측</th>
+                  <th class="col-conf">신뢰</th>
+                  <th class="col-chg">당일</th>
+                </tr>
+              </thead>
+              <tbody id="stock-rl-body">
+                <tr><td colspan="4" class="stock-empty">예측 불러오는 중…</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+        <section class="stock-insight-card" aria-label="제무젬마">
+          <h3>📑 제무젬마 <small id="stock-finance-ts">{{ (stock_watch.insights or {}).get('finance', {}).get('ts', '') }}</small></h3>
+          <ul class="stock-insight-list" id="stock-finance-list">
+            {% for it in (stock_watch.insights or {}).get('finance', {}).get('items', []) %}
+            <li><strong>{{ it.name or it.symbol }}</strong> — {{ it.title }}<br><span class="stock-snippet">{{ it.snippet[:120] }}…</span></li>
+            {% else %}
+            <li class="stock-empty">실적·PER·ROE 웹 팩트가 여기 쌓입니다.</li>
+            {% endfor %}
+          </ul>
+        </section>
+        <section class="stock-insight-card stock-insight-card--analyst" aria-label="애널리스트젬마">
+          <h3>📈 애널리스트 <small id="stock-analyst-ts">{{ (stock_watch.insights or {}).get('analyst_reports', {}).get('ts', '') }}</small></h3>
+          <p class="stock-analyst-disclaimer">증권사 리포트·목표가는 <strong>투자 권유가 아닙니다</strong>. 공시·당일 시세와 교차하세요.</p>
+          <ul class="stock-analyst-list" id="stock-analyst-list">
+            {% for it in (stock_watch.insights or {}).get('analyst_reports', {}).get('items', []) %}
+            <li class="stock-analyst-item">
+              {% if it.company %}<span class="stock-analyst-company">{{ it.company }}{% if it.market_change_pct is not none %} <small>({{ '%+.2f'|format(it.market_change_pct) }}%)</small>{% endif %}</span>{% endif %}
+              {% if it.broker %}<span class="stock-analyst-broker">{{ it.broker }}</span>{% endif %}
+              {% if it.target_price %}<span class="stock-analyst-tp">목표 {{ it.target_price }}</span>{% endif %}
+              <span class="stock-macro-topic">[{{ it.topic }}]</span>
+              {% if it.url %}<a href="{{ it.url }}" rel="noopener noreferrer" target="_blank">{{ it.title[:68] }}</a>{% else %}{{ it.title[:68] }}{% endif %}
+              {% if it.snippet %}<br><span class="stock-snippet">{{ it.snippet[:90] }}…</span>{% endif %}
+            </li>
+            {% else %}
+            <li class="stock-empty">리포트·목표가·투자의견</li>
+            {% endfor %}
+          </ul>
+        </section>
+        <section class="stock-insight-card" aria-label="최신정보젬마">
+          <h3>📰 최신정보젬마 <small id="stock-news-ts">{{ (stock_watch.insights or {}).get('news', {}).get('ts', '') }}</small></h3>
+          <ul class="stock-insight-list" id="stock-news-list">
+            {% for it in (stock_watch.insights or {}).get('news', {}).get('items', []) %}
+            <li><a href="{{ it.url }}" rel="noopener noreferrer" target="_blank">{{ it.title }}</a><br><span class="stock-snippet">{{ it.snippet[:100] }}…</span></li>
+            {% else %}
+            <li class="stock-empty">국내·미국·글로벌 속보가 45분 주기로 갱신됩니다.</li>
+            {% endfor %}
+          </ul>
+        </section>
+        <section class="stock-insight-card" aria-label="리스크젬마">
+          <h3>⚠️ 리스크젬마 <small id="stock-risk-ts">{{ (stock_watch.insights or {}).get('risk', {}).get('ts', '') }}</small></h3>
+          <ul class="stock-insight-list" id="stock-risk-list">
+            {% for it in (stock_watch.insights or {}).get('risk', {}).get('items', []) %}
+            <li>{{ it.name }} — {{ it.change_pct }}% ({{ it.note }})</li>
+            {% else %}
+            <li class="stock-empty">급등락 종목이 없으면 양호로 표시됩니다.</li>
+            {% endfor %}
+          </ul>
+        </section>
+        <section class="stock-insight-card stock-insight-card--macro" aria-label="금리·달러젬마">
+          <h3>💱 금리·달러 <small id="stock-rates-ts">{{ (stock_watch.insights or {}).get('rates_dollar', {}).get('ts', '') }}</small></h3>
+          {% set rd = (stock_watch.insights or {}).get('rates_dollar', {}) %}
+          {% if rd.usdkrw and rd.usdkrw.price %}
+          <p class="stock-fx-spot">USD/KRW <strong>{{ rd.usdkrw.price }}</strong>
+            <span class="{% if rd.usdkrw.change_pct and rd.usdkrw.change_pct > 0 %}stock-up{% elif rd.usdkrw.change_pct and rd.usdkrw.change_pct < 0 %}stock-down{% endif %}">
+              {{ '%+.2f'|format(rd.usdkrw.change_pct or 0) }}%</span></p>
+          {% endif %}
+          <ul class="stock-insight-list" id="stock-rates-list">
+            {% for it in rd.get('items', []) %}
+            <li>
+              {% if it.url %}<a href="{{ it.url }}" rel="noopener noreferrer" target="_blank">{% endif %}
+              <span class="stock-macro-topic">[{{ it.topic }}]</span> {{ it.title[:72] }}
+              {% if it.url %}</a>{% endif %}
+              {% if it.snippet %}<br><span class="stock-snippet">{{ it.snippet[:100] }}…</span>{% endif %}
+            </li>
+            {% else %}
+            <li class="stock-empty">기준금리·원달러·증시 영향 해석</li>
+            {% endfor %}
+          </ul>
+        </section>
+        <section class="stock-insight-card stock-insight-card--bond" aria-label="채권젬마">
+          <h3>📊 채권 <small id="stock-bond-ts">{{ (stock_watch.insights or {}).get('bonds', {}).get('ts', '') }}</small></h3>
+          {% set bd = (stock_watch.insights or {}).get('bonds', {}) %}
+          <ul class="stock-bond-quotes" id="stock-bond-quotes">
+            {% for q in bd.get('quotes', []) %}
+            {% if q.kind == 'yield' %}
+            <li>
+              <span class="stock-bond-name">{{ q.name }}</span>
+              <strong>{{ q.price }}{{ q.unit or '%' }}</strong>
+              <span class="{% if q.change_pct and q.change_pct > 0 %}stock-up{% elif q.change_pct and q.change_pct < 0 %}stock-down{% endif %}">
+                {{ '%+.2f'|format(q.change_pct or 0) }}%</span>
+            </li>
+            {% endif %}
+            {% else %}
+            <li class="stock-empty">국채 수익률·채권 ETF</li>
+            {% endfor %}
+          </ul>
+          <ul class="stock-insight-list" id="stock-bond-list">
+            {% for it in bd.get('items', []) %}
+            <li>
+              {% if it.url %}<a href="{{ it.url }}" rel="noopener noreferrer" target="_blank">{% endif %}
+              <span class="stock-macro-topic">[{{ it.topic }}]</span> {{ it.title[:72] }}
+              {% if it.url %}</a>{% endif %}
+              {% if it.snippet %}<br><span class="stock-snippet">{{ it.snippet[:100] }}…</span>{% endif %}
+            </li>
+            {% else %}
+            <li class="stock-empty">국채·회사채·금리곡선 해석</li>
+            {% endfor %}
+          </ul>
+        </section>
+        <section class="stock-insight-card stock-insight-card--oil-war" aria-label="원유·전쟁젬마">
+          <h3>⚔️ 원유·전쟁 <small id="stock-oil-war-ts">{{ (stock_watch.insights or {}).get('oil_war', {}).get('ts', '') }}</small></h3>
+          {% set ow = (stock_watch.insights or {}).get('oil_war', {}) %}
+          <ul class="stock-oil-war-quotes" id="stock-oil-war-quotes">
+            {% for q in ow.get('oil_quotes', []) %}
+            <li>
+              <span class="stock-oil-name">{{ q.name }}</span>
+              <strong>{{ q.price }}</strong>
+              <span class="{% if q.change_pct and q.change_pct > 0 %}stock-up{% elif q.change_pct and q.change_pct < 0 %}stock-down{% endif %}">
+                {{ '%+.2f'|format(q.change_pct or 0) }}%</span>
+            </li>
+            {% else %}
+            <li class="stock-empty">WTI·브렌트 원유</li>
+            {% endfor %}
+          </ul>
+          <ul class="stock-insight-list" id="stock-oil-war-list">
+            {% for it in ow.get('items', []) %}
+            <li>
+              {% if it.url %}<a href="{{ it.url }}" rel="noopener noreferrer" target="_blank">{% endif %}
+              <span class="stock-macro-topic">[{{ it.topic }}]</span> {{ it.title[:72] }}
+              {% if it.url %}</a>{% endif %}
+              {% if it.snippet %}<br><span class="stock-snippet">{{ it.snippet[:100] }}…</span>{% endif %}
+            </li>
+            {% else %}
+            <li class="stock-empty">지정학·공급·유가→증시 해석</li>
+            {% endfor %}
+          </ul>
+        </section>
+        <section class="stock-insight-card stock-insight-card--commodity" aria-label="원자재젬마">
+          <h3>🛢️ 원자재 <small id="stock-commodity-ts">{{ (stock_watch.insights or {}).get('commodities', {}).get('ts', '') }}</small></h3>
+          {% set cm = (stock_watch.insights or {}).get('commodities', {}) %}
+          <ul class="stock-commodity-quotes" id="stock-commodity-quotes">
+            {% for q in cm.get('quotes', []) %}
+            <li>
+              <span class="stock-commodity-name">{{ q.name }}</span>
+              <strong>{{ q.price }}</strong>
+              <span class="{% if q.change_pct and q.change_pct > 0 %}stock-up{% elif q.change_pct and q.change_pct < 0 %}stock-down{% endif %}">
+                {{ '%+.2f'|format(q.change_pct or 0) }}%</span>
+            </li>
+            {% else %}
+            <li class="stock-empty">유가·금·구리·가스 시세</li>
+            {% endfor %}
+          </ul>
+          <ul class="stock-insight-list" id="stock-commodity-list">
+            {% for it in cm.get('items', []) %}
+            <li>
+              {% if it.url %}<a href="{{ it.url }}" rel="noopener noreferrer" target="_blank">{% endif %}
+              <span class="stock-macro-topic">[{{ it.topic }}]</span> {{ it.title[:72] }}
+              {% if it.url %}</a>{% endif %}
+              {% if it.snippet %}<br><span class="stock-snippet">{{ it.snippet[:100] }}…</span>{% endif %}
+            </li>
+            {% else %}
+            <li class="stock-empty">원자재 동향·증시 영향 해석</li>
+            {% endfor %}
+          </ul>
+        </section>
+        <section class="stock-insight-card" aria-label="공시젬마">
+          <h3>📋 공시젬마 <small id="stock-disclosure-ts">{{ (stock_watch.insights or {}).get('disclosure', {}).get('ts', '') }}</small></h3>
+          <ul class="stock-insight-list" id="stock-disclosure-list">
+            {% for it in (stock_watch.insights or {}).get('disclosure', {}).get('items', []) %}
+            <li><a href="{{ it.url }}" rel="noopener noreferrer" target="_blank">[{{ it.source_type }}] {{ it.title[:70] }}</a></li>
+            {% else %}
+            <li class="stock-empty">DART·SEC·KRX 공시 검색 결과</li>
+            {% endfor %}
+          </ul>
+        </section>
+        <section class="stock-insight-card" aria-label="정부발표젬마">
+          <h3>🏛️ 정부발표젬마 <small id="stock-government-ts">{{ (stock_watch.insights or {}).get('government', {}).get('ts', '') }}</small></h3>
+          <ul class="stock-insight-list" id="stock-government-list">
+            {% for it in (stock_watch.insights or {}).get('government', {}).get('items', []) %}
+            <li><a href="{{ it.url }}" rel="noopener noreferrer" target="_blank">{{ it.title[:72] }}</a></li>
+            {% else %}
+            <li class="stock-empty">금융위·한은·연준 보도자료</li>
+            {% endfor %}
+          </ul>
+        </section>
+        <section class="stock-insight-card" aria-label="기사젬마">
+          <h3>📰 기사젬마 <small id="stock-press-ts">{{ (stock_watch.insights or {}).get('press', {}).get('ts', '') }}</small></h3>
+          <ul class="stock-insight-list" id="stock-press-list">
+            {% for it in (stock_watch.insights or {}).get('press', {}).get('items', []) %}
+            <li><a href="{{ it.url }}" rel="noopener noreferrer" target="_blank">{{ it.title[:72] }}</a></li>
+            {% else %}
+            <li class="stock-empty">연합·경제지·로이터 등</li>
+            {% endfor %}
+          </ul>
+        </section>
+        <section class="stock-insight-card stock-insight-card--youtube" aria-label="유튜브젬마">
+          <h3>▶️ 유튜브 <small id="stock-youtube-ts">{{ (stock_watch.insights or {}).get('youtube', {}).get('ts', '') }}</small></h3>
+          <p class="stock-youtube-disclaimer">채널·크리에이터 <strong>의견</strong>이며 투자 권유가 아닙니다. 공시·시세·기사와 교차하세요.</p>
+          <ul class="stock-youtube-list" id="stock-youtube-list">
+            {% for it in (stock_watch.insights or {}).get('youtube', {}).get('items', []) %}
+            <li class="stock-youtube-item">
+              <span class="stock-macro-topic">[{{ it.topic }}]</span>
+              {% if it.url %}
+              <a href="{{ it.url }}" rel="noopener noreferrer" target="_blank" class="stock-yt-link">▶ {{ it.title[:70] }}</a>
+              {% else %}{{ it.title[:70] }}{% endif %}
+              {% if it.snippet %}<br><span class="stock-snippet">{{ it.snippet[:90] }}…</span>{% endif %}
+            </li>
+            {% else %}
+            <li class="stock-empty">증시·매크로·종목·CEO 관련 영상</li>
+            {% endfor %}
+          </ul>
+        </section>
+        <section class="stock-insight-card stock-insight-card--ceo" aria-label="CEO멘트젬마">
+          <h3>👔 CEO·경영진 <small id="stock-ceo-ts">{{ (stock_watch.insights or {}).get('ceo_remarks', {}).get('ts', '') }}</small></h3>
+          <p class="stock-ceo-disclaimer">IR·인터뷰 멘트는 <strong>투자 권유·확정 전망이 아닐 수 있습니다</strong>. 공시·시세와 교차하세요.</p>
+          <ul class="stock-ceo-list" id="stock-ceo-list">
+            {% for it in (stock_watch.insights or {}).get('ceo_remarks', {}).get('items', []) %}
+            <li class="stock-ceo-item">
+              {% if it.company %}<span class="stock-ceo-company">{{ it.company }}{% if it.market_change_pct is not none %} <small>({{ '%+.2f'|format(it.market_change_pct) }}%)</small>{% endif %}</span>{% endif %}
+              {% if it.executive %}<span class="stock-ceo-exec">{{ it.executive }}</span>{% endif %}
+              <span class="stock-macro-topic">[{{ it.topic }}]</span>
+              {% if it.url %}<a href="{{ it.url }}" rel="noopener noreferrer" target="_blank">{{ it.title[:68] }}</a>{% else %}{{ it.title[:68] }}{% endif %}
+              {% if it.quote %}<p class="stock-ceo-quote">「{{ it.quote[:120] }}{% if it.quote|length > 120 %}…{% endif %}」</p>{% elif it.snippet %}<p class="stock-ceo-quote"><span class="stock-snippet">{{ it.snippet[:100] }}…</span></p>{% endif %}
+            </li>
+            {% else %}
+            <li class="stock-empty">관심종목·대형주 CEO 발언·실적 코멘트</li>
+            {% endfor %}
+          </ul>
+        </section>
+      </div>
+
+      <section class="stock-comments-panel" aria-label="댓글검증젬마">
+        <h3>💬 댓글검증젬마 <small id="stock-comments-ts">{{ (stock_watch.insights or {}).get('comments', {}).get('ts', '') }}</small></h3>
+        <p class="stock-comments-disclaimer">블로그·질문 <strong>댓글은 사실이 아닐 수 있습니다</strong>. 웹 검색 2회 + 당일 시세 스냅샷과 교차합니다. 「교차확인」도 댓글만 믿지 마세요.</p>
+        <ul class="stock-comment-verify-list" id="stock-comments-list">
+          {% for it in (stock_watch.insights or {}).get('comments', {}).get('items', []) %}
+          <li class="stock-comment-item stock-comment-item--{{ it.verdict }}">
+            <div class="stock-comment-head">
+              <span class="stock-comment-verdict">{{ it.verdict }}</span>
+              <span class="stock-comment-meta">글#{{ it.post_id }} · 댓글#{{ it.comment_id }} · {{ it.author }}</span>
+            </div>
+            <p class="stock-comment-excerpt">「{{ it.excerpt }}」</p>
+            <p class="stock-comment-detail">{{ it.verdict_detail }}</p>
+            <p class="stock-comment-market"><small>시세: {{ it.market_check }}</small></p>
+            {% if it.web_sources %}
+            <ul class="stock-comment-sources">
+              {% for s in it.web_sources[:2] %}
+              <li><a href="{{ s.url }}" rel="noopener noreferrer" target="_blank">{{ s.title[:56] }}</a> <span class="stock-snippet">({{ s.provider }})</span></li>
+              {% endfor %}
+            </ul>
+            {% endif %}
+          </li>
+          {% else %}
+          <li class="stock-empty">증시 관련 최근 댓글이 없거나 아직 검증 전입니다.</li>
+          {% endfor %}
+        </ul>
+      </section>
+    </section>
+
+    <section class="office-instruct-panel" aria-label="작업 지시">
+      <h2>작업 지시</h2>
+      <p class="office-instruct-lead">특정 종목·섹터 심화 조사·블로그 글감 연계 지시를 내릴 수 있습니다.</p>
+      <form id="stock-office-instruct-form" class="office-instruct-form" method="post" action="{{ url_for('agent_office_instruct_form') }}">
+        {% include '_csrf_field.html' %}
+        <input type="hidden" name="division" value="stock-watch">
+        <div class="instruct-row">
+          <label>담당
+            <select name="assign_to" id="stock-instruct-assign-to">
+              <option value="all">전체</option>
+              {% for a in stock_agents %}
+              <option value="{{ a.id }}">{{ a.emoji }} {{ a.name }}</option>
+              {% endfor %}
+            </select>
+          </label>
+          <label>우선순위
+            <select name="priority" id="stock-instruct-priority">
+              <option value="normal">보통</option>
+              <option value="high">긴급</option>
+            </select>
+          </label>
+        </div>
+        <label class="instruct-title-label">제목 <span class="optional">(선택)</span>
+          <input type="text" name="title" maxlength="120" placeholder="예: 반도체 섹터 등락 브리핑">
+        </label>
+        <label>지시 내용
+          <textarea name="body" rows="3" required maxlength="4000"
+                    placeholder="예: 오늘 미국 빅테크 하락 원인을 웹에서 조사해 블로그 글감 3개 제안해 주세요."></textarea>
+        </label>
+        <button type="submit" class="btn btn-primary">지시 전달</button>
+      </form>
+      <div class="office-task-queue">
+        <h3>지시 목록 <span class="task-count">{{ stock_tasks | length }}</span></h3>
+        <ul class="task-list" id="stock-task-list">
+          {% for t in stock_tasks %}
+          <li class="task-item task-item--{{ t.status or 'queued' }}">
+            <div class="task-item-head">
+              <span class="task-id">#{{ loop.index }}</span>
+              <span class="task-status">{{ task_status_labels.get(t.status, t.status) }}</span>
+              <time class="task-ts">{{ t.ts }}</time>
+            </div>
+            {% if t.title %}<p class="task-title">{{ t.title }}</p>{% endif %}
+            <p class="task-body">{{ t.body }}</p>
+          </li>
+          {% else %}
+          <li class="task-empty">직접 지시가 없습니다.</li>
+          {% endfor %}
+        </ul>
+      </div>
+    </section>
+
+    <div class="agent-office-feed-wrap">
+      <header class="office-feed-header">
+        <h2>대화 로그</h2>
+        <span class="office-live-status" id="stock-feed-live-status">—</span>
+      </header>
+      <div class="agent-office-feed" id="stock-agent-office-feed">
+        {% for m in stock_messages %}
+        <article class="office-msg office-msg--{{ m.kind or 'chat' }}" data-from="{{ m.from }}" data-to="{{ m.to or '' }}" data-kind="{{ m.kind or '' }}">
+          <header class="office-msg-head">
+            <span class="office-msg-from">{{ roster.get(m.from, {}).get('name', m.from) }}</span>
+            {% if m.to %}<span class="office-msg-arrow">→</span><span class="office-msg-to">{{ roster.get(m.to, {}).get('name', m.to) }}</span>{% endif %}
+            <time class="office-msg-ts">{{ m.ts }}</time>
+          </header>
+          <p class="office-msg-text">{{ m.text }}</p>
+        </article>
+        {% else %}
+        <p class="office-empty">아직 주식 시황부 로그가 없습니다. 수집이 시작되면 여기에 표시됩니다.</p>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+</div>

@@ -1,0 +1,34 @@
+<nav class="office-division-tabs" aria-label="사업부 팀장 선택">
+  <a href="{{ url_for('agent_office') }}"
+     class="office-division-tab{% if office_tab_active == 'finance' %} is-active{% endif %}">{{ division_meta.finance.emoji }} {{ division_meta.finance.team_leader }}</a>
+  <a href="{{ url_for('agent_office', unit='chief-dev') }}"
+     class="office-division-tab office-division-tab--chief-dev{% if office_tab_active == 'chief-dev' %} is-active{% endif %}">{{ division_meta['chief-dev'].emoji }} {{ division_meta['chief-dev'].team_leader }}{% if division_meta['chief-dev'].note %} ({{ division_meta['chief-dev'].note }}){% endif %}</a>
+  <a href="{{ url_for('agent_office', unit='saju-learn') }}"
+     class="office-division-tab office-division-tab--saju{% if office_tab_active == 'saju-learn' %} is-active{% endif %}">{{ division_meta['saju-learn'].emoji }} {{ division_meta['saju-learn'].team_leader }}
+    {% if saju_learn is defined and saju_learn.pending is not none %}
+    <span class="saju-learn-badge">{{ saju_learn.pending }} 대기</span>
+    {% endif %}
+  </a>
+  <a href="{{ url_for('agent_office', unit='gwansang-learn') }}"
+     class="office-division-tab office-division-tab--gwansang{% if office_tab_active == 'gwansang-learn' %} is-active{% endif %}">{{ division_meta['gwansang-learn'].emoji }} {{ division_meta['gwansang-learn'].team_leader }}
+    {% if gwansang_learn is defined and gwansang_learn.pending is not none %}
+    <span class="gwansang-learn-badge">{{ gwansang_learn.pending }} 대기</span>
+    {% endif %}
+  </a>
+  <a href="{{ url_for('agent_office', unit='kiwoom-chasu') }}"
+     class="office-division-tab office-division-tab--kiwoom{% if office_tab_active == 'kiwoom-chasu' %} is-active{% endif %}">{{ division_meta['kiwoom-chasu'].emoji }} {{ division_meta['kiwoom-chasu'].team_leader }}
+    {% if kiwoom_learn is defined and kiwoom_learn.pending is not none %}
+    <span class="kiwoom-learn-badge">{{ kiwoom_learn.pending }} 대기</span>
+    {% endif %}
+  </a>
+  <a href="{{ url_for('agent_office', unit='stock-watch') }}"
+     class="office-division-tab office-division-tab--stock{% if office_tab_active == 'stock-watch' %} is-active{% endif %}">{{ division_meta['stock-watch'].emoji }} {{ division_meta['stock-watch'].team_leader }}</a>
+  <a href="{{ url_for('agent_office', unit='homepage-design') }}"
+     class="office-division-tab office-division-tab--design{% if office_tab_active == 'homepage-design' %} is-active{% endif %}">{{ division_meta['homepage-design'].emoji }} {{ division_meta['homepage-design'].team_leader }}</a>
+  <a href="{{ url_for('agent_office', unit='workisus-chasu') }}"
+     class="office-division-tab office-division-tab--workisus{% if office_tab_active == 'workisus-chasu' %} is-active{% endif %}">{{ division_meta['workisus-chasu'].emoji }} {{ division_meta['workisus-chasu'].team_leader }}
+    {% if workisus_learn is defined and workisus_learn.pending is not none %}
+    <span class="workisus-learn-badge">{{ workisus_learn.pending }} 대기</span>
+    {% endif %}
+  </a>
+</nav>

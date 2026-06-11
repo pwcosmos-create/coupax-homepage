@@ -1,0 +1,248 @@
+<div class="office-unit office-unit--workisus" id="office-unit-workisus-chasu" hidden aria-label="원키스 US 차수">
+<div class="agent-office-layout page-workisus-office">
+  <aside class="agent-office-roster" aria-label="원키스 US 에이전트">
+    <h2>출근 명단</h2>
+    <ul class="roster-list" id="workisus-roster-list">
+      <li>
+        <button type="button" class="roster-btn is-active" data-filter-agent="" data-agent-id="">전체 대화</button>
+      </li>
+      {% for a in workisus_agents %}
+      <li class="roster-item" data-agent-id="{{ a.id }}">
+        <div class="roster-row">
+          <button type="button" class="roster-btn roster-btn--pick" data-filter-agent="{{ a.id }}" data-agent-id="{{ a.id }}">
+            <span class="roster-emoji">{{ a.emoji or '🇺🇸' }}</span>
+            <span class="roster-name">{{ a.name }}</span>
+            <span class="roster-role">{{ a.role }}</span>
+          </button>
+          <label class="mode-on-switch{% if a.mode_on %} is-on{% endif %}" title="상시 작업 ON/OFF">
+            <input type="checkbox" class="agent-mode-on" data-agent-id="{{ a.id }}"
+                   {% if a.mode_on %}checked{% endif %}
+                   {% if not office_control_enabled %}disabled{% endif %}
+                   aria-label="{{ a.name }} ON/OFF">
+            <span class="mode-on-slider" aria-hidden="true"></span>
+            <span class="mode-on-label">{% if a.mode_on %}ON{% else %}OFF{% endif %}</span>
+          </label>
+        </div>
+        <p class="roster-cycle">주기: {{ a | agent_interval }}</p>
+        {% if a.last_run_at %}
+        <p class="roster-run">최근: {{ a.last_run_at }} · {{ a.last_status or '—' }}</p>
+        {% endif %}
+      </li>
+      {% endfor %}
+    </ul>
+  </aside>
+
+  <div class="agent-office-center">
+    {% with pixel_unit='workisus-chasu', pixel_label=division_meta['workisus-chasu'].team_leader, pixel_emoji=division_meta['workisus-chasu'].emoji %}{% include '_pixel_office.html' %}{% endwith %}
+    <section class="office-design-hero office-workisus-hero" aria-label="원키스 US 차수 개요">
+      <h2>🇺🇸 원키스 US 차수</h2>
+      <p class="office-design-lead">
+        <strong>wonkisus 10분할 무손실 리밸런싱</strong> + workisus HTS —
+        정본 <code>wonkisus-grid-trading-rules</code>.
+        <a href="https://stock.coupax.co.kr/workisus/" target="_blank" rel="noopener">workisus ↗</a>
+      </p>
+      <p class="office-workisus-wiki" role="note">
+        Wiki 정본
+        {% if workisus_learn.wiki_rules and workisus_learn.wiki_rules.ok %}
+        <strong>{{ workisus_learn.wiki_rules.wiki_id }}</strong>
+        · 갱신 {{ workisus_learn.wiki_rules.updated_at }}
+        {% else %}
+        <span class="wiki-warn">미연결 — 서버에 <code>WONKISUS_WIKI_RULES_PATH</code> 설정</span>
+        {% endif %}
+      </p>
+      <div class="office-workisus-contrast" role="note">
+        <h3>Agent Office 젬마 17종</h3>
+        <p class="office-workisus-agent-line">
+          👁️워치 · 📖지식 · 🎚️모드 · 💰잔고 · 📈종목 · ⚙️규칙 · 🛡️리스크 · ⚖️리밸런스 · 🔑토큰 · 🔄정합 · 📋주문 · 🤖자동 · 👥멀티 · 📊차수 · 🖥️HTS · 📐ATR · 🔧운영
+        </p>
+        <h3>원히어로 차수매매와 다름</h3>
+        <p>같은 「차수」 용어만 유사합니다. <strong>매매 방법·봇·규칙을 혼동하지 마세요.</strong></p>
+        <table class="office-contrast-table">
+          <thead><tr><th></th><th>원키스US (이 탭)</th><th>원히어로 (<a href="{{ url_for('agent_office', unit='kiwoom-chasu') }}">차수거래 탭</a>)</th></tr></thead>
+          <tbody>
+            <tr><th>실행</th><td>사용자 수동 주문·판단</td><td>MagicSplit <strong>자동봇</strong> 주문</td></tr>
+            <tr><th>추가매수</th><td>직접 매수·슬롯 메모</td><td><code>buy_gaps</code>·ATR·15초 2차 등 규칙</td></tr>
+            <tr><th>익절</th><td>직접 매도</td><td><code>sell_pcts</code>·합산 이익 게이트</td></tr>
+            <tr><th>계좌</th><td>해외 <strong>1계좌</strong></td><td>1계좌+슬롯 또는 <strong>다계좌 cascade</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="office-design-checklist">
+        <h3>매매 정본 (요약)</h3>
+        <ul>
+          <li>현금 <strong>10%</strong> + 9종목 각 <strong>10%</strong> = 10자산 100%</li>
+          <li><strong>Trim to 10%:</strong> Profit&gt;0일 때만 초과분 매도 · 손실 구간 매도 금지</li>
+          <li><strong>Buy up to 10%:</strong> 미달분만 매수 · <strong>하락 괴리 최대 종목 우선</strong></li>
+          <li><strong>Cycle당 최대 2건</strong> 점진 매매 (<code>rebalance_max_trades_per_cycle</code>)</li>
+          <li>자동 손절 없음 · 병행: 격자/ATR (Wiki §3~§4)</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="gemma-knowledge-panel office-knowledge-hub" aria-label="원키스 US 매매 정본">
+      <h2>매매 정본 · 플레이북</h2>
+      <p class="wiki-panel-lead">
+        wonkisus <code>{{ workisus_learn.wiki_rules.wiki_id if workisus_learn.wiki_rules else 'wonkisus-grid-trading-rules' }}</code>
+        · board 학습 카드 <strong id="workisus-learn-total">{{ workisus_learn.total }}</strong>장 (제작 중지)
+        · <code>CURSOR_WORKISUS_LEARN.md</code>
+      </p>
+      <div class="office-knowledge-tabs" role="tablist">
+        <button type="button" class="office-knowledge-tab is-active" role="tab" data-tab="wiki" aria-selected="true">
+          정본 Wiki
+        </button>
+        <button type="button" class="office-knowledge-tab" role="tab" data-tab="learn" aria-selected="false">
+          board 카드 <span class="office-knowledge-tab-count" id="workisus-tab-learn-count">({{ workisus_learn.total }})</span>
+        </button>
+      </div>
+      <div class="office-scroll-panel office-knowledge-panel-pane is-active" data-pane="wiki" role="tabpanel">
+        <p class="wiki-rules-meta">
+          {% if workisus_learn.wiki_rules and workisus_learn.wiki_rules.ok %}
+          <strong>{{ workisus_learn.wiki_rules.short_title or '10분할 무손실 리밸런싱' }}</strong>
+          — {{ workisus_learn.wiki_rules.title }}<br>
+          Wiki: <code>{{ workisus_learn.wiki_rules.path }}</code>
+          {% if workisus_learn.wiki_rules.meta_path %} · Meta: <code>{{ workisus_learn.wiki_rules.meta_path }}</code>{% endif %}
+          · {{ workisus_learn.wiki_rules.chars }}자 · 갱신 {{ workisus_learn.wiki_rules.updated_at }}
+          {% if workisus_learn.wiki_rules.bullets %}
+          <ul class="wiki-rules-bullets">
+            {% for b in workisus_learn.wiki_rules.bullets %}
+            <li>{{ b }}</li>
+            {% endfor %}
+          </ul>
+          {% endif %}
+          {% else %}
+          Gemma24 Wiki 파일을 찾지 못했습니다. 로컬 또는 서버 <code>WONKISUS_WIKI_RULES_PATH</code>를 설정하세요.
+          {% endif %}
+        </p>
+        <p class="saju-learn-actions">
+          <a class="btn btn-primary btn-sm" href="{{ url_for('agent_office_workisus_trading_context') }}" target="_blank" rel="noopener">정본 플레이북 보기</a>
+          <button type="button" class="btn btn-gray btn-sm" id="workisus-learn-refresh-btn">상태 새로고침</button>
+        </p>
+      </div>
+      <div class="office-scroll-panel office-knowledge-panel-pane" data-pane="learn" role="tabpanel" hidden>
+        <form id="workisus-learn-form" class="saju-learn-form saju-learn-form--hub">
+          <label>제목 <input type="text" name="title" id="workisus-learn-title" maxlength="120" placeholder="예: 원키스 US·한 계좌 차수매매"></label>
+          <label>본문 <textarea name="body" id="workisus-learn-body" rows="4" required maxlength="24000"
+                    placeholder="한 계좌·슬롯·HTS 패널·API 경로. 계좌번호·API키는 넣지 마세요."></textarea></label>
+          <div class="kiwoom-compose-actions">
+            <button type="submit" class="btn btn-primary btn-sm" id="workisus-learn-submit"{% if not workisus_learn.card_production_enabled %} disabled title="학습 카드 제작 중지"{% endif %}>학습 카드 저장</button>
+            <button type="button" class="btn btn-gray btn-sm" id="workisus-seed-catalog-btn"{% if not workisus_learn.card_production_enabled %} disabled{% endif %}>카탈로그 시드</button>
+            <button type="button" class="btn btn-gray btn-sm" id="workisus-compose-gap-btn"{% if not workisus_learn.card_production_enabled %} disabled{% endif %}>갭 1장 제작</button>
+            <button type="button" class="btn btn-gray btn-sm" id="workisus-seed-error-btn"{% if not workisus_learn.card_production_enabled %} disabled{% endif %}>오류카드 시드</button>
+            <button type="button" class="btn btn-gray btn-sm" id="workisus-seed-atr-btn"{% if not workisus_learn.card_production_enabled %} disabled{% endif %}>ATR 카드 시드</button>
+            <button type="button" class="btn btn-primary btn-sm" id="workisus-atr-rl-btn"{% if not workisus_learn.card_production_enabled %} disabled{% endif %}>ATR RL 제작</button>
+            <button type="button" class="btn btn-gray btn-sm" id="workisus-web-research-btn">웹 검색 토론</button>
+            <span class="saju-learn-hint" id="workisus-learn-status"></span>
+          </div>
+        </form>
+        <ul class="saju-learn-card-list" id="workisus-learn-card-list">
+          {% for c in workisus_learn.cards %}
+          <li class="saju-learn-card saju-learn-card--{{ c.status }}" data-card-id="{{ c.id }}">
+            <div class="saju-learn-card-head">
+              <span class="saju-learn-card-id">#{{ c.id }}</span>
+              <span class="saju-learn-card-status">{{ '확정' if c.status == 'confirmed' else '검수 대기' }}</span>
+              <time>{{ c.ts }}</time>
+            </div>
+            <h4 class="saju-learn-card-title">{{ c.title }}</h4>
+            <p class="saju-learn-card-summary">{{ c.summary }}</p>
+            {% if c.tags %}<p class="saju-learn-card-tags">{% for t in c.tags %}<span>{{ t }}</span>{% endfor %}</p>{% endif %}
+            <details><summary>본문</summary><pre class="saju-learn-card-body">{{ c.body[:4000] }}</pre></details>
+            {% if c.wiki_id %}<p class="wiki-card-meta">{{ c.wiki_id }}</p>{% endif %}
+            {% if c.status == 'pending' %}
+            <div class="saju-learn-card-actions">
+              <button type="button" class="btn btn-primary btn-sm btn-workisus-confirm" data-card-id="{{ c.id }}">확정</button>
+              <button type="button" class="btn btn-gray btn-sm btn-workisus-delete" data-card-id="{{ c.id }}">삭제</button>
+            </div>
+            {% endif %}
+          </li>
+          {% else %}
+          <li class="saju-learn-empty">board 학습 카드는 사용하지 않습니다. 매매 규칙은 wonkisus Gemma24 Wiki 정본을 따릅니다.</li>
+          {% endfor %}
+        </ul>
+      </div>
+    </section>
+
+    <section class="office-instruct-panel" aria-label="작업 지시">
+      <h2>작업 지시</h2>
+      <p class="office-instruct-lead">workisus HTS·차수 UI·슬롯 동작 지시를 남기면 담당 젬마가 처리합니다.</p>
+      <form id="workisus-office-instruct-form" class="office-instruct-form" method="post" action="{{ url_for('agent_office_instruct_form') }}">
+        {% include '_csrf_field.html' %}
+        <input type="hidden" name="division" value="workisus-chasu">
+        <div class="instruct-row">
+          <label>담당
+            <select name="assign_to" id="workisus-instruct-assign-to">
+              <option value="all">전체</option>
+              {% for a in workisus_agents %}
+              <option value="{{ a.id }}">{{ a.emoji }} {{ a.name }}</option>
+              {% endfor %}
+            </select>
+          </label>
+          <label>우선순위
+            <select name="priority" id="workisus-instruct-priority">
+              <option value="normal">보통</option>
+              <option value="high">긴급</option>
+            </select>
+          </label>
+        </div>
+        <label class="instruct-title-label">제목 <span class="optional">(선택)</span>
+          <input type="text" name="title" id="workisus-instruct-title" maxlength="120" placeholder="예: 차수매매 탭 손익 갱신">
+        </label>
+        <label>지시 내용
+          <textarea id="workisus-instruct-body" name="body" rows="4" required maxlength="4000"
+                    placeholder="예: US 잔고 차수 칸이 깜빡이지 않게 값만 패치해 주세요."></textarea>
+        </label>
+        <button type="submit" class="btn btn-primary" id="workisus-instruct-submit">지시 전달</button>
+      </form>
+      <div class="office-task-queue">
+        <h3>지시 목록 <span class="task-count" id="workisus-task-count">{{ workisus_tasks | length }}</span></h3>
+        <ul class="task-list" id="workisus-task-list">
+          {% for t in workisus_tasks %}
+          <li class="task-item task-item--{{ t.status or 'queued' }}" data-task-id="{{ t.id }}">
+            <div class="task-item-head">
+              <span class="task-id">#{{ loop.index }}</span>
+              <span class="task-global-id">({{ t.id }})</span>
+              <span class="task-status">{{ task_status_labels.get(t.status, t.status) }}</span>
+              <time class="task-ts">{{ t.ts }}</time>
+            </div>
+            {% if t.title %}<p class="task-title">{{ t.title }}</p>{% endif %}
+            <p class="task-body">{{ t.body }}</p>
+            {% if t.result %}<pre class="task-result">{{ t.result }}</pre>{% endif %}
+          </li>
+          {% else %}
+          <li class="task-empty">원키스 US 관련 지시가 없습니다.</li>
+          {% endfor %}
+        </ul>
+      </div>
+    </section>
+  </div>
+
+  <aside class="agent-office-feed" aria-label="원키스 US 대화 로그">
+    <div class="office-feed-panel-head">
+      <h2>대화 로그</h2>
+      <p class="office-feed-lead">
+        <span class="office-live-status is-on" id="workisus-office-live-status">실시간</span>
+      </p>
+    </div>
+    <div class="office-feed-scroll" id="workisus-agent-office-feed">
+      {% for m in workisus_messages %}
+      {% set from_a = roster.get(m.from) %}
+      {% set to_a = roster.get(m.to) if m.to else None %}
+      <article class="office-msg office-msg--{{ m.kind or 'task' }}" data-from="{{ m.from }}" data-to="{{ m.to or '' }}" data-kind="{{ m.kind or '' }}" data-msg-id="{{ m.id }}">
+        <header class="office-msg-head">
+          <span class="office-msg-avatar">{{ (from_a.emoji if from_a else '🤖') }}</span>
+          <span class="office-msg-from">{{ (from_a.name if from_a else m.from) }}</span>
+          {% if m.to %}
+          <span class="office-msg-arrow">→</span>
+          <span class="office-msg-to">{{ (to_a.name if to_a else m.to) }}</span>
+          {% endif %}
+          <span class="office-msg-kind">{{ kind_labels.get(m.kind, m.kind) }}</span>
+          <time class="office-msg-ts">{{ m.ts }}</time>
+        </header>
+        <p class="office-msg-text">{{ m.text }}</p>
+      </article>
+      {% else %}
+      <p class="office-empty">아직 원키스 US 차수 로그가 없습니다.</p>
+      {% endfor %}
+    </div>
+  </aside>
+</div>
+</div>

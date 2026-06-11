@@ -1,0 +1,13 @@
+<section class="pixel-office-panel pixel-office-panel--{{ pixel_unit }}" data-pixel-unit="{{ pixel_unit }}" aria-label="{{ pixel_label }} 사무실">
+  <div class="pixel-office-head">
+    <h2 class="pixel-office-title"><span class="pixel-office-title-emoji" aria-hidden="true">{{ pixel_emoji or '🏢' }}</span> {{ pixel_label }}</h2>
+    <div class="pixel-office-head-meta">
+      <span class="pixel-office-live" id="pixel-live-{{ pixel_unit }}">● LIVE</span>
+      <span class="pixel-office-banner is-hidden" id="pixel-banner-{{ pixel_unit }}" role="status"></span>
+    </div>
+  </div>
+  <div class="pixel-office-stage" id="pixel-stage-{{ pixel_unit }}">
+    <svg class="pixel-office-svg" id="pixel-svg-{{ pixel_unit }}" viewBox="0 0 800 280" preserveAspectRatio="xMidYMid meet" role="img" aria-label="{{ pixel_label }} 에이전트 책상"></svg>
+  </div>
+  <p class="pixel-office-hint">책상을 클릭하면 출근 명단에서 해당 에이전트를 선택합니다.</p>
+</section>

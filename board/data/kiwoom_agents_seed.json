@@ -1,0 +1,224 @@
+{
+  "agents": [
+    {
+      "id": "kiwoom_reader",
+      "name": "차수 젬마",
+      "emoji": "📈",
+      "role": "전략·카드 수집",
+      "division": "kiwoom-chasu",
+      "mode_on": true,
+      "interval_minutes": 0,
+      "interval_label": "항상",
+      "job": "kiwoom_card_pulse",
+      "last_run_at": null,
+      "last_status": "idle",
+      "skills": [
+        {
+          "id": "kiwoom-ingest",
+          "title": "차수거래 카드 수집",
+          "summary": "1·2·3차 진입·청산 조건을 카드로 요약·태그."
+        }
+      ]
+    },
+    {
+      "id": "kiwoom_risk",
+      "name": "리스크 젬마",
+      "emoji": "🛡️",
+      "role": "손절·익절 검수",
+      "division": "kiwoom-chasu",
+      "mode_on": true,
+      "interval_minutes": 0,
+      "interval_label": "항상",
+      "job": "kiwoom_review_hint",
+      "last_run_at": null,
+      "last_status": "idle",
+      "skills": [
+        {
+          "id": "kiwoom-risk-rules",
+          "title": "손절·익절 점검",
+          "summary": "대기 카드의 손절·익절·분할 규칙 누락·모순 힌트."
+        }
+      ]
+    },
+    {
+      "id": "kiwoom_structurer",
+      "name": "구조 젬마",
+      "emoji": "🗂️",
+      "role": "태그·pack 구조",
+      "division": "kiwoom-chasu",
+      "mode_on": true,
+      "interval_minutes": 0,
+      "interval_label": "항상",
+      "job": "kiwoom_tag_digest",
+      "last_run_at": null,
+      "last_status": "idle",
+      "skills": [
+        {
+          "id": "kiwoom-pack-schema",
+          "title": "kiwoom_knowledge_pack",
+          "summary": "확정 카드를 JSON·CURSOR_KIWOM_LEARN.md 로 정리."
+        }
+      ]
+    },
+    {
+      "id": "kiwoom_order",
+      "name": "주문 젬마",
+      "emoji": "📋",
+      "role": "주문·체결 점검",
+      "division": "kiwoom-chasu",
+      "mode_on": true,
+      "interval_minutes": 0,
+      "interval_label": "항상",
+      "job": "kiwoom_card_pulse",
+      "last_run_at": null,
+      "last_status": "idle",
+      "skills": [
+        {
+          "id": "kiwoom-order-check",
+          "title": "체결·미체결",
+          "summary": "호가·체결·미체결 관련 기록을 조사·요약."
+        }
+      ]
+    },
+    {
+      "id": "kiwoom_account",
+      "name": "계좌 젬마",
+      "emoji": "💳",
+      "role": "계좌·예수금 점검",
+      "division": "kiwoom-chasu",
+      "mode_on": true,
+      "interval_minutes": 0,
+      "interval_label": "항상",
+      "job": "kiwoom_account_pulse",
+      "last_run_at": null,
+      "last_status": "idle",
+      "skills": [
+        {
+          "id": "kiwoom-account-check",
+          "title": "증권 계좌 잔고 연동",
+          "summary": "HTS 기준 예수금·주문가능·평가금·보유 종목 스냅샷을 알고 작업·대조. 계좌번호는 끝 4자리만 저장."
+        }
+      ]
+    },
+    {
+      "id": "kiwoom_privacy",
+      "name": "보안 젬마",
+      "emoji": "🔒",
+      "role": "계좌·PII 필터",
+      "division": "kiwoom-chasu",
+      "mode_on": true,
+      "interval_minutes": 0,
+      "interval_label": "항상",
+      "job": "kiwoom_pii_scan",
+      "last_run_at": null,
+      "last_status": "idle",
+      "skills": [
+        {
+          "id": "kiwoom-zero-pii",
+          "title": "계좌·API키 무저장",
+          "summary": "학습 카드에서 계좌번호·비밀번호·API키 패턴 탐지."
+        }
+      ]
+    },
+    {
+      "id": "kiwoom_curator",
+      "name": "큐레이터 젬마",
+      "emoji": "✅",
+      "role": "확정·export",
+      "division": "kiwoom-chasu",
+      "mode_on": true,
+      "interval_minutes": 0,
+      "interval_label": "항상",
+      "job": "kiwoom_pack_sync",
+      "last_run_at": null,
+      "last_status": "idle",
+      "skills": [
+        {
+          "id": "kiwoom-confirm-pack",
+          "title": "확정분 보내기",
+          "summary": "검수 대기 큐 확인 후 pack·Wiki·Cursor 문서 갱신."
+        }
+      ]
+    },
+    {
+      "id": "kiwoom_rl",
+      "name": "회간 젬마",
+      "emoji": "🌀",
+      "role": "학습 피드백",
+      "division": "kiwoom-chasu",
+      "mode_on": true,
+      "interval_minutes": 0,
+      "interval_label": "항상",
+      "job": "kiwoom_gap_autofill",
+      "last_run_at": null,
+      "last_status": "idle",
+      "skills": [
+        {
+          "id": "kiwoom-feedback-loop",
+          "title": "카드 RL·갭 보충",
+          "summary": "ε-greedy 밴딧으로 갭 카드 제작·오류·확정 피드백 학습."
+        }
+      ]
+    },
+    {
+      "id": "kiwoom_error_fix",
+      "name": "오류해결 에이전트",
+      "emoji": "🔧",
+      "role": "학습·API 오류",
+      "division": "kiwoom-chasu",
+      "mode_on": true,
+      "interval_minutes": 0,
+      "interval_label": "항상",
+      "job": "kiwoom_error_resolve",
+      "last_run_at": null,
+      "last_status": "idle",
+      "skills": [
+        {
+          "id": "kiwoom-error-triage",
+          "title": "오류 분류·복구",
+          "summary": "health·학습 JSON·대기 과다를 탐지하고 복구를 제안."
+        }
+      ]
+    },
+    {
+      "id": "kiwoom_catalog",
+      "name": "카탈로그 큐레이터",
+      "emoji": "📋",
+      "role": "원칙·규칙 카드 SSOT",
+      "division": "kiwoom-chasu",
+      "mode_on": true,
+      "interval_minutes": 60,
+      "interval_label": "1시간",
+      "job": "kiwoom_catalog_maintain",
+      "last_run_at": null,
+      "last_status": "idle",
+      "skills": [
+        {
+          "id": "kiwoom-catalog-sync",
+          "title": "카탈로그 sync·구형 합침",
+          "summary": "wonhero·매매원칙·오류 카탈로그를 항상 제작·갱신하고 catalog_seed 중복·구형 제목 카드를 1장으로 합친다."
+        }
+      ]
+    },
+    {
+      "id": "kiwoom_monitor",
+      "name": "원히어로 모니터",
+      "emoji": "📡",
+      "role": "실매매 bot_log",
+      "division": "kiwoom-chasu",
+      "mode_on": true,
+      "interval_minutes": 15,
+      "interval_label": "15분",
+      "job": "kiwoom_wonhero_monitor",
+      "last_run_at": null,
+      "last_status": "idle",
+      "skills": [
+        {
+          "id": "kiwoom-wonhero-bot-log",
+          "title": "bot_log → 학습 카드",
+          "summary": "kisstock trade_history.sqlite bot_log를 읽어 모니터 카드 4종을 revise·확정."
+        }
+      ]
+    }
+  ]
+}

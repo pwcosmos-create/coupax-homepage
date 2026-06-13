@@ -1,17 +1,36 @@
 {% extends 'base.html' %}
 {% block title %}사이트 소개{% endblock %}
+{% block meta_description %}{{ site_name }}는 금융·재테크 주제를 블로그 글로 제공하고, 방문자 질문에는 글 하단 질문란으로 답하는 독립 콘텐츠 사이트입니다.{% endblock %}
 
 {% block content %}
 <section class="doc-wrap">
   <h1>사이트 소개</h1>
-  <p><strong>{{ site_name }}</strong>(<a href="https://coupax.co.kr">coupax.co.kr</a>)는 금융·재테크 정보를 쉽게 설명하는 독립 콘텐츠 사이트입니다.</p>
-  <p>ETF, 연금, 절세, 청약, 예적금 주제를 중심으로 실무에 바로 적용할 수 있는 글을 제공합니다.</p>
+  <p><strong>{{ site_name }}</strong>(<a href="https://coupax.co.kr">coupax.co.kr</a>)는 <strong>일반인의 이해를 돕기 위한 금융·재테크 정보</strong>를 <strong>블로그 글</strong>로 제공하는 독립 콘텐츠 사이트입니다. 별도 데이터 시트보다 <strong>「글 + 질문·답변」</strong> 방식으로 운영합니다.</p>
+
+  <h2>이용 방법</h2>
+  <ol class="doc-list">
+    <li><a href="{{ url_for('blog') }}">블로그</a>에서 주제에 맞는 글을 찾아 읽습니다.</li>
+    <li>궁금한 점은 <strong>해당 글 하단 질문란(댓글)</strong>에 남깁니다. (이름·비밀번호 설정)</li>
+    <li>운영 측에서 <strong>참고 안내</strong> 성격으로 답변합니다. 반복되는 질문은 새 글로 정리할 수 있습니다.</li>
+  </ol>
+
+  <h2>제공 콘텐츠</h2>
+  <ul class="doc-list">
+    <li>블로그: ETF, 연금, 절세, 청약, 예적금 등 실무에 쓰이기 쉬운 설명 글</li>
+    <li>질문·답변: 글마다 이어지는 댓글 형식의 Q&amp;A (투자 자문이 아닌 일반 정보 안내)</li>
+  </ul>
+
+  <h2>운영·수익</h2>
+  <p>사이트 운영에는 도메인·서버 등 비용이 듭니다. <strong>Google 애드센스 등 광고 수익</strong>이 일부 비용을 보전하는 경우가 있으나, <strong>콘텐츠의 작성·편집 방향은 광고주와 독립</strong>적으로 유지하고 있습니다. 광고·쿠키에 관한 설명은 <a href="{{ url_for('privacy') }}">개인정보처리방침</a>을 참고해 주세요.</p>
+
   <h2>운영 정보</h2>
   <ul class="doc-list">
     <li><strong>사이트명:</strong> {{ site_name }}</li>
-    <li><strong>문의:</strong> <a href="mailto:{{ site_contact_email }}">{{ site_contact_email }}</a></li>
-    <li><strong>관련 페이지:</strong> <a href="{{ url_for('privacy') }}">개인정보처리방침</a> · <a href="{{ url_for('terms') }}">이용약관</a></li>
+    <li><strong>문의:</strong> 글 하단 <strong>질문란(댓글)</strong>에 남겨 주세요. 공식 민원은 <a href="{{ url_for('contact') }}">문의하기</a> · <a href="mailto:{{ site_contact_email }}">{{ site_contact_email }}</a></li>
+    <li><strong>필수 고지:</strong> <a href="{{ url_for('privacy') }}">개인정보처리방침</a> · <a href="{{ url_for('terms') }}">이용약관</a></li>
   </ul>
-  <p>본 사이트의 글은 투자·세무·법률 자문이 아니며, 최종 의사결정은 이용자 본인의 책임입니다. 수치·제도는 작성 시점 기준으로 변동될 수 있습니다.</p>
+
+  <h2>면책·한계</h2>
+  <p>본 사이트의 글·수치·댓글 안내는 <strong>투자자문·세무·법률 자문이 아닙니다</strong>. 제도·세율·상품 조건은 변경될 수 있으므로 최종 의사결정과 책임은 이용자 본인에게 있습니다. 특정 종목의 매수·매도를 권유하거나 수익을 보장하지 않습니다.</p>
 </section>
 {% endblock %}

@@ -1,0 +1,656 @@
+{
+  "topics": [
+    {
+      "catalog_seed": "debate_auto_footer_sticky",
+      "title": "토론·푸터 — 하단 sticky CTA 바 vs 정적 푸터만",
+      "ts": "2026-06-04 21:20",
+      "card_id": 21,
+      "auto": true
+    },
+    {
+      "catalog_seed": "debate_auto_logo_size",
+      "title": "토론·헤더 로고 — 큰 워드마크 vs 컴팩트 아이콘+텍스트",
+      "ts": "2026-06-04 21:20",
+      "card_id": 22,
+      "auto": true
+    },
+    {
+      "catalog_seed": "debate_auto_nav_hamburger",
+      "title": "토론·모바일 네비 — 햄버거 드로어 vs 하단 탭 바",
+      "ts": "2026-06-04 21:20",
+      "card_id": 23,
+      "auto": true
+    },
+    {
+      "catalog_seed": "debate_auto_search_prominent",
+      "title": "토론·검색 — 헤더 검색창 노출 vs 검색 아이콘만",
+      "ts": "2026-06-04 21:20",
+      "card_id": 24,
+      "auto": true
+    },
+    {
+      "catalog_seed": "debate_auto_breadcrumb",
+      "title": "토론·경로 — breadcrumb 항상 표시 vs 뒤로가기만",
+      "ts": "2026-06-05 18:49",
+      "card_id": 30,
+      "auto": true
+    },
+    {
+      "catalog_seed": "debate_web_랜딩_히어로_ab4e58d6",
+      "title": "웹리서치·랜딩 히어로 — 다크 풀블리드 히어로 vs 라이트 카드형 히어로",
+      "ts": "2026-06-05 18:52",
+      "card_id": 32,
+      "auto": true
+    },
+    {
+      "catalog_seed": "debate_web_대시보드_밀도_fa871217",
+      "title": "웹리서치·대시보드 밀도 — 정보 밀집 테이블 vs 여백·카드 분리",
+      "ts": "2026-06-05 18:52",
+      "card_id": 33,
+      "auto": true
+    },
+    {
+      "catalog_seed": "debate_auto_sidebar_office",
+      "title": "토론·사무실 — 좌측 고정 roster vs 상단 탭만",
+      "ts": "2026-06-05 18:57",
+      "card_id": 34,
+      "auto": true
+    },
+    {
+      "catalog_seed": "debate_auto_feed_density",
+      "title": "토론·대화 로그 — 메시지 카드 넓게 vs 타임라인 좁게",
+      "ts": "2026-06-05 18:57",
+      "card_id": 35,
+      "auto": true
+    },
+    {
+      "catalog_seed": "debate_auto_form_labels",
+      "title": "토론·폼 — 라벨 상단 vs 플로팅 라벨",
+      "ts": "2026-06-05 18:57",
+      "card_id": 36,
+      "auto": true
+    },
+    {
+      "catalog_seed": "debate_web_모바일_네비_5d133e41",
+      "title": "웹리서치·모바일 네비 — 햄버거 드로어 vs 하단 탭 바",
+      "ts": "2026-06-05 18:57",
+      "card_id": 37,
+      "auto": true
+    },
+    {
+      "catalog_seed": "debate_auto_error_inline",
+      "title": "토론·에러 — 필드 인라인 에러 vs 폼 상단 요약",
+      "ts": "2026-06-05 18:57",
+      "card_id": 38,
+      "auto": true
+    },
+    {
+      "catalog_seed": "debate_auto_loading_skeleton",
+      "title": "토론·로딩 — 스켈레톤 UI vs 스피너만",
+      "ts": "2026-06-05 18:57",
+      "card_id": 39,
+      "auto": true
+    },
+    {
+      "catalog_seed": "debate_auto_image_hero_photo",
+      "title": "토론·히어로 — 실사 배경 vs 일러스트·그라데이션",
+      "ts": "2026-06-05 18:57",
+      "card_id": 40,
+      "auto": true
+    },
+    {
+      "catalog_seed": "debate_auto_video_hero",
+      "title": "토론·히어로 — 짧은 루프 영상 vs 정적 이미지",
+      "ts": "2026-06-05 18:57",
+      "card_id": 41,
+      "auto": true
+    },
+    {
+      "catalog_seed": "debate_web_접근성_cta_d0245f41",
+      "title": "웹리서치·접근성 CTA — 고대비 단색 버튼 vs 아웃라인+보조 텍스트",
+      "ts": "2026-06-05 18:57",
+      "card_id": 42,
+      "auto": true
+    },
+    {
+      "catalog_seed": "debate_auto_icon_style",
+      "title": "토론·아이콘 — 라인 아이콘 vs 필드 아이콘",
+      "ts": "2026-06-05 18:57",
+      "card_id": 43,
+      "auto": true
+    },
+    {
+      "catalog_seed": "debate_auto_table_mobile",
+      "title": "토론·표 — 가로 스크롤 vs 카드형 행 변환",
+      "ts": "2026-06-05 18:57",
+      "card_id": 44,
+      "auto": true
+    },
+    {
+      "catalog_seed": "debate_auto_pagination",
+      "title": "토론·목록 — 무한 스크롤 vs 페이지네이션",
+      "ts": "2026-06-05 18:57",
+      "card_id": 45,
+      "auto": true
+    },
+    {
+      "catalog_seed": "debate_auto_tag_chips",
+      "title": "토론·태그 — 채우기 색 칩 vs 테두리 칩",
+      "ts": "2026-06-05 18:57",
+      "card_id": 46,
+      "auto": true
+    },
+    {
+      "catalog_seed": "debate_auto_modal_vs_drawer",
+      "title": "토론·패널 — 모달 중앙 vs 하단 드로어",
+      "ts": "2026-06-05 18:57",
+      "card_id": 47,
+      "auto": true
+    },
+    {
+      "catalog_seed": "debate_auto_toast_position",
+      "title": "토론·알림 — 하단 토스트 vs 상단 배너",
+      "ts": "2026-06-05 18:57",
+      "card_id": 48,
+      "auto": true
+    },
+    {
+      "catalog_seed": "debate_auto_dark_mode_toggle",
+      "title": "토론·테마 — 사용자 다크 토글 vs 시스템만",
+      "ts": "2026-06-05 18:57",
+      "card_id": 49,
+      "auto": true
+    },
+    {
+      "catalog_seed": "debate_auto_font_serif_head",
+      "title": "토론·타이포 — 제목 세리프 vs 전부 산세리프",
+      "ts": "2026-06-05 18:57",
+      "card_id": 50,
+      "auto": true
+    },
+    {
+      "catalog_seed": "debate_auto_link_underline",
+      "title": "토론·링크 — 본문 링크 밑줄 vs 색만 구분",
+      "ts": "2026-06-05 18:57",
+      "card_id": 51,
+      "auto": true
+    },
+    {
+      "catalog_seed": "debate_auto_focus_ring",
+      "title": "토론·포커스 — 두꺼운 focus ring vs 미세 outline",
+      "ts": "2026-06-05 18:57",
+      "card_id": 52,
+      "auto": true
+    },
+    {
+      "catalog_seed": "debate_auto_anim_hover",
+      "title": "토론·모션 — 호버 스케일 vs 호버 색만",
+      "ts": "2026-06-05 18:58",
+      "card_id": 53,
+      "auto": true
+    },
+    {
+      "catalog_seed": "debate_auto_grid_masonry",
+      "title": "토론·그리드 — 메이슨리 vs 균일 행 높이",
+      "ts": "2026-06-05 18:58",
+      "card_id": 54,
+      "auto": true
+    },
+    {
+      "catalog_seed": "debate_auto_price_color",
+      "title": "토론·데이터 — 상승 빨강 vs 상승 초록",
+      "ts": "2026-06-05 18:58",
+      "card_id": 55,
+      "auto": true
+    },
+    {
+      "catalog_seed": "debate_auto_chart_palette",
+      "title": "토론·차트 — 브랜드 Accent 차트 vs 중립 그레이",
+      "ts": "2026-06-05 18:58",
+      "card_id": 56,
+      "auto": true
+    },
+    {
+      "catalog_seed": "debate_auto_avatar_style",
+      "title": "토론·아바타 — 젬마 이모지 vs 이니셜 원",
+      "ts": "2026-06-05 18:58",
+      "card_id": 57,
+      "auto": true
+    },
+    {
+      "catalog_seed": "debate_auto_divider_style",
+      "title": "토론·구분 — 선 divider vs 여백만",
+      "ts": "2026-06-05 18:58",
+      "card_id": 58,
+      "auto": true
+    },
+    {
+      "catalog_seed": "debate_auto_sticky_header",
+      "title": "토론·헤더 — 스크롤 시 축소 sticky vs 비고정",
+      "ts": "2026-06-05 18:58",
+      "card_id": 59,
+      "auto": true
+    },
+    {
+      "catalog_seed": "debate_auto_tooltip_density",
+      "title": "토론·도움말 — 아이콘 ? 툴팁 vs 인라인 설명",
+      "ts": "2026-06-05 18:58",
+      "card_id": 60,
+      "auto": true
+    },
+    {
+      "catalog_seed": "debate_auto_print_styles",
+      "title": "토론·인쇄 — print CSS 제공 vs 미제공",
+      "ts": "2026-06-05 18:58",
+      "card_id": 61,
+      "auto": true
+    },
+    {
+      "catalog_seed": "debate_auto_code_block",
+      "title": "토론·코드 — 다크 코드 블록 vs 라이트 인라인",
+      "ts": "2026-06-05 18:58",
+      "card_id": 62,
+      "auto": true
+    },
+    {
+      "catalog_seed": "debate_auto_ads_slot",
+      "title": "토론·광고 — 본문 중간 슬롯 vs 사이드만",
+      "ts": "2026-06-05 18:58",
+      "card_id": 63,
+      "auto": true
+    },
+    {
+      "catalog_seed": "debate_auto_cookie_banner",
+      "title": "토론·동의 — 하단 배너 vs 중앙 모달",
+      "ts": "2026-06-05 18:58",
+      "card_id": 64,
+      "auto": true
+    },
+    {
+      "catalog_seed": "debate_auto_lang_switch",
+      "title": "토론·다국어 — 헤더 언어 토글 vs 푸터만",
+      "ts": "2026-06-05 18:58",
+      "card_id": 65,
+      "auto": true
+    },
+    {
+      "catalog_seed": "debate_web_디자인_토큰_22ccd2e8",
+      "title": "웹리서치·디자인 토큰 — JSON 토큰 단일 소스 vs CSS :root 직접",
+      "ts": "2026-06-05 18:58",
+      "card_id": 66,
+      "auto": true
+    },
+    {
+      "catalog_seed": "debate_web_로딩_ux_127d524d",
+      "title": "웹리서치·로딩 UX — 스켈레톤 플레이스홀더 vs 중앙 스피너",
+      "ts": "2026-06-05 18:58",
+      "card_id": 67,
+      "auto": true
+    },
+    {
+      "catalog_seed": "debate_web_경로_표시_63b95c9b",
+      "title": "웹리서치·경로 표시 — breadcrumb 항상 vs 뒤로가기만",
+      "ts": "2026-06-05 18:58",
+      "card_id": 68,
+      "auto": true
+    },
+    {
+      "catalog_seed": "debate_web_폼_라벨_0701ca95",
+      "title": "웹리서치·폼 라벨 — 상단 고정 라벨 vs 플로팅 라벨",
+      "ts": "2026-06-05 18:58",
+      "card_id": 69,
+      "auto": true
+    },
+    {
+      "catalog_seed": "debate_web_헤더_sticky_3736a856",
+      "title": "웹리서치·헤더 sticky — 스크롤 축소 sticky vs 비고정 헤더",
+      "ts": "2026-06-05 18:58",
+      "card_id": 70,
+      "auto": true
+    },
+    {
+      "catalog_seed": "debate_auto_empty_state",
+      "title": "토론·빈 상태 — 일러스트+CTA vs 텍스트만",
+      "ts": "2026-06-05 18:58",
+      "card_id": 71,
+      "auto": true
+    },
+    {
+      "catalog_seed": "debate_auto_progress_steps",
+      "title": "토론·진행 — 스텝퍼 UI vs 퍼센트 바",
+      "ts": "2026-06-05 18:58",
+      "card_id": 72,
+      "auto": true
+    },
+    {
+      "catalog_seed": "debate_auto_trust_badges",
+      "title": "토론·신뢰 — 로고 띠 배지 vs 한 줄 문구",
+      "ts": "2026-06-05 18:58",
+      "card_id": 73,
+      "auto": true
+    },
+    {
+      "catalog_seed": "debate_auto_share_buttons",
+      "title": "토론·공유 — 상단 공유 vs 하단만",
+      "ts": "2026-06-05 18:59",
+      "card_id": 74,
+      "auto": true
+    },
+    {
+      "catalog_seed": "debate_auto_footer_sticky_v1",
+      "title": "토론·푸터 — 하단 sticky CTA 바 vs 정적 푸터만 (v2)",
+      "ts": "2026-06-05 18:59",
+      "card_id": 75,
+      "auto": true
+    },
+    {
+      "catalog_seed": "debate_auto_logo_size_v1",
+      "title": "토론·헤더 로고 — 큰 워드마크 vs 컴팩트 아이콘+텍스트 (v2)",
+      "ts": "2026-06-05 18:59",
+      "card_id": 76,
+      "auto": true
+    },
+    {
+      "catalog_seed": "debate_auto_nav_hamburger_v1",
+      "title": "토론·모바일 네비 — 햄버거 드로어 vs 하단 탭 바 (v2)",
+      "ts": "2026-06-05 18:59",
+      "card_id": 77,
+      "auto": true
+    },
+    {
+      "catalog_seed": "debate_auto_search_prominent_v1",
+      "title": "토론·검색 — 헤더 검색창 노출 vs 검색 아이콘만 (v2)",
+      "ts": "2026-06-05 18:59",
+      "card_id": 78,
+      "auto": true
+    },
+    {
+      "catalog_seed": "debate_web_금융_신뢰_ui_6c5daf02",
+      "title": "웹리서치·금융 신뢰 UI — 데이터·수치 강조 vs 여백·카피 중심",
+      "ts": "2026-06-05 18:59",
+      "card_id": 79,
+      "auto": true
+    },
+    {
+      "catalog_seed": "debate_web_반응형_타이포_6ad13525",
+      "title": "웹리서치·반응형 타이포 — clamp 유동 스케일 vs 고정 px 스텝",
+      "ts": "2026-06-05 18:59",
+      "card_id": 80,
+      "auto": true
+    },
+    {
+      "catalog_seed": "debate_web_다크_카드_f6095ec7",
+      "title": "웹리서치·다크 카드 — 1px border vs soft shadow",
+      "ts": "2026-06-05 18:59",
+      "card_id": 81,
+      "auto": true
+    },
+    {
+      "catalog_seed": "debate_auto_breadcrumb_v1",
+      "title": "토론·경로 — breadcrumb 항상 표시 vs 뒤로가기만 (v2)",
+      "ts": "2026-06-05 18:59",
+      "card_id": 82,
+      "auto": true
+    },
+    {
+      "catalog_seed": "debate_auto_sidebar_office_v1",
+      "title": "토론·사무실 — 좌측 고정 roster vs 상단 탭만 (v2)",
+      "ts": "2026-06-05 18:59",
+      "card_id": 83,
+      "auto": true
+    },
+    {
+      "catalog_seed": "debate_auto_feed_density_v1",
+      "title": "토론·대화 로그 — 메시지 카드 넓게 vs 타임라인 좁게 (v2)",
+      "ts": "2026-06-05 18:59",
+      "card_id": 84,
+      "auto": true
+    },
+    {
+      "catalog_seed": "debate_auto_form_labels_v1",
+      "title": "토론·폼 — 라벨 상단 vs 플로팅 라벨 (v2)",
+      "ts": "2026-06-05 18:59",
+      "card_id": 85,
+      "auto": true
+    },
+    {
+      "catalog_seed": "debate_auto_error_inline_v1",
+      "title": "토론·에러 — 필드 인라인 에러 vs 폼 상단 요약 (v2)",
+      "ts": "2026-06-05 18:59",
+      "card_id": 86,
+      "auto": true
+    },
+    {
+      "catalog_seed": "debate_auto_loading_skeleton_v1",
+      "title": "토론·로딩 — 스켈레톤 UI vs 스피너만 (v2)",
+      "ts": "2026-06-05 18:59",
+      "card_id": 87,
+      "auto": true
+    },
+    {
+      "catalog_seed": "debate_auto_image_hero_photo_v1",
+      "title": "토론·히어로 — 실사 배경 vs 일러스트·그라데이션 (v2)",
+      "ts": "2026-06-05 18:59",
+      "card_id": 88,
+      "auto": true
+    },
+    {
+      "catalog_seed": "debate_auto_video_hero_v1",
+      "title": "토론·히어로 — 짧은 루프 영상 vs 정적 이미지 (v2)",
+      "ts": "2026-06-05 18:59",
+      "card_id": 89,
+      "auto": true
+    },
+    {
+      "catalog_seed": "debate_auto_icon_style_v1",
+      "title": "토론·아이콘 — 라인 아이콘 vs 필드 아이콘 (v2)",
+      "ts": "2026-06-05 18:59",
+      "card_id": 90,
+      "auto": true
+    },
+    {
+      "catalog_seed": "debate_auto_table_mobile_v1",
+      "title": "토론·표 — 가로 스크롤 vs 카드형 행 변환 (v2)",
+      "ts": "2026-06-05 18:59",
+      "card_id": 91,
+      "auto": true
+    },
+    {
+      "catalog_seed": "debate_auto_pagination_v1",
+      "title": "토론·목록 — 무한 스크롤 vs 페이지네이션 (v2)",
+      "ts": "2026-06-05 18:59",
+      "card_id": 92,
+      "auto": true
+    },
+    {
+      "catalog_seed": "debate_auto_tag_chips_v1",
+      "title": "토론·태그 — 채우기 색 칩 vs 테두리 칩 (v2)",
+      "ts": "2026-06-05 18:59",
+      "card_id": 93,
+      "auto": true
+    },
+    {
+      "catalog_seed": "debate_auto_modal_vs_drawer_v1",
+      "title": "토론·패널 — 모달 중앙 vs 하단 드로어 (v2)",
+      "ts": "2026-06-05 18:59",
+      "card_id": 94,
+      "auto": true
+    },
+    {
+      "catalog_seed": "debate_auto_toast_position_v1",
+      "title": "토론·알림 — 하단 토스트 vs 상단 배너 (v2)",
+      "ts": "2026-06-05 18:59",
+      "card_id": 95,
+      "auto": true
+    },
+    {
+      "catalog_seed": "debate_auto_dark_mode_toggle_v1",
+      "title": "토론·테마 — 사용자 다크 토글 vs 시스템만 (v2)",
+      "ts": "2026-06-05 18:59",
+      "card_id": 96,
+      "auto": true
+    },
+    {
+      "catalog_seed": "debate_auto_office_feed_order",
+      "title": "토론·사무실 피드 — 최신순 고정 vs 중요도 핀",
+      "ts": "2026-06-05 19:00",
+      "card_id": 97,
+      "auto": true
+    },
+    {
+      "catalog_seed": "debate_auto_wiki_panel",
+      "title": "토론·위키 패널 — 우측 항상 열림 vs 접기 기본",
+      "ts": "2026-06-05 19:00",
+      "card_id": 98,
+      "auto": true
+    },
+    {
+      "catalog_seed": "debate_auto_card_preview",
+      "title": "토론·카드 미리보기 — 호버 확장 vs 클릭 모달",
+      "ts": "2026-06-05 19:00",
+      "card_id": 99,
+      "auto": true
+    },
+    {
+      "catalog_seed": "debate_auto_unit_tab_color",
+      "title": "토론·유닛 탭 — 색상 구분 탭 vs 아이콘만",
+      "ts": "2026-06-05 19:00",
+      "card_id": 100,
+      "auto": true
+    },
+    {
+      "catalog_seed": "debate_auto_login_gate",
+      "title": "토론·로그인 — 전면 모달 vs 인라인 배너",
+      "ts": "2026-06-05 19:00",
+      "card_id": 101,
+      "auto": true
+    },
+    {
+      "catalog_seed": "debate_auto_data_refresh",
+      "title": "토론·데이터 갱신 — 자동 폴링 배지 vs 수동 새로고침",
+      "ts": "2026-06-05 19:00",
+      "card_id": 102,
+      "auto": true
+    },
+    {
+      "catalog_seed": "debate_auto_seo_snippet",
+      "title": "토론·SEO 스니펫 — 200자 요약 카드 vs 키워드 리스트",
+      "ts": "2026-06-05 19:00",
+      "card_id": 103,
+      "auto": true
+    },
+    {
+      "catalog_seed": "debate_auto_mobile_bottom_bar",
+      "title": "토론·모바일 바 — 하단 액션 바 vs FAB 하나",
+      "ts": "2026-06-05 19:00",
+      "card_id": 104,
+      "auto": true
+    },
+    {
+      "catalog_seed": "debate_auto_font_serif_head_v1",
+      "title": "토론·타이포 — 제목 세리프 vs 전부 산세리프 (v2)",
+      "ts": "2026-06-05 19:00",
+      "card_id": 105,
+      "auto": true
+    },
+    {
+      "catalog_seed": "debate_auto_link_underline_v1",
+      "title": "토론·링크 — 본문 링크 밑줄 vs 색만 구분 (v2)",
+      "ts": "2026-06-05 19:00",
+      "card_id": 106,
+      "auto": true
+    },
+    {
+      "catalog_seed": "debate_web_에이전트_사무실_6130b233",
+      "title": "웹리서치·에이전트 사무실 — 3열 패널 고정 vs 단일 피드 집중",
+      "ts": "2026-06-05 19:00",
+      "card_id": 107,
+      "auto": true
+    },
+    {
+      "catalog_seed": "debate_web_댓글_스레드_038962ad",
+      "title": "웹리서치·댓글 스레드 — 중첩 들여쓰기 vs 플랫 타임라인",
+      "ts": "2026-06-05 19:00",
+      "card_id": 108,
+      "auto": true
+    },
+    {
+      "catalog_seed": "debate_web_탭_네비_a5b616fc",
+      "title": "웹리서치·탭 네비 — 언더라인 탭 vs 필드 세그먼트",
+      "ts": "2026-06-05 19:00",
+      "card_id": 109,
+      "auto": true
+    },
+    {
+      "catalog_seed": "debate_web_버튼_피드백_8ebfb2eb",
+      "title": "웹리서치·버튼 피드백 — 호버·액티브 모션 vs 색상 변화만",
+      "ts": "2026-06-05 19:00",
+      "card_id": 110,
+      "auto": true
+    },
+    {
+      "catalog_seed": "debate_web_og_카드_04249609",
+      "title": "웹리서치·OG 카드 — 대형 타이틀+로고 vs 미니멀 텍스트",
+      "ts": "2026-06-05 19:00",
+      "card_id": 111,
+      "auto": true
+    },
+    {
+      "catalog_seed": "debate_web_문서_목차_4d390dbf",
+      "title": "웹리서치·문서 목차 — 우측 sticky TOC vs 본문 인라인 앵커",
+      "ts": "2026-06-05 19:00",
+      "card_id": 112,
+      "auto": true
+    },
+    {
+      "catalog_seed": "debate_auto_focus_ring_v1",
+      "title": "토론·포커스 — 두꺼운 focus ring vs 미세 outline (v2)",
+      "ts": "2026-06-05 19:00",
+      "card_id": 113,
+      "auto": true
+    },
+    {
+      "catalog_seed": "debate_auto_anim_hover_v1",
+      "title": "토론·모션 — 호버 스케일 vs 호버 색만 (v2)",
+      "ts": "2026-06-05 19:00",
+      "card_id": 114,
+      "auto": true
+    },
+    {
+      "catalog_seed": "debate_auto_grid_masonry_v1",
+      "title": "토론·그리드 — 메이슨리 vs 균일 행 높이 (v2)",
+      "ts": "2026-06-05 19:00",
+      "card_id": 115,
+      "auto": true
+    },
+    {
+      "catalog_seed": "debate_auto_price_color_v1",
+      "title": "토론·데이터 — 상승 빨강 vs 상승 초록 (v2)",
+      "ts": "2026-06-05 19:00",
+      "card_id": 116,
+      "auto": true
+    },
+    {
+      "catalog_seed": "debate_auto_chart_palette_v1",
+      "title": "토론·차트 — 브랜드 Accent 차트 vs 중립 그레이 (v2)",
+      "ts": "2026-06-05 19:00",
+      "card_id": 117,
+      "auto": true
+    },
+    {
+      "catalog_seed": "debate_web_검색_결과_f474023a",
+      "title": "웹리서치·검색 결과 — 좌측 필터 패널 vs 상단 칩 필터",
+      "ts": "2026-06-05 19:00",
+      "card_id": 118,
+      "auto": true
+    },
+    {
+      "catalog_seed": "debate_web_지식_네트워크_e796bbaf",
+      "title": "웹리서치·지식 네트워크 — 노드·엣지 그래프 vs 리스트+태그",
+      "ts": "2026-06-05 19:00",
+      "card_id": 119,
+      "auto": true
+    }
+  ],
+  "updated_at": "2026-06-05 19:00"
+}

@@ -44,6 +44,23 @@ def _sheet_path() -> str:
     return os.path.join(base, "data", "monthly_dividend_etfs.json")
 
 
+def sort_rows_by_total_return(rows: list[dict[str, Any]], reverse: bool = True) -> None:
+    """총 수익률(total_return_pct) 기준 정렬. null은 맨 아래."""
+    def _key(row: dict[str, Any]) -> float:
+        if not isinstance(row, dict):
+            return -999.0
+        v = row.get("total_return_pct")
+        try:
+            return float(v) if v is not None else -999.0
+        except (TypeError, ValueError):
+            return -999.0
+
+    rows.sort(key=_key, reverse=reverse)
+    for i, row in enumerate(rows, start=1):
+        if isinstance(row, dict):
+            row["no"] = i
+
+
 def validate_sheet(data: dict[str, Any]) -> list[str]:
     errors: list[str] = []
     if not isinstance(data, dict):

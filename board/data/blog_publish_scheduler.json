@@ -1,0 +1,20 @@
+{
+  "scheduled": {
+    "date": "2026-05-29",
+    "post_id": 23,
+    "publish_at": "2026-05-29 22:33",
+    "title": "2026-05-29 국내·미국 증시 조사 브리핑 — 시세·차트·뉴스",
+    "score": 105,
+    "dedupe": "ok"
+  },
+  "last_published_date": "2026-05-29",
+  "priority_post_id": 25,
+  "blocked_post_ids": [],
+  "history": [
+    {
+      "post_id": 24,
+      "published_at": "2026-05-29 23:11",
+      "title": "2026-05-29 증시 종합 조사 — 시세·금리·채권·원유·원자재·CEO·유튜브·애널리스트·공시"
+    }
+  ]
+}

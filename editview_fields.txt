@@ -1,0 +1,17 @@
+{
+  "categoryVal": "10_02_06_03_00",
+  "itemName": "12컬러 부드러운 그림 그리기 색연필 미술용품",
+  "imageUrl[64260446]": "https://cdn1.domeggook.com/upload/item/2026/03/31/1774956385569FBBF53D74E9E6CAC1F1/1774956385569FBBF",
+  "keyword_input_3": "초등학생",
+  "keyword_input_4": "생일선물",
+  "keyword_input_5": "어린이집",
+  "brands": "해당없음",
+  "manufactur": "단디자인사입",
+  "models": "해당없음",
+  "content": "<p><img src=\"https://gi.esmplus.com/dany2012/main/VL1-VL9/misul12SAEK.jpg\"></p>",
+  "sel_sort1": "문구",
+  "sel_sort2": "화방용품",
+  "sel_sort3": "스케치/드로잉용품",
+  "sel_sort4": "수채색연필",
+  "sel_sort5": "5차분류"
+}

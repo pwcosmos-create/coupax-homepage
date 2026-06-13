@@ -1,0 +1,2044 @@
+{
+  "office_always_on": true,
+  "global_always_on": true,
+  "worker_note": "office_always_on 이면 사무실 전체가 상시 가동(모든 에이전트 ON + worker). 개별 mode_on 은 office OFF 일 때만 개별 적용.",
+  "agents": [
+    {
+      "id": "privacy",
+      "name": "보안 젬마",
+      "emoji": "🛡️",
+      "role": "개인정보 필터",
+      "mode_on": true,
+      "interval_minutes": 0,
+      "interval_label": "항상",
+      "job": "pii_scan",
+      "last_run_at": "2026-06-12 00:00",
+      "last_status": "err:name '_STOCK_' is not defined",
+      "skills": [
+        {
+          "id": "zero-pii",
+          "title": "Zero-PII 무저장",
+          "summary": "유입 데이터에서 식별정보 제거 후 비식별 패턴만 통과."
+        }
+      ],
+      "division": "finance"
+    },
+    {
+      "id": "researcher",
+      "name": "탐정 젬마",
+      "emoji": "🕵️",
+      "role": "팩트 조사",
+      "mode_on": true,
+      "interval_minutes": 0,
+      "interval_label": "항상",
+      "job": "fact_pulse",
+      "last_run_at": "2026-06-12 00:00",
+      "last_status": "sync#34385",
+      "skills": [
+        {
+          "id": "dual-source-fact",
+          "title": "이중 출처 팩트 추출",
+          "summary": "사이트 DB·ETF 시트 + 웹 검색(Tavily/Brave/DDG) 2곳 이상 대조. 젬마24 답변 RAG와 분리."
+        },
+        {
+          "id": "predictable-questions",
+          "title": "예측 가능 질문 큐",
+          "summary": "답이 스키마·필드로 떨어지는 조사만 큐에 등록."
+        }
+      ],
+      "division": "finance"
+    },
+    {
+      "id": "structurer",
+      "name": "사서 젬마",
+      "emoji": "🗂️",
+      "role": "지식 구조화",
+      "mode_on": true,
+      "interval_minutes": 0,
+      "interval_label": "항상",
+      "job": "meta_digest",
+      "last_run_at": "2026-06-13 23:50",
+      "last_status": "council#21",
+      "skills": [
+        {
+          "id": "wiki-meta-template",
+          "title": "10_Wiki / 20_Meta / 40_템플릿",
+          "summary": "팩트를 JSON·태그·글 틀 세 층으로 분리 저장."
+        }
+      ],
+      "division": "finance"
+    },
+    {
+      "id": "creator",
+      "name": "창조 젬마",
+      "emoji": "🎨",
+      "role": "글·안내 문구",
+      "mode_on": true,
+      "interval_minutes": 0,
+      "interval_label": "항상",
+      "job": "draft_check",
+      "last_run_at": "2026-06-12 00:00",
+      "last_status": "err:name '_STOCK_' is not defined",
+      "skills": [
+        {
+          "id": "e-e-a-t-longform",
+          "title": "E-E-A-T 장문",
+          "summary": "Wiki 숫자만 인용, 1500자+ FAQ 구조, 투자 권유 없음."
+        }
+      ],
+      "division": "finance"
+    },
+    {
+      "id": "observer",
+      "name": "관측 젬마",
+      "emoji": "👁️",
+      "role": "차트·화면 관측",
+      "mode_on": true,
+      "interval_minutes": 0,
+      "interval_label": "항상",
+      "job": "site_watch",
+      "last_run_at": "2026-06-12 00:00",
+      "last_status": "err:name '_STOCK_' is not defined",
+      "skills": [
+        {
+          "id": "visual-audit",
+          "title": "시각·UI 점검",
+          "summary": "시트·차트·모바일 레이아웃 상태를 텍스트로 기록."
+        }
+      ],
+      "division": "finance"
+    },
+    {
+      "id": "listener",
+      "name": "청취 젬마",
+      "emoji": "👂",
+      "role": "질문·댓글 톤 파악",
+      "mode_on": true,
+      "interval_minutes": 0,
+      "interval_label": "항상",
+      "job": "comment_scan",
+      "last_run_at": "2026-06-12 00:00",
+      "last_status": "err:name '_STOCK_' is not defined",
+      "skills": [
+        {
+          "id": "comment-faq-queue",
+          "title": "댓글 FAQ 큐",
+          "summary": "블로그 질문란에서 FAQ·글 후보 키워드만 추출(원문 PII 없음)."
+        }
+      ],
+      "division": "finance"
+    },
+    {
+      "id": "speaker",
+      "name": "송출 젬마",
+      "emoji": "🗣️",
+      "role": "브리핑·댓글 답",
+      "mode_on": true,
+      "interval_minutes": 0,
+      "interval_label": "항상",
+      "job": "comment_bot",
+      "last_run_at": "2026-06-12 00:00",
+      "last_status": "err:name '_STOCK_' is not defined",
+      "skills": [
+        {
+          "id": "comment-reply-bot",
+          "title": "댓글 참고 답",
+          "summary": "COMMENT_BOT_ENABLED=1 일 때 규칙·LLM 짧은 답 + 면책."
+        }
+      ],
+      "division": "finance"
+    },
+    {
+      "id": "rl",
+      "name": "RL 젬마",
+      "emoji": "🏎️",
+      "role": "피드백·우선순위",
+      "mode_on": true,
+      "interval_minutes": 0,
+      "interval_label": "항상",
+      "job": "daily_conclusion",
+      "last_run_at": "2026-06-12 00:00",
+      "last_status": "err:name '_STOCK_' is not defined",
+      "skills": [
+        {
+          "id": "feedback-loop",
+          "title": "가상·현실 오차 축소",
+          "summary": "sync 로그·댓글 피드백으로 내일 우선순위 결론 기록."
+        }
+      ],
+      "division": "finance"
+    },
+    {
+      "id": "etf_sync",
+      "name": "ETF 동기화",
+      "emoji": "⚙️",
+      "role": "월배당 데이터 파이프라인 (중지)",
+      "mode_on": true,
+      "interval_minutes": 0,
+      "interval_label": "항상",
+      "job": "etf_sync",
+      "last_run_at": "2026-06-12 00:00",
+      "last_status": "err:name '_STOCK_' is not defined",
+      "skills": [
+        {
+          "id": "coupax-etf-monthly-sync",
+          "title": "coupax-etf-monthly-sync",
+          "path": ".cursor/skills/coupax-etf-monthly-sync/SKILL.md",
+          "summary": "CSV 병합 → 해외 종목 → 메타·분배·YTD → 검증. API 2회 일치 시만 JSON 반영."
+        }
+      ],
+      "division": "finance"
+    },
+    {
+      "id": "saju_privacy",
+      "name": "결계 젬마",
+      "emoji": "🛡️",
+      "role": "풀이 PII 차단",
+      "division": "saju-learn",
+      "mode_on": true,
+      "interval_minutes": 0,
+      "interval_label": "항상",
+      "job": "saju_pii_scan",
+      "last_run_at": "2026-06-12 00:00",
+      "last_status": "err:name '_STOCK_' is not defined",
+      "skills": [
+        {
+          "id": "saju-zero-pii",
+          "title": "풀이 본문 무PII",
+          "summary": "이름·생년월일·연락처 패턴을 제거한 뒤 학습 카드만 통과."
+        }
+      ]
+    },
+    {
+      "id": "saju_reader",
+      "name": "독해 젬마",
+      "emoji": "📜",
+      "role": "풀이 수집·요약",
+      "division": "saju-learn",
+      "mode_on": true,
+      "interval_minutes": 0,
+      "interval_label": "항상",
+      "job": "saju_card_pulse",
+      "last_run_at": "2026-06-12 00:00",
+      "last_status": "err:name '_STOCK_' is not defined",
+      "skills": [
+        {
+          "id": "saju-ingest",
+          "title": "풀이 카드 수집",
+          "summary": "붙여넣기·feedback import 풀이를 카드로 요약·태그."
+        }
+      ]
+    },
+    {
+      "id": "saju_structurer",
+      "name": "이기 젬마",
+      "emoji": "☯️",
+      "role": "명리 태그·pack 구조",
+      "division": "saju-learn",
+      "mode_on": true,
+      "interval_minutes": 0,
+      "interval_label": "항상",
+      "job": "saju_tag_digest",
+      "last_run_at": "2026-06-12 00:00",
+      "last_status": "err:name '_STOCK_' is not defined",
+      "skills": [
+        {
+          "id": "saju-pack-schema",
+          "title": "saju_knowledge_pack",
+          "summary": "확정 카드를 오프라인 학습용 JSON·CURSOR_SAJU_LEARN.md 로 정리."
+        }
+      ]
+    },
+    {
+      "id": "saju_scholar",
+      "name": "명리 젬마",
+      "emoji": "🔮",
+      "role": "격국·용신 검수",
+      "division": "saju-learn",
+      "mode_on": true,
+      "interval_minutes": 0,
+      "interval_label": "항상",
+      "job": "saju_review_hint",
+      "last_run_at": "2026-06-12 00:00",
+      "last_status": "err:name '_STOCK_' is not defined",
+      "skills": [
+        {
+          "id": "saju-myungri",
+          "title": "명리 키워드 검수",
+          "summary": "오행·십신·대운·용신 등 태그 누락·모순 힌트."
+        }
+      ]
+    },
+    {
+      "id": "saju_curator",
+      "name": "전장 젬마",
+      "emoji": "📿",
+      "role": "확정·export",
+      "division": "saju-learn",
+      "mode_on": true,
+      "interval_minutes": 0,
+      "interval_label": "항상",
+      "job": "saju_pack_sync",
+      "last_run_at": "2026-06-12 00:00",
+      "last_status": "err:name '_STOCK_' is not defined",
+      "skills": [
+        {
+          "id": "saju-confirm-pack",
+          "title": "확정분 보내기",
+          "summary": "검수 대기 큐를 확인하고 pack·Cursor 문서를 갱신."
+        }
+      ]
+    },
+    {
+      "id": "saju_rl",
+      "name": "회간 젬마",
+      "emoji": "🌀",
+      "role": "학습 피드백",
+      "division": "saju-learn",
+      "mode_on": true,
+      "interval_minutes": 0,
+      "interval_label": "항상",
+      "job": "saju_gap_autofill",
+      "last_run_at": "2026-06-12 00:00",
+      "last_status": "err:name '_STOCK_' is not defined",
+      "skills": [
+        {
+          "id": "saju-card-rl",
+          "title": "카드 갭 RL",
+          "summary": "풀·일운·심층 매칭 갭을 탐지하고 RL 가중치로 부족 카드를 자동 제작·위원회 검수."
+        }
+      ]
+    },
+    {
+      "id": "saju_error_fix",
+      "name": "오류해결 에이전트",
+      "emoji": "🔧",
+      "role": "학습·API 오류 점검",
+      "division": "saju-learn",
+      "mode_on": true,
+      "interval_minutes": 0,
+      "interval_label": "항상",
+      "job": "saju_error_resolve",
+      "last_run_at": "2026-06-12 00:00",
+      "last_status": "err:name '_STOCK_' is not defined",
+      "skills": [
+        {
+          "id": "saju-error-triage",
+          "title": "오류 분류·복구",
+          "summary": "health·실패 작업·누락 답변·JSON 손상을 탐지하고 재시도·백필을 제안."
+        }
+      ]
+    },
+    {
+      "id": "saju_reinspector",
+      "name": "재점검 젬마",
+      "emoji": "✅",
+      "role": "명리위원회 인증 재점검",
+      "division": "saju-learn",
+      "mode_on": true,
+      "interval_minutes": 0,
+      "interval_label": "항상",
+      "job": "saju_cert_reverify",
+      "last_run_at": "2026-06-13 23:51",
+      "last_status": "card#78·PASS",
+      "skills": [
+        {
+          "id": "saju-council-recert",
+          "title": "위원회 PASS 재점검",
+          "summary": "PASS·FAIL 재시도·수정 재인증 카드의 면책·구조·인증 이력을 순환 재검증."
+        },
+        {
+          "id": "saju-cert-strengthen",
+          "title": "인증 강화",
+          "summary": "엄격 모드에서 단정 표현·민감 주제·태그·본문 길이를 재확인해 강화 등급 기록."
+        }
+      ]
+    },
+    {
+      "id": "kiwoom_reader",
+      "name": "차수 젬마",
+      "emoji": "📈",
+      "role": "전략·카드 수집",
+      "division": "kiwoom-chasu",
+      "mode_on": true,
+      "interval_minutes": 0,
+      "interval_label": "항상",
+      "job": "kiwoom_card_pulse",
+      "last_run_at": "2026-06-12 00:00",
+      "last_status": "err:name '_STOCK_' is not defined",
+      "skills": [
+        {
+          "id": "kiwoom-ingest",
+          "title": "차수거래 카드 수집",
+          "summary": "1·2·3차 진입·청산 조건을 카드로 요약·태그."
+        },
+        {
+          "id": "kiwoom-council-compose",
+          "title": "9젬마 협업 제작",
+          "summary": "카드 제작 시 전원 협업 검수 본문·피드 참여."
+        }
+      ]
+    },
+    {
+      "id": "kiwoom_risk",
+      "name": "리스크 젬마",
+      "emoji": "🛡️",
+      "role": "손절·익절 검수",
+      "division": "kiwoom-chasu",
+      "mode_on": true,
+      "interval_minutes": 0,
+      "interval_label": "항상",
+      "job": "kiwoom_review_hint",
+      "last_run_at": "2026-06-12 00:00",
+      "last_status": "task#34384",
+      "skills": [
+        {
+          "id": "kiwoom-risk-rules",
+          "title": "손절·익절 점검",
+          "summary": "대기 카드의 손절·익절·분할 규칙 누락·모순 힌트."
+        },
+        {
+          "id": "kiwoom-council-compose",
+          "title": "9젬마 협업 제작",
+          "summary": "카드 제작 시 전원 협업 검수 본문·피드 참여."
+        }
+      ]
+    },
+    {
+      "id": "kiwoom_structurer",
+      "name": "구조 젬마",
+      "emoji": "🗂️",
+      "role": "태그·pack 구조",
+      "division": "kiwoom-chasu",
+      "mode_on": true,
+      "interval_minutes": 0,
+      "interval_label": "항상",
+      "job": "kiwoom_tag_digest",
+      "last_run_at": "2026-06-13 23:50",
+      "last_status": "sync#17",
+      "skills": [
+        {
+          "id": "kiwoom-pack-schema",
+          "title": "kiwoom_knowledge_pack",
+          "summary": "확정 카드를 JSON·CURSOR_KIWOM_LEARN.md 로 정리."
+        },
+        {
+          "id": "kiwoom-council-compose",
+          "title": "9젬마 협업 제작",
+          "summary": "카드 제작 시 전원 협업 검수 본문·피드 참여."
+        }
+      ]
+    },
+    {
+      "id": "kiwoom_order",
+      "name": "주문 젬마",
+      "emoji": "📋",
+      "role": "주문·체결 점검",
+      "division": "kiwoom-chasu",
+      "mode_on": true,
+      "interval_minutes": 0,
+      "interval_label": "항상",
+      "job": "kiwoom_card_pulse",
+      "last_run_at": "2026-06-12 00:00",
+      "last_status": "err:name '_STOCK_' is not defined",
+      "skills": [
+        {
+          "id": "kiwoom-order-check",
+          "title": "체결·미체결",
+          "summary": "호가·체결·미체결 관련 기록을 조사·요약."
+        },
+        {
+          "id": "kiwoom-council-compose",
+          "title": "9젬마 협업 제작",
+          "summary": "카드 제작 시 전원 협업 검수 본문·피드 참여."
+        }
+      ]
+    },
+    {
+      "id": "kiwoom_account",
+      "name": "계좌 젬마",
+      "emoji": "💳",
+      "role": "계좌·예수금 점검",
+      "division": "kiwoom-chasu",
+      "mode_on": true,
+      "interval_minutes": 0,
+      "interval_label": "항상",
+      "job": "kiwoom_account_pulse",
+      "last_run_at": "2026-06-12 00:00",
+      "last_status": "err:name '_STOCK_' is not defined",
+      "skills": [
+        {
+          "id": "kiwoom-account-check",
+          "title": "증권 계좌 잔고 연동",
+          "summary": "HTS 기준 예수금·주문가능·평가금·보유 종목 스냅샷을 알고 작업·대조. 계좌번호는 끝 4자리만 저장."
+        },
+        {
+          "id": "kiwoom-council-compose",
+          "title": "9젬마 협업 제작",
+          "summary": "카드 제작 시 전원 협업 검수 본문·피드 참여."
+        }
+      ]
+    },
+    {
+      "id": "kiwoom_privacy",
+      "name": "보안 젬마",
+      "emoji": "🔒",
+      "role": "계좌·PII 필터",
+      "division": "kiwoom-chasu",
+      "mode_on": true,
+      "interval_minutes": 0,
+      "interval_label": "항상",
+      "job": "kiwoom_pii_scan",
+      "last_run_at": "2026-06-13 23:50",
+      "last_status": "task#17",
+      "skills": [
+        {
+          "id": "kiwoom-zero-pii",
+          "title": "계좌·API키 무저장",
+          "summary": "학습 카드에서 계좌번호·비밀번호·API키 패턴 탐지."
+        },
+        {
+          "id": "kiwoom-council-compose",
+          "title": "9젬마 협업 제작",
+          "summary": "카드 제작 시 전원 협업 검수 본문·피드 참여."
+        }
+      ]
+    },
+    {
+      "id": "kiwoom_curator",
+      "name": "큐레이터 젬마",
+      "emoji": "✅",
+      "role": "확정·export",
+      "division": "kiwoom-chasu",
+      "mode_on": true,
+      "interval_minutes": 0,
+      "interval_label": "항상",
+      "job": "kiwoom_card_compose",
+      "last_run_at": "2026-06-12 00:00",
+      "last_status": "err:name '_STOCK_' is not defined",
+      "skills": [
+        {
+          "id": "kiwoom-council-compose",
+          "title": "9젬마 협업 제작",
+          "summary": "갭 카드 1장 — 전원 검수 섹션·피드 로그 후 확정·pack."
+        },
+        {
+          "id": "kiwoom-confirm-pack",
+          "title": "확정분 보내기",
+          "summary": "검수 대기 큐 확인 후 pack·Wiki·Cursor 문서 갱신."
+        }
+      ]
+    },
+    {
+      "id": "kiwoom_rl",
+      "name": "회간 젬마",
+      "emoji": "🌀",
+      "role": "학습 피드백",
+      "division": "kiwoom-chasu",
+      "mode_on": true,
+      "interval_minutes": 0,
+      "interval_label": "항상",
+      "job": "kiwoom_gap_autofill",
+      "last_run_at": "2026-06-12 00:01",
+      "last_status": "task#34386",
+      "skills": [
+        {
+          "id": "kiwoom-feedback-loop",
+          "title": "카드 RL·갭 보충",
+          "summary": "ε-greedy 밴딧으로 갭 카드 제작(9젬마 협업)·오류·확정 피드백 학습."
+        },
+        {
+          "id": "kiwoom-council-compose",
+          "title": "9젬마 협업 제작",
+          "summary": "카드 제작 시 전원 협업 검수 본문·피드 참여."
+        }
+      ]
+    },
+    {
+      "id": "kiwoom_error_fix",
+      "name": "오류해결 에이전트",
+      "emoji": "🔧",
+      "role": "학습·API 오류",
+      "division": "kiwoom-chasu",
+      "mode_on": true,
+      "interval_minutes": 0,
+      "interval_label": "항상",
+      "job": "kiwoom_error_resolve",
+      "last_run_at": "2026-06-12 00:00",
+      "last_status": "err:name '_STOCK_' is not defined",
+      "skills": [
+        {
+          "id": "kiwoom-error-triage",
+          "title": "오류 분류·복구",
+          "summary": "health·학습 JSON·대기 과다를 탐지하고 복구를 제안."
+        },
+        {
+          "id": "kiwoom-council-compose",
+          "title": "9젬마 협업 제작",
+          "summary": "카드 제작 시 전원 협업 검수 본문·피드 참여."
+        }
+      ]
+    },
+    {
+      "id": "kiwoom_monitor",
+      "name": "원히어로 모니터",
+      "emoji": "📡",
+      "role": "실매매 bot_log",
+      "division": "kiwoom-chasu",
+      "mode_on": true,
+      "interval_minutes": 15,
+      "interval_label": "15분",
+      "job": "kiwoom_wonhero_monitor",
+      "last_run_at": "2026-06-11 23:59",
+      "last_status": "err:name '_STOCK_' is not defined",
+      "skills": [
+        {
+          "id": "kiwoom-wonhero-bot-log",
+          "title": "bot_log → 학습 카드",
+          "summary": "kisstock trade_history.sqlite bot_log를 읽어 모니터 카드 4종을 revise·확정."
+        }
+      ]
+    },
+    {
+      "id": "design_curator",
+      "name": "디자인 큐레이터",
+      "emoji": "🎨",
+      "role": "플레이북·pack·확정",
+      "division": "homepage-design",
+      "mode_on": true,
+      "interval_minutes": 60,
+      "interval_label": "1시간",
+      "job": "homepage_design_pack_sync",
+      "last_run_at": "2026-06-11 23:59",
+      "last_status": "err:name '_STOCK_' is not defined",
+      "skills": [
+        {
+          "id": "design-pack-sync",
+          "title": "재사용 플레이북 pack",
+          "summary": "확정 카드→pack·CURSOR_HOMEPAGE_DESIGN_LEARN.md·Wiki."
+        }
+      ]
+    },
+    {
+      "id": "stock_radar",
+      "name": "시세젬마",
+      "emoji": "📡",
+      "role": "국내·미국 시세 수집",
+      "division": "stock-watch",
+      "mode_on": true,
+      "interval_minutes": 30,
+      "interval_label": "30분",
+      "job": "stock_watch_sync",
+      "skills": [
+        {
+          "id": "kr-us-quotes",
+          "title": "KOSPI·나스닥 스냅샷",
+          "summary": "지수·관심종목 시세를 snapshots.json에 저장."
+        }
+      ],
+      "last_run_at": "2026-06-11 23:59",
+      "last_status": "err:name '_STOCK_' is not defined"
+    },
+    {
+      "id": "stock_kr",
+      "name": "국내시황젬마",
+      "emoji": "🇰🇷",
+      "role": "코스피·코스닥·대형주",
+      "division": "stock-watch",
+      "mode_on": true,
+      "interval_minutes": 60,
+      "interval_label": "1시간",
+      "job": "stock_kr_brief",
+      "skills": [
+        {
+          "id": "kr-macro",
+          "title": "국내 지수 브리핑",
+          "summary": "스냅샷 기준 국내 지수·종목 요약."
+        }
+      ],
+      "last_run_at": "2026-06-11 23:59",
+      "last_status": "err:name '_STOCK_' is not defined"
+    },
+    {
+      "id": "stock_us",
+      "name": "해외시황젬마",
+      "emoji": "🇺🇸",
+      "role": "S&P·나스닥·빅테크",
+      "division": "stock-watch",
+      "mode_on": true,
+      "interval_minutes": 60,
+      "interval_label": "1시간",
+      "job": "stock_us_brief",
+      "skills": [
+        {
+          "id": "us-macro",
+          "title": "미국 지수 브리핑",
+          "summary": "S&P·나스닥·관심 종목 등락 요약."
+        }
+      ],
+      "last_run_at": "2026-06-11 23:59",
+      "last_status": "err:name '_STOCK_' is not defined"
+    },
+    {
+      "id": "stock_chart",
+      "name": "차트젬마",
+      "emoji": "📊",
+      "role": "추세·등락 신호",
+      "division": "stock-watch",
+      "mode_on": true,
+      "interval_minutes": 60,
+      "interval_label": "1시간",
+      "job": "stock_chart_pulse",
+      "skills": [
+        {
+          "id": "trend-signal",
+          "title": "당일·스냅샷 추세",
+          "summary": "지수·종목 등락률로 강세·약세·횡보 신호를 정리."
+        }
+      ],
+      "last_run_at": "2026-06-11 23:59",
+      "last_status": "err:name '_STOCK_' is not defined"
+    },
+    {
+      "id": "stock_finance",
+      "name": "제무젬마",
+      "emoji": "📑",
+      "role": "실적·PER·ROE 조사",
+      "division": "stock-watch",
+      "mode_on": true,
+      "interval_minutes": 120,
+      "interval_label": "2시간",
+      "job": "stock_finance_pulse",
+      "skills": [
+        {
+          "id": "fundamental-web",
+          "title": "재무 웹 팩트",
+          "summary": "변동 큰 종목 위주 실적·밸류에이션 검색."
+        }
+      ],
+      "last_run_at": "2026-06-11 23:59",
+      "last_status": "err:name '_STOCK_' is not defined"
+    },
+    {
+      "id": "stock_news",
+      "name": "최신정보젬마",
+      "emoji": "📰",
+      "role": "속보·시장 뉴스",
+      "division": "stock-watch",
+      "mode_on": true,
+      "interval_minutes": 45,
+      "interval_label": "45분",
+      "job": "stock_news_pulse",
+      "skills": [
+        {
+          "id": "market-news",
+          "title": "국내·미국·글로벌 뉴스",
+          "summary": "코스피·나스닥·연준 이슈 웹 검색."
+        }
+      ],
+      "last_run_at": "2026-06-11 23:59",
+      "last_status": "err:name '_STOCK_' is not defined"
+    },
+    {
+      "id": "stock_risk",
+      "name": "리스크젬마",
+      "emoji": "⚠️",
+      "role": "변동성·알림 점검",
+      "division": "stock-watch",
+      "mode_on": true,
+      "interval_minutes": 30,
+      "interval_label": "30분",
+      "job": "stock_risk_scan",
+      "skills": [
+        {
+          "id": "volatility-scan",
+          "title": "급등락·알림",
+          "summary": "임계치 이상 등락 종목·알림 건수 점검."
+        }
+      ],
+      "last_run_at": "2026-06-11 23:59",
+      "last_status": "err:name '_STOCK_' is not defined"
+    },
+    {
+      "id": "stock_writer",
+      "name": "글감젬마",
+      "emoji": "✍️",
+      "role": "블로그 글감 연계",
+      "division": "stock-watch",
+      "mode_on": true,
+      "interval_minutes": 180,
+      "interval_label": "3시간",
+      "job": "stock_blog_hints",
+      "skills": [
+        {
+          "id": "market-blog-topic",
+          "title": "시황→글감",
+          "summary": "당일 시황·뉴스에서 금융 블로그 주제 후보 제안."
+        }
+      ],
+      "last_run_at": "2026-06-11 23:59",
+      "last_status": "err:name '_STOCK_' is not defined"
+    },
+    {
+      "id": "stock_listener",
+      "name": "댓글검증젬마",
+      "emoji": "💬",
+      "role": "종목 댓글·루머 교차 검증",
+      "division": "stock-watch",
+      "mode_on": true,
+      "interval_minutes": 25,
+      "interval_label": "25분",
+      "job": "stock_comment_verify",
+      "skills": [
+        {
+          "id": "comment-fact-cross",
+          "title": "댓글≠팩트",
+          "summary": "증시 댓글을 웹 2회·당일 시세와 대조. 과장·불일치 시 주의 표시."
+        }
+      ],
+      "last_run_at": "2026-06-11 23:59",
+      "last_status": "err:name '_STOCK_' is not defined"
+    },
+    {
+      "id": "stock_disclosure",
+      "name": "공시젬마",
+      "emoji": "📋",
+      "role": "DART·SEC 전자공시",
+      "division": "stock-watch",
+      "mode_on": true,
+      "interval_minutes": 90,
+      "interval_label": "90분",
+      "job": "stock_disclosure_pulse",
+      "skills": [
+        {
+          "id": "dart-sec",
+          "title": "전자공시·8-K",
+          "summary": "DART·KRX·SEC 공시 검색, DART_API_KEY 시 API 보강."
+        }
+      ],
+      "last_run_at": "2026-06-11 23:59",
+      "last_status": "err:name '_STOCK_' is not defined"
+    },
+    {
+      "id": "stock_government",
+      "name": "정부발표젬마",
+      "emoji": "🏛️",
+      "role": "금융위·한은·연준 보도",
+      "division": "stock-watch",
+      "mode_on": true,
+      "interval_minutes": 60,
+      "interval_label": "1시간",
+      "job": "stock_government_pulse",
+      "skills": [
+        {
+          "id": "gov-press",
+          "title": "정책·보도자료",
+          "summary": "금융위·기재부·한은·연준·재무부 공식 보도 검색."
+        }
+      ],
+      "last_run_at": "2026-06-11 23:59",
+      "last_status": "err:name '_STOCK_' is not defined"
+    },
+    {
+      "id": "stock_press",
+      "name": "기사젬마",
+      "emoji": "📰",
+      "role": "주요 언론 기사",
+      "division": "stock-watch",
+      "mode_on": true,
+      "interval_minutes": 50,
+      "interval_label": "50분",
+      "job": "stock_press_pulse",
+      "skills": [
+        {
+          "id": "major-press",
+          "title": "통신·경제지",
+          "summary": "연합·한경·매경·로이터·CNBC 등 기사 수집."
+        }
+      ],
+      "last_run_at": "2026-06-11 23:59",
+      "last_status": "err:name '_STOCK_' is not defined"
+    },
+    {
+      "id": "stock_macro",
+      "name": "금리·달러젬마",
+      "emoji": "💱",
+      "role": "금리·환율→증시 영향",
+      "division": "stock-watch",
+      "mode_on": true,
+      "interval_minutes": 75,
+      "interval_label": "75분",
+      "job": "stock_rates_dollar_pulse",
+      "skills": [
+        {
+          "id": "rates-fx-impact",
+          "title": "기준금리·USD/KRW",
+          "summary": "한·미 금리·원달러와 코스피·미국 지수를 교차 해석."
+        }
+      ],
+      "last_run_at": "2026-06-11 23:59",
+      "last_status": "err:name '_STOCK_' is not defined"
+    },
+    {
+      "id": "stock_commodity",
+      "name": "원자재젬마",
+      "emoji": "🛢️",
+      "role": "유가·금속·곡물 동향",
+      "division": "stock-watch",
+      "mode_on": true,
+      "interval_minutes": 80,
+      "interval_label": "80분",
+      "job": "stock_commodities_pulse",
+      "skills": [
+        {
+          "id": "commodity-trend",
+          "title": "원자재→섹터",
+          "summary": "WTI·브렌트·금·구리·가스 시세와 코스피·업종 영향 교차."
+        }
+      ],
+      "last_run_at": "2026-06-11 23:59",
+      "last_status": "err:name '_STOCK_' is not defined"
+    },
+    {
+      "id": "stock_bond",
+      "name": "채권젬마",
+      "emoji": "📊",
+      "role": "국채·금리→증시",
+      "division": "stock-watch",
+      "mode_on": true,
+      "interval_minutes": 70,
+      "interval_label": "70분",
+      "job": "stock_bonds_pulse",
+      "skills": [
+        {
+          "id": "bond-yield-curve",
+          "title": "국채 수익률·곡선",
+          "summary": "한·미 10년물·단기금리·채권 ETF와 코스피 교차 해석."
+        }
+      ],
+      "last_run_at": "2026-06-11 23:59",
+      "last_status": "err:name '_STOCK_' is not defined"
+    },
+    {
+      "id": "stock_oil_war",
+      "name": "원유·전쟁젬마",
+      "emoji": "⚔️",
+      "role": "유가·지정학→증시",
+      "division": "stock-watch",
+      "mode_on": true,
+      "interval_minutes": 65,
+      "interval_label": "65분",
+      "job": "stock_oil_war_pulse",
+      "skills": [
+        {
+          "id": "oil-geopolitics",
+          "title": "원유·분쟁 뉴스",
+          "summary": "WTI·브렌트·중동·우크라 등 지정학과 코스피·업종 교차."
+        }
+      ],
+      "last_run_at": "2026-06-11 23:59",
+      "last_status": "err:name '_STOCK_' is not defined"
+    },
+    {
+      "id": "stock_ceo",
+      "name": "CEO멘트젬마",
+      "emoji": "👔",
+      "role": "CEO·경영진 발언",
+      "division": "stock-watch",
+      "mode_on": true,
+      "interval_minutes": 55,
+      "interval_label": "55분",
+      "job": "stock_ceo_remarks_pulse",
+      "skills": [
+        {
+          "id": "ceo-remarks-cross",
+          "title": "경영진 코멘트",
+          "summary": "관심종목·대형주 CEO 발언을 웹·당일 시세와 교차."
+        }
+      ],
+      "last_run_at": "2026-06-11 23:59",
+      "last_status": "err:name '_STOCK_' is not defined"
+    },
+    {
+      "id": "stock_youtube",
+      "name": "유튜브젬마",
+      "emoji": "▶️",
+      "role": "유튜브 증시·CEO 영상",
+      "division": "stock-watch",
+      "mode_on": true,
+      "interval_minutes": 60,
+      "interval_label": "1시간",
+      "job": "stock_youtube_pulse",
+      "skills": [
+        {
+          "id": "youtube-market",
+          "title": "영상 브리핑",
+          "summary": "코스피·미국·매크로·종목·CEO 관련 유튜브 영상 수집."
+        }
+      ],
+      "last_run_at": "2026-06-11 23:59",
+      "last_status": "err:name '_STOCK_' is not defined"
+    },
+    {
+      "id": "stock_analyst",
+      "name": "애널리스트젬마",
+      "emoji": "📈",
+      "role": "리포트·목표가·투자의견",
+      "division": "stock-watch",
+      "mode_on": true,
+      "interval_minutes": 90,
+      "interval_label": "90분",
+      "job": "stock_analyst_pulse",
+      "skills": [
+        {
+          "id": "analyst-report",
+          "title": "증권사 리포트",
+          "summary": "관심종목 애널리스트 리포트·목표가·컨센서스 웹 조사."
+        }
+      ],
+      "last_run_at": "2026-06-11 23:59",
+      "last_status": "err:name '_STOCK_' is not defined"
+    },
+    {
+      "id": "design_token",
+      "name": "토큰젬마",
+      "emoji": "🎯",
+      "role": "색·CSS 변수",
+      "division": "homepage-design",
+      "mode_on": true,
+      "interval_minutes": 90,
+      "interval_label": "90분",
+      "job": "homepage_design_token_pulse",
+      "skills": [
+        {
+          "id": "palette",
+          "title": "Midnight·Copper·Accent",
+          "summary": "브랜드 팔레트 :root 고정."
+        }
+      ],
+      "last_run_at": "2026-06-11 23:59",
+      "last_status": "err:name '_STOCK_' is not defined"
+    },
+    {
+      "id": "design_typography",
+      "name": "타이포젬마",
+      "emoji": "🔤",
+      "role": "글꼴·스케일",
+      "division": "homepage-design",
+      "mode_on": true,
+      "interval_minutes": 120,
+      "interval_label": "2시간",
+      "job": "homepage_design_typography_pulse",
+      "skills": [
+        {
+          "id": "type-scale",
+          "title": "타이포 스케일",
+          "summary": "clamp·16px 본문·캡션."
+        }
+      ],
+      "last_run_at": "2026-06-11 23:59",
+      "last_status": "err:name '_STOCK_' is not defined"
+    },
+    {
+      "id": "design_layout",
+      "name": "레이아웃젬마",
+      "emoji": "📐",
+      "role": "그리드·반응형",
+      "division": "homepage-design",
+      "mode_on": true,
+      "interval_minutes": 75,
+      "interval_label": "75분",
+      "job": "homepage_design_layout_pulse",
+      "skills": [
+        {
+          "id": "responsive",
+          "title": "375px+",
+          "summary": "브레이크포인트·Office 3열."
+        }
+      ],
+      "last_run_at": "2026-06-11 23:59",
+      "last_status": "err:name '_STOCK_' is not defined"
+    },
+    {
+      "id": "design_component",
+      "name": "컴포넌트젬마",
+      "emoji": "🧩",
+      "role": "버튼·카드·폼",
+      "division": "homepage-design",
+      "mode_on": true,
+      "interval_minutes": 80,
+      "interval_label": "80분",
+      "job": "homepage_design_component_pulse",
+      "skills": [
+        {
+          "id": "ui-patterns",
+          "title": "UI 패턴",
+          "summary": "헤더·블로그 타일·질문창."
+        }
+      ],
+      "last_run_at": "2026-06-11 23:59",
+      "last_status": "err:name '_STOCK_' is not defined"
+    },
+    {
+      "id": "design_a11y",
+      "name": "접근성젬마",
+      "emoji": "♿",
+      "role": "WCAG·대비",
+      "division": "homepage-design",
+      "mode_on": true,
+      "interval_minutes": 180,
+      "interval_label": "3시간",
+      "job": "homepage_design_a11y_pulse",
+      "skills": [
+        {
+          "id": "a11y",
+          "title": "접근성",
+          "summary": "대비·키보드·aria."
+        }
+      ],
+      "last_run_at": "2026-06-11 23:59",
+      "last_status": "err:name '_STOCK_' is not defined"
+    },
+    {
+      "id": "design_handoff",
+      "name": "핸드오프젬마",
+      "emoji": "📦",
+      "role": "style.css 반영",
+      "division": "homepage-design",
+      "mode_on": true,
+      "interval_minutes": 100,
+      "interval_label": "100분",
+      "job": "homepage_design_handoff_pulse",
+      "skills": [
+        {
+          "id": "css-handoff",
+          "title": "CSS 핸드오프",
+          "summary": "변수·컴포넌트 클래스 동기."
+        }
+      ],
+      "last_run_at": "2026-06-11 23:59",
+      "last_status": "err:name '_STOCK_' is not defined"
+    },
+    {
+      "id": "design_ux_writer",
+      "name": "UX카피젬마",
+      "emoji": "✍️",
+      "role": "CTA·마이크로카피",
+      "division": "homepage-design",
+      "mode_on": true,
+      "interval_minutes": 150,
+      "interval_label": "2.5시간",
+      "job": "homepage_design_ux_pulse",
+      "skills": [
+        {
+          "id": "microcopy",
+          "title": "카피 톤",
+          "summary": "신뢰·간결·동사 CTA."
+        }
+      ],
+      "last_run_at": "2026-06-11 23:59",
+      "last_status": "err:name '_STOCK_' is not defined"
+    },
+    {
+      "id": "design_council",
+      "name": "디자인 위원회",
+      "emoji": "⚖️",
+      "role": "토론·합의 카드",
+      "division": "homepage-design",
+      "mode_on": true,
+      "interval_minutes": 45,
+      "interval_label": "45분",
+      "job": "homepage_design_council_debate",
+      "skills": [
+        {
+          "id": "design-debate",
+          "title": "8인 토론",
+          "summary": "토큰·레이아웃·CTA 등 주제별 합의 카드."
+        }
+      ],
+      "last_run_at": "2026-06-11 23:59",
+      "last_status": "err:name '_STOCK_' is not defined"
+    },
+    {
+      "id": "design_researcher",
+      "name": "리서치젬마",
+      "emoji": "🔍",
+      "role": "레퍼런스·벤치마크",
+      "division": "homepage-design",
+      "mode_on": true,
+      "interval_minutes": 200,
+      "interval_label": "3.3시간",
+      "job": "homepage_design_research_pulse",
+      "skills": [
+        {
+          "id": "bench",
+          "title": "벤치마크",
+          "summary": "동종 UI→coupax 토큰 축소."
+        }
+      ],
+      "last_run_at": "2026-06-11 23:59",
+      "last_status": "err:name '_STOCK_' is not defined"
+    },
+    {
+      "id": "design_catalog",
+      "name": "카탈로그젬마",
+      "emoji": "📚",
+      "role": "플레이북 카드 sync",
+      "division": "homepage-design",
+      "mode_on": true,
+      "interval_minutes": 120,
+      "interval_label": "2시간",
+      "job": "homepage_design_catalog_maintain",
+      "skills": [
+        {
+          "id": "catalog-sync",
+          "title": "카탈로그 유지",
+          "summary": "시드·갱신·누락 보완."
+        }
+      ],
+      "last_run_at": "2026-06-11 23:59",
+      "last_status": "err:name '_STOCK_' is not defined"
+    },
+    {
+      "id": "design_privacy",
+      "name": "프라이버시젬마",
+      "emoji": "🔒",
+      "role": "목업 PII 차단",
+      "division": "homepage-design",
+      "mode_on": true,
+      "interval_minutes": 240,
+      "interval_label": "4시간",
+      "job": "homepage_design_pii_scan",
+      "skills": [
+        {
+          "id": "pii",
+          "title": "PII 검사",
+          "summary": "학습 카드·지시에 연락처 금지."
+        }
+      ],
+      "last_run_at": "2026-06-11 23:59",
+      "last_status": "err:name '_STOCK_' is not defined"
+    },
+    {
+      "id": "workisus_curator",
+      "name": "원키스 큐레이터",
+      "emoji": "🇺🇸",
+      "role": "카드·pack·확정 [퇴역·board카드]",
+      "division": "workisus-chasu",
+      "mode_on": true,
+      "interval_minutes": 60,
+      "interval_label": "1시간",
+      "job": "workisus_pack_sync",
+      "skills": [
+        {
+          "id": "workisus-pack",
+          "title": "한 계좌 차수 pack",
+          "summary": "확정 카드→workisus_knowledge_pack·Wiki."
+        }
+      ],
+      "last_run_at": "2026-06-11 23:59",
+      "last_status": "err:name '_STOCK_' is not defined"
+    },
+    {
+      "id": "workisus_slots",
+      "name": "차수젬마",
+      "emoji": "📊",
+      "role": "슬롯·차수 칸",
+      "division": "workisus-chasu",
+      "mode_on": true,
+      "interval_minutes": 0,
+      "interval_label": "항상",
+      "job": "workisus_slots_pulse",
+      "skills": [
+        {
+          "id": "cascade-slots",
+          "title": "1·2·3차",
+          "summary": "격자 병행 시 슬롯 표시."
+        }
+      ],
+      "last_run_at": "2026-06-12 00:00",
+      "last_status": "err:name '_STOCK_' is not defined"
+    },
+    {
+      "id": "workisus_hts",
+      "name": "HTS젬마",
+      "emoji": "🖥️",
+      "role": "3001~3005 다창",
+      "division": "workisus-chasu",
+      "mode_on": true,
+      "interval_minutes": 0,
+      "interval_label": "항상",
+      "job": "workisus_hts_pulse",
+      "skills": [
+        {
+          "id": "panels",
+          "title": "다창",
+          "summary": "workisus HTS UI."
+        }
+      ],
+      "last_run_at": "2026-06-12 00:00",
+      "last_status": "err:name '_STOCK_' is not defined"
+    },
+    {
+      "id": "workisus_order",
+      "name": "주문젬마",
+      "emoji": "📋",
+      "role": "[3002] 수동·슬롯",
+      "division": "workisus-chasu",
+      "mode_on": true,
+      "interval_minutes": 0,
+      "interval_label": "항상",
+      "job": "workisus_order_pulse",
+      "skills": [
+        {
+          "id": "manual-ord",
+          "title": "수동",
+          "summary": "차수=슬롯·격자 1차 앵커."
+        }
+      ],
+      "last_run_at": "2026-06-12 00:00",
+      "last_status": "err:name '_STOCK_' is not defined"
+    },
+    {
+      "id": "workisus_sync",
+      "name": "동기젬마",
+      "emoji": "🔄",
+      "role": "카탈로그·점검 [퇴역·board카드]",
+      "division": "workisus-chasu",
+      "mode_on": true,
+      "interval_minutes": 120,
+      "interval_label": "2시간",
+      "job": "workisus_catalog_maintain",
+      "skills": [
+        {
+          "id": "catalog",
+          "title": "WORKISUS 시드",
+          "summary": "workisus 카탈로그→cards.json."
+        }
+      ],
+      "last_run_at": "2026-06-11 23:59",
+      "last_status": "err:name '_STOCK_' is not defined"
+    },
+    {
+      "id": "workisus_watch",
+      "name": "워치젬마",
+      "emoji": "👁️",
+      "role": "전 에이전트·정본 점검",
+      "division": "workisus-chasu",
+      "mode_on": true,
+      "interval_minutes": 0,
+      "interval_label": "항상",
+      "job": "workisus_watch_pulse",
+      "skills": [
+        {
+          "id": "watch",
+          "title": "10%·무손실",
+          "summary": "wonkisus-grid-trading-rules 요약."
+        }
+      ],
+      "last_run_at": "2026-06-12 00:00",
+      "last_status": "err:name '_STOCK_' is not defined"
+    },
+    {
+      "id": "workisus_knowledge",
+      "name": "지식젬마",
+      "emoji": "📖",
+      "role": "wonkisus Wiki 정본",
+      "division": "workisus-chasu",
+      "mode_on": true,
+      "interval_minutes": 0,
+      "interval_label": "항상",
+      "job": "workisus_wiki_pulse",
+      "skills": [
+        {
+          "id": "wiki-rules",
+          "title": "grid-trading-rules",
+          "summary": "gemma24/10_Wiki 정본 동기."
+        },
+        {
+          "id": "playbook",
+          "title": "플레이북",
+          "summary": "export_trading_context → Cursor."
+        }
+      ],
+      "last_run_at": "2026-06-12 00:00",
+      "last_status": "err:name '_STOCK_' is not defined"
+    },
+    {
+      "id": "workisus_mode",
+      "name": "모드젬마",
+      "emoji": "🎚️",
+      "role": "자동·안전·리밸런스·격자",
+      "division": "workisus-chasu",
+      "mode_on": true,
+      "interval_minutes": 0,
+      "interval_label": "항상",
+      "job": "workisus_mode_pulse",
+      "skills": [
+        {
+          "id": "modes",
+          "title": "3모드",
+          "summary": "§3 자동/안전·리밸런스·차수(격자)."
+        }
+      ],
+      "last_run_at": "2026-06-12 00:00",
+      "last_status": "err:name '_STOCK_' is not defined"
+    },
+    {
+      "id": "workisus_balance",
+      "name": "잔고젬마",
+      "emoji": "💰",
+      "role": "현금10%+종목 비중",
+      "division": "workisus-chasu",
+      "mode_on": true,
+      "interval_minutes": 0,
+      "interval_label": "항상",
+      "job": "workisus_balance_pulse",
+      "skills": [
+        {
+          "id": "kis-bal",
+          "title": "10자산",
+          "summary": "원금10%·9종목 각10% 대조."
+        }
+      ],
+      "last_run_at": "2026-06-12 00:00",
+      "last_status": "err:name '_STOCK_' is not defined"
+    },
+    {
+      "id": "workisus_stocks",
+      "name": "종목젬마",
+      "emoji": "📈",
+      "role": "9종목·enabled·보유",
+      "division": "workisus-chasu",
+      "mode_on": true,
+      "interval_minutes": 0,
+      "interval_label": "항상",
+      "job": "workisus_stocks_pulse",
+      "skills": [
+        {
+          "id": "tickers",
+          "title": "종목",
+          "summary": "ON/OFF·미보유·10% 목표."
+        }
+      ],
+      "last_run_at": "2026-06-12 00:00",
+      "last_status": "err:name '_STOCK_' is not defined"
+    },
+    {
+      "id": "workisus_rules",
+      "name": "매매규칙젬마",
+      "emoji": "⚙️",
+      "role": "bot_settings_us·10%",
+      "division": "workisus-chasu",
+      "mode_on": true,
+      "interval_minutes": 0,
+      "interval_label": "항상",
+      "job": "workisus_rules_pulse",
+      "skills": [
+        {
+          "id": "settings",
+          "title": "target_cash",
+          "summary": "target_cash_weight_pct=10."
+        }
+      ],
+      "last_run_at": "2026-06-12 00:00",
+      "last_status": "err:name '_STOCK_' is not defined"
+    },
+    {
+      "id": "workisus_risk",
+      "name": "리스크젬마",
+      "emoji": "🛡️",
+      "role": "무손실 매도·손절 없음",
+      "division": "workisus-chasu",
+      "mode_on": true,
+      "interval_minutes": 0,
+      "interval_label": "항상",
+      "job": "workisus_risk_pulse",
+      "skills": [
+        {
+          "id": "no-loss",
+          "title": "§2",
+          "summary": "Profit>0만 Trim·Profit≤0 홀딩."
+        }
+      ],
+      "last_run_at": "2026-06-12 00:00",
+      "last_status": "err:name '_STOCK_' is not defined"
+    },
+    {
+      "id": "workisus_rebalance",
+      "name": "리밸런스젬마",
+      "emoji": "⚖️",
+      "role": "Trim/Buy 10%·Cycle 2건",
+      "division": "workisus-chasu",
+      "mode_on": true,
+      "interval_minutes": 0,
+      "interval_label": "항상",
+      "job": "workisus_rebalance_pulse",
+      "skills": [
+        {
+          "id": "trim",
+          "title": "Trim 10%",
+          "summary": "Profit>0만 초과분 매도."
+        },
+        {
+          "id": "buy-up",
+          "title": "Buy 10%",
+          "summary": "하락 괴리 최우선 보충."
+        },
+        {
+          "id": "gradual",
+          "title": "Cycle≤2",
+          "summary": "rebalance_max_trades_per_cycle."
+        }
+      ],
+      "last_run_at": "2026-06-12 00:00",
+      "last_status": "err:name '_STOCK_' is not defined"
+    },
+    {
+      "id": "workisus_token",
+      "name": "토큰젬마",
+      "emoji": "🔑",
+      "role": "KIS US 토큰·API",
+      "division": "workisus-chasu",
+      "mode_on": true,
+      "interval_minutes": 0,
+      "interval_label": "항상",
+      "job": "workisus_token_pulse",
+      "skills": [
+        {
+          "id": "kis-token",
+          "title": "토큰",
+          "summary": "잔고 API OK."
+        }
+      ],
+      "last_run_at": "2026-06-12 00:00",
+      "last_status": "err:name '_STOCK_' is not defined"
+    },
+    {
+      "id": "workisus_reconcile",
+      "name": "정합젬마",
+      "emoji": "🔄",
+      "role": "US 슬롯 DB·대조",
+      "division": "workisus-chasu",
+      "mode_on": true,
+      "interval_minutes": 0,
+      "interval_label": "항상",
+      "job": "workisus_reconcile_pulse",
+      "skills": [
+        {
+          "id": "slots-us",
+          "title": "market=US",
+          "summary": "KR 슬롯 혼입 방지."
+        }
+      ],
+      "last_run_at": "2026-06-12 00:00",
+      "last_status": "err:name '_STOCK_' is not defined"
+    },
+    {
+      "id": "workisus_auto",
+      "name": "자동젬마",
+      "emoji": "🤖",
+      "role": "리밸런스 자동·격자",
+      "division": "workisus-chasu",
+      "mode_on": true,
+      "interval_minutes": 0,
+      "interval_label": "항상",
+      "job": "workisus_auto_pulse",
+      "skills": [
+        {
+          "id": "auto-us",
+          "title": "해외봇",
+          "summary": "enabled_us·10% 수렴."
+        },
+        {
+          "id": "cycle-cap",
+          "title": "Cycle 2",
+          "summary": "주기당 최대 2건 집행."
+        }
+      ],
+      "last_run_at": "2026-06-12 00:00",
+      "last_status": "err:name '_STOCK_' is not defined"
+    },
+    {
+      "id": "workisus_multi",
+      "name": "멀티젬마",
+      "emoji": "👥",
+      "role": "단일 해외·10자산",
+      "division": "workisus-chasu",
+      "mode_on": true,
+      "interval_minutes": 0,
+      "interval_label": "항상",
+      "job": "workisus_multi_pulse",
+      "skills": [
+        {
+          "id": "portfolio",
+          "title": "10×10%",
+          "summary": "원금+9종목 균등."
+        }
+      ],
+      "last_run_at": "2026-06-12 00:00",
+      "last_status": "err:name '_STOCK_' is not defined"
+    },
+    {
+      "id": "workisus_atr",
+      "name": "ATR젬마",
+      "emoji": "📐",
+      "role": "ATR gap·sell·PPO",
+      "division": "workisus-chasu",
+      "mode_on": true,
+      "interval_minutes": 0,
+      "interval_label": "항상",
+      "job": "workisus_atr_pulse",
+      "skills": [
+        {
+          "id": "atr-gap",
+          "title": "§4 gap",
+          "summary": "극단/고변동 gap 배율."
+        },
+        {
+          "id": "atr-ppo",
+          "title": "PPO",
+          "summary": "train_rl·atr_timer_run."
+        }
+      ],
+      "last_run_at": "2026-06-12 00:00",
+      "last_status": "err:name '_STOCK_' is not defined"
+    },
+    {
+      "id": "workisus_ops",
+      "name": "운영젬마",
+      "emoji": "🔧",
+      "role": "무손실·점진2건·확인",
+      "division": "workisus-chasu",
+      "mode_on": true,
+      "interval_minutes": 0,
+      "interval_label": "항상",
+      "job": "workisus_ops_pulse",
+      "skills": [
+        {
+          "id": "gates",
+          "title": "무손실",
+          "summary": "Profit>0만 Trim·손절 없음."
+        },
+        {
+          "id": "gradual",
+          "title": "Cycle≤2",
+          "summary": "점진 매매·몰아치기 금지."
+        },
+        {
+          "id": "confirm",
+          "title": "실행확인",
+          "summary": "§5 설정 변경 서명."
+        }
+      ],
+      "last_run_at": "2026-06-12 00:00",
+      "last_status": "err:name '_STOCK_' is not defined"
+    },
+    {
+      "id": "gwansang_watch",
+      "name": "워치젬마",
+      "emoji": "👁️",
+      "role": "전체·SEO·갭",
+      "division": "gwansang-learn",
+      "mode_on": true,
+      "interval_minutes": 0,
+      "interval_label": "항상",
+      "job": "gwansang_watch_pulse",
+      "skills": [
+        {
+          "id": "watch",
+          "title": "점검",
+          "summary": "카드·갭·확정 현황."
+        }
+      ],
+      "last_run_at": "2026-06-13 23:50",
+      "last_status": "ok"
+    },
+    {
+      "id": "gwansang_curator",
+      "name": "큐레이터",
+      "emoji": "✦",
+      "role": "확정·pack·Wiki",
+      "division": "gwansang-learn",
+      "mode_on": true,
+      "interval_minutes": 0,
+      "interval_label": "항상",
+      "job": "gwansang_pack_sync",
+      "skills": [
+        {
+          "id": "pack",
+          "title": "pack",
+          "summary": "gwansang_knowledge_pack.json."
+        }
+      ],
+      "last_run_at": "2026-06-13 23:50",
+      "last_status": "ok"
+    },
+    {
+      "id": "gwansang_compose",
+      "name": "제작젬마",
+      "emoji": "✍️",
+      "role": "갭 카드 제작",
+      "division": "gwansang-learn",
+      "mode_on": true,
+      "interval_minutes": 0,
+      "interval_label": "항상",
+      "job": "gwansang_card_compose",
+      "skills": [
+        {
+          "id": "compose",
+          "title": "갭 1장",
+          "summary": "SEO 200자+ 확정."
+        }
+      ],
+      "last_run_at": "2026-06-13 23:50",
+      "last_status": "ok"
+    },
+    {
+      "id": "gwansang_catalog",
+      "name": "카탈로그젬마",
+      "emoji": "📚",
+      "role": "시드·동기화",
+      "division": "gwansang-learn",
+      "mode_on": true,
+      "interval_minutes": 0,
+      "interval_label": "항상",
+      "job": "gwansang_catalog_maintain",
+      "skills": [
+        {
+          "id": "seed",
+          "title": "카탈로그",
+          "summary": "12종 관상 시드."
+        }
+      ],
+      "last_run_at": "2026-06-13 23:50",
+      "last_status": "err:'cp949' codec can't encode character"
+    },
+    {
+      "id": "gwansang_seo",
+      "name": "SEO젬마",
+      "emoji": "🔍",
+      "role": "200자+·키워드",
+      "division": "gwansang-learn",
+      "mode_on": true,
+      "interval_minutes": 0,
+      "interval_label": "항상",
+      "job": "gwansang_seo_pulse",
+      "skills": [
+        {
+          "id": "seo",
+          "title": "SEO",
+          "summary": "관상·얼굴 키워드 보강."
+        }
+      ],
+      "last_run_at": "2026-06-13 23:50",
+      "last_status": "ok"
+    },
+    {
+      "id": "gwansang_scholar",
+      "name": "학자젬마",
+      "emoji": "📜",
+      "role": "전통 관상 이론",
+      "division": "gwansang-learn",
+      "mode_on": true,
+      "interval_minutes": 0,
+      "interval_label": "항상",
+      "job": "gwansang_scholar_pulse",
+      "skills": [
+        {
+          "id": "theory",
+          "title": "오관·삼정",
+          "summary": "이론 카드 담당."
+        }
+      ],
+      "last_run_at": "2026-06-13 23:50",
+      "last_status": "ok"
+    },
+    {
+      "id": "gwansang_features",
+      "name": "오관젬마",
+      "emoji": "👤",
+      "role": "이마·눈·코·입",
+      "division": "gwansang-learn",
+      "mode_on": true,
+      "interval_minutes": 0,
+      "interval_label": "항상",
+      "job": "gwansang_features_pulse",
+      "skills": [
+        {
+          "id": "features",
+          "title": "오관",
+          "summary": "부위별 해석 카드."
+        }
+      ],
+      "last_run_at": "2026-06-13 23:50",
+      "last_status": "ok"
+    },
+    {
+      "id": "gwansang_fortune",
+      "name": "운세젬마",
+      "emoji": "🌟",
+      "role": "길상·재물·연애",
+      "division": "gwansang-learn",
+      "mode_on": true,
+      "interval_minutes": 0,
+      "interval_label": "항상",
+      "job": "gwansang_fortune_pulse",
+      "skills": [
+        {
+          "id": "fortune",
+          "title": "경향",
+          "summary": "단정 예언 없음."
+        }
+      ],
+      "last_run_at": "2026-06-13 23:50",
+      "last_status": "ok"
+    },
+    {
+      "id": "gwansang_reader",
+      "name": "리더젬마",
+      "emoji": "📖",
+      "role": "수집·요약",
+      "division": "gwansang-learn",
+      "mode_on": true,
+      "interval_minutes": 0,
+      "interval_label": "항상",
+      "job": "gwansang_reader_pulse",
+      "skills": [
+        {
+          "id": "read",
+          "title": "수집",
+          "summary": "본문·요약 초안."
+        }
+      ],
+      "last_run_at": "2026-06-13 23:50",
+      "last_status": "ok"
+    },
+    {
+      "id": "gwansang_structurer",
+      "name": "구조젬마",
+      "emoji": "🗂️",
+      "role": "분류·태그",
+      "division": "gwansang-learn",
+      "mode_on": true,
+      "interval_minutes": 0,
+      "interval_label": "항상",
+      "job": "gwansang_structurer_pulse",
+      "skills": [
+        {
+          "id": "struct",
+          "title": "구조",
+          "summary": "【】블록·카테고리."
+        }
+      ],
+      "last_run_at": "2026-06-13 23:50",
+      "last_status": "ok"
+    },
+    {
+      "id": "gwansang_privacy",
+      "name": "프라이버시젬마",
+      "emoji": "🔒",
+      "role": "PII 차단",
+      "division": "gwansang-learn",
+      "mode_on": true,
+      "interval_minutes": 0,
+      "interval_label": "항상",
+      "job": "gwansang_pii_scan",
+      "skills": [
+        {
+          "id": "pii",
+          "title": "PII",
+          "summary": "연락처·실명 금지."
+        }
+      ],
+      "last_run_at": "2026-06-13 23:50",
+      "last_status": "err:'cp949' codec can't encode character"
+    },
+    {
+      "id": "gwansang_gap_autofill",
+      "name": "갭젬마",
+      "emoji": "🧩",
+      "role": "갭 자동 제작",
+      "division": "gwansang-learn",
+      "mode_on": true,
+      "interval_minutes": 0,
+      "interval_label": "항상",
+      "job": "gwansang_gap_autofill",
+      "skills": [
+        {
+          "id": "gap",
+          "title": "갭 RL",
+          "summary": "카탈로그 누락 자동 확정."
+        }
+      ],
+      "last_run_at": "2026-06-13 23:50",
+      "last_status": "ok"
+    },
+    {
+      "id": "gwansang_wiki_sync",
+      "name": "Wiki젬마",
+      "emoji": "📡",
+      "role": "Wiki 동기화",
+      "division": "gwansang-learn",
+      "mode_on": true,
+      "interval_minutes": 0,
+      "interval_label": "항상",
+      "job": "gwansang_wiki_sync",
+      "skills": [
+        {
+          "id": "wiki",
+          "title": "10_Wiki",
+          "summary": "확정 카드 Wiki 반영."
+        }
+      ],
+      "last_run_at": "2026-06-13 23:50",
+      "last_status": "ok"
+    },
+    {
+      "id": "gwansang_error_fix",
+      "name": "오류점검젬마",
+      "emoji": "🛠️",
+      "role": "품질·200자",
+      "division": "gwansang-learn",
+      "mode_on": true,
+      "interval_minutes": 0,
+      "interval_label": "항상",
+      "job": "gwansang_error_fix",
+      "skills": [
+        {
+          "id": "qa",
+          "title": "품질",
+          "summary": "본문·태그·PII 점검."
+        }
+      ],
+      "last_run_at": "2026-06-13 23:50",
+      "last_status": "err:'cp949' codec can't encode character"
+    },
+    {
+      "id": "gwansang_daily_conclusion",
+      "name": "일일결론젬마",
+      "emoji": "📋",
+      "role": "일일 요약",
+      "division": "gwansang-learn",
+      "mode_on": true,
+      "interval_minutes": 0,
+      "interval_label": "항상",
+      "job": "gwansang_daily_conclusion",
+      "skills": [
+        {
+          "id": "daily",
+          "title": "결론",
+          "summary": "확정·대기·다음 작업."
+        }
+      ],
+      "last_run_at": "2026-06-13 23:50",
+      "last_status": "err:'cp949' codec can't encode character"
+    },
+    {
+      "id": "gwansang_review",
+      "name": "검수젬마",
+      "emoji": "✅",
+      "role": "대기 카드 검수",
+      "division": "gwansang-learn",
+      "mode_on": true,
+      "interval_minutes": 0,
+      "interval_label": "항상",
+      "job": "gwansang_review_hint",
+      "skills": [
+        {
+          "id": "review",
+          "title": "검수",
+          "summary": "pending 카드 안내."
+        }
+      ],
+      "last_run_at": "2026-06-13 23:50",
+      "last_status": "ok"
+    },
+    {
+      "id": "gwansang_tag_digest",
+      "name": "태그젬마",
+      "emoji": "🏷️",
+      "role": "키워드·태그",
+      "division": "gwansang-learn",
+      "mode_on": true,
+      "interval_minutes": 0,
+      "interval_label": "항상",
+      "job": "gwansang_tag_digest",
+      "skills": [
+        {
+          "id": "tags",
+          "title": "태그",
+          "summary": "SEO 키워드 빈도."
+        }
+      ],
+      "last_run_at": "2026-06-13 23:50",
+      "last_status": "ok"
+    },
+    {
+      "id": "chief-arch",
+      "name": "수석 아키텍트 젬마",
+      "emoji": "🏗️",
+      "role": "아키텍처 설계 / 코드 리뷰",
+      "division": "chief-dev",
+      "mode_on": true,
+      "interval_minutes": 120,
+      "job": "chief_arch_review",
+      "skills": [
+        {
+          "id": "코드 아키텍처 리뷰",
+          "summary": "Flask 백엔드 및 전체 워크플로우 효율성을 점검합니다."
+        },
+        {
+          "id": "보안 및 에러 감지",
+          "summary": "백그라운드에서 로그를 분석하여 보안 취약점과 에러를 찾습니다."
+        }
+      ],
+      "last_run_at": "2026-06-13 23:50",
+      "last_status": "task#22"
+    },
+    {
+      "id": "chief-rag",
+      "name": "문서 수집기 젬마",
+      "emoji": "📚",
+      "role": "개발 문서 크롤링 / RAG",
+      "division": "chief-dev",
+      "mode_on": true,
+      "interval_minutes": 60,
+      "job": "chief_rag_crawler",
+      "skills": [
+        {
+          "id": "공식 문서 크롤링",
+          "summary": "최신 개발 문서를 수집하여 Vector DB에 저장합니다."
+        },
+        {
+          "id": "지식 카드 정제",
+          "summary": "수석 개발자가 주입한 URL과 텍스트를 최적화된 형식으로 정제합니다."
+        }
+      ],
+      "last_run_at": "2026-06-11 23:59",
+      "last_status": "err:name '_STOCK_' is not defined"
+    },
+    {
+      "id": "chief-ops",
+      "name": "DevOps 관리 젬마",
+      "emoji": "⚙️",
+      "role": "배포 / CI·CD 모니터링",
+      "division": "chief-dev",
+      "mode_on": true,
+      "interval_minutes": 30,
+      "job": "chief_devops_monitor",
+      "skills": [
+        {
+          "id": "서버 모니터링",
+          "summary": "Oracle Cloud 서버 리소스 및 Flask 서비스 상태를 모니터링합니다."
+        },
+        {
+          "id": "자동화 배포 점검",
+          "summary": "CI/CD 스크립트 실행 결과를 추적합니다."
+        }
+      ],
+      "last_run_at": "2026-06-11 23:59",
+      "last_status": "err:name '_STOCK_' is not defined"
+    }
+  ]
+}

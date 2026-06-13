@@ -1,0 +1,43 @@
+ // 공통 함수: 하위 카테고리 불러오기
+                function mloadSubCategory(level, caParam) {
+                    $.ajax({
+                        url: '/getCategoryNjobPc',
+                        method: 'GET',
+                        data: {ca: caParam},
+                        success: function (response) {
+                            let data = response.data;
+                            let $targetSelect = $(`#sort${level}`);
+                            $targetSelect.empty().append(`<option value="">${level}차분류</option>`);
+
+                            const currentLang = 'ko';
+
+                            $.each(data, function (index, item) {
+                                let categoryName = item.ca_name;
+                                // 중국어인 경우 중국어 카테고리 이름 사용
+                                if (currentLang === 'zh' && window.category_map_obj_zh && window.category_map_obj_zh[item.id]) {
+                                    categoryName = window.category_map_obj_zh[item.id];
+                                }
+                                $targetSelect.append(`<option value="${item.id}">${categoryName}</option>`);
+                            });
+
+                            // 이후 단계 초기화
+                            for (let i = level + 1; i <= 5; i++) {
+                                $(`#sort${i}`).empty().append(`<option value="">${i}차분류</option>`);
+                            }
+                        },
+                        error: function () {
+                            showToast(`${level} 차 분류 데이터를 불러오는 데 실패했습니다`, {
+                                backgroundColor: "#f21b1b",
+                                duration: 3000
+                            });
+                            return;
+                        }
+                    });
+                }
+
+                // 이벤트 바인딩
+                $('#sort1').change(function () {
+                    let val = $(this).val();
+                    if (!val) return;
+                    let caParam = val.substring(0, 2); // 1차 분류는 앞 2자리만
+                    mloadSu

@@ -107,9 +107,62 @@ def _run_job(key: str) -> str:
     return f"[{status}] {(msg or '')[:400]}"
 
 
-def run_all_stock_agents() -> dict[str, str]:
+def _insights_fresh(ins: dict, max_age_min: int = 120) -> bool:
+    ts = (ins.get("updated_at") or "").strip()
+    m = re.match(r"(\d{4})-(\d{2})-(\d{2})\s+(\d{2}):(\d{2})", ts)
+    if not m:
+        return False
+    try:
+        dt = datetime(
+            int(m[1]), int(m[2]), int(m[3]), int(m[4]), int(m[5])
+        )
+        age = (datetime.now() - dt).total_seconds() / 60.0
+        return age <= max_age_min
+    except ValueError:
+        return False
+
+
+def run_all_stock_agents(*, force: bool = False) -> dict[str, str]:
     """시황부 전 에이전트 1회 조사 — insights.json 갱신."""
-    out: dict[str, str] = {}
+    import agent_office_stock_watch as sw
+
+    ins = sw.load_insights()
+    fresh_min = max(30, int(os.getenv("BLOG_STOCK_SERIES_INSIGHTS_FRESH_MIN", "120") or "120"))
+    if not force and _insights_fresh(ins, fresh_min):
+        out: dict[str, str] = {}
+        for label, key in _AGENT_JOBS:
+            if key == "sync":
+                try:
+                    out[label] = _run_job(key)
+                except Exception as ex:
+                    out[label] = f"오류: {str(ex)[:120]}"
+            else:
+                block_key = {
+                    "chart": "chart",
+                    "rl": "rl_predictions",
+                    "finance": "finance",
+                    "news": "news",
+                    "risk": "risk",
+                    "disclosure": "disclosure",
+                    "government": "government",
+                    "press": "press",
+                    "rates": "rates_dollar",
+                    "commodities": "commodities",
+                    "bonds": "bonds",
+                    "oil_war": "oil_war",
+                    "ceo": "ceo_remarks",
+                    "youtube": "youtube",
+                    "analyst": "analyst_reports",
+                    "blog_hints": "blog_hints",
+                    "comment_verify": "comments",
+                }.get(key)
+                summ = ""
+                if block_key and isinstance(ins.get(block_key), dict):
+                    summ = (ins[block_key].get("summary") or "")[:200]
+                out[label] = summ or f"{label} 캐시({ins.get('updated_at', '')})"
+        return out
+
+    out = {}
     for label, key in _AGENT_JOBS:
         try:
             out[label] = _run_job(key)
@@ -248,7 +301,13 @@ def prepare_upload_research(symbols: list[dict]) -> dict[str, dict]:
 
     import agent_office_stock_watch as sw
 
-    global_agents = run_all_stock_agents()
+    force_all = os.getenv("BLOG_STOCK_SERIES_FORCE_AGENTS", "1").strip().lower() not in (
+        "0",
+        "false",
+        "no",
+        "off",
+    )
+    global_agents = run_all_stock_agents(force=force_all)
     snap = sw.load_snapshot()
     ins = sw.load_insights()
 

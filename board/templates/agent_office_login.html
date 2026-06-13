@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block title %}{{ site_name }} | 사무실 입장{% endblock %}
+{% block meta_description %}젬마24 에이전트 사무실 — 비공개 입장{% endblock %}
+{% block extra_head %}
+<meta name="robots" content="noindex, nofollow">
+{% endblock %}
+
+{% block content %}
+<section class="office-login-card">
+  <p class="office-tagline office-tagline--login">주제는 무엇이든 물어보세요</p>
+  <h1>젬마24 에이전트 사무실</h1>
+  <p class="office-login-lead">
+    <strong>대표님과 젬마24</strong> 만을 위한 비공개 사무실입니다.
+    ETF·시장·글·구조화 — <strong>주제 제한 없이</strong> 물어보고, 에이전트가 조사·토론·정리합니다.
+  </p>
+
+  {% if not access_configured %}
+  <p class="office-login-warn">
+    서버 <code>board/.env</code> 에
+    <code>AGENT_OFFICE_ACCESS_PASSWORD</code> (또는 <code>AGENT_OFFICE_CONTROL_TOKEN</code>)을 설정한 뒤
+    앱을 재시작해 주세요.
+  </p>
+  {% else %}
+  <form method="post" action="{{ url_for('agent_office_login') }}" class="office-login-form">
+    {% include '_csrf_field.html' %}
+    <input type="hidden" name="next" value="{{ next_url }}">
+    <label for="office-password">입장 비밀번호</label>
+    <input type="password" id="office-password" name="password" required autocomplete="current-password"
+           placeholder="대표님 전용">
+    <button type="submit" class="btn btn-primary">사무실 입장</button>
+  </form>
+  {% endif %}
+
+  <p class="office-login-foot">
+    <a href="{{ url_for('index') }}">← 공개 홈페이지로</a>
+  </p>
+</section>
+{% endblock %}

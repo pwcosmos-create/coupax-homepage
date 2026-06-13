@@ -1,0 +1,296 @@
+{% extends 'base.html' %}
+{% block title %}원히어로 차수거래 학습부 — {{ site_name }}{% endblock %}
+{% block title_scoped %}원히어로 차수거래{% endblock %}
+{% block meta_description %}원히어로 MagicSplit 매매 규칙·학습 카드·에이전트 사무실 (비공개){% endblock %}
+{% block body_class %}agent-office-page page-kiwoom-chasu{% endblock %}
+{% block extra_head %}
+<meta name="robots" content="noindex, nofollow">
+<link rel="stylesheet" href="{{ url_for('static', filename='agent_office.css') }}?v=20260520d">
+<link rel="stylesheet" href="{{ url_for('static', filename='kiwoom_chasu.css') }}?v=2">
+{% endblock %}
+
+{% block content %}
+<section class="agent-office-hero agent-office-hero--compact">
+  <h1>원히어로 차수거래 학습부</h1>
+  <p class="agent-office-lead">
+    <strong>원히어로(MagicSplit)</strong> 자동 차수매매 규칙(ATR·슬롯·익절)을 카드로 축적하고, 젬마가 검수·pack·Wiki에 반영합니다.
+    실매매는 <a href="https://stock.coupax.co.kr/wonhero/" rel="noopener">stock.coupax.co.kr/wonhero</a> 봇이 담당하며, 본 페이지는 규칙 학습·문서화만 합니다.
+  </p>
+  <p class="agent-office-meta">
+    <a href="{{ url_for('agent_office') }}">← 금융 사무실</a>
+    · <a href="{{ url_for('agent_office', unit='saju-learn') }}">사주 학습부</a>
+  </p>
+  <form method="post" action="{{ url_for('agent_office_logout') }}" class="office-logout-form">
+    {% include '_csrf_field.html' %}
+    <button type="submit" class="btn btn-gray btn-sm">사무실 나가기</button>
+  </form>
+</section>
+
+{% set office_tab_active = 'kiwoom' %}
+{% include '_office_division_tabs.html' %}
+
+<div class="agent-office-layout page-kiwoom-office">
+  <aside class="agent-office-roster" aria-label="차수거래 에이전트">
+    <h2>출근 명단</h2>
+    <ul class="roster-list" id="kiwoom-roster-list">
+      <li>
+        <button type="button" class="roster-btn is-active" data-filter-agent="" data-agent-id="">전체 대화</button>
+      </li>
+      {% for a in kiwoom_agents %}
+      <li class="roster-item" data-agent-id="{{ a.id }}">
+        <div class="roster-row">
+          <button type="button" class="roster-btn roster-btn--pick" data-filter-agent="{{ a.id }}" data-agent-id="{{ a.id }}">
+            <span class="roster-emoji">{{ a.emoji or '🤖' }}</span>
+            <span class="roster-name">{{ a.name }}</span>
+            <span class="roster-role">{{ a.role }}</span>
+          </button>
+          <label class="mode-on-switch{% if a.mode_on %} is-on{% endif %}" title="상시 작업 ON/OFF">
+            <input type="checkbox" class="agent-mode-on" data-agent-id="{{ a.id }}"
+                   {% if a.mode_on %}checked{% endif %}
+                   {% if not office_control_enabled %}disabled{% endif %}
+                   aria-label="{{ a.name }} ON/OFF">
+            <span class="mode-on-slider" aria-hidden="true"></span>
+            <span class="mode-on-label">{% if a.mode_on %}ON{% else %}OFF{% endif %}</span>
+          </label>
+        </div>
+        <p class="roster-cycle">주기: {{ a | agent_interval }}</p>
+        {% if a.last_run_at %}
+        <p class="roster-run">최근: {{ a.last_run_at }} · {{ a.last_status or '—' }}</p>
+        {% endif %}
+      </li>
+      {% endfor %}
+    </ul>
+  </aside>
+
+  <div class="agent-office-center">
+    <section class="office-instruct-panel" aria-label="작업 지시">
+      <h2>작업 지시</h2>
+      <p class="office-instruct-lead">차수 전략·손절·태그·pack·PII 점검 지시를 내리면 담당 젬마가 처리하고 대화 로그에 보고합니다.</p>
+      <form id="kiwoom-office-instruct-form" class="office-instruct-form" method="post" action="{{ url_for('agent_office_instruct_form') }}">
+        {% include '_csrf_field.html' %}
+        <input type="hidden" name="division" value="kiwoom-chasu">
+        <div class="instruct-row">
+          <label>담당
+            <select name="assign_to" id="kiwoom-instruct-assign-to">
+              <option value="all">전체</option>
+              {% for a in kiwoom_agents %}
+              <option value="{{ a.id }}">{{ a.emoji }} {{ a.name }}</option>
+              {% endfor %}
+            </select>
+          </label>
+          <label>우선순위
+            <select name="priority" id="kiwoom-instruct-priority">
+              <option value="normal">보통</option>
+              <option value="high">긴급</option>
+            </select>
+          </label>
+        </div>
+        <label class="instruct-title-label">제목 <span class="optional">(선택)</span>
+          <input type="text" name="title" id="kiwoom-instruct-title" maxlength="120" placeholder="한 줄 요약">
+        </label>
+        <label>지시 내용
+          <textarea id="kiwoom-instruct-body" name="body" rows="4" required maxlength="4000"
+                    placeholder="예: 대기 카드 손절·익절 태그를 점검하고 pack에 반영해 주세요."></textarea>
+        </label>
+        <button type="submit" class="btn btn-primary" id="kiwoom-instruct-submit">지시 전달</button>
+        <span class="instruct-hint" id="kiwoom-instruct-status">완료 시 <code>CURSOR_KIWOM_LEARN.md</code>·지시 목록에 반영됩니다.</span>
+      </form>
+      <div class="office-task-queue">
+        <h3>지시 목록 <span class="task-count" id="kiwoom-task-count">{{ kiwoom_tasks | length }}</span>
+          <span class="task-queue-hint">· {{ kiwoom_reserved_queue_label }}
+            <strong id="kiwoom-reserved-active">{{ kiwoom_reserved_active }}</strong>/{{ kiwoom_reserved_queue_target }}건</span></h3>
+        <ul class="task-list" id="kiwoom-task-list">
+          {% for t in kiwoom_tasks %}
+          <li class="task-item task-item--{{ t.status or 'queued' }}" data-task-id="{{ t.id }}">
+            <div class="task-item-head">
+              <span class="task-id">#{{ loop.index }}</span>
+              <span class="task-global-id">({{ t.id }})</span>
+              {% if t.source == 'reserved_kiwoom' %}<span class="task-reserved-badge">예약</span>{% endif %}
+              <span class="task-status">{{ task_status_labels.get(t.status, t.status) }}</span>
+              <time class="task-ts">{{ t.ts }}</time>
+            </div>
+            {% if t.title %}<p class="task-title">{{ t.title }}</p>{% endif %}
+            <p class="task-body">{{ t.body }}</p>
+            {% if t.result %}<pre class="task-result">{{ t.result }}</pre>{% endif %}
+          </li>
+          {% else %}
+          <li class="task-empty">직접 지시가 없습니다. 「예약」은 원히어로 차수거래 자동 학습 큐입니다.</li>
+          {% endfor %}
+        </ul>
+      </div>
+    </section>
+
+    <section class="kiwoom-learn-path-panel" id="kiwoom-learn-path-panel" aria-label="매매 방법 단계별 학습">
+      <h2>📚 매매 방법 학습 <span class="kiwoom-learn-path-pct" id="kiwoom-learn-path-pct">0%</span></h2>
+      <p class="wiki-panel-lead">
+        확정 카드를 <strong>1→9단계</strong> 순서로 읽고, 각 단계 <em>실습 체크</em> 후 원히어로에서 직접 해봅니다.
+        <a href="https://stock.coupax.co.kr/wonhero" target="_blank" rel="noopener">원히어로 대시보드 ↗</a>
+      </p>
+      <p class="kiwoom-learn-path-next" id="kiwoom-learn-path-next"></p>
+      <ol class="kiwoom-learn-path-list" id="kiwoom-learn-path-list"></ol>
+    </section>
+
+    <section class="kiwoom-account-panel" id="kiwoom-account-panel" aria-label="증권 계좌 현황">
+      <h2>💳 계좌 현황 <span class="kiwoom-account-stale{% if not kiwoom_account.stats.has_data or kiwoom_account.stats.stale %} is-stale{% endif %}" id="kiwoom-account-stale-badge">
+        {% if not kiwoom_account.stats.has_data %}미등록{% elif kiwoom_account.stats.stale %}갱신 필요{% else %}연동됨{% endif %}
+      </span></h2>
+      <p class="kiwoom-account-lead">계좌 젬마가 아는 <strong>증권사 잔고·평가·보유</strong>입니다. HTS/영웅문 수치를 입력하세요. <em>계좌번호는 끝 4자리만</em> 저장합니다.</p>
+      <div class="kiwoom-account-summary" id="kiwoom-account-summary">
+        {% if kiwoom_account.summary_lines %}
+        <ul class="kiwoom-account-summary-list">
+          {% for line in kiwoom_account.summary_lines %}
+          <li>{{ line }}</li>
+          {% endfor %}
+        </ul>
+        {% else %}
+        <p class="kiwoom-account-empty">아직 잔고가 등록되지 않았습니다.</p>
+        {% endif %}
+      </div>
+      <details class="kiwoom-account-form-wrap" open>
+        <summary>HTS 기준 잔고 갱신</summary>
+        <form id="kiwoom-account-form" class="kiwoom-account-form">
+          <div class="kiwoom-account-form-grid">
+            <label>증권사 <input type="text" name="broker" id="kiwoom-acct-broker" value="{{ kiwoom_account.snapshot.broker or '키움증권' }}" maxlength="40"></label>
+            <label>계좌 끝 4자리 <input type="text" name="account_mask" id="kiwoom-acct-mask" maxlength="8" placeholder="1234" value="{{ kiwoom_account.account.account_mask or '' }}"></label>
+            <label>예수금(원) <input type="text" name="deposit" id="kiwoom-acct-deposit" inputmode="numeric" value="{{ kiwoom_account.account.deposit or '' }}"></label>
+            <label>주문가능(원) <input type="text" name="orderable" id="kiwoom-acct-orderable" inputmode="numeric" value="{{ kiwoom_account.account.orderable or '' }}"></label>
+            <label>평가금액(원) <input type="text" name="eval_amount" id="kiwoom-acct-eval" inputmode="numeric" value="{{ kiwoom_account.account.eval_amount or '' }}"></label>
+            <label>평가손익(원) <input type="text" name="profit_loss" id="kiwoom-acct-pl" inputmode="numeric" value="{{ kiwoom_account.account.profit_loss or '' }}"></label>
+          </div>
+          <label>보유 종목 (JSON, 선택)
+            <textarea name="positions" id="kiwoom-acct-positions" rows="3" placeholder='[{"name":"KODEX200","code":"069500","qty":10,"eval":300000}]'>{% if kiwoom_account.positions %}{{ kiwoom_account.positions | tojson }}{% endif %}</textarea>
+          </label>
+          <label>메모 <input type="text" name="note" id="kiwoom-acct-note" maxlength="200" value="{{ kiwoom_account.snapshot.note or '' }}"></label>
+          <button type="submit" class="btn btn-primary btn-sm" id="kiwoom-account-save">계좌 젬마에 반영</button>
+          <span class="saju-learn-hint" id="kiwoom-account-status"></span>
+        </form>
+      </details>
+    </section>
+
+    <section class="kiwoom-rl-panel stock-rl-panel" aria-label="차수거래 강화학습">
+      <h2>🌀 강화학습 <small id="kiwoom-rl-ts"></small></h2>
+      <p class="wiki-panel-lead" id="kiwoom-rl-lead">카테고리·제목 밴딧 — 오류·확정 피드백으로 다음 카드 우선순위를 학습합니다.</p>
+      <div class="stock-rl-chips" id="kiwoom-rl-chips"></div>
+      <ul class="stock-rl-stats" id="kiwoom-rl-stats"></ul>
+    </section>
+
+    <section class="gemma-knowledge-panel office-knowledge-hub" aria-label="젬마 기억 차수거래" id="kiwoom-knowledge-hub">
+      <h2>젬마 기억 <span class="wiki-count" id="kiwoom-wiki-count">10_Wiki {{ kiwoom_knowledge.wiki_count }}</span></h2>
+      <p class="wiki-panel-lead">
+        도메인 <code>kiwoom-chasu</code> · 대기 <strong id="kiwoom-learn-pending">{{ kiwoom_learn.pending }}</strong> ·
+        확정 <strong id="kiwoom-learn-confirmed">{{ kiwoom_learn.confirmed }}</strong>
+        · <code>CURSOR_KIWOM_LEARN.md</code>
+      </p>
+      <div class="office-knowledge-tabs" role="tablist" aria-label="Wiki·학습 카드">
+        <button type="button" class="office-knowledge-tab" role="tab" data-tab="wiki" aria-selected="false">
+          전체글 <span class="office-knowledge-tab-count" id="kiwoom-tab-wiki-count">({{ kiwoom_knowledge.wiki_count }})</span>
+        </button>
+        <button type="button" class="office-knowledge-tab is-active" role="tab" data-tab="learn" aria-selected="true">
+          카드 학습 <span class="office-knowledge-tab-count" id="kiwoom-tab-learn-count">({{ kiwoom_learn.total }})</span>
+        </button>
+      </div>
+      <div class="office-scroll-panel office-knowledge-panel-pane" data-pane="wiki" role="tabpanel" hidden>
+        <ul class="wiki-card-list" id="kiwoom-wiki-card-list">
+          {% for w in kiwoom_knowledge.recent_wiki | reverse %}
+          <li class="wiki-card-item">
+            <span class="wiki-card-id">{{ w.id }}</span>
+            <strong class="wiki-card-title">{{ w.title }}</strong>
+            <p class="wiki-card-summary">{{ w.summary }}</p>
+          </li>
+          {% else %}
+          <li class="wiki-empty">확정 카드·작업 완료 시 Wiki에 쌓입니다.</li>
+          {% endfor %}
+        </ul>
+      </div>
+      <div class="office-scroll-panel office-knowledge-panel-pane is-active" data-pane="learn" role="tabpanel">
+        <div class="kiwoom-knowledge-compose" id="kiwoom-knowledge-compose">
+          <p class="wiki-panel-lead">카드는 이 패널에서 저장·확정되며 Wiki(<code>wiki_kiwoom_*</code>)에 반영됩니다.</p>
+          <form id="kiwoom-learn-form" class="saju-learn-form saju-learn-form--hub">
+            <label>제목 <input type="text" name="title" id="kiwoom-learn-title" maxlength="120" placeholder="예: 2차 분할 매수"></label>
+            <label>본문 <textarea name="body" id="kiwoom-learn-body" rows="4" required maxlength="24000"
+                      placeholder="1·2·3차, 손절·익절, 계좌. 계좌번호·API키는 넣지 마세요."></textarea></label>
+            <div class="kiwoom-compose-actions">
+              <button type="submit" class="btn btn-primary btn-sm" id="kiwoom-learn-submit">학습 카드 저장 (9젬마 검수)</button>
+              <button type="button" class="btn btn-gray btn-sm" id="kiwoom-compose-next-btn">갭 카드 1장 (제목 자동)</button>
+              <button type="button" class="btn btn-gray btn-sm" id="kiwoom-seed-error-cards-btn">오류 가이드 카드</button>
+              <span class="saju-learn-hint" id="kiwoom-learn-status"></span>
+            </div>
+          </form>
+        </div>
+        <ul class="saju-learn-card-list" id="kiwoom-learn-card-list">
+          {% for c in kiwoom_learn.cards %}
+          <li class="saju-learn-card saju-learn-card--{{ c.status }}" data-card-id="{{ c.id }}">
+            <div class="saju-learn-card-head">
+              <span class="saju-learn-card-id">#{{ c.id }}</span>
+              <span class="saju-learn-card-status">{{ '확정' if c.status == 'confirmed' else '검수 대기' }}</span>
+              <time>{{ c.ts }}</time>
+            </div>
+            <h4 class="saju-learn-card-title">{{ c.title }}</h4>
+            <p class="saju-learn-card-summary">{{ c.summary }}</p>
+            {% if c.tags %}<p class="saju-learn-card-tags">{% for t in c.tags %}<span>{{ t }}</span>{% endfor %}</p>{% endif %}
+            <details><summary>본문</summary><pre class="saju-learn-card-body">{{ c.body[:4000] }}</pre></details>
+            {% if c.wiki_id %}<p class="wiki-card-meta"><span class="wiki-card-link">[wiki] {{ c.wiki_id }}</span></p>{% endif %}
+            {% if c.status == 'pending' %}
+            <div class="saju-learn-card-actions">
+              <button type="button" class="btn btn-primary btn-sm btn-kiwoom-confirm" data-card-id="{{ c.id }}">확정</button>
+              <button type="button" class="btn btn-gray btn-sm btn-kiwoom-delete" data-card-id="{{ c.id }}">삭제</button>
+            </div>
+            {% endif %}
+          </li>
+          {% else %}
+          <li class="saju-learn-empty">전략·메모를 붙여 넣어 학습 카드를 만드세요.</li>
+          {% endfor %}
+        </ul>
+      </div>
+    </section>
+
+    <p class="saju-learn-actions">
+      <a class="btn btn-gray btn-sm" href="{{ url_for('agent_office_kiwoom_learn_export') }}">확정분 JSON</a>
+      <button type="button" class="btn btn-gray btn-sm" id="kiwoom-learn-refresh-btn">카드 새로고침</button>
+    </p>
+
+    <section class="agent-skills-panel" id="kiwoom-skills-panel" aria-label="에이전트 스킬">
+      <h2 id="kiwoom-skills-panel-title">에이전트 스킬</h2>
+      <p class="skills-panel-hint" id="kiwoom-skills-panel-hint">왼쪽 명단에서 에이전트를 선택하세요.</p>
+      <ul class="skills-list" id="kiwoom-skills-list"></ul>
+    </section>
+
+    <div class="agent-office-toolbar">
+      <button type="button" class="btn btn-gray btn-sm" id="kiwoom-office-refresh-btn">새로고침</button>
+      <span class="office-live" id="kiwoom-office-live-status">● 실시간</span>
+    </div>
+
+    <div class="agent-office-feed" id="kiwoom-agent-office-feed" aria-live="polite">
+      {% for m in kiwoom_messages %}
+      {% set from_a = roster.get(m.from) %}
+      <article class="office-msg office-msg--{{ m.kind or 'task' }}" data-msg-id="{{ m.id }}" data-from="{{ m.from }}" data-kind="{{ m.kind or 'task' }}">
+        <header class="office-msg-head">
+          <span class="office-msg-avatar">{{ (from_a.emoji if from_a else '🤖') }}</span>
+          <span class="office-msg-from">{{ (from_a.name if from_a else m.from) }}</span>
+          <span class="office-msg-kind">{{ kind_labels.get(m.kind, m.kind) }}</span>
+          <time class="office-msg-ts">{{ m.ts }}</time>
+        </header>
+        <p class="office-msg-text">{{ m.text }}</p>
+      </article>
+      {% else %}
+      <p class="office-empty">아직 원히어로 차수거래 로그가 없습니다.</p>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+<article class="kiwoom-panel kiwoom-panel--warn kiwoom-disclaimer">
+  <h2>면책</h2>
+  <p>운영·기록용이며 투자·세무·법률 자문이 아닙니다. API 키·계좌번호·비밀번호는 저장하지 마세요.
+    <a href="https://www.kiwoom.com/h/customer/download/VOpenApiInfoView" target="_blank" rel="noopener noreferrer">키움 Open API+</a></p>
+</article>
+
+<script>
+  window.KIWOM_OFFICE_AGENTS = {{ kiwoom_agents | tojson }};
+  window.AGENT_OFFICE_CONTROL_ENABLED = {{ office_control_enabled | tojson }};
+  window.AGENT_OFFICE_KIND_LABELS = {{ kind_labels | tojson }};
+  window.CSRF_TOKEN = {{ csrf_token | tojson }};
+</script>
+<script src="{{ url_for('static', filename='agent_office.js') }}?v=20260520f" defer></script>
+<script src="{{ url_for('static', filename='kiwoom_office.js') }}?v=1" defer></script>
+{% endblock %}

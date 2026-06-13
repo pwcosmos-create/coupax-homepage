@@ -8,6 +8,7 @@
 <div class="form-wrap">
   <h2>글쓰기</h2>
   <form method="post" action="{{ url_for('write') }}">
+    {% include '_csrf_field.html' %}
     <div class="form-row">
       <label>제목</label>
       <input type="text" name="title" required maxlength="100" placeholder="제목을 입력하세요.">

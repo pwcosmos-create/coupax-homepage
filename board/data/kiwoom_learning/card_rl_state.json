@@ -1,0 +1,875 @@
+{
+  "version": 2,
+  "epsilon": 0.15,
+  "learning_rate": 0.1,
+  "category_weights": {
+    "risk": 0.8079999999999998,
+    "account": 0.35,
+    "ops": 0.8559999999999999,
+    "etf": 0.988
+  },
+  "title_bias": {
+    "원히어로_MagicSplit_정의": 0.025,
+    "1번_계좌_1차_수동_매수_잔고_인식": 0.025,
+    "1차_2차_등록_15초_후_즉시_매수": 0.025,
+    "3차_이후_추가매수_ATR_buy_gaps": 0.025,
+    "ATR_자동_설정_국내_해외": 0.025,
+    "슬롯별_익절_sell_pcts_수수료_버퍼": 0.025,
+    "합산_이익_게이트_get_account_avg_profit": 0.025,
+    "손절_자동매도_없음_익절만": 0.025,
+    "멀티_계좌_cascade_1번_2번_이전": 0.025,
+    "봇_루프_장중_interval_15초": 0.025,
+    "당일_익절_종목_재등록_스킵": 0.025,
+    "잔고_reconcile_슬롯_검증": 0.025,
+    "학습부_지식_구조_원히어로_전용": 0.025,
+    "카드제작_가이드_본문_형식": 0.025,
+    "카드제작_가이드_pii": 0.025,
+    "자동_카드_제작_실패_복구": 0.025,
+    "카드제작_가이드_too_short": 0.025,
+    "카드제작_가이드_duplicate": 0.025,
+    "카드제작_가이드_tag_missing": 0.025,
+    "카드제작_가이드_confirm_failed": 0.025,
+    "ATR_국면_보정_gap_배율": 0.025,
+    "ATR_익절_산식__atr_to_sell_KR_튜닝": 0.025,
+    "종목_enabled_atr_auto_스위치": 0.025,
+    "최대_슬롯_max_slot_수량_buy_qtys": 0.025,
+    "KR_스캘프_모드_instant_2차_제외": 0.025,
+    "멀티_계좌_순차_매매_staggered": 0.025,
+    "cascade_trigger_loss_숫자_항상_null_": 0.025,
+    "매수_매도_쿨다운_API_재시도": 0.025,
+    "익절_수수료_버퍼_ETF_국내_해외": 0.025,
+    "잔고_스캘프_후보_ATR_BAL": 0.025,
+    "장중_시간_국내_08_00_15_40": 0.025,
+    "해외_US_KIS_차수_비활성_옵션": 0.025,
+    "self_heal_수량_수동_전량매도": 0.025,
+    "RE_ENTRY_1차_슬롯_재진입": 0.025,
+    "대시보드_ATR_버튼_설정_저장": 0.025,
+    "알림_로그_bot_log_텔레그램": 0.025,
+    "카드제작_가이드_too_short_본문_30자_미만": 0.025,
+    "카드제작_가이드_too_short_제목_본문_공백": 0.025,
+    "카드제작_가이드_pii_장문자_번호": 0.025,
+    "카드제작_가이드_pii_API키_비밀번호": 0.025,
+    "카드제작_가이드_tag_missing_차수_슬롯_없음": 0.025,
+    "카드제작_가이드_tag_missing_익절_ATR_없음": 0.025,
+    "카드제작_가이드_tag_missing_차수_리스크_둘_다_부족": 0.025,
+    "카드제작_가이드_duplicate_제목_중복": 0.025,
+    "카드제작_가이드_duplicate_catalog_seed_중복": 0.025,
+    "카드제작_가이드_confirm_failed_확정_실패": 0.025,
+    "카드제작_가이드_confirm_failed_협업_제작_실패": 0.025,
+    "카드제작_가이드_unknown_형식_검수": 0.025,
+    "카드제작_가이드_meta_card_fail_오류_메타_카드_생성_실패": 0.025,
+    "카드제작_가이드_RL_autofill_제작_확정_루프": 0.025,
+    "카드제작_가이드_갭_탐지___error_learn_____tag__": 0.025,
+    "카드제작_가이드_제목_자동_v2_접미": 0.025,
+    "카드제작_가이드_사무실_붙여넣기_검수": 0.025,
+    "매매오류_2차_등록_15초_미만": 0.025,
+    "매매오류_2차_스캘프_모드_차단": 0.025,
+    "매매오류_2차_account_tag_다계좌": 0.025,
+    "매매오류_같은_루프_1차_직후_추가매수_스킵": 0.025,
+    "매매오류_3차_buy_gaps_미충족": 0.025,
+    "매매오류_익절_sell_pcts_버퍼": 0.025,
+    "매매오류_손절_자동매도_없음": 0.025,
+    "매매오류_reconcile_잔고_불일치": 0.025,
+    "매매오류_잔고_주문_거절": 0.025,
+    "매매오류_장중_쿨다운": 0.025,
+    "매매오류_cascade_multi_trigger": 0.025,
+    "매매오류_ATR_갱신_창": 0.025,
+    "매매오류_was_sold_today_재진입": 0.025,
+    "매매원칙_분할_슬롯": 0.025,
+    "매매원칙_1차_HTS_수동": 0.025,
+    "매매원칙_룰_우선_감정_배제": 0.025,
+    "매매원칙_익절만_자동_청산": 0.025,
+    "매매원칙_ATR_변동성_맞춤": 0.025,
+    "매매원칙_합산_이익_후_익절": 0.025,
+    "매매원칙_3차부터_추격_금지": 0.025,
+    "매매원칙_1번_계좌_메인": 0.025,
+    "매매원칙_당일_라운드_제한": 0.025,
+    "매매원칙_cascade_손실_이전": 0.025,
+    "매매원칙_잔고_DB_일치": 0.025,
+    "매매원칙_학습_후_실전": 0.025,
+    "매매원칙_수수료_버퍼": 0.025,
+    "매매원칙_종목_설정_고정": 0.025,
+    "매매원칙_2차_3차_역할_분리": 0.025,
+    "매매원칙_목차_연결": 0.025,
+    "매매원칙_무조건_익절": 0.025,
+    "원히어로_vs_원키스US_매매_방법_차이": 0.025,
+    "웹리서치_그리드_슬롯_고정_간격_vs_ATR_가변_간격": 0.025
+  },
+  "history": [
+    {
+      "ts": "2026-06-02 12:48",
+      "title": "원히어로·MagicSplit 정의",
+      "category": "risk",
+      "card_id": 1,
+      "reward": 1.0,
+      "success": true,
+      "source": "confirm"
+    },
+    {
+      "ts": "2026-06-02 12:48",
+      "title": "1번 계좌 1차 — 수동 매수·잔고 인식",
+      "category": "account",
+      "card_id": 2,
+      "reward": 1.0,
+      "success": true,
+      "source": "confirm"
+    },
+    {
+      "ts": "2026-06-02 12:48",
+      "title": "1차→2차 — 등록 15초 후 즉시 매수",
+      "category": "account",
+      "card_id": 3,
+      "reward": 1.0,
+      "success": true,
+      "source": "confirm"
+    },
+    {
+      "ts": "2026-06-02 12:48",
+      "title": "3차 이후 추가매수 — ATR buy_gaps",
+      "category": "account",
+      "card_id": 4,
+      "reward": 1.0,
+      "success": true,
+      "source": "confirm"
+    },
+    {
+      "ts": "2026-06-02 12:48",
+      "title": "ATR 자동 설정 — 국내·해외",
+      "category": "risk",
+      "card_id": 5,
+      "reward": 1.0,
+      "success": true,
+      "source": "confirm"
+    },
+    {
+      "ts": "2026-06-02 12:48",
+      "title": "슬롯별 익절 — sell_pcts·수수료 버퍼",
+      "category": "account",
+      "card_id": 6,
+      "reward": 1.0,
+      "success": true,
+      "source": "confirm"
+    },
+    {
+      "ts": "2026-06-02 12:48",
+      "title": "합산 이익 게이트 — get_account_avg_profit",
+      "category": "account",
+      "card_id": 7,
+      "reward": 1.0,
+      "success": true,
+      "source": "confirm"
+    },
+    {
+      "ts": "2026-06-02 12:48",
+      "title": "손절 자동매도 없음 — 익절만",
+      "category": "risk",
+      "card_id": 8,
+      "reward": 1.0,
+      "success": true,
+      "source": "confirm"
+    },
+    {
+      "ts": "2026-06-02 12:48",
+      "title": "멀티 계좌 cascade — 1번→2번 이전",
+      "category": "account",
+      "card_id": 9,
+      "reward": 1.0,
+      "success": true,
+      "source": "confirm"
+    },
+    {
+      "ts": "2026-06-02 12:48",
+      "title": "봇 루프·장중·interval 15초",
+      "category": "risk",
+      "card_id": 10,
+      "reward": 1.0,
+      "success": true,
+      "source": "confirm"
+    },
+    {
+      "ts": "2026-06-02 12:48",
+      "title": "당일 익절 종목 재등록 스킵",
+      "category": "risk",
+      "card_id": 11,
+      "reward": 1.0,
+      "success": true,
+      "source": "confirm"
+    },
+    {
+      "ts": "2026-06-02 12:48",
+      "title": "잔고 reconcile·슬롯 검증",
+      "category": "ops",
+      "card_id": 12,
+      "reward": 1.0,
+      "success": true,
+      "source": "confirm"
+    },
+    {
+      "ts": "2026-06-02 12:48",
+      "title": "학습부 지식 구조 — 원히어로 전용",
+      "category": "risk",
+      "card_id": 13,
+      "reward": 1.0,
+      "success": true,
+      "source": "confirm"
+    },
+    {
+      "ts": "2026-06-02 12:48",
+      "title": "카드제작 가이드 · 본문·형식",
+      "category": "account",
+      "card_id": 14,
+      "reward": 1.0,
+      "success": true,
+      "source": "confirm"
+    },
+    {
+      "ts": "2026-06-02 12:48",
+      "title": "카드제작 가이드 · pii",
+      "category": "account",
+      "card_id": 15,
+      "reward": 1.0,
+      "success": true,
+      "source": "confirm"
+    },
+    {
+      "ts": "2026-06-02 12:48",
+      "title": "자동 카드 제작 실패 복구",
+      "category": "ops",
+      "card_id": 16,
+      "reward": 1.0,
+      "success": true,
+      "source": "confirm"
+    },
+    {
+      "ts": "2026-06-02 12:48",
+      "title": "카드제작 가이드 · too_short",
+      "category": "risk",
+      "card_id": 17,
+      "reward": 1.0,
+      "success": true,
+      "source": "confirm"
+    },
+    {
+      "ts": "2026-06-02 12:48",
+      "title": "카드제작 가이드 · duplicate",
+      "category": "ops",
+      "card_id": 18,
+      "reward": 1.0,
+      "success": true,
+      "source": "confirm"
+    },
+    {
+      "ts": "2026-06-02 12:48",
+      "title": "카드제작 가이드 · tag_missing",
+      "category": "account",
+      "card_id": 19,
+      "reward": 1.0,
+      "success": true,
+      "source": "confirm"
+    },
+    {
+      "ts": "2026-06-02 12:48",
+      "title": "카드제작 가이드 · confirm_failed",
+      "category": "risk",
+      "card_id": 20,
+      "reward": 1.0,
+      "success": true,
+      "source": "confirm"
+    },
+    {
+      "ts": "2026-06-02 13:29",
+      "title": "ATR 국면 보정 — gap 배율",
+      "category": "ops",
+      "card_id": 21,
+      "reward": 1.0,
+      "success": true,
+      "source": "confirm"
+    },
+    {
+      "ts": "2026-06-02 13:29",
+      "title": "ATR 익절 산식 — _atr_to_sell·KR 튜닝",
+      "category": "risk",
+      "card_id": 22,
+      "reward": 1.0,
+      "success": true,
+      "source": "confirm"
+    },
+    {
+      "ts": "2026-06-02 13:29",
+      "title": "종목 enabled·atr_auto 스위치",
+      "category": "ops",
+      "card_id": 23,
+      "reward": 1.0,
+      "success": true,
+      "source": "confirm"
+    },
+    {
+      "ts": "2026-06-02 13:29",
+      "title": "최대 슬롯 max_slot·수량 buy_qtys",
+      "category": "ops",
+      "card_id": 24,
+      "reward": 1.0,
+      "success": true,
+      "source": "confirm"
+    },
+    {
+      "ts": "2026-06-02 13:29",
+      "title": "KR 스캘프 모드 — instant 2차 제외",
+      "category": "risk",
+      "card_id": 25,
+      "reward": 1.0,
+      "success": true,
+      "source": "confirm"
+    },
+    {
+      "ts": "2026-06-02 13:29",
+      "title": "멀티 계좌 순차 매매 — staggered",
+      "category": "account",
+      "card_id": 26,
+      "reward": 1.0,
+      "success": true,
+      "source": "confirm"
+    },
+    {
+      "ts": "2026-06-02 13:29",
+      "title": "cascade trigger_loss — 숫자·항상(null)",
+      "category": "account",
+      "card_id": 27,
+      "reward": 1.0,
+      "success": true,
+      "source": "confirm"
+    },
+    {
+      "ts": "2026-06-02 13:29",
+      "title": "매수·매도 쿨다운·API 재시도",
+      "category": "account",
+      "card_id": 28,
+      "reward": 1.0,
+      "success": true,
+      "source": "confirm"
+    },
+    {
+      "ts": "2026-06-02 13:29",
+      "title": "익절 수수료 버퍼 — ETF·국내·해외",
+      "category": "etf",
+      "card_id": 29,
+      "reward": 1.0,
+      "success": true,
+      "source": "confirm"
+    },
+    {
+      "ts": "2026-06-02 13:29",
+      "title": "잔고 스캘프 후보 — ATR-BAL",
+      "category": "risk",
+      "card_id": 30,
+      "reward": 1.0,
+      "success": true,
+      "source": "confirm"
+    },
+    {
+      "ts": "2026-06-02 13:29",
+      "title": "장중 시간 — 국내 08:00~15:40",
+      "category": "risk",
+      "card_id": 31,
+      "reward": 1.0,
+      "success": true,
+      "source": "confirm"
+    },
+    {
+      "ts": "2026-06-02 13:29",
+      "title": "해외 US — KIS·차수 비활성 옵션",
+      "category": "risk",
+      "card_id": 32,
+      "reward": 1.0,
+      "success": true,
+      "source": "confirm"
+    },
+    {
+      "ts": "2026-06-02 13:29",
+      "title": "self-heal — 수량·수동 전량매도",
+      "category": "ops",
+      "card_id": 33,
+      "reward": 1.0,
+      "success": true,
+      "source": "confirm"
+    },
+    {
+      "ts": "2026-06-02 13:29",
+      "title": "RE_ENTRY·1차 슬롯 재진입",
+      "category": "risk",
+      "card_id": 34,
+      "reward": 1.0,
+      "success": true,
+      "source": "confirm"
+    },
+    {
+      "ts": "2026-06-02 13:29",
+      "title": "대시보드 ATR 버튼·설정 저장",
+      "category": "ops",
+      "card_id": 35,
+      "reward": 1.0,
+      "success": true,
+      "source": "confirm"
+    },
+    {
+      "ts": "2026-06-02 13:29",
+      "title": "알림·로그 — bot_log·텔레그램",
+      "category": "account",
+      "card_id": 36,
+      "reward": 1.0,
+      "success": true,
+      "source": "confirm"
+    },
+    {
+      "ts": "2026-06-04 15:53",
+      "title": "카드제작 가이드 · too_short — 본문 30자 미만",
+      "category": "account",
+      "card_id": 37,
+      "reward": 1.0,
+      "success": true,
+      "source": "confirm"
+    },
+    {
+      "ts": "2026-06-04 15:53",
+      "title": "카드제작 가이드 · too_short — 제목·본문 공백",
+      "category": "account",
+      "card_id": 38,
+      "reward": 1.0,
+      "success": true,
+      "source": "confirm"
+    },
+    {
+      "ts": "2026-06-04 15:53",
+      "title": "카드제작 가이드 · pii — 장문자 번호",
+      "category": "account",
+      "card_id": 39,
+      "reward": 1.0,
+      "success": true,
+      "source": "confirm"
+    },
+    {
+      "ts": "2026-06-04 15:53",
+      "title": "카드제작 가이드 · pii — API키·비밀번호",
+      "category": "account",
+      "card_id": 40,
+      "reward": 1.0,
+      "success": true,
+      "source": "confirm"
+    },
+    {
+      "ts": "2026-06-04 15:53",
+      "title": "카드제작 가이드 · tag_missing — 차수·슬롯 없음",
+      "category": "account",
+      "card_id": 41,
+      "reward": 1.0,
+      "success": true,
+      "source": "confirm"
+    },
+    {
+      "ts": "2026-06-04 15:53",
+      "title": "카드제작 가이드 · tag_missing — 익절·ATR 없음",
+      "category": "account",
+      "card_id": 42,
+      "reward": 1.0,
+      "success": true,
+      "source": "confirm"
+    },
+    {
+      "ts": "2026-06-04 15:53",
+      "title": "카드제작 가이드 · tag_missing — 차수·리스크 둘 다 부족",
+      "category": "account",
+      "card_id": 43,
+      "reward": 1.0,
+      "success": true,
+      "source": "confirm"
+    },
+    {
+      "ts": "2026-06-04 15:53",
+      "title": "카드제작 가이드 · duplicate — 제목 중복",
+      "category": "ops",
+      "card_id": 44,
+      "reward": 1.0,
+      "success": true,
+      "source": "confirm"
+    },
+    {
+      "ts": "2026-06-04 15:53",
+      "title": "카드제작 가이드 · duplicate — catalog_seed 중복",
+      "category": "ops",
+      "card_id": 45,
+      "reward": 1.0,
+      "success": true,
+      "source": "confirm"
+    },
+    {
+      "ts": "2026-06-04 15:53",
+      "title": "카드제작 가이드 · confirm_failed — 확정 실패",
+      "category": "account",
+      "card_id": 46,
+      "reward": 1.0,
+      "success": true,
+      "source": "confirm"
+    },
+    {
+      "ts": "2026-06-04 15:53",
+      "title": "카드제작 가이드 · confirm_failed — 협업 제작 실패",
+      "category": "account",
+      "card_id": 47,
+      "reward": 1.0,
+      "success": true,
+      "source": "confirm"
+    },
+    {
+      "ts": "2026-06-04 15:53",
+      "title": "카드제작 가이드 · unknown — 형식·검수",
+      "category": "account",
+      "card_id": 48,
+      "reward": 1.0,
+      "success": true,
+      "source": "confirm"
+    },
+    {
+      "ts": "2026-06-04 15:53",
+      "title": "카드제작 가이드 · meta_card_fail — 오류 메타 카드 생성 실패",
+      "category": "ops",
+      "card_id": 49,
+      "reward": 1.0,
+      "success": true,
+      "source": "confirm"
+    },
+    {
+      "ts": "2026-06-04 15:53",
+      "title": "카드제작 가이드 · RL autofill — 제작·확정 루프",
+      "category": "account",
+      "card_id": 50,
+      "reward": 1.0,
+      "success": true,
+      "source": "confirm"
+    },
+    {
+      "ts": "2026-06-04 15:53",
+      "title": "카드제작 가이드 · 갭 탐지 — __error_learn__ · __tag__",
+      "category": "account",
+      "card_id": 51,
+      "reward": 1.0,
+      "success": true,
+      "source": "confirm"
+    },
+    {
+      "ts": "2026-06-04 15:53",
+      "title": "카드제작 가이드 · 제목 자동 · v2 접미",
+      "category": "account",
+      "card_id": 52,
+      "reward": 1.0,
+      "success": true,
+      "source": "confirm"
+    },
+    {
+      "ts": "2026-06-04 15:53",
+      "title": "카드제작 가이드 · 사무실 붙여넣기 — 검수",
+      "category": "account",
+      "card_id": 53,
+      "reward": 1.0,
+      "success": true,
+      "source": "confirm"
+    },
+    {
+      "ts": "2026-06-04 15:53",
+      "title": "매매오류 · 2차 — 등록 15초 미만",
+      "category": "account",
+      "card_id": 54,
+      "reward": 1.0,
+      "success": true,
+      "source": "confirm"
+    },
+    {
+      "ts": "2026-06-04 15:53",
+      "title": "매매오류 · 2차 — 스캘프 모드 차단",
+      "category": "account",
+      "card_id": 55,
+      "reward": 1.0,
+      "success": true,
+      "source": "confirm"
+    },
+    {
+      "ts": "2026-06-04 15:53",
+      "title": "매매오류 · 2차 — account_tag·다계좌",
+      "category": "account",
+      "card_id": 56,
+      "reward": 1.0,
+      "success": true,
+      "source": "confirm"
+    },
+    {
+      "ts": "2026-06-04 15:53",
+      "title": "매매오류 · 같은 루프 1차 직후 추가매수 스킵",
+      "category": "account",
+      "card_id": 57,
+      "reward": 1.0,
+      "success": true,
+      "source": "confirm"
+    },
+    {
+      "ts": "2026-06-04 15:53",
+      "title": "매매오류 · 3차+ buy_gaps 미충족",
+      "category": "account",
+      "card_id": 58,
+      "reward": 1.0,
+      "success": true,
+      "source": "confirm"
+    },
+    {
+      "ts": "2026-06-04 15:53",
+      "title": "매매오류 · 익절 sell_pcts·버퍼",
+      "category": "account",
+      "card_id": 59,
+      "reward": 1.0,
+      "success": true,
+      "source": "confirm"
+    },
+    {
+      "ts": "2026-06-04 15:53",
+      "title": "매매오류 · 손절 자동매도 없음",
+      "category": "account",
+      "card_id": 60,
+      "reward": 1.0,
+      "success": true,
+      "source": "confirm"
+    },
+    {
+      "ts": "2026-06-04 15:53",
+      "title": "매매오류 · reconcile·잔고 불일치",
+      "category": "account",
+      "card_id": 61,
+      "reward": 1.0,
+      "success": true,
+      "source": "confirm"
+    },
+    {
+      "ts": "2026-06-04 15:53",
+      "title": "매매오류 · 잔고·주문 거절",
+      "category": "account",
+      "card_id": 62,
+      "reward": 1.0,
+      "success": true,
+      "source": "confirm"
+    },
+    {
+      "ts": "2026-06-04 15:53",
+      "title": "매매오류 · 장중·쿨다운",
+      "category": "account",
+      "card_id": 63,
+      "reward": 1.0,
+      "success": true,
+      "source": "confirm"
+    },
+    {
+      "ts": "2026-06-04 15:53",
+      "title": "매매오류 · cascade·multi_trigger",
+      "category": "account",
+      "card_id": 64,
+      "reward": 1.0,
+      "success": true,
+      "source": "confirm"
+    },
+    {
+      "ts": "2026-06-04 15:53",
+      "title": "매매오류 · ATR 갱신 창",
+      "category": "account",
+      "card_id": 65,
+      "reward": 1.0,
+      "success": true,
+      "source": "confirm"
+    },
+    {
+      "ts": "2026-06-04 15:53",
+      "title": "매매오류 · was_sold_today·재진입",
+      "category": "account",
+      "card_id": 66,
+      "reward": 1.0,
+      "success": true,
+      "source": "confirm"
+    },
+    {
+      "ts": "2026-06-04 16:16",
+      "title": "매매원칙 · 분할·슬롯",
+      "category": "account",
+      "card_id": 67,
+      "reward": 1.0,
+      "success": true,
+      "source": "confirm"
+    },
+    {
+      "ts": "2026-06-04 16:16",
+      "title": "매매원칙 · 1차 HTS 수동",
+      "category": "account",
+      "card_id": 68,
+      "reward": 1.0,
+      "success": true,
+      "source": "confirm"
+    },
+    {
+      "ts": "2026-06-04 16:16",
+      "title": "매매원칙 · 룰 우선·감정 배제",
+      "category": "account",
+      "card_id": 69,
+      "reward": 1.0,
+      "success": true,
+      "source": "confirm"
+    },
+    {
+      "ts": "2026-06-04 16:16",
+      "title": "매매원칙 · 익절만 자동 청산",
+      "category": "risk",
+      "card_id": 70,
+      "reward": 1.0,
+      "success": true,
+      "source": "confirm"
+    },
+    {
+      "ts": "2026-06-04 16:16",
+      "title": "매매원칙 · ATR 변동성 맞춤",
+      "category": "account",
+      "card_id": 71,
+      "reward": 1.0,
+      "success": true,
+      "source": "confirm"
+    },
+    {
+      "ts": "2026-06-04 16:16",
+      "title": "매매원칙 · 합산 이익 후 익절",
+      "category": "account",
+      "card_id": 72,
+      "reward": 1.0,
+      "success": true,
+      "source": "confirm"
+    },
+    {
+      "ts": "2026-06-04 16:16",
+      "title": "매매원칙 · 3차부터 추격 금지",
+      "category": "account",
+      "card_id": 73,
+      "reward": 1.0,
+      "success": true,
+      "source": "confirm"
+    },
+    {
+      "ts": "2026-06-04 16:16",
+      "title": "매매원칙 · 1번 계좌 메인",
+      "category": "account",
+      "card_id": 74,
+      "reward": 1.0,
+      "success": true,
+      "source": "confirm"
+    },
+    {
+      "ts": "2026-06-04 16:16",
+      "title": "매매원칙 · 당일 라운드 제한",
+      "category": "account",
+      "card_id": 75,
+      "reward": 1.0,
+      "success": true,
+      "source": "confirm"
+    },
+    {
+      "ts": "2026-06-04 16:16",
+      "title": "매매원칙 · cascade 손실 이전",
+      "category": "account",
+      "card_id": 76,
+      "reward": 1.0,
+      "success": true,
+      "source": "confirm"
+    },
+    {
+      "ts": "2026-06-04 16:16",
+      "title": "매매원칙 · 잔고·DB 일치",
+      "category": "account",
+      "card_id": 77,
+      "reward": 1.0,
+      "success": true,
+      "source": "confirm"
+    },
+    {
+      "ts": "2026-06-04 16:16",
+      "title": "매매원칙 · 학습 후 실전",
+      "category": "account",
+      "card_id": 78,
+      "reward": 1.0,
+      "success": true,
+      "source": "confirm"
+    },
+    {
+      "ts": "2026-06-04 16:16",
+      "title": "매매원칙 · 수수료·버퍼",
+      "category": "account",
+      "card_id": 79,
+      "reward": 1.0,
+      "success": true,
+      "source": "confirm"
+    },
+    {
+      "ts": "2026-06-04 16:16",
+      "title": "매매원칙 · 종목·설정 고정",
+      "category": "account",
+      "card_id": 80,
+      "reward": 1.0,
+      "success": true,
+      "source": "confirm"
+    },
+    {
+      "ts": "2026-06-04 16:16",
+      "title": "매매원칙 · 2차·3차 역할 분리",
+      "category": "account",
+      "card_id": 81,
+      "reward": 1.0,
+      "success": true,
+      "source": "confirm"
+    },
+    {
+      "ts": "2026-06-04 16:16",
+      "title": "매매원칙 · 목차·연결",
+      "category": "account",
+      "card_id": 82,
+      "reward": 1.0,
+      "success": true,
+      "source": "confirm"
+    },
+    {
+      "ts": "2026-06-04 16:36",
+      "title": "매매원칙 · 무조건 익절",
+      "category": "risk",
+      "card_id": 83,
+      "reward": 1.0,
+      "success": true,
+      "source": "confirm"
+    },
+    {
+      "ts": "2026-06-04 22:27",
+      "title": "원히어로 vs 원키스US·매매 방법 차이",
+      "category": "ops",
+      "card_id": 87,
+      "reward": 1.0,
+      "success": true,
+      "source": "confirm"
+    },
+    {
+      "ts": "2026-06-05 19:55",
+      "title": "웹리서치·그리드 슬롯 — 고정 간격 vs ATR 가변 간격",
+      "category": "account",
+      "card_id": 88,
+      "reward": 1.0,
+      "success": true,
+      "source": "confirm"
+    }
+  ],
+  "stats": {
+    "runs": 0,
+    "train_steps": 0,
+    "added": 0,
+    "pass": 85,
+    "fail": 0,
+    "confirm_rewards": 85,
+    "error_penalties": 0
+  },
+  "updated_at": "2026-06-05 19:55"
+}

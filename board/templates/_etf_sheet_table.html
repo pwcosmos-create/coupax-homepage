@@ -1,0 +1,149 @@
+  {% if brand_summaries %}
+  <section class="etf-brand-summary" aria-label="브랜드별 요약">
+    <h3 class="etf-brand-summary-title">브랜드별 요약 <span class="etf-brand-summary-hint">(재가공 집계)</span></h3>
+    <div class="etf-brand-grid">
+      {% for s in brand_summaries %}
+      <article class="etf-brand-card">
+        <h4 class="etf-brand-card-name">{{ s.brand }}</h4>
+        <dl class="etf-brand-stats">
+          <div><dt>종목</dt><dd>{{ s.count }}개</dd></div>
+          <div><dt>시총 합</dt><dd>{{ s.mcap_sum_label }}</dd></div>
+          <div><dt>평균 누적 배당수익률</dt><dd>{% if s.avg_yield_pct is not none %}{{ '%.2f'|format(s.avg_yield_pct) }}%{% else %}—{% endif %}</dd></div>
+          <div><dt>월평균 분배</dt><dd>{% if s.avg_monthly_div is not none %}{{ s.avg_monthly_div|intcomma }}원{% else %}—{% endif %}</dd></div>
+        </dl>
+      </article>
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+
+  <div id="etf-sheet-tools" class="etf-sheet-tools" data-year="{{ dividend_sheet.year }}">
+    <div class="etf-sheet-filters">
+      <label class="etf-filter-item">
+        <span>검색</span>
+        <input type="search" id="etf-filter-q" placeholder="코드·종목명·브랜드" autocomplete="off">
+      </label>
+      <label class="etf-filter-item">
+        <span>구분</span>
+        <select id="etf-filter-scope">
+          <option value="">전체</option>
+          <option value="domestic">국내 ETF</option>
+          <option value="overseas">해외 ETF</option>
+        </select>
+      </label>
+      <label class="etf-filter-item">
+        <span>주기</span>
+        <select id="etf-filter-cycle">
+          <option value="">전체</option>
+          <option value="월배">월배</option>
+          <option value="월중">월중</option>
+          <option value="월말">월말</option>
+        </select>
+      </label>
+      <label class="etf-filter-item">
+        <span>시총</span>
+        <select id="etf-filter-mcap">
+          <option value="0">전체</option>
+          <option value="500">500억+</option>
+          <option value="1000">1,000억+</option>
+          <option value="3000">3,000억+</option>
+        </select>
+      </label>
+      <label class="etf-filter-item">
+        <span>누적 배당수익률</span>
+        <select id="etf-filter-yield">
+          <option value="0">전체</option>
+          <option value="3">3%+</option>
+          <option value="5">5%+</option>
+          <option value="8">8%+</option>
+        </select>
+      </label>
+      <button type="button" class="btn btn-gray btn-sm" id="etf-filter-reset">초기화</button>
+    </div>
+    <div class="etf-sheet-actions">
+      <span id="etf-filter-count" class="etf-filter-count"></span>
+      <a href="{{ url_for('etf_monthly_csv') }}" class="btn btn-gray btn-sm">전체 CSV</a>
+      <button type="button" class="btn btn-primary btn-sm" id="etf-csv-filtered">필터 결과 CSV</button>
+    </div>
+  </div>
+
+  <div class="table-scroll sheet-scroll" tabindex="0" aria-label="월배당 ETF 표, 가로·세로 스크롤">
+    <table class="board-table sheet-table">
+      <thead>
+        <tr class="sheet-head-group">
+          <th colspan="2" class="sheet-freeze sheet-freeze-group">ETF 정보</th>
+          <th colspan="4">기준·시총</th>
+          <th colspan="14" class="sheet-month-zone">{{ dividend_sheet.year }}년 · 월별 분배금</th>
+          <th colspan="4">참고 지표</th>
+        </tr>
+        <tr class="sheet-head-cols">
+          <th class="center sheet-col-code sheet-freeze sheet-freeze--code">코드</th>
+          <th class="sheet-col-name sheet-freeze sheet-freeze--name">ETF명</th>
+          <th class="center">주기</th>
+          <th class="center">상장일</th>
+          <th class="center">시가총액</th>
+          <th class="center">총 보수</th>
+          <th class="center sheet-col-m sheet-month-start">1월</th>
+          <th class="center sheet-col-m">2월</th>
+          <th class="center sheet-col-m">3월</th>
+          <th class="center sheet-col-m">4월</th>
+          <th class="center sheet-col-m">5월</th>
+          <th class="center sheet-col-m">6월</th>
+          <th class="center sheet-col-m">7월</th>
+          <th class="center sheet-col-m">8월</th>
+          <th class="center sheet-col-m">9월</th>
+          <th class="center sheet-col-m">10월</th>
+          <th class="center sheet-col-m">11월</th>
+          <th class="center sheet-col-m sheet-month-end">12월</th>
+          <th class="center sheet-col-spark">추이</th>
+          <th class="center sheet-month-total">총합</th>
+          <th class="center">현재가</th>
+          <th class="center sheet-col-pct" title="해당 연도 표에 반영된 월별 분배금 합계 ÷ 현재가. 지난 12개월(TTM) 배당수익률이 아닙니다.">{{ dividend_sheet.year }}년<br>누적 배당수익률</th>
+          <th class="center sheet-col-pct" title="일부 종목은 kisstock CSV·공시 기준. 외부 API 자동 갱신은 중단되었습니다.">{{ dividend_sheet.year }}년<br>YTD 주가수익률</th>
+          <th class="center sheet-col-pct sheet-th-total" id="etf-sort-by-total" role="button" tabindex="0" title="클릭 시 총 수익률 높은 순으로 다시 정렬. CSV·API 산출 혼재 가능.">{{ dividend_sheet.year }}년<br>YTD 총 수익률 ▼</th>
+        </tr>
+      </thead>
+      <tbody id="etf-sheet-body">
+        {% for row in dividend_sheet.rows %}
+        {% set months = row.months if row.months is defined else [] %}
+        {% set dy = row.dividend_yield_pct if row.dividend_yield_pct is defined and row.dividend_yield_pct is not none else '' %}
+        {% set row_scope = 'overseas' if row.get('scope') == 'overseas' else 'domestic' %}
+        <tr class="sheet-data-row"
+            data-no="{{ row.get('no', '') }}"
+            data-scope="{{ row_scope }}"
+            data-code="{{ row.get('code', '') }}"
+            data-name="{{ row.get('name', '') }}"
+            data-brand="{{ row.get('brand', '') }}"
+            data-cycle="{{ row.get('cycle', '') }}"
+            data-listed="{{ row.get('listed', '—') }}"
+            data-mcap="{{ row.get('market_cap', '—') }}"
+            data-fee="{{ row.get('expense_ratio', '—') }}"
+            data-total="{{ row.get('dividend_total', '—') }}"
+            data-price="{% if row.current_price is defined and row.current_price is not none %}{{ row.current_price }}{% endif %}"
+            data-yield="{% if dy != '' %}{{ '%.2f'|format(dy) }}{% endif %}"
+            data-price-yield="{% if row.price_return_pct is defined and row.price_return_pct is not none %}{{ '%.2f'|format(row.price_return_pct) }}{% endif %}"
+            data-total-yield="{% if row.total_return_pct is defined and row.total_return_pct is not none %}{{ '%.2f'|format(row.total_return_pct) }}{% endif %}"
+            data-months='{{ months | tojson }}'>
+          <td class="center mono sheet-freeze sheet-freeze--code">{{ row.get('code', '—') }}</td>
+          <td class="sheet-name-cell sheet-freeze sheet-freeze--name">{{ row.get('name', '—') }}</td>
+          <td class="center">{{ row.get('cycle', '—') }}</td>
+          <td class="center">{{ row.get('listed', '—') }}</td>
+          <td class="center">{{ row.get('market_cap', '—') }}</td>
+          <td class="center">{{ row.get('expense_ratio', '—') }}</td>
+          {% for i in range(12) %}
+          {% set has_div = months|length > i and months[i] is not none %}
+          <td class="center sheet-num sheet-month{% if has_div %} sheet-month--has{% else %} sheet-month--empty{% endif %}{% if i == 0 %} sheet-month-start{% elif i == 11 %} sheet-month-end{% endif %}">
+            {% if has_div %}{{ months[i] }}{% else %}—{% endif %}
+          </td>
+          {% endfor %}
+          <td class="center sheet-spark-cell sheet-month"></td>
+          <td class="center sheet-num sheet-total sheet-month-total">{{ row.get('dividend_total', '—') }}</td>
+          <td class="center sheet-num">{% if row.current_price is defined and row.current_price is not none %}{{ row.current_price|intcomma }}{% else %}—{% endif %}</td>
+          <td class="center sheet-pct">{% if dy != '' %}{{ '%.2f'|format(dy) }}%{% else %}—{% endif %}</td>
+          <td class="center sheet-pct sheet-pct-price">{% if row.price_return_pct is defined and row.price_return_pct is not none %}{{ '%.2f'|format(row.price_return_pct) }}%{% else %}—{% endif %}</td>
+          <td class="center sheet-pct sheet-pct-total">{% if row.total_return_pct is defined and row.total_return_pct is not none %}{{ '%.2f'|format(row.total_return_pct) }}%{% else %}—{% endif %}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>

@@ -1,0 +1,44 @@
+{
+  "version": 1,
+  "purpose": "workisus_us_single_account_cascade",
+  "exported_at": "2026-06-05 19:56",
+  "card_count": 2,
+  "cards": [
+    {
+      "id": 1,
+      "title": "웹리서치·10분할 — 고정 10슬롯 vs ATR 가변 슬롯",
+      "summary": "【웹 리서치 · 2026-06-05】 검색: US stock grid trading ten split lossless rebalancing 외부 검색 결과 없음 — 내장 축·위원회 규칙만으로 토론. 【coupax 적용】 wonkisus 10분할·무손실 Wiki 정본 우선. 【주제】 10…",
+      "tags": [
+        "workisus",
+        "US",
+        "차수",
+        "슬롯",
+        "HTS",
+        "무손실",
+        "ATR",
+        "토론"
+      ],
+      "catalog_seed": "debate_web_10분할_32326ed8",
+      "category": "debate",
+      "body": "【웹 리서치 · 2026-06-05】 검색: US stock grid trading ten split lossless rebalancing\n\n외부 검색 결과 없음 — 내장 축·위원회 규칙만으로 토론.\n【coupax 적용】 wonkisus 10분할·무손실 Wiki 정본 우선.\n\n【주제】 10분할: 고정 10슬롯 vs ATR 가변 슬롯\n【결론 가이드】 wonkisus 10분할 정본, ATR은 보조.\n【재사용】 catalog_seed=debate_web_10분할_32326ed8\n\n——— 위원회 토론 ———\n\n【그리드 · workisus_grid】\n10분할·간격·재진입 Wiki와 일치.\n\n【US시장 · workisus_us】\n미국 장 시간·환율·종목 유동성.\n\n【리스크 · workisus_risk】\n무손실 리밸런싱·최대 차수.\n\n【UI · workisus_ui】\nworkisus HTS 탭·손익 갱신.\n\n【슬롯 · workisus_slot】\n슬롯별 수량·ATR 연동.\n\n【합의 초안】 위 관점을 반영해 확정하고, catalog_seed(debate_web_10분할_32326ed8)로 재사용한다."
+    },
+    {
+      "id": 2,
+      "title": "웹리서치·미국 장외 — 프리마켓 표시 vs 정규장만",
+      "summary": "【웹 리서치 · 2026-06-05】 검색: US market premarket after hours trading UI 외부 검색 결과 없음 — 내장 축·위원회 규칙만으로 토론. 【coupax 적용】 wonkisus 10분할·무손실 Wiki 정본 우선. 【주제】 미국 장외: 프리마켓 …",
+      "tags": [
+        "workisus",
+        "US",
+        "차수",
+        "슬롯",
+        "HTS",
+        "무손실",
+        "ATR",
+        "토론"
+      ],
+      "catalog_seed": "debate_web_미국_장외_b8b1f144",
+      "category": "debate",
+      "body": "【웹 리서치 · 2026-06-05】 검색: US market premarket after hours trading UI\n\n외부 검색 결과 없음 — 내장 축·위원회 규칙만으로 토론.\n【coupax 적용】 wonkisus 10분할·무손실 Wiki 정본 우선.\n\n【주제】 미국 장외: 프리마켓 표시 vs 정규장만\n【결론 가이드】 프리/애프터는 배지로 구분.\n【재사용】 catalog_seed=debate_web_미국_장외_b8b1f144\n\n——— 위원회 토론 ———\n\n【그리드 · workisus_grid】\n10분할·간격·재진입 Wiki와 일치.\n\n【US시장 · workisus_us】\n미국 장 시간·환율·종목 유동성.\n\n【리스크 · workisus_risk】\n무손실 리밸런싱·최대 차수.\n\n【UI · workisus_ui】\nworkisus HTS 탭·손익 갱신.\n\n【슬롯 · workisus_slot】\n슬롯별 수량·ATR 연동.\n\n【합의 초안】 위 관점을 반영해 확정하고, catalog_seed(debate_web_미국_장외_b8b1f144)로 재사용한다."
+    }
+  ]
+}

@@ -1,0 +1,153 @@
+{
+  "updated_at": "2026-06-02 13:29",
+  "playbook": {
+    "too_short": "본문 30자 이상. 1·2·3차 조건과 손절·익절을 구체적으로.",
+    "pii": "계좌번호·API키·비밀번호·전화번호 제거. 끝 4자리만 허용.",
+    "duplicate": "동일 제목 카드가 이미 있음 — 제목 변경 또는 기존 카드 수정.",
+    "tag_missing": "본문에 차수·손절·익절·체결·계좌 키워드를 포함. · 최근: 익절·분할·ATR 중 하나를 본문에 포함. · 최근: 차수·슬롯·1·2·3차 중 하나를 본문에 포함.",
+    "confirm_failed": "확정 전 PII·태그 점검 실패 — 본문 수정 후 재시도.",
+    "unknown": "형식·길이·PII를 점검한 뒤 다시 저장."
+  },
+  "errors": [
+    {
+      "ts": "2026-06-02 11:55",
+      "kind": "pii",
+      "message": "API키·비밀번호 금지.",
+      "title": "학습 카드 작성 오류 — 본문·형식",
+      "card_id": null
+    },
+    {
+      "ts": "2026-06-02 11:55",
+      "kind": "pii",
+      "message": "API키·비밀번호 금지.",
+      "title": "학습 카드 작성 오류 — 본문·형식",
+      "card_id": null
+    },
+    {
+      "ts": "2026-06-02 11:55",
+      "kind": "tag_missing",
+      "message": "차수·1·2·3차 중 하나를 본문에 포함.",
+      "title": "자동 카드 제작 실패 복구",
+      "card_id": null
+    },
+    {
+      "ts": "2026-06-02 12:48",
+      "kind": "tag_missing",
+      "message": "익절·분할·ATR 중 하나를 본문에 포함.",
+      "title": "1번 계좌 1차 — 수동 매수·잔고 인식",
+      "card_id": null
+    },
+    {
+      "ts": "2026-06-02 12:48",
+      "kind": "tag_missing",
+      "message": "익절·분할·ATR 중 하나를 본문에 포함.",
+      "title": "1차→2차 — 등록 15초 후 즉시 매수",
+      "card_id": null
+    },
+    {
+      "ts": "2026-06-02 12:48",
+      "kind": "tag_missing",
+      "message": "차수·슬롯·1·2·3차 중 하나를 본문에 포함.",
+      "title": "ATR 자동 설정 — 국내·해외",
+      "card_id": null
+    },
+    {
+      "ts": "2026-06-02 12:48",
+      "kind": "tag_missing",
+      "message": "익절·분할·ATR 중 하나를 본문에 포함.",
+      "title": "잔고 reconcile·슬롯 검증",
+      "card_id": null
+    },
+    {
+      "ts": "2026-06-02 13:29",
+      "kind": "tag_missing",
+      "message": "차수·슬롯·1·2·3차 중 하나를 본문에 포함.",
+      "title": "ATR 국면 보정 — gap 배율",
+      "card_id": null
+    },
+    {
+      "ts": "2026-06-02 13:29",
+      "kind": "tag_missing",
+      "message": "차수·슬롯·1·2·3차 중 하나를 본문에 포함.",
+      "title": "종목 enabled·atr_auto 스위치",
+      "card_id": null
+    },
+    {
+      "ts": "2026-06-02 13:29",
+      "kind": "tag_missing",
+      "message": "익절·분할·ATR 중 하나를 본문에 포함.",
+      "title": "최대 슬롯 max_slot·수량 buy_qtys",
+      "card_id": null
+    },
+    {
+      "ts": "2026-06-02 13:29",
+      "kind": "tag_missing",
+      "message": "차수·슬롯·1·2·3차 중 하나를 본문에 포함.",
+      "title": "멀티 계좌 순차 매매 — staggered",
+      "card_id": null
+    },
+    {
+      "ts": "2026-06-02 13:29",
+      "kind": "tag_missing",
+      "message": "차수·슬롯·1·2·3차 중 하나를 본문에 포함.",
+      "title": "cascade trigger_loss — 숫자·항상(null)",
+      "card_id": null
+    },
+    {
+      "ts": "2026-06-02 13:29",
+      "kind": "tag_missing",
+      "message": "차수·슬롯·1·2·3차 중 하나를 본문에 포함.",
+      "title": "매수·매도 쿨다운·API 재시도",
+      "card_id": null
+    },
+    {
+      "ts": "2026-06-02 13:29",
+      "kind": "tag_missing",
+      "message": "차수·슬롯·1·2·3차 중 하나를 본문에 포함.",
+      "title": "익절 수수료 버퍼 — ETF·국내·해외",
+      "card_id": null
+    },
+    {
+      "ts": "2026-06-02 13:29",
+      "kind": "tag_missing",
+      "message": "차수·슬롯·1·2·3차 중 하나를 본문에 포함.",
+      "title": "잔고 스캘프 후보 — ATR-BAL",
+      "card_id": null
+    },
+    {
+      "ts": "2026-06-02 13:29",
+      "kind": "tag_missing",
+      "message": "차수·슬롯·1·2·3차 중 하나를 본문에 포함.",
+      "title": "장중 시간 — 국내 08:00~15:40",
+      "card_id": null
+    },
+    {
+      "ts": "2026-06-02 13:29",
+      "kind": "tag_missing",
+      "message": "익절·분할·ATR 중 하나를 본문에 포함.",
+      "title": "self-heal — 수량·수동 전량매도",
+      "card_id": null
+    },
+    {
+      "ts": "2026-06-02 13:29",
+      "kind": "tag_missing",
+      "message": "차수·슬롯·1·2·3차 중 하나를 본문에 포함.",
+      "title": "대시보드 ATR 버튼·설정 저장",
+      "card_id": null
+    },
+    {
+      "ts": "2026-06-02 13:29",
+      "kind": "tag_missing",
+      "message": "익절·분할·ATR 중 하나를 본문에 포함.",
+      "title": "알림·로그 — bot_log·텔레그램",
+      "card_id": null
+    }
+  ],
+  "stats": {
+    "total": 19,
+    "by_kind": {
+      "pii": 2,
+      "tag_missing": 17
+    }
+  }
+}

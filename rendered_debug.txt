@@ -1,0 +1,119 @@
+{
+  "api_calls": [
+    {
+      "url": "https://cdn1.domeggook.com/upload/item/2026/03/31/177495180220259F0ABC46F22A0F02A6/177495180220259F0ABC46F22A0F02A6_img_760?hash=0ffe5b716e5a194eed5e371ee409ed85",
+      "status": 200
+    },
+    {
+      "url": "https://cdn1.domeggook.com/upload/item/2026/03/31/1774947959A5780DD60A03FA421EB197/1774947959A5780DD60A03FA421EB197_img_760?hash=9d86064020dc982f290a8668becc0013",
+      "status": 200
+    },
+    {
+      "url": "https://cdn1.domeggook.com/upload/item/2026/03/31/1774956385569FBBF53D74E9E6CAC1F1/1774956385569FBBF53D74E9E6CAC1F1_img_760?hash=c766996ac42a06c08040f78f7d9ded7c",
+      "status": 200
+    },
+    {
+      "url": "https://cdn1.domeggook.com/upload/item/2026/03/31/1774948187EE4EC93082EA2ACC08CEB2/1774948187EE4EC93082EA2ACC08CEB2_img_760?hash=908b83a2e8fddda73db088e2c8b1ef15",
+      "status": 200
+    },
+    {
+      "url": "https://cdn1.domeggook.com/upload/item/2026/03/31/17749326080F146376A609A716C53E21/17749326080F146376A609A716C53E21_img_760?hash=ce3e632702791019e440f5d6507380e5",
+      "status": 200
+    },
+    {
+      "url": "https://cdn1.domeggook.com/upload/item/2026/03/31/177492930572E8297FE6AFE296742E2D/177492930572E8297FE6AFE296742E2D_img_760?hash=d602fea08bb5ab3fdcfe3bd87c5b12c4",
+      "status": 200
+    },
+    {
+      "url": "https://cdn1.domeggook.com/upload/item/2026/03/31/1774928156992530E49808ECEC3424C8/1774928156992530E49808ECEC3424C8_img_760?hash=ccd4cb67715a4f03b954a50b57750f4e",
+      "status": 200
+    },
+    {
+      "url": "https://cdn1.domeggook.com/upload/item/2026/03/31/17749303461FECF38835498CD1C6F7EB/17749303461FECF38835498CD1C6F7EB_img_760?hash=431246e5e016067cbc1dade538de2a67",
+      "status": 200
+    },
+    {
+      "url": "https://cdn1.domeggook.com/upload/item/2026/03/31/1774927955297DCDACA55B0549F474D5/1774927955297DCDACA55B0549F474D5_img_760?hash=87d7cbbd50cf92db89bc603f359bd252",
+      "status": 200
+    },
+    {
+      "url": "https://cdn1.domeggook.com/upload/item/2026/03/31/17749279729E899CF7F2CCE00390C149/17749279729E899CF7F2CCE00390C149_img_760?hash=7811f02fbe7cf51b2073fccb9034b59b",
+      "status": 200
+    },
+    {
+      "url": "https://cdn1.domeggook.com/upload/item/2026/03/31/17749278129DD7D26D0F16DB46F6974D/17749278129DD7D26D0F16DB46F6974D_img_760?hash=87cd73a1119f5c4e1afbb4fe1b8ad0a8",
+      "status": 200
+    },
+    {
+      "url": "https://cdn1.domeggook.com/upload/item/2026/03/31/17749275375457D478D107D7E202DF75/17749275375457D478D107D7E202DF75_img_760?hash=c3fa73b7dcd28ec773c690b4fe7bb427",
+      "status": 200
+    },
+    {
+      "url": "https://cdn1.domeggook.com/upload/item/2026/03/31/177492720590A0C7FD9A508E6E7924EF/177492720590A0C7FD9A508E6E7924EF_img_760?hash=9e5d3e081bf4646bb86d70ee33dfa5f3",
+      "status": 200
+    },
+    {
+      "url": "https://cdn1.domeggook.com/upload/item/2026/03/31/17749269431290C1C5E5A14C1B93439A/17749269431290C1C5E5A14C1B93439A_img_760?hash=01a6005c11dd1c59251eca934b9edbe5",
+      "status": 200
+    },
+    {
+      "url": "https://cdn1.domeggook.com/upload/item/2026/03/31/1774926928D807EAF1FF1122D7759A87/1774926928D807EAF1FF1122D7759A87_img_760?hash=7188481d4fe6685aa4ef76bf99768714",
+      "status": 200
+    },
+    {
+      "url": "https://cdn1.domeggook.com/upload/item/2026/03/31/17749268813EDF642A986F6DF9E9CF23/17749268813EDF642A986F6DF9E9CF23_img_760?hash=a99a9a82908773b34b74003048aed42d",
+      "status": 200
+    },
+    {
+      "url": "https://chatmng.njobapp.com/api/messages/unread?user_id=5B6148919B288413167C&app=njob",
+      "status": 200
+    }
+  ],
+  "rendered": [
+    {
+      "itemNo": "64260446",
+      "texts": [
+        "제목편집: O",
+        "상세편집: O",
+        "스마트스토어 기준 카테고리로 변경 후",
+        "스마트스토어 카테고리를",
+        "기준으로 마켓의 카테고리를 업데이트 할 수 있습니다",
+        "스마트스토어 카테고리선택",
+        "스스카테고리변경",
+        "수치 입력 후 마켓에 바로 적용할 경우 수정 후 업데이트를 통해서 가능합니다",
+        "할인율(%)",
+        "스마트스토어 1.3%, 9%"
+      ]
+    },
+    {
+      "itemNo": "64260017",
+      "texts": [
+        "제목편집: O",
+        "상세편집: O",
+        "스마트스토어 기준 카테고리로 변경 후",
+        "스마트스토어 카테고리를",
+        "기준으로 마켓의 카테고리를 업데이트 할 수 있습니다",
+        "스마트스토어 카테고리선택",
+        "스스카테고리변경",
+        "수치 입력 후 마켓에 바로 적용할 경우 수정 후 업데이트를 통해서 가능합니다",
+        "할인율(%)",
+        "스마트스토어 1.3%, 9%"
+      ]
+    },
+    {
+      "itemNo": "64259486",
+      "texts": [
+        "제목편집: O",
+        "상세편집: O",
+        "스마트스토어 기준 카테고리로 변경 후",
+        "스마트스토어 카테고리를",
+        "기준으로 마켓의 카테고리를 업데이트 할 수 있습니다",
+        "스마트스토어 카테고리선택",
+        "스스카테고리변경",
+        "수치 입력 후 마켓에 바로 적용할 경우 수정 후 업데이트를 통해서 가능합니다",
+        "할인율(%)",
+        "스마트스토어 1.3%, 9%"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %}{{ site_name }} | ETF 서비스 일시 중단{% endblock %}
+{% block title_scoped %}{{ site_name }} | ETF 서비스 일시 중단{% endblock %}
+{% block meta_description %}ETF·월배당 시트 및 관련 데이터 제공을 일시 중단했습니다.{% endblock %}
+{% block robots %}noindex, nofollow{% endblock %}
+
+{% block content %}
+<section class="hero-box">
+  <h1>ETF·월배당 서비스 일시 중단</h1>
+  <p>외부 데이터 이용 관련 요청에 따라 <strong>ETF 시트·데이터 다운로드</strong>를 중지했습니다.</p>
+  <p>금융 정보는 <strong><a href="{{ url_for('blog') }}">블로그 글</a>과 글 하단 질문·답변</strong>으로 이어갑니다.</p>
+  <p class="hero-meta">
+    <a href="{{ url_for('index') }}" class="hero-inline-link">홈</a>
+    · <a href="{{ url_for('blog') }}" class="hero-inline-link">블로그 · 질문 답변</a>
+    · <a href="{{ url_for('contact') }}" class="hero-inline-link">문의</a>
+  </p>
+</section>
+{% endblock %}

@@ -20,8 +20,13 @@ $Staging = Join-Path $env:TEMP ("coupax-board-staging-" + [Guid]::NewGuid().ToSt
 
 try {
     New-Item -ItemType Directory -Path $Staging | Out-Null
-    robocopy $BoardRoot $Staging /E /XD .venv __pycache__ .git /XF .env board.db coupax-board-deploy.zip /NFL /NDL /NJH /NJS | Out-Null
+    robocopy $BoardRoot $Staging /E /XD .venv __pycache__ .git pwcosmos-swiki saju_learning kiwoom_account local-ssh /XF .env board.db coupax-board-deploy.zip agent_office_tasks.json agent_office_feed.json agent_registry.json gemma_knowledge.json swiki_sync_state.json cursor_office_inbox.json *.lock /NFL /NDL /NJH /NJS | Out-Null
     if ($LASTEXITCODE -ge 8) { throw "robocopy failed (exit $LASTEXITCODE)" }
+    $stagingKeys = Join-Path $Staging "deploy\local-ssh"
+    if (Test-Path $stagingKeys) {
+        Remove-Item $stagingKeys -Recurse -Force
+        Write-Host "Excluded: deploy/local-ssh (SSH keys must not ship in zip)"
+    }
     if (Test-Path $ZipPath) { Remove-Item $ZipPath -Force }
     Compress-Archive -Path (Join-Path $Staging "*") -DestinationPath $ZipPath -Force
     Write-Host "OK: $ZipPath"

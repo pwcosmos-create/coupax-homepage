@@ -1,0 +1,46 @@
+loadSubCategory(level, caParam) {
+---
+getCategoryNjobPc',
+---
+sort1').change(function () {
+---
+loadSubCategory(2, caParam);
+---
+sort2').change(function () {
+---
+loadSubCategory(3, caParam);
+---
+loadSubCategory(4, caParam);
+---
+loadSubCategory(5, caParam);
+---
+sort1 option').each(function() {
+---
+sort2 option').each(function() {
+---
+sort1" id="sort1" class="select1" style="width:90px">
+---
+sort2" id="sort2" class="select1" style="width:80px">
+---
+getCategoryNjobPc',
+---
+sort1').change(function () {
+---
+sort2').change(function () {
+---
+sort1').change(function () {
+---
+loadSubCategory(2, caParam);
+---
+sort2').change(function () {
+---
+loadSubCategory(3, caParam);
+---
+loadSubCategory(4, caParam);
+---
+loadSubCategory(5, caParam);
+---
+loadSubCategory(level, caParam) {
+---
+getCategoryNjobPc',
+---

@@ -4,8 +4,10 @@
 {% block content %}
 <section class="doc-wrap">
   <h1>문의하기</h1>
-  <p>콘텐츠 정정 요청, 제휴 문의, 기타 문의는 아래 이메일로 연락해주세요.</p>
-  <p><strong>Email:</strong> {{ site_contact_email }}</p>
-  <p>일반적으로 2영업일 내 확인 후 답변드립니다.</p>
+  <p><strong>일반 문의·질문은 해당 글 하단의 질문란(댓글)에 남겨 주세요.</strong> 운영 참고용으로 확인합니다.</p>
+  <p>관련 글 목록은 <a href="{{ url_for('blog') }}">블로그</a>에서 찾을 수 있습니다.</p>
+  <p>개인정보 열람·정정·삭제 요청, 저작권·광고 등 공식 민원 성격의 연락만 아래 이메일로 부탁드립니다. 개인정보·쿠키·애드센스 안내는 <a href="{{ url_for('privacy') }}">개인정보처리방침</a>을 참고해 주세요.</p>
+  <p><strong>Email:</strong> <a href="mailto:{{ site_contact_email }}">{{ site_contact_email }}</a></p>
+  <p>단순 투자 판단·개별 세무 계산 요청 등은 답변이 제한될 수 있습니다.</p>
 </section>
 {% endblock %}

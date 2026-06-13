@@ -24,3 +24,6 @@ pm2_info.txt
 
 # Deploy artifact
 board/coupax-board-deploy.zip
+
+# 로컬 SSH 키 복사본 (deploy 스크립트 옆에서 찾기 쉽게 두는 용도 — 커밋 금지)
+board/deploy/local-ssh/

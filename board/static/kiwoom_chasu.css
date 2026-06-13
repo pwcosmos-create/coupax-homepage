@@ -1,0 +1,278 @@
+.page-kiwoom-chasu .agent-office-hero--compact {
+  margin-bottom: 8px;
+}
+
+.page-kiwoom-chasu .agent-office-hero--compact h1 {
+  font-size: 1.5rem;
+  margin: 0 0 8px;
+}
+
+.office-division-tab--kiwoom.is-active {
+  background: #0d6b4a;
+  border-color: #0d6b4a;
+  color: #fff;
+}
+
+.kiwoom-learn-badge {
+  font-size: 0.75rem;
+  padding: 2px 6px;
+  border-radius: 8px;
+  background: rgba(13, 107, 74, 0.15);
+  color: #0d6b4a;
+}
+
+.kiwoom-council-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin: 6px 0 0;
+}
+
+.kiwoom-council-badge {
+  font-size: 0.68rem;
+  padding: 1px 5px;
+  border-radius: 6px;
+  background: rgba(13, 107, 74, 0.12);
+  color: #0a5238;
+  border: 1px solid rgba(13, 107, 74, 0.25);
+}
+
+.kiwoom-learn-path-panel {
+  margin: 12px 0;
+  padding: 12px 14px;
+  border: 1px solid rgba(13, 107, 74, 0.35);
+  border-radius: 10px;
+  background: rgba(13, 107, 74, 0.06);
+}
+
+.kiwoom-learn-path-pct {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #0d6b4a;
+}
+
+.kiwoom-learn-path-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.kiwoom-learn-path-item {
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  padding: 10px 12px;
+  background: #fff;
+}
+
+.kiwoom-learn-path-item.is-done {
+  border-color: #86efac;
+  background: #f0fdf4;
+}
+
+.kiwoom-learn-path-item.is-active {
+  border-color: #0d6b4a;
+  box-shadow: 0 0 0 1px rgba(13, 107, 74, 0.25);
+}
+
+.kiwoom-learn-path-item-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.kiwoom-learn-path-practice {
+  margin: 6px 0 0;
+  padding-left: 1.1rem;
+  font-size: 0.88rem;
+  color: #334155;
+}
+
+.kiwoom-learn-path-actions {
+  margin-top: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.saju-learn-card.kiwoom-learn-highlight {
+  outline: 2px solid #0d6b4a;
+  outline-offset: 2px;
+}
+
+.kiwoom-knowledge-compose {
+  margin-bottom: 12px;
+  padding: 12px 14px;
+  background: #f4faf7;
+  border: 1px solid #b8dcc8;
+  border-radius: 8px;
+}
+
+.saju-learn-form--hub label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 0.9rem;
+}
+
+.kiwoom-compose-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.page-kiwoom-office.agent-office-layout {
+  max-width: 1200px;
+  margin: 0 auto 32px;
+}
+
+.kiwoom-disclaimer {
+  max-width: 1100px;
+  margin: 0 auto 48px;
+}
+
+.kiwoom-account-panel {
+  background: #f8fafc;
+  border: 1px solid #c5d4e8;
+  border-radius: 10px;
+  padding: 16px 18px;
+  margin-bottom: 20px;
+}
+
+.kiwoom-account-panel h2 {
+  margin: 0 0 8px;
+  font-size: 1.1rem;
+}
+
+.kiwoom-account-stale {
+  font-size: 0.75rem;
+  padding: 2px 8px;
+  border-radius: 6px;
+  background: #e8f5e9;
+  color: #1b5e20;
+  font-weight: 600;
+}
+
+.kiwoom-account-stale.is-stale {
+  background: #fff3e0;
+  color: #e65100;
+}
+
+.kiwoom-account-lead {
+  margin: 0 0 12px;
+  font-size: 0.9rem;
+  color: #444;
+}
+
+.kiwoom-account-summary-list {
+  margin: 0 0 12px;
+  padding-left: 1.2rem;
+  font-size: 0.9rem;
+}
+
+.kiwoom-account-form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.kiwoom-account-form label {
+  display: block;
+  font-size: 0.85rem;
+}
+
+.kiwoom-account-form input,
+.kiwoom-account-form textarea {
+  width: 100%;
+  margin-top: 4px;
+  box-sizing: border-box;
+}
+
+a.office-division-tab {
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.kiwoom-chasu-wrap {
+  max-width: 1100px;
+  margin: 0 auto 48px;
+}
+
+.kiwoom-chasu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.kiwoom-panel {
+  background: #fff;
+  border: 1px solid #dde3f0;
+  border-radius: 10px;
+  padding: 18px 20px;
+}
+
+.kiwoom-panel h2 {
+  font-size: 1.05rem;
+  margin: 0 0 12px;
+  color: #1a2744;
+}
+
+.kiwoom-checklist {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.kiwoom-checklist li {
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.kiwoom-checklist label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: default;
+}
+
+.kiwoom-hint {
+  font-size: 12px;
+  color: #6b7280;
+  margin: 12px 0 0;
+}
+
+.kiwoom-desc {
+  font-size: 14px;
+  line-height: 1.55;
+  margin: 0 0 12px;
+  color: #374151;
+}
+
+.kiwoom-memo {
+  width: 100%;
+  box-sizing: border-box;
+  font-family: inherit;
+  font-size: 14px;
+  line-height: 1.5;
+  padding: 10px 12px;
+  border: 1px solid #c5d0e6;
+  border-radius: 8px;
+  resize: vertical;
+  min-height: 160px;
+}
+
+.kiwoom-panel--warn {
+  border-color: #f0d9a8;
+  background: #fffbeb;
+}
+
+.kiwoom-panel--warn p {
+  font-size: 13px;
+  line-height: 1.55;
+  margin: 0;
+}

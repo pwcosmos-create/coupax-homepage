@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "category_weights": {
+    "feature": 0.7
+  },
+  "history": [
+    {
+      "ts": "2026-06-13 23:50",
+      "title": "관상·눈썹·눈썹살 해석",
+      "card_id": 29,
+      "kind": "rl_gemini",
+      "category": "feature"
+    },
+    {
+      "ts": "2026-06-13 23:50",
+      "title": "관상·광대·볼 윤곽",
+      "card_id": 30,
+      "kind": "rl_gemini",
+      "category": "feature"
+    }
+  ],
+  "stats": {
+    "runs": 1,
+    "catalog_added": 0,
+    "rl_added": 2,
+    "fail": 0
+  },
+  "last_run": "2026-06-13 23:50",
+  "updated_at": "2026-06-13 23:50"
+}

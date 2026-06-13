@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>젬마24 (Gemma24) AI 지식 신경망 대시보드</title>
+    <!-- Force Graph 라이브러리 CDN -->
+    <script src="https://unpkg.com/force-graph"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap');
+        
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #0b0f19;
+            font-family: 'Inter', -apple-system, sans-serif;
+            overflow: hidden;
+            color: #ffffff;
+        }
+
+        /* 상단 글래스모피즘 헤더 */
+        .header {
+            position: absolute;
+            top: 24px;
+            left: 24px;
+            z-index: 10;
+            background: rgba(18, 25, 43, 0.7);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 20px 28px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            max-width: 400px;
+        }
+
+        .header h1 {
+            margin: 0 0 8px 0;
+            font-size: 24px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .header p {
+            margin: 0;
+            font-size: 13px;
+            color: #94a3b8;
+            line-height: 1.5;
+        }
+
+        /* 우측 상단 카테고리 범례 (사진 속 색상 완벽 반영) */
+        .legend {
+            position: absolute;
+            top: 24px;
+            right: 24px;
+            z-index: 10;
+            background: rgba(18, 25, 43, 0.7);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 18px 24px;
+            border-radius: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            display: inline-block;
+            box-shadow: 0 0 10px currentColor;
+        }
+
+        /* 하단 상세 팝업 패널 */
+        .detail-panel {
+            position: absolute;
+            bottom: -300px;
+            left: 24px;
+            z-index: 10;
+            background: rgba(18, 25, 43, 0.85);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 242, 254, 0.3);
+            padding: 24px;
+            border-radius: 20px;
+            width: 380px;
+            transition: bottom 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 20px 50px rgba(0, 242, 254, 0.15);
+        }
+
+        .detail-panel.active {
+            bottom: 24px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        .detail-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin: 0 0 10px 0;
+            color: #ffffff;
+        }
+
+        .detail-desc {
+            font-size: 13px;
+            color: #cbd5e1;
+            line-height: 1.6;
+            margin-bottom: 16px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            cursor: pointer;
+            color: #94a3b8;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        .close-btn:hover { color: #ffffff; }
+
+        #graph-container { width: 100%; height: 100%; position: absolute; top: 0; left: 0; }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>✨ 젬마24 지식 신경망</h1>
+        <p>오라클 클라우드 서버(168.107.31.153)에 통합된 자율 에이전트 및 비즈니스 데이터 연관 관계망입니다. 노드를 클릭하거나 드래그해 보세요.</p>
+    </div>
+
+    <!-- 범례 패널 (사진 카테고리 색상 반영) -->
+    <div class="legend">
+        <div class="legend-item"><span style="display:flex; align-items:center; gap:10px;"><span class="dot" style="background:#3b82f6; color:#3b82f6;"></span> 00_Raw (원시 데이터)</span> <span style="color:#64748b;">3</span></div>
+        <div class="legend-item"><span style="display:flex; align-items:center; gap:10px;"><span class="dot" style="background:#10b981; color:#10b981;"></span> 10_Wiki (핵심 지식)</span> <span style="color:#64748b;">4</span></div>
+        <div class="legend-item"><span style="display:flex; align-items:center; gap:10px;"><span class="dot" style="background:#f97316; color:#f97316;"></span> 20_Meta (메타·태그)</span> <span style="color:#64748b;">3</span></div>
+        <div class="legend-item"><span style="display:flex; align-items:center; gap:10px;"><span class="dot" style="background:#a855f7; color:#a855f7;"></span> 40_템플릿 (양식·프롬프트)</span> <span style="color:#64748b;">3</span></div>
+        <div class="legend-item"><span style="display:flex; align-items:center; gap:10px;"><span class="dot" style="background:#eab308; color:#eab308;"></span> _company (실행 로직)</span> <span style="color:#64748b;">5</span></div>
+    </div>
+
+    <!-- 노드 클릭 시 열리는 상세 정보 창 -->
+    <div class="detail-panel" id="detailPanel">
+        <div class="close-btn" onclick="closeDetail()">✕</div>
+        <div class="badge" id="detailBadge" style="background:#10b981; color:#000;">10_Wiki</div>
+        <div class="detail-title" id="detailTitle">SCHD ETF 분석 지식</div>
+        <div class="detail-desc" id="detailDesc">미국 배당성장 ETF의 핵심 지표. 분기별 분배금 내역 및 10년 복리 성장률 연산 데이터베이스가 담겨 있습니다.</div>
+        <div style="font-size:12px; color:#64748b;">서버 연결 상태: <span style="color:#10b981;">● Online (포트 11434)</span></div>
+    </div>
+
+    <!-- 그래프가 렌더링될 영역 -->
+    <div id="graph-container"></div>
+
+    <script>
+        // 서버 지식 구조를 모사한 더미 데이터셋
+        const gData = {
+            nodes: [
+                // 00_Raw
+                { id: 'raw_news', name: '실시간 금융 뉴스 크롤러', group: '00_Raw', color: '#3b82f6', size: 14, desc: '매일 아침 네이버 및 미국 야후 파이낸스에서 수집되는 ETF/주식 날것의 기사 데이터입니다.' },
+                { id: 'raw_voice', name: '사주 상담 녹음 원본', group: '00_Raw', color: '#3b82f6', size: 14, desc: '고객 음성 파일에서 텍스트로 막 변환된 미가공 STT 데이터입니다.' },
+                { id: 'raw_logs', name: '서버 에러 시스템 로그', group: '00_Raw', color: '#3b82f6', size: 12, desc: '오라클 클라우드 우분투 서버의 일일 시스템 상태 및 예외 처리 기록입니다.' },
+                
+                // 10_Wiki
+                { id: 'wiki_schd', name: 'SCHD 배당성장 지식셋', group: '10_Wiki', color: '#10b981', size: 22, desc: '미국 찰스슈왑 배당성장 ETF의 분배금 이력 및 구성 100개 종목 데이터 백과입니다.' },
+                { id: 'wiki_saju', name: '명리학 십신 오행 DB', group: '10_Wiki', color: '#10b981', size: 20, desc: '사주풀이 알고리즘을 위한 음양오행 및 대운/세운 풀이 핵심 백과사전입니다.' },
+                { id: 'wiki_spy', name: 'S&P 500 인덱스 데이터', group: '10_Wiki', color: '#10b981', size: 18, desc: '미국 500대 대기업 시장 평균 지수 실시간 기준가 및 역사적 변동성 데이터입니다.' },
+                { id: 'wiki_music', name: '음악 장르별 무드 매핑', group: '10_Wiki', color: '#10b981', size: 16, desc: 'AI 음악 생성을 위한 BPM, 키코드, 감정 키워드 매핑 테이블입니다.' },
+
+                // 20_Meta
+                { id: 'meta_tag_etf', name: '#배당수익화 메타 태그', group: '20_Meta', color: '#f97316', size: 16, desc: '자동 포스팅 및 알림 발송 시 수익화 우선순위를 결정하는 라벨링 지표입니다.' },
+                { id: 'meta_index', name: '서버 파일 통합 색인', group: '20_Meta', color: '#f97316', size: 18, desc: '오라클 서버 내 300여 개 스크립트의 위치와 연관성 인덱싱 데이터입니다.' },
+                { id: 'meta_auth', name: '보안 키 및 인증서', group: '20_Meta', color: '#f97316', size: 14, desc: 'shinserver.key 및 Ollama API 통신 토큰 관리용 암호화 헤더입니다.' },
+
+                // 40_템플릿
+                { id: 'tmpl_gemma', name: '젬마24 시스템 프롬프트', group: '40_템플릿', color: '#a855f7', size: 24, desc: 'Gemma 2B 모델의 무한 루프를 막고 완벽한 턴 제어를 수행하는 Modelfile 템플릿입니다.' },
+                { id: 'tmpl_yt', name: '유튜브 쇼츠 대본 양식', group: '40_템플릿', color: '#a855f7', size: 18, desc: 'SCHD 및 주식 분석 결과를 1분짜리 숏폼 바이럴 대본으로 자동 변환하는 마크다운 틀입니다.' },
+                { id: 'tmpl_counsel', name: '사주 풀이 결과지 양식', group: '40_템플릿', color: '#a855f7', size: 18, desc: '고객에게 최종 전달되는 프리미엄 사주 분석 PDF/HTML 출력 레이아웃입니다.' },
+
+                // _company (실행 로직)
+                { id: 'core_gemma24', name: '🤖 젬마24 (etf_gemma:2b)', group: '_company', color: '#eab308', size: 32, desc: '오라클 서버 11434 포트에서 24시간 가동 중인 자율 에이전트 코어 두뇌입니다.' },
+                { id: 'comp_saju', name: 'saju_api.py (사주 엔진)', group: '_company', color: '#eab308', size: 24, desc: '사주 지식셋과 TTS 음성을 연동하여 실시간 음성 상담을 처리하는 파이썬 모듈입니다.' },
+                { id: 'comp_stockbot', name: 'stockbot.py (주식 봇)', group: '_company', color: '#eab308', size: 24, desc: '한국투자증권(KIS) 및 야후 데이터를 수집하여 조건 달성 시 텔레그램을 발송하는 실행 봇입니다.' },
+                { id: 'comp_music', name: 'gen_mood_thumbs.js', group: '_company', color: '#eab308', size: 20, desc: '음악 파일 생성과 동시에 분위기에 맞는 썸네일을 자동 생성하는 노드 스크립트입니다.' },
+                { id: 'comp_n8n', name: 'n8n 자동화 워크플로우', group: '_company', color: '#eab308', size: 26, desc: '뉴스 수집 -> 젬마24 분석 -> 대본 생성 -> 자동 포스팅을 이어주는 오케스트레이션 엔진입니다.' }
+            ],
+            links: [
+                // 젬마24 코어와의 연결
+                { source: 'core_gemma24', target: 'tmpl_gemma', value: 5 },
+                { source: 'core_gemma24', target: 'wiki_schd', value: 4 },
+                { source: 'core_gemma24', target: 'comp_stockbot', value: 4 },
+                { source: 'core_gemma24', target: 'comp_n8n', value: 6 },
+                { source: 'core_gemma24', target: 'meta_index', value: 3 },
+                
+                // 사주 시스템 파이프라인
+                { source: 'comp_saju', target: 'wiki_saju', value: 5 },
+                { source: 'comp_saju', target: 'raw_voice', value: 3 },
+                { source: 'comp_saju', target: 'tmpl_counsel', value: 4 },
+
+                // 주식 및 자동화 파이프라인
+                { source: 'comp_stockbot', target: 'raw_news', value: 4 },
+                { source: 'comp_stockbot', target: 'wiki_spy', value: 3 },
+                { source: 'comp_stockbot', target: 'meta_tag_etf', value: 2 },
+                { source: 'comp_n8n', target: 'tmpl_yt', value: 5 },
+                { source: 'comp_n8n', target: 'comp_music', value: 3 },
+                { source: 'comp_music', target: 'wiki_music', value: 3 },
+                { source: 'meta_index', target: 'raw_logs', value: 2 },
+                { source: 'meta_auth', target: 'core_gemma24', value: 5 }
+            ]
+        };
+
+        // 3D Force Graph 초기화
+        const elem = document.getElementById('graph-container');
+        const Graph = ForceGraph()(elem)
+            .graphData(gData)
+            .nodeRelSize(7)
+            .nodeVal(node => node.size)
+            .nodeColor(node => node.color)
+            .nodeLabel(node => `${node.name} (${node.group})`)
+            .linkColor(() => 'rgba(255, 255, 255, 0.15)')
+            .linkWidth(link => link.value * 0.6)
+            .linkDirectionalParticles(2)
+            .linkDirectionalParticleWidth(2.5)
+            .linkDirectionalParticleSpeed(0.005)
+            .onNodeHover(node => {
+                elem.style.cursor = node ? 'pointer' : null;
+            })
+            .onNodeClick(node => {
+                showDetail(node);
+            });
+
+        // 애니메이션 효과 (로딩 시 우주 회전)
+        Graph.d3Force('charge').strength(-400);
+
+        // 노드 클릭 시 패널 열기 로직
+        function showDetail(node) {
+            const panel = document.getElementById('detailPanel');
+            const badge = document.getElementById('detailBadge');
+            const title = document.getElementById('detailTitle');
+            const desc = document.getElementById('detailDesc');
+
+            badge.innerText = node.group;
+            badge.style.background = node.color;
+            badge.style.color = node.group === '40_템플릿' || node.group === '00_Raw' ? '#fff' : '#000';
+            title.innerText = node.name;
+            desc.innerText = node.desc;
+
+            panel.classList.add('active');
+            
+            // 카메라를 해당 노드로 부드럽게 줌인
+            Graph.centerAt(node.x, node.y, 1000);
+            Graph.zoom(1.8, 1000);
+        }
+
+        function closeDetail() {
+            document.getElementById('detailPanel').classList.remove('active');
+            Graph.zoom(1.2, 1000);
+        }
+    </script>
+</body>
+</html>

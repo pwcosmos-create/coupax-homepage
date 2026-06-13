@@ -1,23 +1,23 @@
 {
   "year": 2026,
   "dividend_unit": "1좌당 분배금(원), 재가공 후 반영",
-  "pipeline_note": "국내 상장 월배당 ETF(코리아·코스피·국내 고배당 등)를 운용사·거래소·search-etf.com 등 공개 자료로 정리했습니다. 분배금·시세는 변동하며 투자 권유가 아닙니다.",
+  "pipeline_note": "국내 상장 월배당·월분배 ETF(국내·해외전용)를 운용사·거래소·CSV·공시 기준으로 정리합니다. 외부 search-etf API 호출은 중단되었습니다.",
   "data_sources": [
-    "Search ETF 최근 배당 (search-etf.com/recent_dividend.php)",
     "K-ETF · 운용사 간이투자설명서·분배 공지",
-    "한국거래소 상장 정보"
+    "한국거래소 상장 정보",
+    "월배당 ETF 시트 CSV(종목·시총·수익률)"
   ],
-  "note": "국내 월배당 ETF 131종. 2026년 월별 분배금(1좌당 원)은 search-etf.com(get_etf_stock_info) 기준 자동 반영. 미지급 월은 null. 수익률·시총 등 메타는 kisstock CSV와 병합. 투자 권유가 아닙니다.",
+  "note": "국내 월배당 ETF 157종 (kisstock CSV 127종 + 기존 단독 30종). 분배금·수익률은 공개 자료 기준. 미지급 월은 null. 투자 권유가 아닙니다.",
   "rows": [
     {
       "no": 1,
       "brand": "PLUS",
       "name": "PLUS 코리아밸류업",
       "code": "495040",
-      "cycle": "월배",
-      "listed": "—",
-      "market_cap": "—",
-      "expense_ratio": "—",
+      "cycle": "월중",
+      "listed": "24.11.04",
+      "market_cap": "996억",
+      "expense_ratio": "0.01%%",
       "months": [
         20,
         20,
@@ -33,20 +33,20 @@
         null
       ],
       "dividend_total": 100,
-      "current_price": 22860,
-      "dividend_yield_pct": 0.44,
+      "current_price": 36880,
+      "dividend_yield_pct": 0.27,
       "price_return_pct": 108.95,
       "total_return_pct": 109.52
     },
     {
       "no": 2,
       "brand": "KODEX",
-      "name": "KODEX 코리아밸류업",
+      "name": "Kodex 코리아밸류업",
       "code": "495850",
-      "cycle": "월배",
-      "listed": "—",
-      "market_cap": "—",
-      "expense_ratio": "—",
+      "cycle": "월말",
+      "listed": "24.11.04",
+      "market_cap": "8,399억",
+      "expense_ratio": "0.01%%",
       "months": [
         84,
         25,
@@ -62,20 +62,20 @@
         null
       ],
       "dividend_total": 154,
-      "current_price": 22940,
-      "dividend_yield_pct": 0.67,
+      "current_price": 36920,
+      "dividend_yield_pct": 0.42,
       "price_return_pct": 108.23,
       "total_return_pct": 109.1
     },
     {
       "no": 3,
       "brand": "1Q",
-      "name": "1Q코리아밸류업",
+      "name": "1Q 코리아밸류업",
       "code": "495330",
-      "cycle": "월배",
-      "listed": "—",
-      "market_cap": "—",
-      "expense_ratio": "—",
+      "cycle": "월말",
+      "listed": "24.11.04",
+      "market_cap": "1,395억",
+      "expense_ratio": "0.02%%",
       "months": [
         10,
         17,
@@ -91,20 +91,20 @@
         null
       ],
       "dividend_total": 139,
-      "current_price": 22960,
-      "dividend_yield_pct": 0.61,
+      "current_price": 36715,
+      "dividend_yield_pct": 0.38,
       "price_return_pct": 107.72,
       "total_return_pct": 108.51
     },
     {
       "no": 4,
-      "brand": "KoAct",
+      "brand": "Koact",
       "name": "KoAct 코리아밸류업액티브",
       "code": "495230",
-      "cycle": "월배",
-      "listed": "—",
-      "market_cap": "—",
-      "expense_ratio": "—",
+      "cycle": "월말",
+      "listed": "24.11.04",
+      "market_cap": "3,479억",
+      "expense_ratio": "0.50%%",
       "months": [
         44,
         53,
@@ -120,8 +120,8 @@
         null
       ],
       "dividend_total": 206,
-      "current_price": 23330,
-      "dividend_yield_pct": 0.88,
+      "current_price": 37210,
+      "dividend_yield_pct": 0.55,
       "price_return_pct": 106.44,
       "total_return_pct": 107.58
     },
@@ -130,10 +130,10 @@
       "brand": "TIGER",
       "name": "TIGER 200타겟위클리커버드콜",
       "code": "0104N0",
-      "cycle": "월배",
-      "listed": "—",
-      "market_cap": "—",
-      "expense_ratio": "—",
+      "cycle": "월중",
+      "listed": "25.09.23",
+      "market_cap": "2307억",
+      "expense_ratio": "0.25%%",
       "months": [
         80,
         92,
@@ -149,8 +149,8 @@
         null
       ],
       "dividend_total": 509,
-      "current_price": 15590,
-      "dividend_yield_pct": 3.26,
+      "current_price": 24285,
+      "dividend_yield_pct": 2.1,
       "price_return_pct": 95.22,
       "total_return_pct": 99.31
     },
@@ -177,8 +177,8 @@
         null
       ],
       "dividend_total": 1460,
-      "current_price": 16510,
-      "dividend_yield_pct": 8.84,
+      "current_price": 24580,
+      "dividend_yield_pct": 5.94,
       "price_return_pct": 81.6,
       "total_return_pct": 92.39,
       "no": 6
@@ -188,10 +188,10 @@
       "brand": "HANARO",
       "name": "HANARO 증권고배당TOP3플러스",
       "code": "0111J0",
-      "cycle": "월배",
-      "listed": "—",
-      "market_cap": "—",
-      "expense_ratio": "—",
+      "cycle": "월말",
+      "listed": "25.10.28",
+      "market_cap": "1,107억",
+      "expense_ratio": "0.07%%",
       "months": [
         10,
         25,
@@ -207,20 +207,20 @@
         null
       ],
       "dividend_total": 105,
-      "current_price": 14305,
-      "dividend_yield_pct": 0.73,
+      "current_price": 18920,
+      "dividend_yield_pct": 0.55,
       "price_return_pct": 89.2,
       "total_return_pct": 90.25
     },
     {
       "no": 8,
       "brand": "KODEX",
-      "name": "KODEX 200타겟위클리커버드콜",
+      "name": "Kodex 200타겟위클리커버드콜",
       "code": "498400",
-      "cycle": "월배",
-      "listed": "—",
-      "market_cap": "—",
-      "expense_ratio": "—",
+      "cycle": "월중",
+      "listed": "24.12.03",
+      "market_cap": "58,630억",
+      "expense_ratio": "0.39%%",
       "months": [
         213,
         244,
@@ -236,8 +236,8 @@
         null
       ],
       "dividend_total": 1319,
-      "current_price": 16745,
-      "dividend_yield_pct": 7.88,
+      "current_price": 24655,
+      "dividend_yield_pct": 5.35,
       "price_return_pct": 79.44,
       "total_return_pct": 89.04
     },
@@ -246,10 +246,10 @@
       "brand": "RISE",
       "name": "RISE 코리아밸류업위클리고정커버드콜",
       "code": "0094M0",
-      "cycle": "월배",
-      "listed": "—",
-      "market_cap": "—",
-      "expense_ratio": "—",
+      "cycle": "월중",
+      "listed": "25.09.02",
+      "market_cap": "1588억",
+      "expense_ratio": "0.30%%",
       "months": [
         190,
         310,
@@ -265,10 +265,39 @@
         null
       ],
       "dividend_total": 1630,
-      "current_price": 15865,
-      "dividend_yield_pct": 10.27,
+      "current_price": 22050,
+      "dividend_yield_pct": 7.39,
       "price_return_pct": 71.8,
       "total_return_pct": 84.5
+    },
+    {
+      "no": 10,
+      "brand": "TIME",
+      "name": "TIME Korea플러스배당액티브",
+      "code": "441800",
+      "cycle": "월배",
+      "listed": "22.09.27",
+      "market_cap": "9776억",
+      "expense_ratio": "0.80%",
+      "months": [
+        117,
+        148,
+        267,
+        154,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "dividend_total": 686,
+      "current_price": 24940,
+      "dividend_yield_pct": 2.75,
+      "price_return_pct": 73.48,
+      "total_return_pct": 78.25
     },
     {
       "brand": "KoAct",
@@ -293,11 +322,11 @@
         null
       ],
       "dividend_total": 614,
-      "current_price": 17060,
-      "dividend_yield_pct": 3.6,
+      "current_price": 24395,
+      "dividend_yield_pct": 0.97,
       "price_return_pct": 75.5,
       "total_return_pct": 77.2,
-      "no": 10
+      "no": 11
     },
     {
       "brand": "ACE",
@@ -322,11 +351,12 @@
         null
       ],
       "dividend_total": 941,
-      "current_price": 14145,
-      "dividend_yield_pct": 6.65,
+      "current_price": 19235,
+      "dividend_yield_pct": 4.89,
       "price_return_pct": 55.62,
       "total_return_pct": 63.24,
-      "no": 11
+      "no": 12,
+      "scope": "overseas"
     },
     {
       "brand": "RISE",
@@ -351,21 +381,21 @@
         null
       ],
       "dividend_total": 827,
-      "current_price": 12430,
-      "dividend_yield_pct": 6.65,
+      "current_price": 15245,
+      "dividend_yield_pct": 5.42,
       "price_return_pct": 40.64,
       "total_return_pct": 48.27,
-      "no": 12
+      "no": 13
     },
     {
-      "no": 13,
+      "no": 14,
       "brand": "KODEX",
-      "name": "KODEX 코리아배당성장",
+      "name": "Kodex 코리아배당성장",
       "code": "211900",
-      "cycle": "월배",
-      "listed": "—",
-      "market_cap": "—",
-      "expense_ratio": "—",
+      "cycle": "월말",
+      "listed": "14.12.17",
+      "market_cap": "1,095억",
+      "expense_ratio": "0.15%%",
       "months": [
         24,
         24,
@@ -381,8 +411,8 @@
         null
       ],
       "dividend_total": 527,
-      "current_price": 26225,
-      "dividend_yield_pct": 2.01,
+      "current_price": 31750,
+      "dividend_yield_pct": 1.66,
       "price_return_pct": 45.18,
       "total_return_pct": 47.59
     },
@@ -409,11 +439,12 @@
         null
       ],
       "dividend_total": 253,
-      "current_price": 10765,
-      "dividend_yield_pct": 2.35,
+      "current_price": 13275,
+      "dividend_yield_pct": 1.91,
       "price_return_pct": 34.57,
       "total_return_pct": 37.13,
-      "no": 14
+      "no": 15,
+      "scope": "overseas"
     },
     {
       "brand": "KODEX",
@@ -438,11 +469,11 @@
         null
       ],
       "dividend_total": 121,
-      "current_price": 18600,
-      "dividend_yield_pct": 0.65,
+      "current_price": 23025,
+      "dividend_yield_pct": 0.53,
       "price_return_pct": 35.36,
       "total_return_pct": 36.07,
-      "no": 15
+      "no": 16
     },
     {
       "brand": "KODEX",
@@ -467,11 +498,11 @@
         null
       ],
       "dividend_total": 15,
-      "current_price": 14000,
-      "dividend_yield_pct": 0.11,
+      "current_price": 14425,
+      "dividend_yield_pct": 0.1,
       "price_return_pct": 35.07,
       "total_return_pct": 35.21,
-      "no": 16
+      "no": 17
     },
     {
       "brand": "TIGER",
@@ -496,11 +527,11 @@
         null
       ],
       "dividend_total": 321,
-      "current_price": 18605,
-      "dividend_yield_pct": 1.73,
+      "current_price": 23130,
+      "dividend_yield_pct": 1.39,
       "price_return_pct": 33.2,
       "total_return_pct": 35.05,
-      "no": 17
+      "no": 18
     },
     {
       "brand": "RISE",
@@ -525,21 +556,21 @@
         null
       ],
       "dividend_total": 250,
-      "current_price": 17635,
-      "dividend_yield_pct": 1.42,
+      "current_price": 19940,
+      "dividend_yield_pct": 1.25,
       "price_return_pct": 32.84,
       "total_return_pct": 34.51,
-      "no": 18
+      "no": 19
     },
     {
-      "no": 19,
+      "no": 20,
       "brand": "KODEX",
-      "name": "KODEX 고배당주",
+      "name": "Kodex 고배당주",
       "code": "279530",
-      "cycle": "월배",
+      "cycle": "월말",
       "listed": "17.10.17",
-      "market_cap": "—",
-      "expense_ratio": "0.30%",
+      "market_cap": "4,170억",
+      "expense_ratio": "0.30%%",
       "months": [
         45,
         47,
@@ -555,20 +586,49 @@
         null
       ],
       "dividend_total": 227,
-      "current_price": 15840,
-      "dividend_yield_pct": 1.43,
+      "current_price": 18615,
+      "dividend_yield_pct": 1.22,
       "price_return_pct": 32.49,
       "total_return_pct": 34.11
     },
     {
-      "no": 20,
-      "brand": "KIWOOM",
-      "name": "KIWOOM 고배당",
-      "code": "104530",
+      "no": 21,
+      "brand": "SOL",
+      "name": "SOL 코리아고배당",
+      "code": "0105E0",
       "cycle": "월배",
-      "listed": "—",
-      "market_cap": "—",
-      "expense_ratio": "—",
+      "listed": "25.09.23",
+      "market_cap": "6759억",
+      "expense_ratio": "0.15%",
+      "months": [
+        60,
+        60,
+        60,
+        60,
+        60,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "dividend_total": 300,
+      "current_price": 12190,
+      "dividend_yield_pct": 2.46,
+      "price_return_pct": 30.7,
+      "total_return_pct": 33.92
+    },
+    {
+      "no": 22,
+      "brand": "KIWOOM",
+      "name": "KIWOOM 코리아고배당",
+      "code": "104530",
+      "cycle": "월중",
+      "listed": "08.07.29",
+      "market_cap": "514억",
+      "expense_ratio": "0.19%%",
       "months": [
         60,
         70,
@@ -584,20 +644,20 @@
         null
       ],
       "dividend_total": 355,
-      "current_price": 18230,
-      "dividend_yield_pct": 1.95,
+      "current_price": 20540,
+      "dividend_yield_pct": 1.73,
       "price_return_pct": 31.08,
       "total_return_pct": 33.34
     },
     {
-      "no": 21,
+      "no": 23,
       "brand": "ACE",
       "name": "ACE 고배당주",
       "code": "0139P0",
-      "cycle": "월배",
-      "listed": "—",
-      "market_cap": "—",
-      "expense_ratio": "—",
+      "cycle": "월말",
+      "listed": "25.12.16",
+      "market_cap": "643억",
+      "expense_ratio": "0.15%%",
       "months": [
         44,
         44,
@@ -613,10 +673,39 @@
         null
       ],
       "dividend_total": 176,
-      "current_price": 13005,
-      "dividend_yield_pct": 1.35,
+      "current_price": 14460,
+      "dividend_yield_pct": 1.22,
       "price_return_pct": 31.39,
       "total_return_pct": 32.99
+    },
+    {
+      "no": 24,
+      "brand": "HANARO",
+      "name": "HANARO K고배당",
+      "code": "322410",
+      "cycle": "월배",
+      "listed": "19.04.23",
+      "market_cap": "528억",
+      "expense_ratio": "0.070%",
+      "months": [
+        50,
+        50,
+        50,
+        60,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "dividend_total": 210,
+      "current_price": 21110,
+      "dividend_yield_pct": 0.99,
+      "price_return_pct": 31.46,
+      "total_return_pct": 32.76
     },
     {
       "brand": "RISE",
@@ -641,11 +730,12 @@
         null
       ],
       "dividend_total": 893,
-      "current_price": 13070,
-      "dividend_yield_pct": 6.83,
+      "current_price": 16130,
+      "dividend_yield_pct": 5.54,
       "price_return_pct": 24.27,
       "total_return_pct": 31.15,
-      "no": 22
+      "no": 25,
+      "scope": "overseas"
     },
     {
       "brand": "KODEX",
@@ -670,21 +760,21 @@
         null
       ],
       "dividend_total": 143,
-      "current_price": 14595,
-      "dividend_yield_pct": 0.98,
+      "current_price": 17350,
+      "dividend_yield_pct": 0.82,
       "price_return_pct": 29.87,
       "total_return_pct": 30.94,
-      "no": 23
+      "no": 26
     },
     {
-      "no": 24,
+      "no": 27,
       "brand": "PLUS",
       "name": "PLUS 고배당주",
       "code": "161510",
-      "cycle": "월배",
+      "cycle": "월말",
       "listed": "12.08.29",
-      "market_cap": "약 2.8조",
-      "expense_ratio": "0.23%",
+      "market_cap": "27,548억",
+      "expense_ratio": "0.23%%",
       "months": [
         86,
         86,
@@ -700,10 +790,69 @@
         null
       ],
       "dividend_total": 344,
-      "current_price": 24300,
-      "dividend_yield_pct": 1.42,
+      "current_price": 27370,
+      "dividend_yield_pct": 1.26,
       "price_return_pct": 28.65,
       "total_return_pct": 30.27
+    },
+    {
+      "no": 28,
+      "brand": "TIGER",
+      "name": "TIGER 코리아배당다우존스",
+      "code": "0052D0",
+      "cycle": "월배",
+      "listed": "25.05.20",
+      "market_cap": "4690억",
+      "expense_ratio": "0.25%",
+      "months": [
+        51,
+        51,
+        58,
+        58,
+        58,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "dividend_total": 276,
+      "current_price": 14830,
+      "dividend_yield_pct": 1.86,
+      "price_return_pct": 26.26,
+      "total_return_pct": 28.61
+    },
+    {
+      "brand": "TIME",
+      "name": "TIME 미국배당다우존스액티브",
+      "code": "0036D0",
+      "cycle": "월배",
+      "listed": "25.04.29",
+      "market_cap": "—",
+      "expense_ratio": "0.80%",
+      "months": [
+        54,
+        55,
+        54,
+        57,
+        65,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "dividend_total": 285,
+      "current_price": 10600,
+      "dividend_yield_pct": 2.69,
+      "price_return_pct": 25.18,
+      "total_return_pct": 28.55,
+      "scope": "overseas",
+      "no": 29
     },
     {
       "brand": "Koact",
@@ -728,21 +877,22 @@
         null
       ],
       "dividend_total": 179,
-      "current_price": 10190,
-      "dividend_yield_pct": 1.76,
+      "current_price": 11770,
+      "dividend_yield_pct": 1.52,
       "price_return_pct": 25.41,
       "total_return_pct": 27.32,
-      "no": 25
+      "no": 30,
+      "scope": "overseas"
     },
     {
-      "no": 26,
+      "no": 31,
       "brand": "KODEX",
-      "name": "KODEX 금융고배당TOP10",
+      "name": "Kodex 금융고배당TOP10",
       "code": "0089D0",
-      "cycle": "월배",
-      "listed": "—",
-      "market_cap": "—",
-      "expense_ratio": "—",
+      "cycle": "월중",
+      "listed": "25.08.12",
+      "market_cap": "2,444억",
+      "expense_ratio": "0.30%%",
       "months": [
         27,
         27,
@@ -758,8 +908,8 @@
         null
       ],
       "dividend_total": 249,
-      "current_price": 11770,
-      "dividend_yield_pct": 2.12,
+      "current_price": 13210,
+      "dividend_yield_pct": 1.88,
       "price_return_pct": 23.52,
       "total_return_pct": 25.84
     },
@@ -786,21 +936,22 @@
         null
       ],
       "dividend_total": 155,
-      "current_price": 12200,
-      "dividend_yield_pct": 1.27,
+      "current_price": 13410,
+      "dividend_yield_pct": 1.16,
       "price_return_pct": 22.63,
       "total_return_pct": 24.05,
-      "no": 27
+      "no": 32,
+      "scope": "overseas"
     },
     {
-      "no": 28,
+      "no": 33,
       "brand": "PLUS",
       "name": "PLUS 자사주매입고배당주",
       "code": "0098N0",
-      "cycle": "월배",
-      "listed": "25.09",
-      "market_cap": "약 1천억",
-      "expense_ratio": "—",
+      "cycle": "월중",
+      "listed": "25.09.16",
+      "market_cap": "986억",
+      "expense_ratio": "0.30%%",
       "months": [
         40,
         40,
@@ -816,8 +967,8 @@
         null
       ],
       "dividend_total": 260,
-      "current_price": 12020,
-      "dividend_yield_pct": 2.16,
+      "current_price": 13150,
+      "dividend_yield_pct": 1.98,
       "price_return_pct": 21.25,
       "total_return_pct": 23.65
     },
@@ -844,11 +995,11 @@
         null
       ],
       "dividend_total": 152,
-      "current_price": 11980,
-      "dividend_yield_pct": 1.27,
+      "current_price": 12485,
+      "dividend_yield_pct": 1.22,
       "price_return_pct": 21.92,
       "total_return_pct": 23.41,
-      "no": 29
+      "no": 34
     },
     {
       "brand": "TIGER",
@@ -873,11 +1024,11 @@
         null
       ],
       "dividend_total": 294,
-      "current_price": 9895,
-      "dividend_yield_pct": 2.97,
+      "current_price": 11455,
+      "dividend_yield_pct": 2.57,
       "price_return_pct": 18.7,
       "total_return_pct": 21.75,
-      "no": 30
+      "no": 35
     },
     {
       "brand": "TIGER",
@@ -902,21 +1053,51 @@
         null
       ],
       "dividend_total": 443,
-      "current_price": 11160,
-      "dividend_yield_pct": 3.97,
+      "current_price": 11880,
+      "dividend_yield_pct": 3.73,
       "price_return_pct": 16.7,
       "total_return_pct": 21.05,
-      "no": 31
+      "no": 36
     },
     {
-      "no": 32,
-      "brand": "KODEX",
-      "name": "KODEX 은행",
-      "code": "091170",
+      "brand": "SOL",
+      "name": "SOL 미국배당다우존스2호",
+      "code": "493420",
       "cycle": "월배",
-      "listed": "—",
+      "listed": "24.10.08",
       "market_cap": "—",
-      "expense_ratio": "—",
+      "expense_ratio": "0.05%",
+      "months": [
+        26,
+        27,
+        35,
+        34,
+        26,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "dividend_total": 148,
+      "current_price": 11290,
+      "dividend_yield_pct": 1.31,
+      "price_return_pct": 19.3,
+      "total_return_pct": 20.86,
+      "scope": "overseas",
+      "no": 37
+    },
+    {
+      "no": 38,
+      "brand": "KODEX",
+      "name": "Kodex 은행",
+      "code": "091170",
+      "cycle": "월말",
+      "listed": "06.06.27",
+      "market_cap": "5,403억",
+      "expense_ratio": "0.30%%",
       "months": [
         45,
         50,
@@ -932,10 +1113,70 @@
         null
       ],
       "dividend_total": 206,
-      "current_price": 13485,
-      "dividend_yield_pct": 1.53,
+      "current_price": 15050,
+      "dividend_yield_pct": 1.37,
       "price_return_pct": 18.93,
       "total_return_pct": 20.55
+    },
+    {
+      "brand": "SOL",
+      "name": "SOL 미국배당다우존스",
+      "code": "446720",
+      "cycle": "월배",
+      "listed": "22.11.15",
+      "market_cap": "—",
+      "expense_ratio": "0.01%",
+      "months": [
+        30,
+        35,
+        33,
+        30,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "dividend_total": 128,
+      "current_price": 12230,
+      "dividend_yield_pct": 1.05,
+      "price_return_pct": 18.89,
+      "total_return_pct": 20.14,
+      "scope": "overseas",
+      "no": 39
+    },
+    {
+      "brand": "TIGER",
+      "name": "TIGER 미국배당다우존스",
+      "code": "458730",
+      "cycle": "월배",
+      "listed": "23.06.20",
+      "market_cap": "—",
+      "expense_ratio": "0.01%",
+      "months": [
+        32,
+        38,
+        36,
+        33,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "dividend_total": 139,
+      "current_price": 13360,
+      "dividend_yield_pct": 1.04,
+      "price_return_pct": 18.63,
+      "total_return_pct": 19.86,
+      "scope": "overseas",
+      "no": 40
     },
     {
       "brand": "TIGER",
@@ -960,11 +1201,12 @@
         null
       ],
       "dividend_total": 501,
-      "current_price": 9400,
-      "dividend_yield_pct": 5.33,
+      "current_price": 10295,
+      "dividend_yield_pct": 4.87,
       "price_return_pct": 14.07,
       "total_return_pct": 19.62,
-      "no": 33
+      "no": 41,
+      "scope": "overseas"
     },
     {
       "brand": "ACE",
@@ -989,11 +1231,12 @@
         null
       ],
       "dividend_total": 180,
-      "current_price": 13530,
-      "dividend_yield_pct": 1.33,
+      "current_price": 15245,
+      "dividend_yield_pct": 1.18,
       "price_return_pct": 18.18,
       "total_return_pct": 19.57,
-      "no": 34
+      "no": 42,
+      "scope": "overseas"
     },
     {
       "brand": "TIGER",
@@ -1018,11 +1261,12 @@
         null
       ],
       "dividend_total": 319,
-      "current_price": 11810,
-      "dividend_yield_pct": 2.7,
+      "current_price": 13155,
+      "dividend_yield_pct": 2.42,
       "price_return_pct": 16.62,
       "total_return_pct": 19.45,
-      "no": 35
+      "no": 43,
+      "scope": "overseas"
     },
     {
       "brand": "KODEX",
@@ -1047,11 +1291,12 @@
         null
       ],
       "dividend_total": 153,
-      "current_price": 11495,
-      "dividend_yield_pct": 1.33,
+      "current_price": 12920,
+      "dividend_yield_pct": 1.18,
       "price_return_pct": 18.04,
       "total_return_pct": 19.44,
-      "no": 36
+      "no": 44,
+      "scope": "overseas"
     },
     {
       "brand": "TIGER",
@@ -1076,21 +1321,22 @@
         null
       ],
       "dividend_total": 368,
-      "current_price": 10200,
-      "dividend_yield_pct": 3.61,
+      "current_price": 11165,
+      "dividend_yield_pct": 3.3,
       "price_return_pct": 14.28,
       "total_return_pct": 18.05,
-      "no": 37
+      "no": 45,
+      "scope": "overseas"
     },
     {
-      "no": 38,
+      "no": 46,
       "brand": "KODEX",
-      "name": "KODEX 주주환원고배당주",
+      "name": "Kodex 주주환원고배당주",
       "code": "0153K0",
-      "cycle": "월배",
-      "listed": "—",
-      "market_cap": "—",
-      "expense_ratio": "—",
+      "cycle": "월중",
+      "listed": "26.01.20",
+      "market_cap": "2,138억",
+      "expense_ratio": "0.33%%",
       "months": [
         null,
         null,
@@ -1106,8 +1352,8 @@
         null
       ],
       "dividend_total": 105,
-      "current_price": 10835,
-      "dividend_yield_pct": 0.97,
+      "current_price": 12010,
+      "dividend_yield_pct": 0.87,
       "price_return_pct": 16.77,
       "total_return_pct": 17.79
     },
@@ -1134,11 +1380,12 @@
         null
       ],
       "dividend_total": 419,
-      "current_price": 9725,
-      "dividend_yield_pct": 4.31,
+      "current_price": 10550,
+      "dividend_yield_pct": 3.97,
       "price_return_pct": 13.2,
       "total_return_pct": 17.69,
-      "no": 39
+      "no": 47,
+      "scope": "overseas"
     },
     {
       "brand": "TIGER",
@@ -1163,11 +1410,12 @@
         null
       ],
       "dividend_total": 527,
-      "current_price": 10480,
-      "dividend_yield_pct": 5.03,
+      "current_price": 11855,
+      "dividend_yield_pct": 4.45,
       "price_return_pct": 12.16,
       "total_return_pct": 17.14,
-      "no": 40
+      "no": 48,
+      "scope": "overseas"
     },
     {
       "brand": "KIWOOM",
@@ -1192,11 +1440,12 @@
         null
       ],
       "dividend_total": 129,
-      "current_price": 10425,
-      "dividend_yield_pct": 1.24,
+      "current_price": 11895,
+      "dividend_yield_pct": 1.08,
       "price_return_pct": 15.6,
       "total_return_pct": 16.85,
-      "no": 41
+      "no": 49,
+      "scope": "overseas"
     },
     {
       "brand": "RISE",
@@ -1221,11 +1470,12 @@
         null
       ],
       "dividend_total": 615,
-      "current_price": 8890,
-      "dividend_yield_pct": 6.92,
+      "current_price": 9495,
+      "dividend_yield_pct": 6.48,
       "price_return_pct": 9.01,
       "total_return_pct": 16.07,
-      "no": 42
+      "no": 50,
+      "scope": "overseas"
     },
     {
       "brand": "RISE",
@@ -1250,11 +1500,12 @@
         null
       ],
       "dividend_total": 699,
-      "current_price": 10750,
-      "dividend_yield_pct": 6.5,
+      "current_price": 11910,
+      "dividend_yield_pct": 5.87,
       "price_return_pct": 9.32,
       "total_return_pct": 15.73,
-      "no": 43
+      "no": 51,
+      "scope": "overseas"
     },
     {
       "brand": "KIWOOM",
@@ -1279,11 +1530,42 @@
         null
       ],
       "dividend_total": 52,
-      "current_price": 10615,
-      "dividend_yield_pct": 0.49,
+      "current_price": 12310,
+      "dividend_yield_pct": 0.42,
       "price_return_pct": 15.1,
       "total_return_pct": 15.59,
-      "no": 44
+      "no": 52,
+      "scope": "overseas"
+    },
+    {
+      "brand": "SOL",
+      "name": "SOL 미국배당다우존스(H)",
+      "code": "452360",
+      "cycle": "월배",
+      "listed": "23.03.21",
+      "market_cap": "—",
+      "expense_ratio": "0.05%",
+      "months": [
+        28,
+        33,
+        30,
+        28,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "dividend_total": 119,
+      "current_price": 11550,
+      "dividend_yield_pct": 1.03,
+      "price_return_pct": 13.35,
+      "total_return_pct": 14.52,
+      "scope": "overseas",
+      "no": 53
     },
     {
       "brand": "TIGER",
@@ -1308,11 +1590,12 @@
         null
       ],
       "dividend_total": 750,
-      "current_price": 11800,
-      "dividend_yield_pct": 6.36,
+      "current_price": 12985,
+      "dividend_yield_pct": 5.78,
       "price_return_pct": 7.94,
       "total_return_pct": 14.17,
-      "no": 45
+      "no": 54,
+      "scope": "overseas"
     },
     {
       "brand": "KIWOOM",
@@ -1337,11 +1620,11 @@
         null
       ],
       "dividend_total": 60,
-      "current_price": 10275,
-      "dividend_yield_pct": 0.58,
+      "current_price": 11465,
+      "dividend_yield_pct": 0.52,
       "price_return_pct": 13.07,
       "total_return_pct": 13.66,
-      "no": 46
+      "no": 55
     },
     {
       "brand": "KIWOOM",
@@ -1366,11 +1649,41 @@
         null
       ],
       "dividend_total": 42,
-      "current_price": 10095,
-      "dividend_yield_pct": 0.42,
+      "current_price": 11420,
+      "dividend_yield_pct": 0.37,
       "price_return_pct": 13.18,
       "total_return_pct": 13.6,
-      "no": 47
+      "no": 56
+    },
+    {
+      "brand": "RISE",
+      "name": "RISE 글로벌리얼티인컴",
+      "code": "475380",
+      "cycle": "월배",
+      "listed": "24.02.20",
+      "market_cap": "—",
+      "expense_ratio": "0.01%",
+      "months": [
+        31,
+        31,
+        33,
+        35,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "dividend_total": 130,
+      "current_price": 10500,
+      "dividend_yield_pct": 1.24,
+      "price_return_pct": 11.87,
+      "total_return_pct": 13.26,
+      "scope": "overseas",
+      "no": 57
     },
     {
       "brand": "PLUS",
@@ -1395,11 +1708,11 @@
         null
       ],
       "dividend_total": 192,
-      "current_price": 15180,
-      "dividend_yield_pct": 1.26,
+      "current_price": 16000,
+      "dividend_yield_pct": 1.2,
       "price_return_pct": 11.89,
       "total_return_pct": 13.23,
-      "no": 48
+      "no": 58
     },
     {
       "brand": "KODEX",
@@ -1424,11 +1737,42 @@
         null
       ],
       "dividend_total": 661,
-      "current_price": 9905,
-      "dividend_yield_pct": 6.67,
+      "current_price": 10675,
+      "dividend_yield_pct": 6.19,
       "price_return_pct": 6.43,
       "total_return_pct": 13.02,
-      "no": 49
+      "no": 59,
+      "scope": "overseas"
+    },
+    {
+      "brand": "SOL",
+      "name": "SOL 미국S&P500",
+      "code": "433330",
+      "cycle": "월배",
+      "listed": "22.06.21",
+      "market_cap": "—",
+      "expense_ratio": "0.05%",
+      "months": [
+        12,
+        14,
+        21,
+        10,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "dividend_total": 57,
+      "current_price": 20645,
+      "dividend_yield_pct": 0.28,
+      "price_return_pct": 12.42,
+      "total_return_pct": 12.73,
+      "scope": "overseas",
+      "no": 60
     },
     {
       "brand": "RISE",
@@ -1453,11 +1797,42 @@
         null
       ],
       "dividend_total": 595,
-      "current_price": 9725,
-      "dividend_yield_pct": 6.12,
+      "current_price": 10440,
+      "dividend_yield_pct": 5.7,
       "price_return_pct": 6.58,
       "total_return_pct": 12.66,
-      "no": 50
+      "no": 61,
+      "scope": "overseas"
+    },
+    {
+      "brand": "HANARO",
+      "name": "HANARO 미국S&P500",
+      "code": "432840",
+      "cycle": "월배",
+      "listed": "22.06.08",
+      "market_cap": "—",
+      "expense_ratio": "0.05%",
+      "months": [
+        9,
+        10,
+        11,
+        13,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "dividend_total": 43,
+      "current_price": 18590,
+      "dividend_yield_pct": 0.23,
+      "price_return_pct": 12.37,
+      "total_return_pct": 12.63,
+      "scope": "overseas",
+      "no": 62
     },
     {
       "brand": "KODEX",
@@ -1482,21 +1857,21 @@
         null
       ],
       "dividend_total": 197,
-      "current_price": 15415,
-      "dividend_yield_pct": 1.28,
+      "current_price": 16280,
+      "dividend_yield_pct": 1.21,
       "price_return_pct": 11.16,
       "total_return_pct": 12.51,
-      "no": 51
+      "no": 63
     },
     {
-      "no": 52,
+      "no": 64,
       "brand": "PLUS",
       "name": "PLUS 고배당주위클리고정커버드콜",
       "code": "0018C0",
-      "cycle": "월배",
-      "listed": "—",
-      "market_cap": "—",
-      "expense_ratio": "—",
+      "cycle": "월중",
+      "listed": "25.03.05",
+      "market_cap": "977억",
+      "expense_ratio": "0.30%%",
       "months": [
         145,
         173,
@@ -1512,8 +1887,8 @@
         null
       ],
       "dividend_total": 799,
-      "current_price": 12800,
-      "dividend_yield_pct": 6.24,
+      "current_price": 12440,
+      "dividend_yield_pct": 6.42,
       "price_return_pct": 5.2,
       "total_return_pct": 11.96
     },
@@ -1540,11 +1915,11 @@
         null
       ],
       "dividend_total": 139,
-      "current_price": 10050,
-      "dividend_yield_pct": 1.38,
+      "current_price": 11125,
+      "dividend_yield_pct": 1.25,
       "price_return_pct": 10.53,
       "total_return_pct": 11.91,
-      "no": 53
+      "no": 65
     },
     {
       "brand": "ACE",
@@ -1569,11 +1944,12 @@
         null
       ],
       "dividend_total": 786,
-      "current_price": 12635,
-      "dividend_yield_pct": 6.22,
+      "current_price": 13440,
+      "dividend_yield_pct": 5.85,
       "price_return_pct": 5.66,
       "total_return_pct": 11.84,
-      "no": 54
+      "no": 66,
+      "scope": "overseas"
     },
     {
       "brand": "ACE",
@@ -1598,11 +1974,12 @@
         null
       ],
       "dividend_total": 682,
-      "current_price": 10640,
-      "dividend_yield_pct": 6.41,
+      "current_price": 11345,
+      "dividend_yield_pct": 6.01,
       "price_return_pct": 5.39,
       "total_return_pct": 11.72,
-      "no": 55
+      "no": 67,
+      "scope": "overseas"
     },
     {
       "brand": "KODEX",
@@ -1627,11 +2004,12 @@
         null
       ],
       "dividend_total": 383,
-      "current_price": 9590,
-      "dividend_yield_pct": 3.99,
+      "current_price": 10590,
+      "dividend_yield_pct": 3.62,
       "price_return_pct": 7.79,
       "total_return_pct": 11.68,
-      "no": 56
+      "no": 68,
+      "scope": "overseas"
     },
     {
       "brand": "PLUS",
@@ -1656,11 +2034,11 @@
         null
       ],
       "dividend_total": 39,
-      "current_price": 10820,
-      "dividend_yield_pct": 0.36,
+      "current_price": 12015,
+      "dividend_yield_pct": 0.32,
       "price_return_pct": 11.3,
       "total_return_pct": 11.66,
-      "no": 57
+      "no": 69
     },
     {
       "brand": "KODEX",
@@ -1685,11 +2063,12 @@
         null
       ],
       "dividend_total": 616,
-      "current_price": 12450,
-      "dividend_yield_pct": 4.95,
+      "current_price": 13460,
+      "dividend_yield_pct": 4.58,
       "price_return_pct": 6.66,
       "total_return_pct": 11.54,
-      "no": 58
+      "no": 70,
+      "scope": "overseas"
     },
     {
       "brand": "SOL",
@@ -1714,11 +2093,11 @@
         null
       ],
       "dividend_total": 213,
-      "current_price": 16335,
-      "dividend_yield_pct": 1.3,
+      "current_price": 15405,
+      "dividend_yield_pct": 1.38,
       "price_return_pct": 9.96,
       "total_return_pct": 11.48,
-      "no": 59
+      "no": 71
     },
     {
       "brand": "SOL",
@@ -1743,11 +2122,102 @@
         null
       ],
       "dividend_total": 439,
-      "current_price": 10865,
-      "dividend_yield_pct": 4.04,
+      "current_price": 11710,
+      "dividend_yield_pct": 3.75,
       "price_return_pct": 7.23,
       "total_return_pct": 11.25,
-      "no": 60
+      "no": 72,
+      "scope": "overseas"
+    },
+    {
+      "brand": "TIGER",
+      "name": "TIGER 미국MSCI리츠(합성 H)",
+      "code": "182480",
+      "cycle": "월배",
+      "listed": "13.10.10",
+      "market_cap": "—",
+      "expense_ratio": "0.24%",
+      "months": [
+        42,
+        10,
+        50,
+        50,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "dividend_total": 152,
+      "current_price": 12405,
+      "dividend_yield_pct": 1.23,
+      "price_return_pct": 9.57,
+      "total_return_pct": 10.92,
+      "scope": "overseas",
+      "no": 73
+    },
+    {
+      "brand": "SOL",
+      "name": "SOL 미국배당미국채혼합50",
+      "code": "490490",
+      "cycle": "월배",
+      "listed": "24.09.24",
+      "market_cap": "—",
+      "expense_ratio": "0.15%",
+      "months": [
+        31,
+        24,
+        30,
+        30,
+        22,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "dividend_total": 137,
+      "current_price": 10815,
+      "dividend_yield_pct": 1.27,
+      "price_return_pct": 9.36,
+      "total_return_pct": 10.75,
+      "scope": "overseas",
+      "no": 74
+    },
+    {
+      "brand": "TIGER",
+      "name": "TIGER 글로벌멀티에셋TIF액티브",
+      "code": "440340",
+      "cycle": "월배",
+      "listed": "22.08.30",
+      "market_cap": "—",
+      "expense_ratio": "0.55%",
+      "months": [
+        35,
+        40,
+        42,
+        46,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "dividend_total": 163,
+      "current_price": 11940,
+      "dividend_yield_pct": 1.37,
+      "price_return_pct": 9.18,
+      "total_return_pct": 10.68,
+      "scope": "overseas",
+      "no": 75
     },
     {
       "brand": "TIGER",
@@ -1772,11 +2242,12 @@
         null
       ],
       "dividend_total": 395,
-      "current_price": 11675,
-      "dividend_yield_pct": 3.38,
+      "current_price": 12630,
+      "dividend_yield_pct": 3.13,
       "price_return_pct": 7.26,
       "total_return_pct": 10.62,
-      "no": 61
+      "no": 76,
+      "scope": "overseas"
     },
     {
       "brand": "KIWOOM",
@@ -1801,11 +2272,12 @@
         null
       ],
       "dividend_total": 64,
-      "current_price": 10010,
-      "dividend_yield_pct": 0.64,
+      "current_price": 11040,
+      "dividend_yield_pct": 0.58,
       "price_return_pct": 9.63,
       "total_return_pct": 10.27,
-      "no": 62
+      "no": 77,
+      "scope": "overseas"
     },
     {
       "brand": "ACE",
@@ -1830,11 +2302,12 @@
         null
       ],
       "dividend_total": 59,
-      "current_price": 12015,
-      "dividend_yield_pct": 0.49,
+      "current_price": 13045,
+      "dividend_yield_pct": 0.45,
       "price_return_pct": 9.67,
       "total_return_pct": 10.16,
-      "no": 63
+      "no": 78,
+      "scope": "overseas"
     },
     {
       "brand": "KODEX",
@@ -1859,11 +2332,12 @@
         null
       ],
       "dividend_total": 487,
-      "current_price": 9675,
-      "dividend_yield_pct": 5.03,
+      "current_price": 10305,
+      "dividend_yield_pct": 4.73,
       "price_return_pct": 5.1,
       "total_return_pct": 10.07,
-      "no": 64
+      "no": 79,
+      "scope": "overseas"
     },
     {
       "brand": "TIGER",
@@ -1888,11 +2362,12 @@
         null
       ],
       "dividend_total": 449,
-      "current_price": 10940,
-      "dividend_yield_pct": 4.1,
+      "current_price": 11570,
+      "dividend_yield_pct": 3.88,
       "price_return_pct": 5.76,
       "total_return_pct": 9.86,
-      "no": 65
+      "no": 80,
+      "scope": "overseas"
     },
     {
       "brand": "KODEX",
@@ -1917,11 +2392,42 @@
         null
       ],
       "dividend_total": 164,
-      "current_price": 10950,
-      "dividend_yield_pct": 1.5,
+      "current_price": 11930,
+      "dividend_yield_pct": 1.37,
       "price_return_pct": 8.36,
       "total_return_pct": 9.85,
-      "no": 66
+      "no": 81,
+      "scope": "overseas"
+    },
+    {
+      "brand": "SOL",
+      "name": "SOL 미국S&P500엔화노출(H)",
+      "code": "499150",
+      "cycle": "월배",
+      "listed": "24.12.03",
+      "market_cap": "—",
+      "expense_ratio": "0.15%",
+      "months": [
+        10,
+        10,
+        10,
+        10,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "dividend_total": 40,
+      "current_price": 10750,
+      "dividend_yield_pct": 0.37,
+      "price_return_pct": 8.86,
+      "total_return_pct": 9.26,
+      "scope": "overseas",
+      "no": 82
     },
     {
       "brand": "KODEX",
@@ -1946,11 +2452,12 @@
         null
       ],
       "dividend_total": 98,
-      "current_price": 11700,
-      "dividend_yield_pct": 0.84,
+      "current_price": 12515,
+      "dividend_yield_pct": 0.78,
       "price_return_pct": 8.26,
       "total_return_pct": 9.11,
-      "no": 67
+      "no": 83,
+      "scope": "overseas"
     },
     {
       "brand": "TIGER",
@@ -1975,11 +2482,12 @@
         null
       ],
       "dividend_total": 653,
-      "current_price": 15405,
-      "dividend_yield_pct": 4.24,
+      "current_price": 16615,
+      "dividend_yield_pct": 3.93,
       "price_return_pct": 4.63,
       "total_return_pct": 8.74,
-      "no": 68
+      "no": 84,
+      "scope": "overseas"
     },
     {
       "brand": "TIGER",
@@ -2004,11 +2512,12 @@
         null
       ],
       "dividend_total": 401,
-      "current_price": 9695,
-      "dividend_yield_pct": 4.14,
+      "current_price": 10280,
+      "dividend_yield_pct": 3.9,
       "price_return_pct": 4.58,
       "total_return_pct": 8.66,
-      "no": 69
+      "no": 85,
+      "scope": "overseas"
     },
     {
       "brand": "ACE",
@@ -2033,11 +2542,12 @@
         null
       ],
       "dividend_total": 948,
-      "current_price": 80400,
-      "dividend_yield_pct": 1.18,
+      "current_price": 85740,
+      "dividend_yield_pct": 1.11,
       "price_return_pct": 6.99,
       "total_return_pct": 8.18,
-      "no": 70
+      "no": 86,
+      "scope": "overseas"
     },
     {
       "brand": "PLUS",
@@ -2062,11 +2572,11 @@
         null
       ],
       "dividend_total": 44,
-      "current_price": 11465,
-      "dividend_yield_pct": 0.38,
+      "current_price": 12315,
+      "dividend_yield_pct": 0.36,
       "price_return_pct": 7.6,
       "total_return_pct": 7.99,
-      "no": 71
+      "no": 87
     },
     {
       "brand": "KODEX",
@@ -2091,11 +2601,11 @@
         null
       ],
       "dividend_total": 671,
-      "current_price": 12345,
-      "dividend_yield_pct": 5.44,
+      "current_price": 12150,
+      "dividend_yield_pct": 5.52,
       "price_return_pct": 2.32,
       "total_return_pct": 7.97,
-      "no": 72
+      "no": 88
     },
     {
       "brand": "KODEX",
@@ -2120,11 +2630,12 @@
         null
       ],
       "dividend_total": 495,
-      "current_price": 12660,
-      "dividend_yield_pct": 3.91,
+      "current_price": 13160,
+      "dividend_yield_pct": 3.76,
       "price_return_pct": 3.99,
       "total_return_pct": 7.9,
-      "no": 73
+      "no": 89,
+      "scope": "overseas"
     },
     {
       "brand": "KODEX",
@@ -2149,11 +2660,102 @@
         null
       ],
       "dividend_total": 162,
-      "current_price": 21380,
-      "dividend_yield_pct": 0.76,
+      "current_price": 22750,
+      "dividend_yield_pct": 0.71,
       "price_return_pct": 7.08,
       "total_return_pct": 7.85,
-      "no": 74
+      "no": 90,
+      "scope": "overseas"
+    },
+    {
+      "brand": "SOL",
+      "name": "SOL 미국S&P500미국채혼합50",
+      "code": "0080X0",
+      "cycle": "월배",
+      "listed": "25.07.15",
+      "market_cap": "—",
+      "expense_ratio": "0.15%",
+      "months": [
+        11,
+        18,
+        20,
+        22,
+        18,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "dividend_total": 89,
+      "current_price": 11000,
+      "dividend_yield_pct": 0.81,
+      "price_return_pct": 6.91,
+      "total_return_pct": 7.78,
+      "scope": "overseas",
+      "no": 91
+    },
+    {
+      "brand": "RISE",
+      "name": "RISE 미국S&P500(H)",
+      "code": "453330",
+      "cycle": "월배",
+      "listed": "23.03.21",
+      "market_cap": "—",
+      "expense_ratio": "0.01%",
+      "months": [
+        15,
+        16,
+        15,
+        15,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "dividend_total": 61,
+      "current_price": 16465,
+      "dividend_yield_pct": 0.37,
+      "price_return_pct": 7.23,
+      "total_return_pct": 7.63,
+      "scope": "overseas",
+      "no": 92
+    },
+    {
+      "brand": "TIGER",
+      "name": "TIGER 미국다우존스30",
+      "code": "245340",
+      "cycle": "월배",
+      "listed": "16.07.01",
+      "market_cap": "—",
+      "expense_ratio": "0.35%",
+      "months": [
+        22,
+        40,
+        59,
+        25,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "dividend_total": 146,
+      "current_price": 34125,
+      "dividend_yield_pct": 0.43,
+      "price_return_pct": 7.07,
+      "total_return_pct": 7.53,
+      "scope": "overseas",
+      "no": 93
     },
     {
       "brand": "ACE",
@@ -2178,11 +2780,72 @@
         null
       ],
       "dividend_total": 278,
-      "current_price": 11360,
-      "dividend_yield_pct": 2.45,
+      "current_price": 11880,
+      "dividend_yield_pct": 2.34,
       "price_return_pct": 4.85,
       "total_return_pct": 7.31,
-      "no": 75
+      "no": 94,
+      "scope": "overseas"
+    },
+    {
+      "brand": "RISE",
+      "name": "RISE 미국고배당다우존스TOP10",
+      "code": "0115C0",
+      "cycle": "월배",
+      "listed": "25.10.21",
+      "market_cap": "—",
+      "expense_ratio": "0.01%",
+      "months": [
+        34,
+        34,
+        34,
+        34,
+        34,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "dividend_total": 170,
+      "current_price": 10905,
+      "dividend_yield_pct": 1.56,
+      "price_return_pct": 5.34,
+      "total_return_pct": 6.98,
+      "scope": "overseas",
+      "no": 95
+    },
+    {
+      "brand": "TIGER",
+      "name": "TIGER 미국캐시카우100",
+      "code": "465670",
+      "cycle": "월배",
+      "listed": "23.09.19",
+      "market_cap": "—",
+      "expense_ratio": "0.25%",
+      "months": [
+        16,
+        21,
+        12,
+        16,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "dividend_total": 65,
+      "current_price": 14395,
+      "dividend_yield_pct": 0.45,
+      "price_return_pct": 5.99,
+      "total_return_pct": 6.47,
+      "scope": "overseas",
+      "no": 96
     },
     {
       "brand": "PLUS",
@@ -2207,11 +2870,12 @@
         null
       ],
       "dividend_total": 511,
-      "current_price": 9550,
-      "dividend_yield_pct": 5.35,
+      "current_price": 9760,
+      "dividend_yield_pct": 5.24,
       "price_return_pct": 1.09,
       "total_return_pct": 6.38,
-      "no": 76
+      "no": 97,
+      "scope": "overseas"
     },
     {
       "brand": "ACE",
@@ -2236,11 +2900,42 @@
         null
       ],
       "dividend_total": 271,
-      "current_price": 11695,
-      "dividend_yield_pct": 2.32,
+      "current_price": 11995,
+      "dividend_yield_pct": 2.26,
       "price_return_pct": 3.49,
       "total_return_pct": 5.83,
-      "no": 77
+      "no": 98,
+      "scope": "overseas"
+    },
+    {
+      "brand": "RISE",
+      "name": "RISE 미국S&P배당킹",
+      "code": "460660",
+      "cycle": "월배",
+      "listed": "23.06.27",
+      "market_cap": "—",
+      "expense_ratio": "0.01%",
+      "months": [
+        28,
+        30,
+        29,
+        29,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "dividend_total": 116,
+      "current_price": 11345,
+      "dividend_yield_pct": 1.02,
+      "price_return_pct": 4.53,
+      "total_return_pct": 5.6,
+      "scope": "overseas",
+      "no": 99
     },
     {
       "brand": "ACE",
@@ -2265,11 +2960,72 @@
         null
       ],
       "dividend_total": 79,
-      "current_price": 10960,
-      "dividend_yield_pct": 0.72,
+      "current_price": 11410,
+      "dividend_yield_pct": 0.69,
       "price_return_pct": 4.73,
       "total_return_pct": 5.45,
-      "no": 78
+      "no": 100,
+      "scope": "overseas"
+    },
+    {
+      "brand": "TIGER",
+      "name": "TIGER 미국초단기(3개월이하)국채",
+      "code": "0046A0",
+      "cycle": "월배",
+      "listed": "25.04.29",
+      "market_cap": "—",
+      "expense_ratio": "0.09%",
+      "months": [
+        25,
+        29,
+        31,
+        27,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "dividend_total": 112,
+      "current_price": 9970,
+      "dividend_yield_pct": 1.12,
+      "price_return_pct": 4.16,
+      "total_return_pct": 5.33,
+      "scope": "overseas",
+      "no": 101
+    },
+    {
+      "brand": "TIGER",
+      "name": "TIGER 미국S&P500배당귀족",
+      "code": "429000",
+      "cycle": "월배",
+      "listed": "22.05.17",
+      "market_cap": "—",
+      "expense_ratio": "0.25%",
+      "months": [
+        16,
+        24,
+        27,
+        24,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "dividend_total": 91,
+      "current_price": 13245,
+      "dividend_yield_pct": 0.69,
+      "price_return_pct": 4.35,
+      "total_return_pct": 5.07,
+      "scope": "overseas",
+      "no": 102
     },
     {
       "brand": "KODEX",
@@ -2294,11 +3050,12 @@
         null
       ],
       "dividend_total": 154,
-      "current_price": 12350,
-      "dividend_yield_pct": 1.25,
+      "current_price": 12810,
+      "dividend_yield_pct": 1.2,
       "price_return_pct": 3.64,
       "total_return_pct": 4.89,
-      "no": 79
+      "no": 103,
+      "scope": "overseas"
     },
     {
       "brand": "KODEX",
@@ -2323,11 +3080,12 @@
         null
       ],
       "dividend_total": 31,
-      "current_price": 11360,
-      "dividend_yield_pct": 0.27,
+      "current_price": 11920,
+      "dividend_yield_pct": 0.26,
       "price_return_pct": 4.56,
       "total_return_pct": 4.83,
-      "no": 80
+      "no": 104,
+      "scope": "overseas"
     },
     {
       "brand": "KODEX",
@@ -2352,11 +3110,12 @@
         null
       ],
       "dividend_total": 145,
-      "current_price": 17580,
-      "dividend_yield_pct": 0.82,
+      "current_price": 18290,
+      "dividend_yield_pct": 0.79,
       "price_return_pct": 3.98,
       "total_return_pct": 4.8,
-      "no": 81
+      "no": 105,
+      "scope": "overseas"
     },
     {
       "brand": "KODEX",
@@ -2381,11 +3140,12 @@
         null
       ],
       "dividend_total": 187,
-      "current_price": 14385,
-      "dividend_yield_pct": 1.3,
+      "current_price": 14915,
+      "dividend_yield_pct": 1.25,
       "price_return_pct": 3.47,
       "total_return_pct": 4.77,
-      "no": 82
+      "no": 106,
+      "scope": "overseas"
     },
     {
       "brand": "PLUS",
@@ -2410,11 +3170,12 @@
         null
       ],
       "dividend_total": 1573,
-      "current_price": 131495,
-      "dividend_yield_pct": 1.2,
+      "current_price": 135955,
+      "dividend_yield_pct": 1.16,
       "price_return_pct": 3.28,
       "total_return_pct": 4.47,
-      "no": 83
+      "no": 107,
+      "scope": "overseas"
     },
     {
       "brand": "KODEX",
@@ -2439,11 +3200,12 @@
         null
       ],
       "dividend_total": 267,
-      "current_price": 11625,
-      "dividend_yield_pct": 2.3,
+      "current_price": 11880,
+      "dividend_yield_pct": 2.25,
       "price_return_pct": 2.06,
       "total_return_pct": 4.36,
-      "no": 84
+      "no": 108,
+      "scope": "overseas"
     },
     {
       "brand": "KODEX",
@@ -2468,11 +3230,12 @@
         null
       ],
       "dividend_total": 956,
-      "current_price": 63115,
-      "dividend_yield_pct": 1.51,
+      "current_price": 65060,
+      "dividend_yield_pct": 1.47,
       "price_return_pct": 2.56,
       "total_return_pct": 4.07,
-      "no": 85
+      "no": 109,
+      "scope": "overseas"
     },
     {
       "brand": "KIWOOM",
@@ -2497,11 +3260,12 @@
         null
       ],
       "dividend_total": 98,
-      "current_price": 15785,
-      "dividend_yield_pct": 0.62,
+      "current_price": 16090,
+      "dividend_yield_pct": 0.61,
       "price_return_pct": 2.61,
       "total_return_pct": 3.24,
-      "no": 86
+      "no": 110,
+      "scope": "overseas"
     },
     {
       "brand": "KODEX",
@@ -2526,11 +3290,12 @@
         null
       ],
       "dividend_total": 174,
-      "current_price": 11705,
-      "dividend_yield_pct": 1.49,
+      "current_price": 11990,
+      "dividend_yield_pct": 1.45,
       "price_return_pct": 1.44,
       "total_return_pct": 2.91,
-      "no": 87
+      "no": 111,
+      "scope": "overseas"
     },
     {
       "brand": "ACE",
@@ -2555,11 +3320,12 @@
         null
       ],
       "dividend_total": 122,
-      "current_price": 10500,
-      "dividend_yield_pct": 1.16,
+      "current_price": 10760,
+      "dividend_yield_pct": 1.13,
       "price_return_pct": 1.46,
       "total_return_pct": 2.61,
-      "no": 88
+      "no": 112,
+      "scope": "overseas"
     },
     {
       "brand": "KODEX",
@@ -2584,11 +3350,12 @@
         null
       ],
       "dividend_total": 150,
-      "current_price": 14255,
-      "dividend_yield_pct": 1.05,
+      "current_price": 14505,
+      "dividend_yield_pct": 1.03,
       "price_return_pct": 1.22,
       "total_return_pct": 2.27,
-      "no": 89
+      "no": 113,
+      "scope": "overseas"
     },
     {
       "brand": "SOL",
@@ -2613,11 +3380,12 @@
         null
       ],
       "dividend_total": 322,
-      "current_price": 8985,
-      "dividend_yield_pct": 3.58,
+      "current_price": 9050,
+      "dividend_yield_pct": 3.56,
       "price_return_pct": -1.31,
       "total_return_pct": 2.2,
-      "no": 90
+      "no": 114,
+      "scope": "overseas"
     },
     {
       "brand": "PLUS",
@@ -2642,11 +3410,42 @@
         null
       ],
       "dividend_total": 1427,
-      "current_price": 96930,
-      "dividend_yield_pct": 1.47,
+      "current_price": 98680,
+      "dividend_yield_pct": 1.45,
       "price_return_pct": 0.66,
       "total_return_pct": 2.11,
-      "no": 91
+      "no": 115,
+      "scope": "overseas"
+    },
+    {
+      "brand": "FOCUS",
+      "name": "FOCUS 알리바바미국채커버드콜혼합",
+      "code": "0073X0",
+      "cycle": "월배",
+      "listed": "25.07.01",
+      "market_cap": "—",
+      "expense_ratio": "0.36%",
+      "months": [
+        116,
+        112,
+        108,
+        105,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "dividend_total": 441,
+      "current_price": 11320,
+      "dividend_yield_pct": 3.9,
+      "price_return_pct": -1.74,
+      "total_return_pct": 2.09,
+      "scope": "overseas",
+      "no": 116
     },
     {
       "brand": "RISE",
@@ -2671,11 +3470,12 @@
         null
       ],
       "dividend_total": 290,
-      "current_price": 8915,
-      "dividend_yield_pct": 3.25,
+      "current_price": 8975,
+      "dividend_yield_pct": 3.23,
       "price_return_pct": -1.37,
       "total_return_pct": 1.81,
-      "no": 92
+      "no": 117,
+      "scope": "overseas"
     },
     {
       "brand": "1Q",
@@ -2700,11 +3500,12 @@
         null
       ],
       "dividend_total": 112,
-      "current_price": 9055,
+      "current_price": 9030,
       "dividend_yield_pct": 1.24,
       "price_return_pct": 0.5,
       "total_return_pct": 1.75,
-      "no": 93
+      "no": 118,
+      "scope": "overseas"
     },
     {
       "brand": "KIWOOM",
@@ -2729,11 +3530,12 @@
         null
       ],
       "dividend_total": 80,
-      "current_price": 10530,
-      "dividend_yield_pct": 0.76,
+      "current_price": 10760,
+      "dividend_yield_pct": 0.74,
       "price_return_pct": 0.87,
       "total_return_pct": 1.62,
-      "no": 94
+      "no": 119,
+      "scope": "overseas"
     },
     {
       "brand": "PLUS",
@@ -2758,11 +3560,12 @@
         null
       ],
       "dividend_total": 974,
-      "current_price": 9660,
-      "dividend_yield_pct": 10.08,
+      "current_price": 9225,
+      "dividend_yield_pct": 10.56,
       "price_return_pct": -8.12,
       "total_return_pct": 1.58,
-      "no": 95
+      "no": 120,
+      "scope": "overseas"
     },
     {
       "brand": "ACE",
@@ -2787,11 +3590,42 @@
         null
       ],
       "dividend_total": 125,
-      "current_price": 9785,
-      "dividend_yield_pct": 1.28,
+      "current_price": 9950,
+      "dividend_yield_pct": 1.26,
       "price_return_pct": 0.2,
       "total_return_pct": 1.46,
-      "no": 96
+      "no": 121,
+      "scope": "overseas"
+    },
+    {
+      "brand": "TIGER",
+      "name": "TIGER 글로벌비만치료제TOP2Plus",
+      "code": "476690",
+      "cycle": "월배",
+      "listed": "24.02.29",
+      "market_cap": "—",
+      "expense_ratio": "0.45%",
+      "months": [
+        12,
+        12,
+        33,
+        12,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "dividend_total": 69,
+      "current_price": 10830,
+      "dividend_yield_pct": 0.64,
+      "price_return_pct": 0.81,
+      "total_return_pct": 1.46,
+      "scope": "overseas",
+      "no": 122
     },
     {
       "brand": "KODEX",
@@ -2816,11 +3650,11 @@
         null
       ],
       "dividend_total": 1204,
-      "current_price": 114745,
+      "current_price": 114880,
       "dividend_yield_pct": 1.05,
       "price_return_pct": 0.06,
       "total_return_pct": 1.11,
-      "no": 97
+      "no": 123
     },
     {
       "brand": "KODEX",
@@ -2845,11 +3679,11 @@
         null
       ],
       "dividend_total": 1273,
-      "current_price": 114825,
+      "current_price": 114870,
       "dividend_yield_pct": 1.11,
       "price_return_pct": -0.03,
       "total_return_pct": 1.08,
-      "no": 98
+      "no": 124
     },
     {
       "brand": "PLUS",
@@ -2874,11 +3708,12 @@
         null
       ],
       "dividend_total": 431,
-      "current_price": 52345,
-      "dividend_yield_pct": 0.82,
+      "current_price": 53240,
+      "dividend_yield_pct": 0.81,
       "price_return_pct": 0.26,
       "total_return_pct": 1.08,
-      "no": 99
+      "no": 125,
+      "scope": "overseas"
     },
     {
       "brand": "KODEX",
@@ -2903,11 +3738,11 @@
         null
       ],
       "dividend_total": 9671,
-      "current_price": 1021690,
+      "current_price": 1022590,
       "dividend_yield_pct": 0.95,
       "price_return_pct": 0.07,
       "total_return_pct": 1.01,
-      "no": 100
+      "no": 126
     },
     {
       "brand": "KODEX",
@@ -2932,11 +3767,11 @@
         null
       ],
       "dividend_total": 9885,
-      "current_price": 1073565,
+      "current_price": 1074530,
       "dividend_yield_pct": 0.92,
       "price_return_pct": 0.07,
       "total_return_pct": 0.99,
-      "no": 101
+      "no": 127
     },
     {
       "brand": "KODEX",
@@ -2961,11 +3796,11 @@
         null
       ],
       "dividend_total": 961,
-      "current_price": 110655,
+      "current_price": 110745,
       "dividend_yield_pct": 0.87,
       "price_return_pct": 0.08,
       "total_return_pct": 0.95,
-      "no": 102
+      "no": 128
     },
     {
       "brand": "KODEX",
@@ -2990,11 +3825,11 @@
         null
       ],
       "dividend_total": 1146,
-      "current_price": 113415,
+      "current_price": 113405,
       "dividend_yield_pct": 1.01,
       "price_return_pct": -0.07,
       "total_return_pct": 0.93,
-      "no": 103
+      "no": 129
     },
     {
       "brand": "KODEX",
@@ -3019,11 +3854,12 @@
         null
       ],
       "dividend_total": 435,
-      "current_price": 8815,
-      "dividend_yield_pct": 4.93,
+      "current_price": 8720,
+      "dividend_yield_pct": 4.99,
       "price_return_pct": -4.28,
       "total_return_pct": 0.49,
-      "no": 104
+      "no": 130,
+      "scope": "overseas"
     },
     {
       "brand": "RISE",
@@ -3048,11 +3884,12 @@
         null
       ],
       "dividend_total": 463,
-      "current_price": 9405,
+      "current_price": 9415,
       "dividend_yield_pct": 4.92,
       "price_return_pct": -4.42,
       "total_return_pct": 0.28,
-      "no": 105
+      "no": 131,
+      "scope": "overseas"
     },
     {
       "brand": "ACE",
@@ -3077,11 +3914,12 @@
         null
       ],
       "dividend_total": 211,
-      "current_price": 9770,
-      "dividend_yield_pct": 2.16,
+      "current_price": 9565,
+      "dividend_yield_pct": 2.21,
       "price_return_pct": -2.35,
       "total_return_pct": -0.19,
-      "no": 106
+      "no": 132,
+      "scope": "overseas"
     },
     {
       "brand": "ACE",
@@ -3106,11 +3944,11 @@
         null
       ],
       "dividend_total": 180,
-      "current_price": 10205,
-      "dividend_yield_pct": 1.76,
+      "current_price": 10000,
+      "dividend_yield_pct": 1.8,
       "price_return_pct": -1.96,
       "total_return_pct": -0.2,
-      "no": 107
+      "no": 133
     },
     {
       "brand": "ACE",
@@ -3135,11 +3973,12 @@
         null
       ],
       "dividend_total": 251,
-      "current_price": 14815,
-      "dividend_yield_pct": 1.69,
+      "current_price": 14150,
+      "dividend_yield_pct": 1.77,
       "price_return_pct": -2.14,
       "total_return_pct": -0.41,
-      "no": 108
+      "no": 134,
+      "scope": "overseas"
     },
     {
       "brand": "KODEX",
@@ -3164,11 +4003,42 @@
         null
       ],
       "dividend_total": 407,
-      "current_price": 8220,
-      "dividend_yield_pct": 4.95,
+      "current_price": 7900,
+      "dividend_yield_pct": 5.15,
       "price_return_pct": -5.33,
       "total_return_pct": -0.46,
-      "no": 109
+      "no": 135,
+      "scope": "overseas"
+    },
+    {
+      "brand": "RISE",
+      "name": "RISE 미국30년국채액티브",
+      "code": "481340",
+      "cycle": "월배",
+      "listed": "24.05.28",
+      "market_cap": "—",
+      "expense_ratio": "0.05%",
+      "months": [
+        37,
+        37,
+        37,
+        35,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "dividend_total": 146,
+      "current_price": 9650,
+      "dividend_yield_pct": 1.51,
+      "price_return_pct": -2.14,
+      "total_return_pct": -0.66,
+      "scope": "overseas",
+      "no": 136
     },
     {
       "brand": "KODEX",
@@ -3193,11 +4063,12 @@
         null
       ],
       "dividend_total": 1441,
-      "current_price": 100560,
-      "dividend_yield_pct": 1.43,
+      "current_price": 98955,
+      "dividend_yield_pct": 1.46,
       "price_return_pct": -2.35,
       "total_return_pct": -0.93,
-      "no": 110
+      "no": 137,
+      "scope": "overseas"
     },
     {
       "brand": "KODEX",
@@ -3222,11 +4093,42 @@
         null
       ],
       "dividend_total": 156,
-      "current_price": 9960,
-      "dividend_yield_pct": 1.57,
+      "current_price": 9805,
+      "dividend_yield_pct": 1.59,
       "price_return_pct": -2.73,
       "total_return_pct": -1.18,
-      "no": 111
+      "no": 138,
+      "scope": "overseas"
+    },
+    {
+      "brand": "RISE",
+      "name": "RISE 미국은행TOP10",
+      "code": "0013P0",
+      "cycle": "월배",
+      "listed": "25.02.18",
+      "market_cap": "—",
+      "expense_ratio": "0.20%",
+      "months": [
+        22,
+        21,
+        17,
+        19,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "dividend_total": 79,
+      "current_price": 11920,
+      "dividend_yield_pct": 0.66,
+      "price_return_pct": -1.84,
+      "total_return_pct": -1.19,
+      "scope": "overseas",
+      "no": 139
     },
     {
       "brand": "ACE",
@@ -3251,11 +4153,42 @@
         null
       ],
       "dividend_total": 118,
-      "current_price": 10080,
-      "dividend_yield_pct": 1.17,
+      "current_price": 9920,
+      "dividend_yield_pct": 1.19,
       "price_return_pct": -2.36,
       "total_return_pct": -1.2,
-      "no": 112
+      "no": 140,
+      "scope": "overseas"
+    },
+    {
+      "brand": "TIGER",
+      "name": "TIGER 미국투자등급회사채액티브(H)",
+      "code": "458260",
+      "cycle": "월배",
+      "listed": "23.05.31",
+      "market_cap": "—",
+      "expense_ratio": "0.14%",
+      "months": [
+        170,
+        196,
+        224,
+        150,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "dividend_total": 740,
+      "current_price": 48455,
+      "dividend_yield_pct": 1.53,
+      "price_return_pct": -3.04,
+      "total_return_pct": -1.56,
+      "scope": "overseas",
+      "no": 141
     },
     {
       "brand": "ACE",
@@ -3280,11 +4213,12 @@
         null
       ],
       "dividend_total": 77,
-      "current_price": 8565,
-      "dividend_yield_pct": 0.9,
+      "current_price": 8400,
+      "dividend_yield_pct": 0.92,
       "price_return_pct": -2.5,
       "total_return_pct": -1.6,
-      "no": 113
+      "no": 142,
+      "scope": "overseas"
     },
     {
       "brand": "TIGER",
@@ -3309,11 +4243,42 @@
         null
       ],
       "dividend_total": 303,
-      "current_price": 7500,
-      "dividend_yield_pct": 4.04,
+      "current_price": 7210,
+      "dividend_yield_pct": 4.2,
       "price_return_pct": -5.94,
       "total_return_pct": -1.98,
-      "no": 114
+      "no": 143,
+      "scope": "overseas"
+    },
+    {
+      "brand": "RISE",
+      "name": "RISE 미국30년국채엔화노출(합성 H)",
+      "code": "472870",
+      "cycle": "월배",
+      "listed": "23.12.27",
+      "market_cap": "—",
+      "expense_ratio": "0.15%",
+      "months": [
+        20,
+        20,
+        20,
+        19,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "dividend_total": 79,
+      "current_price": 7985,
+      "dividend_yield_pct": 0.99,
+      "price_return_pct": -3.0,
+      "total_return_pct": -2.04,
+      "scope": "overseas",
+      "no": 144
     },
     {
       "brand": "ACE",
@@ -3338,11 +4303,12 @@
         null
       ],
       "dividend_total": 91,
-      "current_price": 7560,
-      "dividend_yield_pct": 1.2,
+      "current_price": 7415,
+      "dividend_yield_pct": 1.23,
       "price_return_pct": -3.45,
       "total_return_pct": -2.27,
-      "no": 115
+      "no": 145,
+      "scope": "overseas"
     },
     {
       "brand": "KODEX",
@@ -3367,11 +4333,12 @@
         null
       ],
       "dividend_total": 142,
-      "current_price": 8765,
-      "dividend_yield_pct": 1.62,
+      "current_price": 8555,
+      "dividend_yield_pct": 1.66,
       "price_return_pct": -3.98,
       "total_return_pct": -2.39,
-      "no": 116
+      "no": 146,
+      "scope": "overseas"
     },
     {
       "brand": "KODEX",
@@ -3396,11 +4363,11 @@
         null
       ],
       "dividend_total": 147,
-      "current_price": 4890,
-      "dividend_yield_pct": 3.01,
+      "current_price": 4595,
+      "dividend_yield_pct": 3.2,
       "price_return_pct": -5.45,
       "total_return_pct": -2.43,
-      "no": 117
+      "no": 147
     },
     {
       "brand": "PLUS",
@@ -3425,11 +4392,12 @@
         null
       ],
       "dividend_total": 439,
-      "current_price": 9410,
-      "dividend_yield_pct": 4.67,
+      "current_price": 8470,
+      "dividend_yield_pct": 5.18,
       "price_return_pct": -8.48,
       "total_return_pct": -3.74,
-      "no": 118
+      "no": 148,
+      "scope": "overseas"
     },
     {
       "brand": "PLUS",
@@ -3454,11 +4422,11 @@
         null
       ],
       "dividend_total": 135,
-      "current_price": 7100,
-      "dividend_yield_pct": 1.9,
+      "current_price": 6565,
+      "dividend_yield_pct": 2.19,
       "price_return_pct": -6.61,
       "total_return_pct": -4.57,
-      "no": 119
+      "no": 149
     },
     {
       "brand": "RISE",
@@ -3483,11 +4451,12 @@
         null
       ],
       "dividend_total": 364,
-      "current_price": 9955,
-      "dividend_yield_pct": 3.66,
+      "current_price": 9245,
+      "dividend_yield_pct": 3.94,
       "price_return_pct": -8.47,
       "total_return_pct": -4.86,
-      "no": 120
+      "no": 150,
+      "scope": "overseas"
     },
     {
       "brand": "SOL",
@@ -3512,11 +4481,12 @@
         null
       ],
       "dividend_total": 746,
-      "current_price": 9120,
-      "dividend_yield_pct": 8.18,
+      "current_price": 8580,
+      "dividend_yield_pct": 8.69,
       "price_return_pct": -13.81,
       "total_return_pct": -6.32,
-      "no": 121
+      "no": 151,
+      "scope": "overseas"
     },
     {
       "brand": "SOL",
@@ -3541,11 +4511,12 @@
         null
       ],
       "dividend_total": 815,
-      "current_price": 10265,
-      "dividend_yield_pct": 7.94,
+      "current_price": 9765,
+      "dividend_yield_pct": 8.35,
       "price_return_pct": -13.74,
       "total_return_pct": -6.54,
-      "no": 122
+      "no": 152,
+      "scope": "overseas"
     },
     {
       "brand": "KODEX",
@@ -3570,11 +4541,12 @@
         null
       ],
       "dividend_total": 187,
-      "current_price": 12565,
-      "dividend_yield_pct": 1.49,
+      "current_price": 11605,
+      "dividend_yield_pct": 1.61,
       "price_return_pct": -9.02,
       "total_return_pct": -7.55,
-      "no": 123
+      "no": 153,
+      "scope": "overseas"
     },
     {
       "brand": "KIWOOM",
@@ -3599,11 +4571,12 @@
         null
       ],
       "dividend_total": 80,
-      "current_price": 10365,
-      "dividend_yield_pct": 0.77,
+      "current_price": 10075,
+      "dividend_yield_pct": 0.79,
       "price_return_pct": -8.33,
       "total_return_pct": -7.6,
-      "no": 124
+      "no": 154,
+      "scope": "overseas"
     },
     {
       "brand": "PLUS",
@@ -3628,11 +4601,11 @@
         null
       ],
       "dividend_total": 557,
-      "current_price": 8975,
-      "dividend_yield_pct": 6.21,
+      "current_price": 7555,
+      "dividend_yield_pct": 7.37,
       "price_return_pct": -14.87,
       "total_return_pct": -8.6,
-      "no": 125
+      "no": 155
     },
     {
       "brand": "KIWOOM",
@@ -3657,11 +4630,11 @@
         null
       ],
       "dividend_total": 472,
-      "current_price": 54785,
-      "dividend_yield_pct": 0.86,
+      "current_price": 50400,
+      "dividend_yield_pct": 0.94,
       "price_return_pct": -12.58,
       "total_return_pct": -11.76,
-      "no": 126
+      "no": 156
     },
     {
       "brand": "RISE",
@@ -3686,127 +4659,11 @@
         null
       ],
       "dividend_total": 264,
-      "current_price": 8190,
-      "dividend_yield_pct": 3.22,
+      "current_price": 6885,
+      "dividend_yield_pct": 3.83,
       "price_return_pct": -21.76,
       "total_return_pct": -18.76,
-      "no": 127
-    },
-    {
-      "no": 128,
-      "brand": "TIGER",
-      "name": "TIGER 코리아배당다우존스",
-      "code": "0052D0",
-      "cycle": "월배",
-      "listed": "25.05.20",
-      "market_cap": "—",
-      "expense_ratio": "0.25%",
-      "months": [
-        51,
-        51,
-        58,
-        58,
-        58,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "dividend_total": 276,
-      "current_price": 14830,
-      "dividend_yield_pct": 1.86,
-      "price_return_pct": null,
-      "total_return_pct": null
-    },
-    {
-      "no": 129,
-      "brand": "SOL",
-      "name": "SOL 코리아고배당",
-      "code": "0105E0",
-      "cycle": "월배",
-      "listed": "—",
-      "market_cap": "—",
-      "expense_ratio": "0.15%",
-      "months": [
-        60,
-        60,
-        60,
-        60,
-        60,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "dividend_total": 300,
-      "current_price": 12190,
-      "dividend_yield_pct": 2.46,
-      "price_return_pct": null,
-      "total_return_pct": null
-    },
-    {
-      "no": 130,
-      "brand": "TIME",
-      "name": "TIME Korea플러스배당액티브",
-      "code": "441800",
-      "cycle": "월배",
-      "listed": "22.09.27",
-      "market_cap": "—",
-      "expense_ratio": "0.80%",
-      "months": [
-        117,
-        148,
-        267,
-        154,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "dividend_total": 686,
-      "current_price": 24940,
-      "dividend_yield_pct": 2.75,
-      "price_return_pct": null,
-      "total_return_pct": null
-    },
-    {
-      "no": 131,
-      "brand": "HANARO",
-      "name": "HANARO K고배당",
-      "code": "322410",
-      "cycle": "월배",
-      "listed": "—",
-      "market_cap": "—",
-      "expense_ratio": "—",
-      "months": [
-        50,
-        50,
-        50,
-        60,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "dividend_total": 210,
-      "current_price": 21110,
-      "dividend_yield_pct": 0.99,
-      "price_return_pct": null,
-      "total_return_pct": null
+      "no": 157
     }
   ]
 }

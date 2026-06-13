@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}지식 네트워크 · LIVE — {{ site_name }}{% endblock %}
+{% block body_class %}page-knowledge-network{% endblock %}
+{% block extra_head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='knowledge_network.css') }}?v=1">
+<script src="https://unpkg.com/force-graph"></script>
+{% endblock %}
+{% block content %}
+<div class="kn-graph-wrap">
+  <div class="kn-panel kn-header">
+    <h1>✦ 지식 네트워크 · LIVE</h1>
+    <p>젬마24 Wiki·Meta·swiki 연결망입니다. 노드를 클릭하거나 드래그해 보세요.</p>
+    <p class="kn-stats" id="kn-stats">불러오는 중…<span class="kn-live">● LIVE</span></p>
+  </div>
+  <aside class="kn-panel kn-legend" aria-label="범례">
+    <h2>폴더</h2>
+    <div id="kn-legend-list"></div>
+  </aside>
+  <aside class="kn-panel kn-detail" id="kn-detail" aria-label="노드 상세">
+    <button type="button" class="kn-close" id="kn-detail-close" aria-label="닫기">✕</button>
+    <span class="kn-badge" id="kn-detail-badge">10_Wiki</span>
+    <h3 id="kn-detail-title"></h3>
+    <p id="kn-detail-desc"></p>
+  </aside>
+  <div id="kn-graph-container" role="img" aria-label="지식 네트워크 그래프"></div>
+</div>
+<script src="{{ url_for('static', filename='knowledge_network.js') }}?v=1" defer></script>
+{% endblock %}

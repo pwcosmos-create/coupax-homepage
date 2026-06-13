@@ -1,0 +1,51 @@
+{
+  "version": 1,
+  "epsilon": 0.18,
+  "learning_rate": 0.12,
+  "category_weights": {
+    "atr_rl": 1.2,
+    "atr_formula": 1.138,
+    "atr_policy": 1.1,
+    "other": 0.988
+  },
+  "seed_weights": {
+    "debate_web_미국_장외_b8b1f144": 1.024,
+    "debate_web_10분할_32326ed8": 1.024
+  },
+  "title_bias": {
+    "웹리서치_미국_장외_프리마켓_표시_vs_정규장만": 0.0264,
+    "웹리서치_10분할_고정_10슬롯_vs_ATR_가변_슬롯": 0.0264
+  },
+  "history": [
+    {
+      "ts": "2026-06-05 19:55",
+      "title": "웹리서치·미국 장외 — 프리마켓 표시 vs 정규장만",
+      "category": "debate",
+      "catalog_seed": "debate_web_미국_장외_b8b1f144",
+      "card_id": 2,
+      "reward": 1.0,
+      "success": true,
+      "source": "confirm"
+    },
+    {
+      "ts": "2026-06-05 19:56",
+      "title": "웹리서치·10분할 — 고정 10슬롯 vs ATR 가변 슬롯",
+      "category": "atr_formula",
+      "catalog_seed": "debate_web_10분할_32326ed8",
+      "card_id": 1,
+      "reward": 1.0,
+      "success": true,
+      "source": "confirm"
+    }
+  ],
+  "stats": {
+    "runs": 0,
+    "train_steps": 0,
+    "added": 0,
+    "pass": 2,
+    "fail": 0,
+    "confirm_rewards": 2,
+    "error_penalties": 0
+  },
+  "updated_at": "2026-06-05 19:56"
+}

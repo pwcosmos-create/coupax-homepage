@@ -1,0 +1,32 @@
+---
+description: 젬마24 사무실 폼 지시 → Cursor 인박스 연동
+globs:
+  - CURSOR_OFFICE_INBOX.md
+  - board/data/cursor_office_inbox.json
+alwaysApply: false
+---
+
+# 사무실 지시 ↔ Cursor
+
+대표님이 https://coupax.co.kr/agents/office **지시 전달** 폼에 올린 내용은 서버 `board/data/cursor_office_inbox.json` 에 복제됩니다.
+
+## 세션 시작·「사무실」「지시」 언급 시
+
+1. 로컬 동기화 (최신이면 생략 가능):
+   `python board/scripts/sync_cursor_office_inbox.py pull`
+2. **`CURSOR_OFFICE_INBOX.md`** 또는 `board/data/cursor_office_inbox.json` 을 읽는다.
+3. `cursor_status: pending` 항목을 우선 처리한다 (코드·배포·글 수정·분석 등).
+4. 처리 후:
+   `python board/scripts/sync_cursor_office_inbox.py push-done --id ins-NN --note "요약"`
+5. 서버 에이전트가 이미 `done` 처리한 작업은 **후속**(발행·배포·품질 개선)만 한다.
+
+## 역할 분담
+
+| 채널 | 역할 |
+|------|------|
+| 서버 cron/worker | DB·ETF 조사, 템플릿 취합, 위키·블로그 초안 |
+| **이 Cursor 채팅** | pending 인박스, 구현·배포, 대표님 맞춤 작업 |
+
+**사주 카드 제작·추가** 지시는 `.cursor/rules/saju-card-production-priority.mdc` 에 따라 **최우선** 처리한다.
+
+`AGENT_OFFICE_CURSOR_BRIDGE=0` 이면 인박스 기록이 꺼집니다.

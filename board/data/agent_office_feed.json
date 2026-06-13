@@ -1,0 +1,3310 @@
+{
+  "office_name": "젬마24 에이전트 사무실",
+  "office_tagline": "주제는 무엇이든 물어보세요",
+  "description": "대표님과 젬마24만 쓰는 비공개 공간입니다. ETF·금융·이슈·글·AdSense·구조화된 생각 — 주제 제한 없이 에이전트가 조사·정리·토론합니다.",
+  "updated_at": "2026-06-13 23:50",
+  "agents": [
+    {
+      "id": "privacy",
+      "name": "보안 젬마",
+      "emoji": "🛡️",
+      "role": "개인정보 필터"
+    },
+    {
+      "id": "researcher",
+      "name": "탐정 젬마",
+      "emoji": "🕵️",
+      "role": "팩트 조사"
+    },
+    {
+      "id": "structurer",
+      "name": "사서 젬마",
+      "emoji": "🗂️",
+      "role": "지식 구조화"
+    },
+    {
+      "id": "creator",
+      "name": "창조 젬마",
+      "emoji": "🎨",
+      "role": "글·안내 문구"
+    },
+    {
+      "id": "observer",
+      "name": "관측 젬마",
+      "emoji": "👁️",
+      "role": "차트·화면 관측"
+    },
+    {
+      "id": "listener",
+      "name": "청취 젬마",
+      "emoji": "👂",
+      "role": "질문·댓글 톤 파악"
+    },
+    {
+      "id": "speaker",
+      "name": "송출 젬마",
+      "emoji": "🗣️",
+      "role": "브리핑·댓글 답"
+    },
+    {
+      "id": "rl",
+      "name": "RL 젬마",
+      "emoji": "🏎️",
+      "role": "피드백·우선순위"
+    },
+    {
+      "id": "etf_sync",
+      "name": "ETF 동기화",
+      "emoji": "⚙️",
+      "role": "월배당 데이터 파이프라인 (중지)"
+    },
+    {
+      "id": "saju_privacy",
+      "name": "결계 젬마",
+      "emoji": "🛡️",
+      "role": "풀이 PII 차단"
+    },
+    {
+      "id": "saju_reader",
+      "name": "독해 젬마",
+      "emoji": "📜",
+      "role": "풀이 수집·요약"
+    },
+    {
+      "id": "saju_structurer",
+      "name": "이기 젬마",
+      "emoji": "☯️",
+      "role": "명리 태그·pack 구조"
+    },
+    {
+      "id": "saju_scholar",
+      "name": "명리 젬마",
+      "emoji": "🔮",
+      "role": "격국·용신 검수"
+    },
+    {
+      "id": "saju_curator",
+      "name": "전장 젬마",
+      "emoji": "📿",
+      "role": "확정·export"
+    },
+    {
+      "id": "saju_rl",
+      "name": "회간 젬마",
+      "emoji": "🌀",
+      "role": "학습 피드백"
+    },
+    {
+      "id": "saju_error_fix",
+      "name": "오류해결 에이전트",
+      "emoji": "🔧",
+      "role": "학습·API 오류 점검"
+    },
+    {
+      "id": "saju_reinspector",
+      "name": "재점검 젬마",
+      "emoji": "✅",
+      "role": "명리위원회 인증 재점검"
+    },
+    {
+      "id": "kiwoom_reader",
+      "name": "차수 젬마",
+      "emoji": "📈",
+      "role": "전략·카드 수집"
+    },
+    {
+      "id": "kiwoom_risk",
+      "name": "리스크 젬마",
+      "emoji": "🛡️",
+      "role": "손절·익절 검수"
+    },
+    {
+      "id": "kiwoom_structurer",
+      "name": "구조 젬마",
+      "emoji": "🗂️",
+      "role": "태그·pack 구조"
+    },
+    {
+      "id": "kiwoom_order",
+      "name": "주문 젬마",
+      "emoji": "📋",
+      "role": "주문·체결 점검"
+    },
+    {
+      "id": "kiwoom_account",
+      "name": "계좌 젬마",
+      "emoji": "💳",
+      "role": "계좌·예수금 점검"
+    },
+    {
+      "id": "kiwoom_privacy",
+      "name": "보안 젬마",
+      "emoji": "🔒",
+      "role": "계좌·PII 필터"
+    },
+    {
+      "id": "kiwoom_curator",
+      "name": "큐레이터 젬마",
+      "emoji": "✅",
+      "role": "확정·export"
+    },
+    {
+      "id": "kiwoom_rl",
+      "name": "회간 젬마",
+      "emoji": "🌀",
+      "role": "학습 피드백"
+    },
+    {
+      "id": "kiwoom_error_fix",
+      "name": "오류해결 에이전트",
+      "emoji": "🔧",
+      "role": "학습·API 오류"
+    },
+    {
+      "id": "kiwoom_monitor",
+      "name": "원히어로 모니터",
+      "emoji": "📡",
+      "role": "실매매 bot_log"
+    },
+    {
+      "id": "design_curator",
+      "name": "디자인 큐레이터",
+      "emoji": "🎨",
+      "role": "플레이북·pack·확정"
+    },
+    {
+      "id": "stock_radar",
+      "name": "시세젬마",
+      "emoji": "📡",
+      "role": "국내·미국 시세 수집"
+    },
+    {
+      "id": "stock_kr",
+      "name": "국내시황젬마",
+      "emoji": "🇰🇷",
+      "role": "코스피·코스닥·대형주"
+    },
+    {
+      "id": "stock_us",
+      "name": "해외시황젬마",
+      "emoji": "🇺🇸",
+      "role": "S&P·나스닥·빅테크"
+    },
+    {
+      "id": "stock_chart",
+      "name": "차트젬마",
+      "emoji": "📊",
+      "role": "추세·등락 신호"
+    },
+    {
+      "id": "stock_finance",
+      "name": "제무젬마",
+      "emoji": "📑",
+      "role": "실적·PER·ROE 조사"
+    },
+    {
+      "id": "stock_news",
+      "name": "최신정보젬마",
+      "emoji": "📰",
+      "role": "속보·시장 뉴스"
+    },
+    {
+      "id": "stock_risk",
+      "name": "리스크젬마",
+      "emoji": "⚠️",
+      "role": "변동성·알림 점검"
+    },
+    {
+      "id": "stock_writer",
+      "name": "글감젬마",
+      "emoji": "✍️",
+      "role": "블로그 글감 연계"
+    },
+    {
+      "id": "stock_listener",
+      "name": "댓글검증젬마",
+      "emoji": "💬",
+      "role": "종목 댓글·루머 교차 검증"
+    },
+    {
+      "id": "stock_disclosure",
+      "name": "공시젬마",
+      "emoji": "📋",
+      "role": "DART·SEC 전자공시"
+    },
+    {
+      "id": "stock_government",
+      "name": "정부발표젬마",
+      "emoji": "🏛️",
+      "role": "금융위·한은·연준 보도"
+    },
+    {
+      "id": "stock_press",
+      "name": "기사젬마",
+      "emoji": "📰",
+      "role": "주요 언론 기사"
+    },
+    {
+      "id": "stock_macro",
+      "name": "금리·달러젬마",
+      "emoji": "💱",
+      "role": "금리·환율→증시 영향"
+    },
+    {
+      "id": "stock_commodity",
+      "name": "원자재젬마",
+      "emoji": "🛢️",
+      "role": "유가·금속·곡물 동향"
+    },
+    {
+      "id": "stock_bond",
+      "name": "채권젬마",
+      "emoji": "📊",
+      "role": "국채·금리→증시"
+    },
+    {
+      "id": "stock_oil_war",
+      "name": "원유·전쟁젬마",
+      "emoji": "⚔️",
+      "role": "유가·지정학→증시"
+    },
+    {
+      "id": "stock_ceo",
+      "name": "CEO멘트젬마",
+      "emoji": "👔",
+      "role": "CEO·경영진 발언"
+    },
+    {
+      "id": "stock_youtube",
+      "name": "유튜브젬마",
+      "emoji": "▶️",
+      "role": "유튜브 증시·CEO 영상"
+    },
+    {
+      "id": "stock_analyst",
+      "name": "애널리스트젬마",
+      "emoji": "📈",
+      "role": "리포트·목표가·투자의견"
+    },
+    {
+      "id": "design_token",
+      "name": "토큰젬마",
+      "emoji": "🎯",
+      "role": "색·CSS 변수"
+    },
+    {
+      "id": "design_typography",
+      "name": "타이포젬마",
+      "emoji": "🔤",
+      "role": "글꼴·스케일"
+    },
+    {
+      "id": "design_layout",
+      "name": "레이아웃젬마",
+      "emoji": "📐",
+      "role": "그리드·반응형"
+    },
+    {
+      "id": "design_component",
+      "name": "컴포넌트젬마",
+      "emoji": "🧩",
+      "role": "버튼·카드·폼"
+    },
+    {
+      "id": "design_a11y",
+      "name": "접근성젬마",
+      "emoji": "♿",
+      "role": "WCAG·대비"
+    },
+    {
+      "id": "design_handoff",
+      "name": "핸드오프젬마",
+      "emoji": "📦",
+      "role": "style.css 반영"
+    },
+    {
+      "id": "design_ux_writer",
+      "name": "UX카피젬마",
+      "emoji": "✍️",
+      "role": "CTA·마이크로카피"
+    },
+    {
+      "id": "design_council",
+      "name": "디자인 위원회",
+      "emoji": "⚖️",
+      "role": "토론·합의 카드"
+    },
+    {
+      "id": "design_researcher",
+      "name": "리서치젬마",
+      "emoji": "🔍",
+      "role": "레퍼런스·벤치마크"
+    },
+    {
+      "id": "design_catalog",
+      "name": "카탈로그젬마",
+      "emoji": "📚",
+      "role": "플레이북 카드 sync"
+    },
+    {
+      "id": "design_privacy",
+      "name": "프라이버시젬마",
+      "emoji": "🔒",
+      "role": "목업 PII 차단"
+    },
+    {
+      "id": "workisus_curator",
+      "name": "원키스 큐레이터",
+      "emoji": "🇺🇸",
+      "role": "카드·pack·Wiki [퇴역·board카드] [퇴역·board카드]"
+    },
+    {
+      "id": "workisus_slots",
+      "name": "차수젬마",
+      "emoji": "📊",
+      "role": "슬롯·차수 칸"
+    },
+    {
+      "id": "workisus_hts",
+      "name": "HTS젬마",
+      "emoji": "🖥️",
+      "role": "3001~3005 다창"
+    },
+    {
+      "id": "workisus_order",
+      "name": "주문젬마",
+      "emoji": "📋",
+      "role": "[3002] 수동·슬롯"
+    },
+    {
+      "id": "workisus_sync",
+      "name": "동기젬마",
+      "emoji": "📚",
+      "role": "wonkisus 카탈로그 [퇴역·board카드] [퇴역·board카드]"
+    },
+    {
+      "id": "workisus_mode",
+      "name": "모드젬마",
+      "emoji": "🎚️",
+      "role": "자동·안전·리밸런스·격자"
+    },
+    {
+      "id": "workisus_balance",
+      "name": "잔고젬마",
+      "emoji": "💰",
+      "role": "현금10%+종목 비중"
+    },
+    {
+      "id": "workisus_stocks",
+      "name": "종목젬마",
+      "emoji": "📈",
+      "role": "9종목·enabled·보유"
+    },
+    {
+      "id": "workisus_rules",
+      "name": "매매규칙젬마",
+      "emoji": "⚙️",
+      "role": "bot_settings_us·10%"
+    },
+    {
+      "id": "workisus_risk",
+      "name": "리스크젬마",
+      "emoji": "🛡️",
+      "role": "무손실 매도·손절 없음"
+    },
+    {
+      "id": "workisus_rebalance",
+      "name": "리밸런스젬마",
+      "emoji": "⚖️",
+      "role": "Trim/Buy 10%·Cycle 2건"
+    },
+    {
+      "id": "workisus_token",
+      "name": "토큰젬마",
+      "emoji": "🔑",
+      "role": "KIS US 토큰·API"
+    },
+    {
+      "id": "workisus_reconcile",
+      "name": "정합젬마",
+      "emoji": "🔄",
+      "role": "US 슬롯 DB·대조"
+    },
+    {
+      "id": "workisus_auto",
+      "name": "자동젬마",
+      "emoji": "🤖",
+      "role": "리밸런스 자동·격자"
+    },
+    {
+      "id": "workisus_multi",
+      "name": "멀티젬마",
+      "emoji": "👥",
+      "role": "단일 해외·10자산"
+    },
+    {
+      "id": "workisus_watch",
+      "name": "워치젬마",
+      "emoji": "👁️",
+      "role": "전 에이전트·정본 점검"
+    },
+    {
+      "id": "workisus_error_fix",
+      "name": "오류젬마",
+      "emoji": "🔧",
+      "role": "오류카드·playbook [퇴역·board카드] [퇴역·board카드]"
+    },
+    {
+      "id": "workisus_atr_rl",
+      "name": "ATR강화학습젬마",
+      "emoji": "🧠",
+      "role": "ATR RL 카드 [퇴역·board카드] [퇴역·board카드]"
+    },
+    {
+      "id": "workisus_knowledge",
+      "name": "지식젬마",
+      "emoji": "📖",
+      "role": "wonkisus Wiki 정본"
+    },
+    {
+      "id": "workisus_atr",
+      "name": "ATR젬마",
+      "emoji": "📐",
+      "role": "ATR gap·sell·PPO"
+    },
+    {
+      "id": "workisus_ops",
+      "name": "운영젬마",
+      "emoji": "🔧",
+      "role": "무손실·점진2건·확인"
+    },
+    {
+      "id": "gwansang_watch",
+      "name": "워치젬마",
+      "emoji": "👁️",
+      "role": "전체·SEO·갭"
+    },
+    {
+      "id": "gwansang_curator",
+      "name": "큐레이터",
+      "emoji": "✦",
+      "role": "확정·pack·Wiki"
+    },
+    {
+      "id": "gwansang_compose",
+      "name": "제작젬마",
+      "emoji": "✍️",
+      "role": "갭 카드 제작"
+    },
+    {
+      "id": "gwansang_catalog",
+      "name": "카탈로그젬마",
+      "emoji": "📚",
+      "role": "시드·동기화"
+    },
+    {
+      "id": "gwansang_seo",
+      "name": "SEO젬마",
+      "emoji": "🔍",
+      "role": "200자+·키워드"
+    },
+    {
+      "id": "gwansang_scholar",
+      "name": "학자젬마",
+      "emoji": "📜",
+      "role": "전통 관상 이론"
+    },
+    {
+      "id": "gwansang_features",
+      "name": "오관젬마",
+      "emoji": "👤",
+      "role": "이마·눈·코·입"
+    },
+    {
+      "id": "gwansang_fortune",
+      "name": "운세젬마",
+      "emoji": "🌟",
+      "role": "길상·재물·연애"
+    },
+    {
+      "id": "gwansang_reader",
+      "name": "리더젬마",
+      "emoji": "📖",
+      "role": "수집·요약"
+    },
+    {
+      "id": "gwansang_structurer",
+      "name": "구조젬마",
+      "emoji": "🗂️",
+      "role": "분류·태그"
+    },
+    {
+      "id": "gwansang_privacy",
+      "name": "프라이버시젬마",
+      "emoji": "🔒",
+      "role": "PII 차단"
+    },
+    {
+      "id": "gwansang_gap_autofill",
+      "name": "갭젬마",
+      "emoji": "🧩",
+      "role": "갭 자동 제작"
+    },
+    {
+      "id": "gwansang_wiki_sync",
+      "name": "Wiki젬마",
+      "emoji": "📡",
+      "role": "Wiki 동기화"
+    },
+    {
+      "id": "gwansang_error_fix",
+      "name": "오류점검젬마",
+      "emoji": "🛠️",
+      "role": "품질·200자"
+    },
+    {
+      "id": "gwansang_daily_conclusion",
+      "name": "일일결론젬마",
+      "emoji": "📋",
+      "role": "일일 요약"
+    },
+    {
+      "id": "gwansang_review",
+      "name": "검수젬마",
+      "emoji": "✅",
+      "role": "대기 카드 검수"
+    },
+    {
+      "id": "gwansang_tag_digest",
+      "name": "태그젬마",
+      "emoji": "🏷️",
+      "role": "키워드·태그"
+    },
+    {
+      "id": "chief-arch",
+      "name": "수석 아키텍트 젬마",
+      "emoji": "🏗️",
+      "role": "아키텍처 설계 / 코드 리뷰"
+    },
+    {
+      "id": "chief-rag",
+      "name": "문서 수집기 젬마",
+      "emoji": "📚",
+      "role": "개발 문서 크롤링 / RAG"
+    },
+    {
+      "id": "chief-ops",
+      "name": "DevOps 관리 젬마",
+      "emoji": "⚙️",
+      "role": "배포 / CI·CD 모니터링"
+    },
+    {
+      "id": "chief-web-search",
+      "name": "웹 서치 젬마",
+      "emoji": "🌐",
+      "role": "최신 기술 동향 및 문서 웹 검색"
+    }
+  ],
+  "messages": [
+    {
+      "id": 1294,
+      "ts": "2026-06-05 20:13",
+      "from": "gwansang_curator",
+      "to": null,
+      "kind": "task",
+      "text": "[관상 카드 #20] 웹리서치·코 관상 — 재물·직업 강조 vs 건강·균형 강조\n【웹 리서치 · 2026-06-05】 검색: nose shape face reading wealth career 외부 검색 결과 없음 — 내장 축·위원회 규칙만으로 토론. 【coupax 적용】 전통 관상·과학 관찰 …",
+      "division": "gwansang-learn"
+    },
+    {
+      "id": 1295,
+      "ts": "2026-06-05 20:13",
+      "from": "gwansang_curator",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[확정 #20] 웹리서치·코 관상 — 재물·직업 강조 vs 건강·균형 강조 — pack·SEO 관상 플레이북 · wiki_gwansang_20",
+      "division": "gwansang-learn"
+    },
+    {
+      "id": 1296,
+      "ts": "2026-06-05 20:13",
+      "from": "gwansang_council",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[웹리서치 토론·자동] 웹리서치·코 관상 — 재물·직업 강조 vs 건강·균형 강조 · 패널 6명",
+      "division": "gwansang-learn"
+    },
+    {
+      "id": 1297,
+      "ts": "2026-06-05 20:13",
+      "from": "gwansang_curator",
+      "to": null,
+      "kind": "task",
+      "text": "[관상 카드 #21] 웹리서치·삼정 — 상·중·하정 구분 vs 통합 인상만\n【웹 리서치 · 2026-06-05】 검색: face reading forehead three zones sanqing 외부 검색 결과 없음 — 내장 축·위원회 규칙만으로 토론. 【coupax 적용】 전통 관상·과학…",
+      "division": "gwansang-learn"
+    },
+    {
+      "id": 1298,
+      "ts": "2026-06-05 20:13",
+      "from": "gwansang_curator",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[확정 #21] 웹리서치·삼정 — 상·중·하정 구분 vs 통합 인상만 — pack·SEO 관상 플레이북 · wiki_gwansang_21",
+      "division": "gwansang-learn"
+    },
+    {
+      "id": 1299,
+      "ts": "2026-06-05 20:13",
+      "from": "gwansang_council",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[웹리서치 토론·자동] 웹리서치·삼정 — 상·중·하정 구분 vs 통합 인상만 · 패널 6명",
+      "division": "gwansang-learn"
+    },
+    {
+      "id": 1300,
+      "ts": "2026-06-05 20:13",
+      "from": "gwansang_curator",
+      "to": null,
+      "kind": "task",
+      "text": "[관상 카드 #22] 웹리서치·관상 SEO — 질문형 H2 vs 키워드 리스트\n【웹 리서치 · 2026-06-05】 검색: physiognomy content SEO long form article 외부 검색 결과 없음 — 내장 축·위원회 규칙만으로 토론. 【coupax 적용】 전통 관상·과학…",
+      "division": "gwansang-learn"
+    },
+    {
+      "id": 1301,
+      "ts": "2026-06-05 20:13",
+      "from": "gwansang_curator",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[확정 #22] 웹리서치·관상 SEO — 질문형 H2 vs 키워드 리스트 — pack·SEO 관상 플레이북 · wiki_gwansang_22",
+      "division": "gwansang-learn"
+    },
+    {
+      "id": 1302,
+      "ts": "2026-06-05 20:13",
+      "from": "gwansang_council",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[웹리서치 토론·자동] 웹리서치·관상 SEO — 질문형 H2 vs 키워드 리스트 · 패널 6명",
+      "division": "gwansang-learn"
+    },
+    {
+      "id": 1303,
+      "ts": "2026-06-05 20:13",
+      "from": "gwansang_curator",
+      "to": null,
+      "kind": "task",
+      "text": "[관상 카드 #23] 웹리서치·얼굴 해부 — 골격·연부조직 설명 vs 전통 오관 상징만\n【웹 리서치 · 2026-06-05】 검색: facial anatomy bone soft tissue forehead jaw morphology 외부 검색 결과 없음 — 내장 축·위원회 규칙만으로 토론. 【coupa…",
+      "division": "gwansang-learn"
+    },
+    {
+      "id": 1304,
+      "ts": "2026-06-05 20:13",
+      "from": "gwansang_curator",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[확정 #23] 웹리서치·얼굴 해부 — 골격·연부조직 설명 vs 전통 오관 상징만 — pack·SEO 관상 플레이북 · wiki_gwansang_23",
+      "division": "gwansang-learn"
+    },
+    {
+      "id": 1305,
+      "ts": "2026-06-05 20:13",
+      "from": "gwansang_council",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[웹리서치 토론·자동] 웹리서치·얼굴 해부 — 골격·연부조직 설명 vs 전통 오관 상징만 · 패널 6명",
+      "division": "gwansang-learn"
+    },
+    {
+      "id": 1306,
+      "ts": "2026-06-05 20:13",
+      "from": "gwansang_curator",
+      "to": null,
+      "kind": "task",
+      "text": "[관상 카드 #24] 웹리서치·표정·지각 — 심리·첫인상 연구 vs 오관 길흉 해석\n【웹 리서치 · 2026-06-05】 검색: facial expression psychology first impression trust 외부 검색 결과 없음 — 내장 축·위원회 규칙만으로 토론. 【coupax 적용…",
+      "division": "gwansang-learn"
+    },
+    {
+      "id": 1307,
+      "ts": "2026-06-05 20:13",
+      "from": "gwansang_curator",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[확정 #24] 웹리서치·표정·지각 — 심리·첫인상 연구 vs 오관 길흉 해석 — pack·SEO 관상 플레이북 · wiki_gwansang_24",
+      "division": "gwansang-learn"
+    },
+    {
+      "id": 1308,
+      "ts": "2026-06-05 20:13",
+      "from": "gwansang_council",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[웹리서치 토론·자동] 웹리서치·표정·지각 — 심리·첫인상 연구 vs 오관 길흉 해석 · 패널 6명",
+      "division": "gwansang-learn"
+    },
+    {
+      "id": 1309,
+      "ts": "2026-06-05 20:13",
+      "from": "gwansang_curator",
+      "to": null,
+      "kind": "task",
+      "text": "[관상 카드 #25] 웹리서치·대칭·인상 — 지각 심리·평균성 vs 전통 길상 대칭\n【웹 리서치 · 2026-06-05】 검색: facial symmetry perception attractiveness psychology 외부 검색 결과 없음 — 내장 축·위원회 규칙만으로 토론. 【coupax 적…",
+      "division": "gwansang-learn"
+    },
+    {
+      "id": 1310,
+      "ts": "2026-06-05 20:13",
+      "from": "gwansang_curator",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[확정 #25] 웹리서치·대칭·인상 — 지각 심리·평균성 vs 전통 길상 대칭 — pack·SEO 관상 플레이북 · wiki_gwansang_25",
+      "division": "gwansang-learn"
+    },
+    {
+      "id": 1311,
+      "ts": "2026-06-05 20:13",
+      "from": "gwansang_council",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[웹리서치 토론·자동] 웹리서치·대칭·인상 — 지각 심리·평균성 vs 전통 길상 대칭 · 패널 6명",
+      "division": "gwansang-learn"
+    },
+    {
+      "id": 1312,
+      "ts": "2026-06-05 20:13",
+      "from": "gwansang_curator",
+      "to": null,
+      "kind": "task",
+      "text": "[관상 카드 #26] 웹리서치·피부 생리 — 생리·생활 습관 vs 색·윤택 길흉\n【웹 리서치 · 2026-06-05】 검색: skin physiology complexion dark circles fatigue 외부 검색 결과 없음 — 내장 축·위원회 규칙만으로 토론. 【coupax 적용】 전통…",
+      "division": "gwansang-learn"
+    },
+    {
+      "id": 1313,
+      "ts": "2026-06-05 20:13",
+      "from": "gwansang_curator",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[확정 #26] 웹리서치·피부 생리 — 생리·생활 습관 vs 색·윤택 길흉 — pack·SEO 관상 플레이북 · wiki_gwansang_26",
+      "division": "gwansang-learn"
+    },
+    {
+      "id": 1314,
+      "ts": "2026-06-05 20:13",
+      "from": "gwansang_council",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[웹리서치 토론·자동] 웹리서치·피부 생리 — 생리·생활 습관 vs 색·윤택 길흉 · 패널 6명",
+      "division": "gwansang-learn"
+    },
+    {
+      "id": 1315,
+      "ts": "2026-06-05 20:13",
+      "from": "gwansang_curator",
+      "to": null,
+      "kind": "task",
+      "text": "[관상 카드 #27] 웹리서치·촬영·광학 — 조명·각도 보정 vs 사진 그대로 관상\n【웹 리서치 · 2026-06-05】 검색: portrait photography lighting angle facial distortion optics 외부 검색 결과 없음 — 내장 축·위원회 규칙만으로 토론. 【…",
+      "division": "gwansang-learn"
+    },
+    {
+      "id": 1316,
+      "ts": "2026-06-05 20:13",
+      "from": "gwansang_curator",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[확정 #27] 웹리서치·촬영·광학 — 조명·각도 보정 vs 사진 그대로 관상 — pack·SEO 관상 플레이북 · wiki_gwansang_27",
+      "division": "gwansang-learn"
+    },
+    {
+      "id": 1317,
+      "ts": "2026-06-05 20:13",
+      "from": "gwansang_council",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[웹리서치 토론·자동] 웹리서치·촬영·광학 — 조명·각도 보정 vs 사진 그대로 관상 · 패널 6명",
+      "division": "gwansang-learn"
+    },
+    {
+      "id": 1318,
+      "ts": "2026-06-05 20:13",
+      "from": "gwansang_curator",
+      "to": null,
+      "kind": "task",
+      "text": "[관상 카드 #28] 웹리서치·노화·주름 — 근육·표정 습관 vs 주름 길흉만\n【웹 리서치 · 2026-06-05】 검색: facial aging muscle skin wrinkles expression habits 외부 검색 결과 없음 — 내장 축·위원회 규칙만으로 토론. 【coupax 적용…",
+      "division": "gwansang-learn"
+    },
+    {
+      "id": 1319,
+      "ts": "2026-06-05 20:13",
+      "from": "gwansang_curator",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[확정 #28] 웹리서치·노화·주름 — 근육·표정 습관 vs 주름 길흉만 — pack·SEO 관상 플레이북 · wiki_gwansang_28",
+      "division": "gwansang-learn"
+    },
+    {
+      "id": 1320,
+      "ts": "2026-06-05 20:13",
+      "from": "gwansang_council",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[웹리서치 토론·자동] 웹리서치·노화·주름 — 근육·표정 습관 vs 주름 길흉만 · 패널 6명",
+      "division": "gwansang-learn"
+    },
+    {
+      "id": 1321,
+      "ts": "2026-06-07 08:57",
+      "from": "saju_reader",
+      "to": null,
+      "kind": "task",
+      "text": "[학습 카드 #445] 변수·일주_경술\n【실천 조언】 강한 기운은 기록·대화로 완화하고, 약한 기운은 작은 습관으로 채워 보세요. 【주의】 위 내용은 명리학적 경향을 읽어 드리는 참고 풀이이며, 특정 사건·시기·질병·투자·이혼 등을 확정하지 않습니다. 개…",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1322,
+      "ts": "2026-06-07 08:57",
+      "from": "saju_reader",
+      "to": null,
+      "kind": "task",
+      "text": "[학습 카드 #446] 변수·십신_재생관\n【실천 조언】 강한 기운은 기록·대화로 완화하고, 약한 기운은 작은 습관으로 채워 보세요. 【주의】 위 내용은 명리학적 경향을 읽어 드리는 참고 풀이이며, 특정 사건·시기·질병·투자·이혼 등을 확정하지 않습니다. 개…",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1323,
+      "ts": "2026-06-07 08:57",
+      "from": "saju_curator",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[확정 #445] 변수·일주_경술 — pack 반영 · 젬마기억 wiki_saju_445",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1324,
+      "ts": "2026-06-07 08:57",
+      "from": "saju_rl",
+      "to": "ceo",
+      "kind": "conclusion",
+      "text": "[위원회·realtime · 카드 #445] PASS · 변수·일주_경술",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1325,
+      "ts": "2026-06-07 08:57",
+      "from": "saju_curator",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[확정 #446] 변수·십신_재생관 — pack 반영 · 젬마기억 wiki_saju_446",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1326,
+      "ts": "2026-06-07 08:57",
+      "from": "saju_rl",
+      "to": "ceo",
+      "kind": "conclusion",
+      "text": "[위원회·realtime · 카드 #446] PASS · 변수·십신_재생관",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1327,
+      "ts": "2026-06-07 09:10",
+      "from": "saju_reader",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[Gemini 카드 #64] 해석·학업·문창·자격 — gemini-2.5-flash 저장",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1328,
+      "ts": "2026-06-07 09:12",
+      "from": "saju_reader",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[Gemini 카드 #65] 해석·일주만 빠른 상담 — gemini-2.5-flash 저장",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1329,
+      "ts": "2026-06-07 09:13",
+      "from": "saju_reader",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[Gemini 카드 #67] 해석·식상·표현·창업 — gemini-2.5-flash 저장",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1330,
+      "ts": "2026-06-07 09:14",
+      "from": "saju_reader",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[Gemini 카드 #68] 해석·말년·시주 운세 — gemini-2.5-flash 저장",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1331,
+      "ts": "2026-06-07 09:14",
+      "from": "saju_reader",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[Gemini 카드 #72] 해석·대운 전환기 — gemini-2.5-flash 저장",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1332,
+      "ts": "2026-06-07 09:15",
+      "from": "saju_reader",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[Gemini 카드 #73] 해석·자녀·시주·식상 — gemini-2.5-flash 저장",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1333,
+      "ts": "2026-06-07 09:16",
+      "from": "saju_reader",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[Gemini 카드 #73] 해석·자녀·시주·식상 — gemini-2.5-flash 저장",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1334,
+      "ts": "2026-06-07 09:16",
+      "from": "saju_reader",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[Gemini 카드 #74] 해석·오행 불균형 보완 — gemini-2.5-flash 저장",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1335,
+      "ts": "2026-06-07 09:17",
+      "from": "saju_reader",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[Gemini 카드 #74] 해석·오행 불균형 보완 — gemini-2.5-flash 저장",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1336,
+      "ts": "2026-06-07 09:17",
+      "from": "saju_reader",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[Gemini 카드 #75] 해석·이동·이직·역마 — gemini-2.5-flash 저장",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1337,
+      "ts": "2026-06-07 09:17",
+      "from": "saju_reader",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[Gemini 카드 #75] 해석·이동·이직·역마 — gemini-2.5-flash 저장",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1338,
+      "ts": "2026-06-07 09:18",
+      "from": "saju_reader",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[Gemini 카드 #76] 해석·명예·체면·관성 — gemini-2.5-flash 저장",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1339,
+      "ts": "2026-06-07 09:18",
+      "from": "saju_reader",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[Gemini 카드 #76] 해석·명예·체면·관성 — gemini-2.5-flash 저장",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1340,
+      "ts": "2026-06-07 09:19",
+      "from": "saju_reader",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[Gemini 카드 #77] 해석·인맥·비겁·합 — gemini-2.5-flash 저장",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1341,
+      "ts": "2026-06-07 09:19",
+      "from": "saju_reader",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[Gemini 카드 #77] 해석·인맥·비겁·합 — gemini-2.5-flash 저장",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1342,
+      "ts": "2026-06-07 09:20",
+      "from": "saju_reader",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[Gemini 카드 #78] 해석·용신·기신 실전 — gemini-2.5-flash 저장",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1343,
+      "ts": "2026-06-07 09:21",
+      "from": "saju_reader",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[Gemini 카드 #81] 해석·가족·육친 톤 — gemini-2.5-flash 저장",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1344,
+      "ts": "2026-06-07 09:22",
+      "from": "saju_reader",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[Gemini 카드 #138] 심층·[1] 인사·성향 — gemini-2.5-flash 저장",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1345,
+      "ts": "2026-06-07 09:23",
+      "from": "saju_reader",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[Gemini 카드 #141] 심층·[4] 십신·격국 — gemini-2.5-flash 저장",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1346,
+      "ts": "2026-06-07 13:25",
+      "from": "saju_reader",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[Gemini 카드 #80] 해석·병화 일주 성향 — gemini-2.5-flash 저장",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1347,
+      "ts": "2026-06-07 15:28",
+      "from": "saju_reader",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[Gemini 카드 #82] 해석·건강·컨디션 리듬 — gemini-2.5-flash 저장",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1348,
+      "ts": "2026-06-07 15:29",
+      "from": "saju_reader",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[Gemini 카드 #142] 심층·[5] 용신·기신 — gemini-2.5-flash 저장",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1349,
+      "ts": "2026-06-07 17:32",
+      "from": "saju_reader",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[Gemini 카드 #139] 심층·[2] 사주팔자 — gemini-2.5-flash 저장",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1350,
+      "ts": "2026-06-07 17:33",
+      "from": "saju_reader",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[Gemini 카드 #140] 심층·[3] 오행 균형 — gemini-2.5-flash 저장",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1351,
+      "ts": "2026-06-07 17:35",
+      "from": "saju_reader",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[Gemini 카드 #144] 심층·[7] 재물 — gemini-2.5-flash 저장",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1352,
+      "ts": "2026-06-07 18:36",
+      "from": "saju_reader",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[Gemini 카드 #143] 심층·[6] 대운·세운 — gemini-2.5-flash 저장",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1353,
+      "ts": "2026-06-07 18:38",
+      "from": "saju_reader",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[Gemini 카드 #148] 해석·갑목 일주 성향 — gemini-2.5-flash 저장",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1354,
+      "ts": "2026-06-07 19:39",
+      "from": "saju_reader",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[Gemini 카드 #145] 심층·[8] 연애·관계 — gemini-2.5-flash 저장",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1355,
+      "ts": "2026-06-07 19:40",
+      "from": "saju_reader",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[Gemini 카드 #146] 심층·[9] 직업 — gemini-2.5-flash 저장",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1356,
+      "ts": "2026-06-07 19:41",
+      "from": "saju_reader",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[Gemini 카드 #150] 해석·무토 일주 성향 — gemini-2.5-flash 저장",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1357,
+      "ts": "2026-06-07 20:42",
+      "from": "saju_reader",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[Gemini 카드 #147] 심층·[10] 실천·주의 — gemini-2.5-flash 저장",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1358,
+      "ts": "2026-06-07 20:43",
+      "from": "saju_reader",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[Gemini 카드 #149] 해석·정화 일주 성향 — gemini-2.5-flash 저장",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1359,
+      "ts": "2026-06-07 23:47",
+      "from": "saju_reader",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[Gemini 카드 #151] 해석·계수 일주 성향 — gemini-2.5-flash 저장",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1360,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_reader",
+      "to": null,
+      "kind": "task",
+      "text": "[학습 카드 #447] 변수·음양 원리\n【음양 변수】 양(陽)은 확장·밝음·추진·건조, 음(陰)은 수용·내면·유연·습润. 천간 양: 갑병무경임, 음: 을정기신계. 지지 양: 인진오신술, 음: 축묘미유자해. 일간 음양으로 겉·속 성향을 나누고, 오행과 함께…",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1361,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_curator",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[확정 #447] 변수·음양 원리 — pack 반영 · 젬마기억 wiki_saju_447",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1362,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_rl",
+      "to": "ceo",
+      "kind": "conclusion",
+      "text": "[위원회·realtime · 카드 #447] PASS · 변수·음양 원리",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1363,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_reader",
+      "to": null,
+      "kind": "task",
+      "text": "[학습 카드 #448] 변수·일간 음양 판별\n【음양 변수】 양일간은 드러내는 추진·리더·속도, 음일간은 섬세·인내·내면·협상. 양일간+관성 과다: 압박·완고, 음일간+식상: 표현·창작. 참고용 서술이며 가능성 예언·의학·법률 단정은 금지한다. 또한 일간=겉 성…",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1364,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_curator",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[확정 #448] 변수·일간 음양 판별 — pack 반영 · 젬마기억 wiki_saju_448",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1365,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_rl",
+      "to": "ceo",
+      "kind": "conclusion",
+      "text": "[위원회·realtime · 카드 #448] PASS · 변수·일간 음양 판별",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1366,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_reader",
+      "to": null,
+      "kind": "task",
+      "text": "[학습 카드 #449] 변수·십이운성 장생\n【십이운성 변수】 새 출발·학습·씨앗 단계. 일간·대운·세운 지지에 따라 단계가 달라진다. 한 단계만으로 길흉 단정하지 말고 십신·용신과 함께 본다. 참고용 서술이며 가능성 예언·의학·법률 단정은 금지한다. 또한 대…",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1367,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_curator",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[확정 #449] 변수·십이운성 장생 — pack 반영 · 젬마기억 wiki_saju_449",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1368,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_rl",
+      "to": "ceo",
+      "kind": "conclusion",
+      "text": "[위원회·realtime · 카드 #449] PASS · 변수·십이운성 장생",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1369,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_reader",
+      "to": null,
+      "kind": "task",
+      "text": "[학습 카드 #450] 변수·십이운성 목욕\n【십이운성 변수】 과다 시 산만·스캔들 톤만. 일간·대운·세운 지지에 따라 단계가 달라진다. 한 단계만으로 길흉 단정하지 말고 십신·용신과 함께 본다. 참고용 서술이며 가능성 예언·의학·법률 단정은 금지한다. 또한 …",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1370,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_curator",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[확정 #450] 변수·십이운성 목욕 — pack 반영 · 젬마기억 wiki_saju_450",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1371,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_rl",
+      "to": "ceo",
+      "kind": "conclusion",
+      "text": "[위원회·realtime · 카드 #450] PASS · 변수·십이운성 목욕",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1372,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_reader",
+      "to": null,
+      "kind": "task",
+      "text": "[학습 카드 #451] 변수·십이운성 관대\n【십이운성 변수】 성장·자립·사회 진출. 일간·대운·세운 지지에 따라 단계가 달라진다. 한 단계만으로 길흉 단정하지 말고 십신·용신과 함께 본다. 참고용 서술이며 가능성 예언·의학·법률 단정은 금지한다. 또한 대운(…",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1373,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_curator",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[확정 #451] 변수·십이운성 관대 — pack 반영 · 젬마기억 wiki_saju_451",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1374,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_rl",
+      "to": "ceo",
+      "kind": "conclusion",
+      "text": "[위원회·realtime · 카드 #451] PASS · 변수·십이운성 관대",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1375,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_reader",
+      "to": null,
+      "kind": "task",
+      "text": "[학습 카드 #452] 변수·십이운성 건록\n【십이운성 변수】 일간·대운·세운 지지에 따라 단계가 달라진다. 한 단계만으로 길흉 단정하지 말고 십신·용신과 함께 본다. 참고용 서술이며 가능성 예언·의학·법률 단정은 금지한다. 또한 대운(10년)→세운(1년)→월…",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1376,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_curator",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[확정 #452] 변수·십이운성 건록 — pack 반영 · 젬마기억 wiki_saju_452",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1377,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_rl",
+      "to": "ceo",
+      "kind": "conclusion",
+      "text": "[위원회·realtime · 카드 #452] PASS · 변수·십이운성 건록",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1378,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_reader",
+      "to": null,
+      "kind": "task",
+      "text": "[학습 카드 #453] 변수·십이운성 제왕\n【십이운성 변수】 일간·대운·세운 지지에 따라 단계가 달라진다. 한 단계만으로 길흉 단정하지 말고 십신·용신과 함께 본다. 참고용 서술이며 가능성 예언·의학·법률 단정은 금지한다. 또한 대운(10년)→세운(1년)→월…",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1379,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_curator",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[확정 #453] 변수·십이운성 제왕 — pack 반영 · 젬마기억 wiki_saju_453",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1380,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_rl",
+      "to": "ceo",
+      "kind": "conclusion",
+      "text": "[위원회·realtime · 카드 #453] PASS · 변수·십이운성 제왕",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1381,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_reader",
+      "to": null,
+      "kind": "task",
+      "text": "[학습 카드 #454] 변수·십이운성 쇠\n【십이운성 변수】 과다 시 무기력 톤만. 일간·대운·세운 지지에 따라 단계가 달라진다. 한 단계만으로 길흉 단정하지 말고 십신·용신과 함께 본다. 참고용 서술이며 가능성 예언·의학·법률 단정은 금지한다. 또한 대운(…",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1382,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_curator",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[확정 #454] 변수·십이운성 쇠 — pack 반영 · 젬마기억 wiki_saju_454",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1383,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_rl",
+      "to": "ceo",
+      "kind": "conclusion",
+      "text": "[위원회·realtime · 카드 #454] PASS · 변수·십이운성 쇠",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1384,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_reader",
+      "to": null,
+      "kind": "task",
+      "text": "[학습 카드 #455] 변수·십이운성 병\n【십이운성 변수】 일간·대운·세운 지지에 따라 단계가 달라진다. 한 단계만으로 길흉 단정하지 말고 십신·용신과 함께 본다. 참고용 서술이며 가능성 예언·의학·법률 단정은 금지한다. 또한 대운(10년)→세운(1년)→월…",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1385,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_curator",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[확정 #455] 변수·십이운성 병 — pack 반영 · 젬마기억 wiki_saju_455",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1386,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_rl",
+      "to": "ceo",
+      "kind": "conclusion",
+      "text": "[위원회·realtime · 카드 #455] PASS · 변수·십이운성 병",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1387,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_reader",
+      "to": null,
+      "kind": "task",
+      "text": "[학습 카드 #456] 변수·십이운성 사\n【십이운성 변수】 정지·변화·재시작 전. 일간·대운·세운 지지에 따라 단계가 달라진다. 한 단계만으로 길흉 단정하지 말고 십신·용신과 함께 본다. 참고용 서술이며 가능성 예언·의학·법률 단정은 금지한다. 또한 대운(…",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1388,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_curator",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[확정 #456] 변수·십이운성 사 — pack 반영 · 젬마기억 wiki_saju_456",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1389,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_rl",
+      "to": "ceo",
+      "kind": "conclusion",
+      "text": "[위원회·realtime · 카드 #456] PASS · 변수·십이운성 사",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1390,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_reader",
+      "to": null,
+      "kind": "task",
+      "text": "[학습 카드 #457] 변수·십이운성 묘\n【십이운성 변수】 일간·대운·세운 지지에 따라 단계가 달라진다. 한 단계만으로 길흉 단정하지 말고 십신·용신과 함께 본다. 참고용 서술이며 가능성 예언·의학·법률 단정은 금지한다. 또한 대운(10년)→세운(1년)→월…",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1391,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_curator",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[확정 #457] 변수·십이운성 묘 — pack 반영 · 젬마기억 wiki_saju_457",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1392,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_rl",
+      "to": "ceo",
+      "kind": "conclusion",
+      "text": "[위원회·realtime · 카드 #457] PASS · 변수·십이운성 묘",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1393,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_reader",
+      "to": null,
+      "kind": "task",
+      "text": "[학습 카드 #458] 변수·십이운성 절\n【십이운성 변수】 단절·새 사이클 직전. 일간·대운·세운 지지에 따라 단계가 달라진다. 한 단계만으로 길흉 단정하지 말고 십신·용신과 함께 본다. 참고용 서술이며 가능성 예언·의학·법률 단정은 금지한다. 또한 대운(…",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1394,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_curator",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[확정 #458] 변수·십이운성 절 — pack 반영 · 젬마기억 wiki_saju_458",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1395,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_rl",
+      "to": "ceo",
+      "kind": "conclusion",
+      "text": "[위원회·realtime · 카드 #458] PASS · 변수·십이운성 절",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1396,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_reader",
+      "to": null,
+      "kind": "task",
+      "text": "[학습 카드 #459] 변수·십이운성 태\n【십이운성 변수】 일간·대운·세운 지지에 따라 단계가 달라진다. 한 단계만으로 길흉 단정하지 말고 십신·용신과 함께 본다. 참고용 서술이며 가능성 예언·의학·법률 단정은 금지한다. 또한 대운(10년)→세운(1년)→월…",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1397,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_curator",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[확정 #459] 변수·십이운성 태 — pack 반영 · 젬마기억 wiki_saju_459",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1398,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_rl",
+      "to": "ceo",
+      "kind": "conclusion",
+      "text": "[위원회·realtime · 카드 #459] PASS · 변수·십이운성 태",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1399,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_reader",
+      "to": null,
+      "kind": "task",
+      "text": "[학습 카드 #460] 변수·십이운성 양\n【십이운성 변수】 양육·보호·성장 기반. 멘토·가정·인성 기운. 일간·대운·세운 지지에 따라 단계가 달라진다. 한 단계만으로 길흉 단정하지 말고 십신·용신과 함께 본다. 참고용 서술이며 가능성 예언·의학·법률 단정은…",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1400,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_curator",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[확정 #460] 변수·십이운성 양 — pack 반영 · 젬마기억 wiki_saju_460",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1401,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_rl",
+      "to": "ceo",
+      "kind": "conclusion",
+      "text": "[위원회·realtime · 카드 #460] PASS · 변수·십이운성 양",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1402,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_reader",
+      "to": null,
+      "kind": "task",
+      "text": "[학습 카드 #461] 변수·지장간 개요\n【지장간 변수】 지지 안에 숨은 천간(본기·중기·여기). 월지 본기가 격의 핵심, 일지 본기는 배우자·내면. 지장간이 강하면 겉과 속이 다를 수 있음 — 「겉 격 vs 속 십신」 분리 서술. 참고용 서술이며 가능성 …",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1403,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_curator",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[확정 #461] 변수·지장간 개요 — pack 반영 · 젬마기억 wiki_saju_461",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1404,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_rl",
+      "to": "ceo",
+      "kind": "conclusion",
+      "text": "[위원회·realtime · 카드 #461] PASS · 변수·지장간 개요",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1405,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_reader",
+      "to": null,
+      "kind": "task",
+      "text": "[학습 카드 #462] 변수·지장간 자수\n【지장간 변수】 자수 — 본기 癸 중심. 壬癸 잠재·지혜·유통. 월지·일지·시지에 있을 때 해당 궁에 투영. 참고용 서술이며 가능성 예언·의학·법률 단정은 금지한다. 일간·월지·대운과 함께 보며, 한 변수만으로 길흉…",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1406,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_curator",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[확정 #462] 변수·지장간 자수 — pack 반영 · 젬마기억 wiki_saju_462",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1407,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_rl",
+      "to": "ceo",
+      "kind": "conclusion",
+      "text": "[위원회·realtime · 카드 #462] PASS · 변수·지장간 자수",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1408,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_reader",
+      "to": null,
+      "kind": "task",
+      "text": "[학습 카드 #463] 변수·지장간 축토\n【지장간 변수】 축토 — 본기 己 중심. 己辛癸 습토·저장·노력. 월지·일지·시지에 있을 때 해당 궁에 투영. 참고용 서술이며 가능성 예언·의학·법률 단정은 금지한다. 일간·월지·대운과 함께 보며, 한 변수만으로 길…",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1409,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_curator",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[확정 #463] 변수·지장간 축토 — pack 반영 · 젬마기억 wiki_saju_463",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1410,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_rl",
+      "to": "ceo",
+      "kind": "conclusion",
+      "text": "[위원회·realtime · 카드 #463] PASS · 변수·지장간 축토",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1411,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_reader",
+      "to": null,
+      "kind": "task",
+      "text": "[학습 카드 #464] 변수·지장간 인목\n【지장간 변수】 인목 — 본기 甲 중심. 甲丙戊 봄초·도전·리더. 월지·일지·시지에 있을 때 해당 궁에 투영. 참고용 서술이며 가능성 예언·의학·법률 단정은 금지한다. 일간·월지·대운과 함께 보며, 한 변수만으로 길…",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1412,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_curator",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[확정 #464] 변수·지장간 인목 — pack 반영 · 젬마기억 wiki_saju_464",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1413,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_rl",
+      "to": "ceo",
+      "kind": "conclusion",
+      "text": "[위원회·realtime · 카드 #464] PASS · 변수·지장간 인목",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1414,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_reader",
+      "to": null,
+      "kind": "task",
+      "text": "[학습 카드 #465] 변수·지장간 묘목\n【지장간 변수】 묘목 — 본기 乙 중심. 乙 목 기운·표현·인연. 월지·일지·시지에 있을 때 해당 궁에 투영. 참고용 서술이며 가능성 예언·의학·법률 단정은 금지한다. 일간·월지·대운과 함께 보며, 한 변수만으로 길…",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1415,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_curator",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[확정 #465] 변수·지장간 묘목 — pack 반영 · 젬마기억 wiki_saju_465",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1416,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_rl",
+      "to": "ceo",
+      "kind": "conclusion",
+      "text": "[위원회·realtime · 카드 #465] PASS · 변수·지장간 묘목",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1417,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_reader",
+      "to": null,
+      "kind": "task",
+      "text": "[학습 카드 #466] 변수·지장간 진토\n【지장간 변수】 진토 — 본기 戊 중심. 戊乙癸 습토·전환·야망. 월지·일지·시지에 있을 때 해당 궁에 투영. 참고용 서술이며 가능성 예언·의학·법률 단정은 금지한다. 일간·월지·대운과 함께 보며, 한 변수만으로 길…",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1418,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_curator",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[확정 #466] 변수·지장간 진토 — pack 반영 · 젬마기억 wiki_saju_466",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1419,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_rl",
+      "to": "ceo",
+      "kind": "conclusion",
+      "text": "[위원회·realtime · 카드 #466] PASS · 변수·지장간 진토",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1420,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_reader",
+      "to": null,
+      "kind": "task",
+      "text": "[학습 카드 #467] 변수·지장간 사화\n【지장간 변수】 사화 — 본기 丙 중심. 丙庚戊 화·전략·표현. 월지·일지·시지에 있을 때 해당 궁에 투영. 참고용 서술이며 가능성 예언·의학·법률 단정은 금지한다. 일간·월지·대운과 함께 보며, 한 변수만으로 길흉…",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1421,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_curator",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[확정 #467] 변수·지장간 사화 — pack 반영 · 젬마기억 wiki_saju_467",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1422,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_rl",
+      "to": "ceo",
+      "kind": "conclusion",
+      "text": "[위원회·realtime · 카드 #467] PASS · 변수·지장간 사화",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1423,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_reader",
+      "to": null,
+      "kind": "task",
+      "text": "[학습 카드 #468] 변수·지장간 오화\n【지장간 변수】 오화 — 본기 丁 중심. 丁己 화 정점·명예·속도. 월지·일지·시지에 있을 때 해당 궁에 투영. 참고용 서술이며 가능성 예언·의학·법률 단정은 금지한다. 일간·월지·대운과 함께 보며, 한 변수만으로 …",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1424,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_curator",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[확정 #468] 변수·지장간 오화 — pack 반영 · 젬마기억 wiki_saju_468",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1425,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_rl",
+      "to": "ceo",
+      "kind": "conclusion",
+      "text": "[위원회·realtime · 카드 #468] PASS · 변수·지장간 오화",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1426,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_reader",
+      "to": null,
+      "kind": "task",
+      "text": "[학습 카드 #469] 변수·지장간 미토\n【지장간 변수】 미토 — 본기 己 중심. 己丁乙 조토·돌봄·완성. 월지·일지·시지에 있을 때 해당 궁에 투영. 참고용 서술이며 가능성 예언·의학·법률 단정은 금지한다. 일간·월지·대운과 함께 보며, 한 변수만으로 길…",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1427,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_curator",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[확정 #469] 변수·지장간 미토 — pack 반영 · 젬마기억 wiki_saju_469",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1428,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_rl",
+      "to": "ceo",
+      "kind": "conclusion",
+      "text": "[위원회·realtime · 카드 #469] PASS · 변수·지장간 미토",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1429,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_reader",
+      "to": null,
+      "kind": "task",
+      "text": "[학습 카드 #470] 변수·지장간 신금\n【지장간 변수】 신금 — 본기 庚 중심. 庚壬戊 금·실행·변화. 월지·일지·시지에 있을 때 해당 궁에 투영. 참고용 서술이며 가능성 예언·의학·법률 단정은 금지한다. 일간·월지·대운과 함께 보며, 한 변수만으로 길흉…",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1430,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_curator",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[확정 #470] 변수·지장간 신금 — pack 반영 · 젬마기억 wiki_saju_470",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1431,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_rl",
+      "to": "ceo",
+      "kind": "conclusion",
+      "text": "[위원회·realtime · 카드 #470] PASS · 변수·지장간 신금",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1432,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_reader",
+      "to": null,
+      "kind": "task",
+      "text": "[학습 카드 #471] 변수·지장간 유금\n【지장간 변수】 유금 — 본기 辛 중심. 월지·일지·시지에 있을 때 해당 궁에 투영. 참고용 서술이며 가능성 예언·의학·법률 단정은 금지한다. 일간·월지·대운과 함께 보며, 한 변수만으로 길흉을 단정하지 않습니다. …",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1433,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_curator",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[확정 #471] 변수·지장간 유금 — pack 반영 · 젬마기억 wiki_saju_471",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1434,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_rl",
+      "to": "ceo",
+      "kind": "conclusion",
+      "text": "[위원회·realtime · 카드 #471] PASS · 변수·지장간 유금",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1435,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_reader",
+      "to": null,
+      "kind": "task",
+      "text": "[학습 카드 #472] 변수·지장간 술토\n【지장간 변수】 술토 — 본기 戊 중심. 戊辛丁 조토·의리·저장. 월지·일지·시지에 있을 때 해당 궁에 투영. 참고용 서술이며 가능성 예언·의학·법률 단정은 금지한다. 일간·월지·대운과 함께 보며, 한 변수만으로 길…",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1436,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_curator",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[확정 #472] 변수·지장간 술토 — pack 반영 · 젬마기억 wiki_saju_472",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1437,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_rl",
+      "to": "ceo",
+      "kind": "conclusion",
+      "text": "[위원회·realtime · 카드 #472] PASS · 변수·지장간 술토",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1438,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_reader",
+      "to": null,
+      "kind": "task",
+      "text": "[학습 카드 #473] 변수·지장간 해수\n【지장간 변수】 해수 — 본기 壬 중심. 월지·일지·시지에 있을 때 해당 궁에 투영. 참고용 서술이며 가능성 예언·의학·법률 단정은 금지한다. 또한 지지는 계절·환경·육친·관계(합·충·형·파·해)로 읽으며 단정은 피…",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1439,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_curator",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[확정 #473] 변수·지장간 해수 — pack 반영 · 젬마기억 wiki_saju_473",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1440,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_rl",
+      "to": "ceo",
+      "kind": "conclusion",
+      "text": "[위원회·realtime · 카드 #473] PASS · 변수·지장간 해수",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1441,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_reader",
+      "to": null,
+      "kind": "task",
+      "text": "[학습 카드 #474] 변수·천간합 甲己合土\n【천간합 변수】 갑기 합토 — 중재·현실·신뢰. 합이 깨지면 내적 갈등. 합이 성립하면 해당 오행 기운이 강해짐. 충·극과 겹치면 「합 속 갈등」 톤. 참고용 서술이며 가능성 예언·의학·법률 단정은 금지한다. 또한 …",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1442,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_curator",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[확정 #474] 변수·천간합 甲己合土 — pack 반영 · 젬마기억 wiki_saju_474",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1443,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_rl",
+      "to": "ceo",
+      "kind": "conclusion",
+      "text": "[위원회·realtime · 카드 #474] PASS · 변수·천간합 甲己合土",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1444,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_reader",
+      "to": null,
+      "kind": "task",
+      "text": "[학습 카드 #475] 변수·천간합 乙庚合金\n【천간합 변수】 을경 합금 — 규율·결단·정리. 합이 성립하면 해당 오행 기운이 강해짐. 충·극과 겹치면 「합 속 갈등」 톤. 참고용 서술이며 가능성 예언·의학·법률 단정은 금지한다. 또한 천간 오행·음양·일간 강약…",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1445,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_curator",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[확정 #475] 변수·천간합 乙庚合金 — pack 반영 · 젬마기억 wiki_saju_475",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1446,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_rl",
+      "to": "ceo",
+      "kind": "conclusion",
+      "text": "[위원회·realtime · 카드 #475] PASS · 변수·천간합 乙庚合金",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1447,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_reader",
+      "to": null,
+      "kind": "task",
+      "text": "[학습 카드 #476] 변수·천간합 丙辛合水\n【천간합 변수】 병신 합수 — 감성·직관·표현 정제. 합이 성립하면 해당 오행 기운이 강해짐. 충·극과 겹치면 「합 속 갈등」 톤. 참고용 서술이며 가능성 예언·의학·법률 단정은 금지한다. 또한 천간 오행·음양·일간…",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1448,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_curator",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[확정 #476] 변수·천간합 丙辛合水 — pack 반영 · 젬마기억 wiki_saju_476",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1449,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_rl",
+      "to": "ceo",
+      "kind": "conclusion",
+      "text": "[위원회·realtime · 카드 #476] PASS · 변수·천간합 丙辛合水",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1450,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_reader",
+      "to": null,
+      "kind": "task",
+      "text": "[학습 카드 #477] 변수·천간합 丁壬合木\n【천간합 변수】 정임 합목 — 성장·학습·인연 확장. 합이 성립하면 해당 오행 기운이 강해짐. 충·극과 겹치면 「합 속 갈등」 톤. 참고용 서술이며 가능성 예언·의학·법률 단정은 금지한다. 또한 천간 오행·음양·일간…",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1451,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_curator",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[확정 #477] 변수·천간합 丁壬合木 — pack 반영 · 젬마기억 wiki_saju_477",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1452,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_rl",
+      "to": "ceo",
+      "kind": "conclusion",
+      "text": "[위원회·realtime · 카드 #477] PASS · 변수·천간합 丁壬合木",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1453,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_reader",
+      "to": null,
+      "kind": "task",
+      "text": "[학습 카드 #478] 변수·천간합 戊癸合火\n【천간합 변수】 무계 합화 — 열정·추진·체면. 합이 성립하면 해당 오행 기운이 강해짐. 충·극과 겹치면 「합 속 갈등」 톤. 참고용 서술이며 가능성 예언·의학·법률 단정은 금지한다. 또한 천간 오행·음양·일간 강약…",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1454,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_curator",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[확정 #478] 변수·천간합 戊癸合火 — pack 반영 · 젬마기억 wiki_saju_478",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1455,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_rl",
+      "to": "ceo",
+      "kind": "conclusion",
+      "text": "[위원회·realtime · 카드 #478] PASS · 변수·천간합 戊癸合火",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1456,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_reader",
+      "to": null,
+      "kind": "task",
+      "text": "[학습 카드 #479] 변수·납음 개요\n【납음 변수】 60갑자 각각의 오행·음성(海中金·炉中火 등). 년주·일주 납음으로 조상·본인 기질 보조. 납음만으로 용신 단정 금지 — 오행 개수·월지 격이 우선. 참고용 서술이며 가능성 예언·의학·법률 단정은 금지…",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1457,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_curator",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[확정 #479] 변수·납음 개요 — pack 반영 · 젬마기억 wiki_saju_479",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1458,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_rl",
+      "to": "ceo",
+      "kind": "conclusion",
+      "text": "[위원회·realtime · 카드 #479] PASS · 변수·납음 개요",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1459,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_reader",
+      "to": null,
+      "kind": "task",
+      "text": "[학습 카드 #480] 변수·특수격 종격\n【특수격】 일간 극약·비겁·인성 편중 시 종(從)격 검토. 종재격·종살격·종儿격 등 — 강한 기운에 순응하는 풀이. 참고용 서술이며 가능성 예언·의학·법률 단정은 금지한다. 또한 월지 본기 정기로 격을 잡고 일간 강…",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1460,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_curator",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[확정 #480] 변수·특수격 종격 — pack 반영 · 젬마기억 wiki_saju_480",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1461,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_rl",
+      "to": "ceo",
+      "kind": "conclusion",
+      "text": "[위원회·realtime · 카드 #480] PASS · 변수·특수격 종격",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1462,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_reader",
+      "to": null,
+      "kind": "task",
+      "text": "[학습 카드 #481] 변수·특수격 화격\n【특수격】 화(化) 기운이 명확할 때 — 합화·化神. 甲己化土·丙辛化水 등 천간합화와 연계. 참고용 서술이며 가능성 예언·의학·법률 단정은 금지한다. 또한 월지 본기 정기로 격을 잡고 일간 강약·종격·화격 여부는 참…",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1463,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_curator",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[확정 #481] 변수·특수격 화격 — pack 반영 · 젬마기억 wiki_saju_481",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1464,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_rl",
+      "to": "ceo",
+      "kind": "conclusion",
+      "text": "[위원회·realtime · 카드 #481] PASS · 변수·특수격 화격",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1465,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_reader",
+      "to": null,
+      "kind": "task",
+      "text": "[학습 카드 #482] 변수·특수격 신강\n【신강신약】 일간 득령·득지·득시·비겁으로 강약 판단. 신강: 설기·극·泄 필요, 신약: 생·扶 필요. 용신은 「억부」— 강하면 설, 약하면 생. 참고용 서술이며 가능성 예언·의학·법률 단정은 금지한다. 또한 월지 …",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1466,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_curator",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[확정 #482] 변수·특수격 신강 — pack 반영 · 젬마기억 wiki_saju_482",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1467,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_rl",
+      "to": "ceo",
+      "kind": "conclusion",
+      "text": "[위원회·realtime · 카드 #482] PASS · 변수·특수격 신강",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1468,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_reader",
+      "to": null,
+      "kind": "task",
+      "text": "[학습 카드 #483] 변수·특수격 신약\n【신강신약】 신약 일간은 인성·비겁 보호·학습·멘토가 도움. 관성·재성 과다 시 압박·재물 부담 — 「보완·휴식」 톤. 참고용 서술이며 가능성 예언·의학·법률 단정은 금지한다. 또한 월지 본기 정기로 격을 잡고 일간…",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1469,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_curator",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[확정 #483] 변수·특수격 신약 — pack 반영 · 젬마기억 wiki_saju_483",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1470,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_rl",
+      "to": "ceo",
+      "kind": "conclusion",
+      "text": "[위원회·realtime · 카드 #483] PASS · 변수·특수격 신약",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1471,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_reader",
+      "to": null,
+      "kind": "task",
+      "text": "[학습 카드 #484] 변수·득령득지득시\n【득령득지득시】 월지=득령(계절), 일지=득지(배우자궁), 시지=득시(말년·자녀). 세 개 중 2개 이상이면 일간 강한 편. 득령 없으면 격국·용신 해석에 주의. 참고용 서술이며 가능성 예언·의학·법률 단정은 금지한…",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1472,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_curator",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[확정 #484] 변수·득령득지득시 — pack 반영 · 젬마기억 wiki_saju_484",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1473,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_rl",
+      "to": "ceo",
+      "kind": "conclusion",
+      "text": "[위원회·realtime · 카드 #484] PASS · 변수·득령득지득시",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1474,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_reader",
+      "to": null,
+      "kind": "task",
+      "text": "[학습 카드 #485] 변수·신살 역마\n【신살 변수】 이동·변화·해외·이직·유통. 안정 싫어할 수 있음. 본격(격국·용신) 다음 보조. 신살만으로 길흉 결정 금지. 또한 문창·역마·도화·천을 등은 본격(격·용신) 다음 1~2문장 보조. 신살만으로 길흉 단…",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1475,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_curator",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[확정 #485] 변수·신살 역마 — pack 반영 · 젬마기억 wiki_saju_485",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1476,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_rl",
+      "to": "ceo",
+      "kind": "conclusion",
+      "text": "[위원회·realtime · 카드 #485] PASS · 변수·신살 역마",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1477,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_reader",
+      "to": null,
+      "kind": "task",
+      "text": "[학습 카드 #486] 변수·신살 도화\n【신살 변수】 매력·인연·표현·예술. 과다 시 산만·스캔들 톤만. 본격(격국·용신) 다음 보조. 신살만으로 길흉 결정 금지. 또한 문창·역마·도화·천을 등은 본격(격·용신) 다음 1~2문장 보조. 신살만으로 길흉 단…",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1478,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_curator",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[확정 #486] 변수·신살 도화 — pack 반영 · 젬마기억 wiki_saju_486",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1479,
+      "ts": "2026-06-09 19:42",
+      "from": "saju_rl",
+      "to": "ceo",
+      "kind": "conclusion",
+      "text": "[위원회·realtime · 카드 #486] PASS · 변수·신살 도화",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1480,
+      "ts": "2026-06-09 19:43",
+      "from": "saju_reader",
+      "to": null,
+      "kind": "task",
+      "text": "[학습 카드 #487] 변수·신살 화개\n【신살 변수】 철학·종교·예술·고독·학문. 본격(격국·용신) 다음 보조. 신살만으로 길흉 결정 금지. 또한 문창·역마·도화·천을 등은 본격(격·용신) 다음 1~2문장 보조. 신살만으로 길흉 단정 금지. 일간·월지·대…",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1481,
+      "ts": "2026-06-09 19:43",
+      "from": "saju_curator",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[확정 #487] 변수·신살 화개 — pack 반영 · 젬마기억 wiki_saju_487",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1482,
+      "ts": "2026-06-09 19:43",
+      "from": "saju_rl",
+      "to": "ceo",
+      "kind": "conclusion",
+      "text": "[위원회·realtime · 카드 #487] PASS · 변수·신살 화개",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1483,
+      "ts": "2026-06-09 19:43",
+      "from": "saju_reader",
+      "to": null,
+      "kind": "task",
+      "text": "[학습 카드 #488] 변수·신살 문창\n【신살 변수】 시험·학습·기록·자격·문서. 본격(격국·용신) 다음 보조. 신살만으로 길흉 결정 금지. 또한 문창·역마·도화·천을 등은 본격(격·용신) 다음 1~2문장 보조. 신살만으로 길흉 단정 금지. 일간·월지·대…",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1484,
+      "ts": "2026-06-09 19:43",
+      "from": "saju_curator",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[확정 #488] 변수·신살 문창 — pack 반영 · 젬마기억 wiki_saju_488",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1485,
+      "ts": "2026-06-09 19:43",
+      "from": "saju_rl",
+      "to": "ceo",
+      "kind": "conclusion",
+      "text": "[위원회·realtime · 카드 #488] PASS · 변수·신살 문창",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1486,
+      "ts": "2026-06-09 19:43",
+      "from": "saju_reader",
+      "to": null,
+      "kind": "task",
+      "text": "[학습 카드 #489] 변수·신살 천을\n【신살 변수】 귀인·멘토·위기 시 도움. 인복·치유·의료(참고만). 본격(격국·용신) 다음 보조. 신살만으로 길흉 결정 금지. 또한 문창·역마·도화·천을 등은 본격(격·용신) 다음 1~2문장 보조. 신살만으로 길흉 …",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1487,
+      "ts": "2026-06-09 19:43",
+      "from": "saju_curator",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[확정 #489] 변수·신살 천을 — pack 반영 · 젬마기억 wiki_saju_489",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1488,
+      "ts": "2026-06-09 19:43",
+      "from": "saju_rl",
+      "to": "ceo",
+      "kind": "conclusion",
+      "text": "[위원회·realtime · 카드 #489] PASS · 변수·신살 천을",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1489,
+      "ts": "2026-06-09 19:43",
+      "from": "saju_reader",
+      "to": null,
+      "kind": "task",
+      "text": "[학습 카드 #490] 변수·신살 백호\n【신살 변수】 급변·수술·사고 톤 — 공포 조장 금지. 본격(격국·용신) 다음 보조. 신살만으로 길흉 결정 금지. 또한 문창·역마·도화·천을 등은 본격(격·용신) 다음 1~2문장 보조. 신살만으로 길흉 단정 금지. …",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1490,
+      "ts": "2026-06-09 19:43",
+      "from": "saju_curator",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[확정 #490] 변수·신살 백호 — pack 반영 · 젬마기억 wiki_saju_490",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1491,
+      "ts": "2026-06-09 19:43",
+      "from": "saju_rl",
+      "to": "ceo",
+      "kind": "conclusion",
+      "text": "[위원회·realtime · 카드 #490] PASS · 변수·신살 백호",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1492,
+      "ts": "2026-06-09 19:43",
+      "from": "saju_reader",
+      "to": null,
+      "kind": "task",
+      "text": "[학습 카드 #491] 변수·신살 겁살\n【신살 변수】 갑작·경쟁·손재 주의. 리스크 관리·보험·계약 점검 톤. 본격(격국·용신) 다음 보조. 신살만으로 길흉 결정 금지. 또한 문창·역마·도화·천을 등은 본격(격·용신) 다음 1~2문장 보조. 신살만으로 길…",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1493,
+      "ts": "2026-06-09 19:43",
+      "from": "saju_curator",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[확정 #491] 변수·신살 겁살 — pack 반영 · 젬마기억 wiki_saju_491",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1494,
+      "ts": "2026-06-09 19:43",
+      "from": "saju_rl",
+      "to": "ceo",
+      "kind": "conclusion",
+      "text": "[위원회·realtime · 카드 #491] PASS · 변수·신살 겁살",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1495,
+      "ts": "2026-06-09 19:43",
+      "from": "saju_reader",
+      "to": null,
+      "kind": "task",
+      "text": "[학습 카드 #492] 변수·신살 양인\n【신살 변수】 강한 개성·추진·분쟁 가능. 본격(격국·용신) 다음 보조. 신살만으로 길흉 결정 금지. 또한 문창·역마·도화·천을 등은 본격(격·용신) 다음 1~2문장 보조. 신살만으로 길흉 단정 금지. 일간·월지·대…",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1496,
+      "ts": "2026-06-09 19:43",
+      "from": "saju_curator",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[확정 #492] 변수·신살 양인 — pack 반영 · 젬마기억 wiki_saju_492",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1497,
+      "ts": "2026-06-09 19:43",
+      "from": "saju_rl",
+      "to": "ceo",
+      "kind": "conclusion",
+      "text": "[위원회·realtime · 카드 #492] PASS · 변수·신살 양인",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1498,
+      "ts": "2026-06-09 19:43",
+      "from": "saju_reader",
+      "to": null,
+      "kind": "task",
+      "text": "[학습 카드 #493] 변수·신살 홍염\n【신살 변수】 연애·매력·감정 기복. 도화와 유사, 관성·재성 맥락. 본격(격국·용신) 다음 보조. 신살만으로 길흉 결정 금지. 또한 문창·역마·도화·천을 등은 본격(격·용신) 다음 1~2문장 보조. 신살만으로 길흉…",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1499,
+      "ts": "2026-06-09 19:43",
+      "from": "saju_curator",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[확정 #493] 변수·신살 홍염 — pack 반영 · 젬마기억 wiki_saju_493",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1500,
+      "ts": "2026-06-09 19:43",
+      "from": "saju_rl",
+      "to": "ceo",
+      "kind": "conclusion",
+      "text": "[위원회·realtime · 카드 #493] PASS · 변수·신살 홍염",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1501,
+      "ts": "2026-06-09 19:43",
+      "from": "saju_reader",
+      "to": null,
+      "kind": "task",
+      "text": "[학습 카드 #494] 변수·신살 공망\n【신살 변수】 「기대 조절」톤, 불길 단정 금지. 본격(격국·용신) 다음 보조. 신살만으로 길흉 결정 금지. 또한 문창·역마·도화·천을 등은 본격(격·용신) 다음 1~2문장 보조. 신살만으로 길흉 단정 금지. 일간·…",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1502,
+      "ts": "2026-06-09 19:43",
+      "from": "saju_curator",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[확정 #494] 변수·신살 공망 — pack 반영 · 젬마기억 wiki_saju_494",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1503,
+      "ts": "2026-06-09 19:43",
+      "from": "saju_rl",
+      "to": "ceo",
+      "kind": "conclusion",
+      "text": "[위원회·realtime · 카드 #494] PASS · 변수·신살 공망",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1504,
+      "ts": "2026-06-09 19:43",
+      "from": "saju_reader",
+      "to": null,
+      "kind": "task",
+      "text": "[학습 카드 #495] 변수·격 편관격\n【격국 변수】 압박·경쟁·권위·변동 속 성취. 월지 본기 정기로 잡는다. 일간 강약·종격 여부는 별도 검토. 또한 월지 본기 정기로 격을 잡고 일간 강약·종격·화격 여부는 참고만. 격 vs 용신 충돌 시 분리. 일간…",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1505,
+      "ts": "2026-06-09 19:43",
+      "from": "saju_curator",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[확정 #495] 변수·격 편관격 — pack 반영 · 젬마기억 wiki_saju_495",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1506,
+      "ts": "2026-06-09 19:43",
+      "from": "saju_rl",
+      "to": "ceo",
+      "kind": "conclusion",
+      "text": "[위원회·realtime · 카드 #495] PASS · 변수·격 편관격",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1507,
+      "ts": "2026-06-09 19:43",
+      "from": "saju_reader",
+      "to": null,
+      "kind": "task",
+      "text": "[학습 카드 #496] 변수·운 대운\n【대운】 귀하의 사주에서 「운 대운」에 해당하는 흐름을 짚어 드립니다. 대운(10년)→세운(1년)→월운(선택). 용신·기신과 맞물리면 확장·조정 톤. 【운 변수】 천간=겉 흐름·지지=속 환경. 대운·세운·월운 해석 …",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1508,
+      "ts": "2026-06-09 19:43",
+      "from": "saju_curator",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[확정 #496] 변수·운 대운 — pack 반영 · 젬마기억 wiki_saju_496",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1509,
+      "ts": "2026-06-09 19:43",
+      "from": "saju_rl",
+      "to": "ceo",
+      "kind": "conclusion",
+      "text": "[위원회·realtime · 카드 #496] PASS · 변수·운 대운",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1510,
+      "ts": "2026-06-09 19:43",
+      "from": "saju_reader",
+      "to": null,
+      "kind": "task",
+      "text": "[학습 카드 #497] 변수·운 세운\n【세운】 귀하의 사주에서 「운 세운」에 해당하는 흐름을 짚어 드립니다. 대운(10년)→세운(1년)→월운(선택). 용신·기신과 맞물리면 확장·조정 톤. 【운 변수】 본년 테마·이직·재물·관계 이벤트 키워드. 대운·세운…",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1511,
+      "ts": "2026-06-09 19:43",
+      "from": "saju_curator",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[확정 #497] 변수·운 세운 — pack 반영 · 젬마기억 wiki_saju_497",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1512,
+      "ts": "2026-06-09 19:43",
+      "from": "saju_rl",
+      "to": "ceo",
+      "kind": "conclusion",
+      "text": "[위원회·realtime · 카드 #497] PASS · 변수·운 세운",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1513,
+      "ts": "2026-06-09 19:43",
+      "from": "saju_reader",
+      "to": null,
+      "kind": "task",
+      "text": "[학습 카드 #498] 변수·운 월운\n【월운】 귀하의 사주에서 「운 월운」에 해당하는 흐름을 짚어 드립니다. 대운(10년)→세운(1년)→월운(선택). 용신·기신과 맞물리면 확장·조정 톤. 【운 변수】 세운 보조·단기 1~2문장. 대운·세운·월운 해석 순…",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1514,
+      "ts": "2026-06-09 19:43",
+      "from": "saju_curator",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[확정 #498] 변수·운 월운 — pack 반영 · 젬마기억 wiki_saju_498",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1515,
+      "ts": "2026-06-09 19:43",
+      "from": "saju_rl",
+      "to": "ceo",
+      "kind": "conclusion",
+      "text": "[위원회·realtime · 카드 #498] PASS · 변수·운 월운",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1516,
+      "ts": "2026-06-09 19:43",
+      "from": "saju_reader",
+      "to": null,
+      "kind": "task",
+      "text": "[학습 카드 #499] 변수·운 용신 변수\n【용신】 귀하의 사주에서 「운 용신 변수」에 해당하는 흐름을 짚어 드립니다. 용신 변수은(는) 일간·월지·대운과 함께 보며, 한 오행만으로 길흉을 단정하지 않습니다. 과다하면 조절·완충, 부족하면 보완 방향을 안내합…",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1517,
+      "ts": "2026-06-09 19:43",
+      "from": "saju_curator",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[확정 #499] 변수·운 용신 변수 — pack 반영 · 젬마기억 wiki_saju_499",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1518,
+      "ts": "2026-06-09 19:43",
+      "from": "saju_rl",
+      "to": "ceo",
+      "kind": "conclusion",
+      "text": "[위원회·realtime · 카드 #499] PASS · 변수·운 용신 변수",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1519,
+      "ts": "2026-06-09 19:43",
+      "from": "saju_reader",
+      "to": null,
+      "kind": "task",
+      "text": "[학습 카드 #500] 변수·운 기신 변수\n【기신】 귀하의 사주에서 「운 기신 변수」에 해당하는 흐름을 짚어 드립니다. 기신 변수은(는) 일간·월지·대운과 함께 보며, 한 오행만으로 길흉을 단정하지 않습니다. 과다하면 조절·완충, 부족하면 보완 방향을 안내합…",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1520,
+      "ts": "2026-06-09 19:43",
+      "from": "saju_curator",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[확정 #500] 변수·운 기신 변수 — pack 반영 · 젬마기억 wiki_saju_500",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1521,
+      "ts": "2026-06-09 19:43",
+      "from": "saju_rl",
+      "to": "ceo",
+      "kind": "conclusion",
+      "text": "[위원회·realtime · 카드 #500] PASS · 변수·운 기신 변수",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1522,
+      "ts": "2026-06-09 19:43",
+      "from": "saju_reader",
+      "to": null,
+      "kind": "task",
+      "text": "[학습 카드 #501] 해석·재물·연애·직업 테마 톤\n【인사·성향】 「재물·연애·직업 테마 톤」 주제를 중심으로 성향과 흐름을 짚어 드립니다. 재물: 정재·편재·식상생재·재성 과다/부족, 대운 재성 기운으로 본다. 「수입원·저축·투자 성향」까지 가능, 종목·날짜 단정 …",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1523,
+      "ts": "2026-06-09 19:43",
+      "from": "saju_curator",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[확정 #501] 해석·재물·연애·직업 테마 톤 — pack 반영 · 젬마기억 wiki_saju_501",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1524,
+      "ts": "2026-06-09 19:43",
+      "from": "saju_rl",
+      "to": "ceo",
+      "kind": "conclusion",
+      "text": "[위원회·realtime · 카드 #501] PASS · 해석·재물·연애·직업 테마 톤",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1525,
+      "ts": "2026-06-09 19:43",
+      "from": "saju_reader",
+      "to": null,
+      "kind": "task",
+      "text": "[학습 카드 #502] 해석·일주 중심 빠른 풀이\n【인사·성향】 「일주 중심 빠른 풀이」 주제를 중심으로 성향과 흐름을 짚어 드립니다. 시간·분 미상일 때는 일주(日柱)와 월지 격을 중심으로 풀이한다. 일간 천간의 오행·음양으로 기본 성향, 일지로 내면·배우자·말년…",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1526,
+      "ts": "2026-06-09 19:43",
+      "from": "saju_curator",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[확정 #502] 해석·일주 중심 빠른 풀이 — pack 반영 · 젬마기억 wiki_saju_502",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1527,
+      "ts": "2026-06-09 19:43",
+      "from": "saju_rl",
+      "to": "ceo",
+      "kind": "conclusion",
+      "text": "[위원회·realtime · 카드 #502] PASS · 해석·일주 중심 빠른 풀이",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1528,
+      "ts": "2026-06-09 19:43",
+      "from": "saju_reader",
+      "to": null,
+      "kind": "task",
+      "text": "[학습 카드 #503] 해석·무료 풀이 금지·주의 문구\n【인사·성향】 「무료 풀이 금지·주의 문구」 주제를 중심으로 성향과 흐름을 짚어 드립니다. 금지: 실명·주민번호·연락처, 특정 날짜의 사고·사망·이혼 단정, 의학 진단·약 처방, 주식·코인 매수 매도 시점, 법률·소…",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1529,
+      "ts": "2026-06-09 19:43",
+      "from": "saju_curator",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[확정 #503] 해석·무료 풀이 금지·주의 문구 — pack 반영 · 젬마기억 wiki_saju_503",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1530,
+      "ts": "2026-06-09 19:43",
+      "from": "saju_rl",
+      "to": "ceo",
+      "kind": "conclusion",
+      "text": "[위원회·realtime · 카드 #503] PASS · 해석·무료 풀이 금지·주의 문구",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1531,
+      "ts": "2026-06-09 19:43",
+      "from": "saju_reader",
+      "to": null,
+      "kind": "task",
+      "text": "[학습 카드 #504] 해석·신살·보조星 간략 활용\n【인사·성향】 「신살·보조星 간략 활용」 주제를 중심으로 성향과 흐름을 짚어 드립니다. 신살은 본격(격국·용신) 다음 보조 설명으로만 쓴다. 문창·학당: 학습·시험·기록. 도화: 매력·인연(과다 시 산만). 백호·겁…",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1532,
+      "ts": "2026-06-09 19:43",
+      "from": "saju_curator",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[확정 #504] 해석·신살·보조星 간략 활용 — pack 반영 · 젬마기억 wiki_saju_504",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1533,
+      "ts": "2026-06-09 19:43",
+      "from": "saju_rl",
+      "to": "ceo",
+      "kind": "conclusion",
+      "text": "[위원회·realtime · 카드 #504] PASS · 해석·신살·보조星 간략 활용",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1534,
+      "ts": "2026-06-09 19:43",
+      "from": "saju_reader",
+      "to": null,
+      "kind": "task",
+      "text": "[학습 카드 #505] 해석·남녀·연령대 서술 차이\n【인사·성향】 「남녀·연령대 서술 차이」 주제를 중심으로 성향과 흐름을 짚어 드립니다. 성별 입력이 있으면 관성·재성·도화 해석 시 배우자·연애 표현만 톤을 조정한다. 팔자 자체는 바꾸지 않는다. 연령대는 현재 나이…",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1535,
+      "ts": "2026-06-09 19:43",
+      "from": "saju_curator",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[확정 #505] 해석·남녀·연령대 서술 차이 — pack 반영 · 젬마기억 wiki_saju_505",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1536,
+      "ts": "2026-06-09 19:44",
+      "from": "saju_rl",
+      "to": "ceo",
+      "kind": "conclusion",
+      "text": "[위원회·realtime · 카드 #505] PASS · 해석·남녀·연령대 서술 차이",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1537,
+      "ts": "2026-06-09 19:44",
+      "from": "saju_reader",
+      "to": null,
+      "kind": "task",
+      "text": "[학습 카드 #506] 해석·갑목 일주 · 오행 균형 샘플\n【인사·성향】 「갑목 일주 · 오행 균형 샘플」 주제를 중심으로 성향과 흐름을 짚어 드립니다. 일주 갑목(甲木)으로 뿌리가 굳건한 명식입니다. 오행은 목·화가 상대적으로 강하고 금·수가 약한 편입니다. 십신으로 보면…",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1538,
+      "ts": "2026-06-09 19:44",
+      "from": "saju_reader",
+      "to": null,
+      "kind": "task",
+      "text": "[학습 카드 #507] 해석·정화 일주 · 대운·세운 해석 샘플\n【인사·성향】 「정화 일주 · 대운·세운 해석 샘플」 주제를 중심으로 성향과 흐름을 짚어 드립니다. 일주 정화(丁火)로 세밀하고 직관적인 기질이 강합니다. 오행은 화·토가 중심이고 수·목이 보완 역할을 합니다. 십신…",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1539,
+      "ts": "2026-06-09 19:44",
+      "from": "saju_curator",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[확정 #506] 해석·갑목 일주 · 오행 균형 샘플 — pack 반영 · 젬마기억 wiki_saju_506",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1540,
+      "ts": "2026-06-09 19:44",
+      "from": "saju_rl",
+      "to": "ceo",
+      "kind": "conclusion",
+      "text": "[위원회·realtime · 카드 #506] PASS · 해석·갑목 일주 · 오행 균형 샘플",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1541,
+      "ts": "2026-06-09 19:44",
+      "from": "saju_curator",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[확정 #507] 해석·정화 일주 · 대운·세운 해석 샘플 — pack 반영 · 젬마기억 wiki_saju_507",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1542,
+      "ts": "2026-06-09 19:44",
+      "from": "saju_rl",
+      "to": "ceo",
+      "kind": "conclusion",
+      "text": "[위원회·realtime · 카드 #507] PASS · 해석·정화 일주 · 대운·세운 해석 샘플",
+      "division": "saju-learn"
+    },
+    {
+      "id": 1543,
+      "ts": "2026-06-12 23:45",
+      "from": "gwansang_watch",
+      "to": null,
+      "kind": "task",
+      "text": "워치 (2026-06-12 23:45): SEO·오관·확정28 · 갭 제작 활성",
+      "division": "gwansang-learn"
+    },
+    {
+      "id": 1544,
+      "ts": "2026-06-12 23:45",
+      "from": "gwansang_curator",
+      "to": null,
+      "kind": "conclusion",
+      "text": "관상 pack (2026-06-12 23:45): 확정 28건 · CURSOR_GWANSANG_LEARN.md · 28",
+      "division": "gwansang-learn"
+    },
+    {
+      "id": 1545,
+      "ts": "2026-06-12 23:45",
+      "from": "gwansang_compose",
+      "to": null,
+      "kind": "conclusion",
+      "text": "관상 카드 (2026-06-12 23:45): 갭 없음 · pack 28건",
+      "division": "gwansang-learn"
+    },
+    {
+      "id": 1546,
+      "ts": "2026-06-12 23:45",
+      "from": "gwansang_catalog",
+      "to": null,
+      "kind": "conclusion",
+      "text": "관상 카탈로그 (2026-06-12 23:45): +0 ↻18 · 확정28",
+      "division": "gwansang-learn"
+    },
+    {
+      "id": 1547,
+      "ts": "2026-06-12 23:45",
+      "from": "gwansang_seo",
+      "to": null,
+      "kind": "task",
+      "text": "SEO젬마 (2026-06-12 23:45): 200자+·키워드·확정 28",
+      "division": "gwansang-learn"
+    },
+    {
+      "id": 1548,
+      "ts": "2026-06-12 23:45",
+      "from": "gwansang_scholar",
+      "to": null,
+      "kind": "task",
+      "text": "학자젬마 (2026-06-12 23:45): 오관·삼정·전통 이론 · 카드 28",
+      "division": "gwansang-learn"
+    },
+    {
+      "id": 1549,
+      "ts": "2026-06-12 23:45",
+      "from": "gwansang_features",
+      "to": null,
+      "kind": "task",
+      "text": "오관젬마 (2026-06-12 23:45): 이마·눈·코·입·귀 · 카드 28",
+      "division": "gwansang-learn"
+    },
+    {
+      "id": 1550,
+      "ts": "2026-06-12 23:45",
+      "from": "gwansang_fortune",
+      "to": null,
+      "kind": "task",
+      "text": "운세젬마 (2026-06-12 23:45): 길상·재물·연애 경향 · 카드 28",
+      "division": "gwansang-learn"
+    },
+    {
+      "id": 1551,
+      "ts": "2026-06-12 23:45",
+      "from": "gwansang_reader",
+      "to": null,
+      "kind": "task",
+      "text": "리더젬마 (2026-06-12 23:45): 수집·요약·카드 초안 · 카드 28",
+      "division": "gwansang-learn"
+    },
+    {
+      "id": 1552,
+      "ts": "2026-06-12 23:45",
+      "from": "gwansang_structurer",
+      "to": null,
+      "kind": "task",
+      "text": "구조젬마 (2026-06-12 23:45): 【】소제목·분류·태그 · 카드 28",
+      "division": "gwansang-learn"
+    },
+    {
+      "id": 1553,
+      "ts": "2026-06-12 23:45",
+      "from": "gwansang_privacy",
+      "to": null,
+      "kind": "task",
+      "text": "프라이버시 (2026-06-12 23:45): 대기 0 — 이상 없음",
+      "division": "gwansang-learn"
+    },
+    {
+      "id": 1554,
+      "ts": "2026-06-12 23:45",
+      "from": "gwansang_gap_autofill",
+      "to": null,
+      "kind": "conclusion",
+      "text": "관상 갭 (2026-06-12 23:45): 누락 0 · 추가 0 · (없음)",
+      "division": "gwansang-learn"
+    },
+    {
+      "id": 1555,
+      "ts": "2026-06-12 23:45",
+      "from": "gwansang_wiki_sync",
+      "to": null,
+      "kind": "conclusion",
+      "text": "Wiki 동기화 (2026-06-12 23:45): +0 · 확정 28",
+      "division": "gwansang-learn"
+    },
+    {
+      "id": 1556,
+      "ts": "2026-06-12 23:45",
+      "from": "gwansang_error_fix",
+      "to": null,
+      "kind": "task",
+      "text": "오류점검 (2026-06-12 23:45): 카드 28 — 이상 없음",
+      "division": "gwansang-learn"
+    },
+    {
+      "id": 1557,
+      "ts": "2026-06-12 23:45",
+      "from": "gwansang_daily_conclusion",
+      "to": null,
+      "kind": "conclusion",
+      "text": "관상 학습 결론 (2026-06-12 23:45): 확정 28 · 대기 0. 다음 — 갭 자동·SEO 보강·Wiki 동기화.",
+      "division": "gwansang-learn"
+    },
+    {
+      "id": 1558,
+      "ts": "2026-06-13 23:50",
+      "from": "gwansang_curator",
+      "to": null,
+      "kind": "system",
+      "text": "관상 학습 젬마 활성화 — ON 17종 · 시드 +0",
+      "division": "gwansang-learn"
+    },
+    {
+      "id": 1559,
+      "ts": "2026-06-13 23:50",
+      "from": "gwansang_watch",
+      "to": null,
+      "kind": "task",
+      "text": "워치 (2026-06-13 23:50): SEO·오관·확정28 · 갭 제작 활성",
+      "division": "gwansang-learn"
+    },
+    {
+      "id": 1560,
+      "ts": "2026-06-13 23:50",
+      "from": "gwansang_curator",
+      "to": null,
+      "kind": "conclusion",
+      "text": "관상 pack (2026-06-13 23:50): 확정 28건 · CURSOR_GWANSANG_LEARN.md · 28",
+      "division": "gwansang-learn"
+    },
+    {
+      "id": 1561,
+      "ts": "2026-06-13 23:50",
+      "from": "gwansang_compose",
+      "to": null,
+      "kind": "conclusion",
+      "text": "관상 카드 (2026-06-13 23:50): 갭 없음 · pack 28건",
+      "division": "gwansang-learn"
+    },
+    {
+      "id": 1562,
+      "ts": "2026-06-13 23:50",
+      "from": "gwansang_catalog",
+      "to": null,
+      "kind": "conclusion",
+      "text": "관상 카탈로그 (2026-06-13 23:50): +0 ↻18 · 확정28",
+      "division": "gwansang-learn"
+    },
+    {
+      "id": 1563,
+      "ts": "2026-06-13 23:50",
+      "from": "gwansang_seo",
+      "to": null,
+      "kind": "task",
+      "text": "SEO젬마 (2026-06-13 23:50): 200자+·키워드·확정 28",
+      "division": "gwansang-learn"
+    },
+    {
+      "id": 1564,
+      "ts": "2026-06-13 23:50",
+      "from": "gwansang_scholar",
+      "to": null,
+      "kind": "task",
+      "text": "학자젬마 (2026-06-13 23:50): 오관·삼정·전통 이론 · 카드 28",
+      "division": "gwansang-learn"
+    },
+    {
+      "id": 1565,
+      "ts": "2026-06-13 23:50",
+      "from": "gwansang_features",
+      "to": null,
+      "kind": "task",
+      "text": "오관젬마 (2026-06-13 23:50): 이마·눈·코·입·귀 · 카드 28",
+      "division": "gwansang-learn"
+    },
+    {
+      "id": 1566,
+      "ts": "2026-06-13 23:50",
+      "from": "gwansang_fortune",
+      "to": null,
+      "kind": "task",
+      "text": "운세젬마 (2026-06-13 23:50): 길상·재물·연애 경향 · 카드 28",
+      "division": "gwansang-learn"
+    },
+    {
+      "id": 1567,
+      "ts": "2026-06-13 23:50",
+      "from": "gwansang_reader",
+      "to": null,
+      "kind": "task",
+      "text": "리더젬마 (2026-06-13 23:50): 수집·요약·카드 초안 · 카드 28",
+      "division": "gwansang-learn"
+    },
+    {
+      "id": 1568,
+      "ts": "2026-06-13 23:50",
+      "from": "gwansang_structurer",
+      "to": null,
+      "kind": "task",
+      "text": "구조젬마 (2026-06-13 23:50): 【】소제목·분류·태그 · 카드 28",
+      "division": "gwansang-learn"
+    },
+    {
+      "id": 1569,
+      "ts": "2026-06-13 23:50",
+      "from": "gwansang_privacy",
+      "to": null,
+      "kind": "task",
+      "text": "프라이버시 (2026-06-13 23:50): 대기 0 — 이상 없음",
+      "division": "gwansang-learn"
+    },
+    {
+      "id": 1570,
+      "ts": "2026-06-13 23:50",
+      "from": "gwansang_gap_autofill",
+      "to": null,
+      "kind": "task",
+      "text": "[관상 카드 #29] 관상·눈썹·눈썹살 해석\n관상·눈썹·눈썹살 해석 【눈썹】 눈썹은 얼굴의 지붕이자 감정 표현의 중요한 부분으로, 개인의 집중력과 감정 조절 경향을 엿볼 수 있는 부위입니다. * **두께와 숱:** 짙고 숱이 많은 눈썹은 대체로 강한 집중력과 …",
+      "division": "gwansang-learn"
+    },
+    {
+      "id": 1571,
+      "ts": "2026-06-13 23:50",
+      "from": "gwansang_curator",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[확정 #29] 관상·눈썹·눈썹살 해석 — pack·SEO 관상 플레이북 · wiki_gwansang_29",
+      "division": "gwansang-learn"
+    },
+    {
+      "id": 1572,
+      "ts": "2026-06-13 23:50",
+      "from": "gwansang_gap_autofill",
+      "to": null,
+      "kind": "task",
+      "text": "[관상 카드 #30] 관상·광대·볼 윤곽\n## 관상·광대·볼 윤곽 【광대뼈】 얼굴의 좌우 폭을 결정하며, 관상학적으로는 사회생활에서의 활동성과 에너지, 그리고 대인 관계에서의 영향력을 엿볼 수 있는 중요한 부위입니다. 적당히 돌출된 광대뼈는 활발하고 적극적…",
+      "division": "gwansang-learn"
+    },
+    {
+      "id": 1573,
+      "ts": "2026-06-13 23:50",
+      "from": "gwansang_curator",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[확정 #30] 관상·광대·볼 윤곽 — pack·SEO 관상 플레이북 · wiki_gwansang_30",
+      "division": "gwansang-learn"
+    },
+    {
+      "id": 1574,
+      "ts": "2026-06-13 23:50",
+      "from": "gwansang_gap_autofill",
+      "to": null,
+      "kind": "conclusion",
+      "text": "관상 갭 (2026-06-13 23:50): 카탈로그누락 0 · RL대기 12 · 추가 2 (시드0+Gemini2) · 관상·눈썹·눈썹살 해석, 관상·광대·볼 윤곽",
+      "division": "gwansang-learn"
+    },
+    {
+      "id": 1575,
+      "ts": "2026-06-13 23:50",
+      "from": "gwansang_wiki_sync",
+      "to": null,
+      "kind": "conclusion",
+      "text": "Wiki 동기화 (2026-06-13 23:50): +0 · 확정 30",
+      "division": "gwansang-learn"
+    },
+    {
+      "id": 1576,
+      "ts": "2026-06-13 23:50",
+      "from": "gwansang_error_fix",
+      "to": null,
+      "kind": "task",
+      "text": "오류점검 (2026-06-13 23:50): 카드 30 — 이상 없음",
+      "division": "gwansang-learn"
+    },
+    {
+      "id": 1577,
+      "ts": "2026-06-13 23:50",
+      "from": "gwansang_daily_conclusion",
+      "to": null,
+      "kind": "conclusion",
+      "text": "관상 학습 결론 (2026-06-13 23:50): 확정 30 · 대기 0. 다음 — 갭 자동·SEO 보강·Wiki 동기화.",
+      "division": "gwansang-learn"
+    },
+    {
+      "id": 1578,
+      "ts": "2026-06-13 23:50",
+      "from": "gwansang_review",
+      "to": null,
+      "kind": "task",
+      "text": "검수 (2026-06-13 23:50): 대기 0 · 확정 30",
+      "division": "gwansang-learn"
+    },
+    {
+      "id": 1579,
+      "ts": "2026-06-13 23:50",
+      "from": "gwansang_tag_digest",
+      "to": null,
+      "kind": "task",
+      "text": "태그 (2026-06-13 23:50): 관상×30, 입×30, 눈×29, 이마×28, 코×28",
+      "division": "gwansang-learn"
+    },
+    {
+      "id": 1580,
+      "ts": "2026-06-13 23:50",
+      "from": "ceo",
+      "to": "kiwoom_privacy",
+      "kind": "task",
+      "text": "[작업 #17 전달] 🔒 보안 젬마에게 지시했습니다.\n학습 카드에 계좌번호·비밀번호·API키 패턴이 있는지 조사해 보고해 주세요.",
+      "division": "kiwoom-chasu"
+    },
+    {
+      "id": 1581,
+      "ts": "2026-06-13 23:50",
+      "from": "kiwoom_privacy",
+      "to": "kiwoom_structurer",
+      "kind": "handoff",
+      "text": "[작업 #17 연구 시작] 지시 내용을 조사합니다.",
+      "division": "kiwoom-chasu"
+    },
+    {
+      "id": 1582,
+      "ts": "2026-06-13 23:50",
+      "from": "kiwoom_privacy",
+      "to": "ceo",
+      "kind": "task",
+      "text": "[작업 #17 연구 수집]\n  · [kiwoom_account] 계좌 스냅샷 없음\n  · [kiwoom_card] 카드 #88 [confirmed] 웹리서치·그리드 슬롯 — 고정 간격 vs ATR 가변 간격\n  · [kiwoom_card] 카드 #87 [confirmed] 원히어로 vs 원키스US·매매 방법 차이\n  · [kiwoom_card] 카드 #86 [confirmed] 카드제작 가이드 · PII·보안 — 오류 pii: 본문에 10자리 이상 \n  · [kiwoom_card] 카드 #85 [confirmed] 카드제작 가이드 · 태그·키워드 — 오류 종류: tag_missing (\n  · [kiwoom_card] 카드 #84 [confirmed] 카드제작 가이드 · PII·보안 — 오류 종류: pii (누적 2회)\n  · [kiwoom_card] 카드 #83 [confirmed] 매매원칙 · 무조건 익절\n  · [kiwoom_pack] 확정 pack 87건",
+      "division": "kiwoom-chasu"
+    },
+    {
+      "id": 1583,
+      "ts": "2026-06-13 23:50",
+      "from": "kiwoom_privacy",
+      "to": "kiwoom_structurer",
+      "kind": "handoff",
+      "text": "[작업 #17] 연구 자료 9건을 사서에게 전달 — 취합 요청",
+      "division": "kiwoom-chasu"
+    },
+    {
+      "id": 1584,
+      "ts": "2026-06-13 23:50",
+      "from": "kiwoom_structurer",
+      "to": "ceo",
+      "kind": "conclusion",
+      "text": "[작업 #17 완료 — 🔒 보안 젬마 연구 + 취합]\n【차수거래 학습 #17 완료】\n담당: 🔒 보안 젬마 → 취합: 🗂️ 구조 젬마\n\n■ 지시\n계좌·PII 스캔\n학습 카드에 계좌번호·비밀번호·API키 패턴이 있는지 조사해 보고해 주세요.\n\n■ 학습부 현황 — 전체 87 · 대기 0 · 확정 87\n\n■ 조사\n  1. [kiwoom_account] 계좌 스냅샷 없음\n     HTS에서 잔고 확인 후 사무실 「계좌 현황」 갱신 필요\n  2. [kiwoom_card] 카드 #88 [confirmed] 웹리서치·그리드 슬롯 — 고정 간격 vs ATR 가변 간격\n     【웹 리서치 · 2026-06-05】 검색: grid trading strategy slot sizing risk management 외부 검색 결과 없음 — 내장 축·위원회 규칙만으로 토론. 【coupax 적용】 원히어로 차수·슬롯·ATR 규칙 정본 우선, API 키·계좌번호 금지. …\n     태그: 원히어로, 슬롯, ATR, 차수, 손절, 익절, 분할, 계좌, API\n  3. [kiwoom_card] 카드 #87 [confirmed] 원히어로 vs 원키스US·매매 방법 차이\n     「차수매매」라는 말만 같을 뿐, 원히어로(/wonhero)와 원키스US(/workisus)는 매매 방법이 다르다. 혼동 금지 — Agent Office도 탭·카드·pack을 분리한다(원히어로 차수거래 / 원키스US차수). 【원히어로】 MagicSplit 자동봇(auto_bot): 종목별…\n     태그: 원히어로, 슬롯, ATR, buy_gaps, sell_pcts, cascade, MagicSplit, 차수, 1차, 2차, 매수, 매도\n  4. [kiwoom_card] 카드 #86 [confirmed] 카드제작 가이드 · PII·보안 — 오류 pii: 본문에 10자리 이상 \n     오류 pii: 본문에 10자리 이상 연속 숫자(계좌·주민번호 형태)가 있으면 거부된다. 해결: 계좌는 끝 4자리만, API키·비밀번호·전화번호는 [제거됨] 처리 후 재저장. 원히어로·슬롯·1차·2차·익절·ATR·체결·계좌 키워드는 유지한다. --- 【에이전트 협업 검수 — 카드제작 가이…\n     태그: 원히어로, 슬롯, ATR, sell_pcts, cascade, 차수, 1차, 2차, 3차, 매도, 손절, 익절\n  5. [kiwoom_card] 카드 #85 [confirmed] 카드제작 가이드 · 태그·키워드 — 오류 종류: tag_missing (\n     오류 종류: tag_missing (누적 17회). 수정 가이드: 본문에 차수·손절·익절·체결·계좌 키워드를 포함. · 최근: 익절·분할·ATR 중 하나를 본문에 포함. · 최근: 차수·슬롯·1·2·3차 중 하나를 본문에 포함. 자동·수동 카드 제작 시 이 규칙을 먼저 적용한다. ---…\n     태그: 원히어로, 슬롯, ATR, sell_pcts, cascade, 차수, 1차, 3차, 매도, 손절, 익절, 분할\n  6. [kiwoom_card] 카드 #84 [confirmed] 카드제작 가이드 · PII·보안",
+      "division": "kiwoom-chasu"
+    },
+    {
+      "id": 1585,
+      "ts": "2026-06-13 23:50",
+      "from": "ceo",
+      "to": "chief-arch",
+      "kind": "task",
+      "text": "[작업 #22 전달] 🏗️ 수석 아키텍트 젬마에게 지시했습니다.\n최근 변경된 백엔드 로직의 결합도 및 응집도를 평가하고, 중장기적으로 유지보수성을 높이기 위한 리팩토링 전략을 수립하세요.",
+      "division": "chief-dev"
+    },
+    {
+      "id": 1586,
+      "ts": "2026-06-13 23:50",
+      "from": "chief-arch",
+      "to": "structurer",
+      "kind": "handoff",
+      "text": "[작업 #22 연구 시작] 지시 내용을 조사합니다.",
+      "division": "chief-dev"
+    },
+    {
+      "id": 1587,
+      "ts": "2026-06-13 23:50",
+      "from": "chief-arch",
+      "to": "ceo",
+      "kind": "task",
+      "text": "[작업 #22 연구 수집]\n  · [agent] chief-arch 전문 점검",
+      "division": "chief-dev"
+    },
+    {
+      "id": 1588,
+      "ts": "2026-06-13 23:50",
+      "from": "chief-arch",
+      "to": "structurer",
+      "kind": "handoff",
+      "text": "[작업 #22] 연구 자료 1건을 사서에게 전달 — 취합 요청",
+      "division": "chief-dev"
+    },
+    {
+      "id": 1589,
+      "ts": "2026-06-13 23:50",
+      "from": "structurer",
+      "to": "ceo",
+      "kind": "conclusion",
+      "text": "[작업 #22 완료 — 🏗️ 수석 아키텍트 젬마 연구 + 취합]\n【작업 #22 완료 보고】\n담당: 🏗️ 수석 아키텍트 젬마 → 취합: 🗂️ 사서 젬마\n\n■ 지시\n코드 구조 리뷰\n최근 변경된 백엔드 로직의 결합도 및 응집도를 평가하고, 중장기적으로 유지보수성을 높이기 위한 리팩토링 전략을 수립하세요.\n\n■ 연구 수집\n  1. [agent] chief-arch 전문 점검\n     ✓ 팩트 펄스: 블로그 글 0건, 월배당 ETF 157종목 (2026-06-13 23:50)\n\n■ 취합 결론\n  · 🏗️ 수석 아키텍트 젬마 전문 점검: ✓ 팩트 펄스: 블로그 글 0건, 월배당 ETF 157종목 (2026-06-13 23:50)\n\n■ 제안 다음 단계\n  · Wiki/메타 카드 초안 → 사서 젬마에게 구조화 지시\n  · 블로그 초안 → 작업 완료 시 자동 생성(미공개), 사무실에서 발행\n  · 데이터 갱신 → ETF 동기화 지시\n\n📗 10_Wiki 저장: wiki_office_22",
+      "division": "finance"
+    },
+    {
+      "id": 1590,
+      "ts": "2026-06-13 23:50",
+      "from": "structurer",
+      "to": "ceo",
+      "kind": "system",
+      "text": "[10_Wiki] 코드 구조 리뷰 — 메타 8개 태그 색인",
+      "division": "finance"
+    },
+    {
+      "id": 1591,
+      "ts": "2026-06-13 23:50",
+      "from": "structurer",
+      "to": "ceo",
+      "kind": "system",
+      "text": "[Cursor 연동] 작업 #22 — CURSOR_OFFICE_INBOX.md 에 반영됨. Cursor에서 `sync_cursor_office_inbox.py pull` 후 처리",
+      "division": "finance"
+    },
+    {
+      "id": 1592,
+      "ts": "2026-06-13 23:50",
+      "from": "ceo",
+      "to": "structurer",
+      "kind": "task",
+      "text": "[위원회 #21] 금융 위원회 조사·토론·검증 시작",
+      "division": "finance"
+    },
+    {
+      "id": 1593,
+      "ts": "2026-06-13 23:50",
+      "from": "rl",
+      "to": "ceo",
+      "kind": "system",
+      "text": "【금융 위원회 · 2026-06-13 23:50】\n단계: 조사(7통) → 토론 → 검증\n검증: FAIL\n\n■ 1. 조사 보고서\n  1. [OK] privacy (pii_scan)\n     PII 스캔: 최근 30댓글·지시 — 이상 없음\n  2. [OK] researcher (fact_pulse)\n     팩트 펄스: 블로그 글 0건, 월배당 ETF 157종목 (2026-06-13 23:50)\n  3. [OK] structurer (meta_digest)\n     메타 요약: 최근 8건 — conclusion 1, handoff 2, system 2, task 3\n  4. [OK] creator (draft_check)\n     DB 없음 — 글감 점검 스킵\n  5. [OK] observer (site_watch)\n     ETF 파이프라인 중지 — 신선도 점검 스킵 (ETF 데이터 파이프라인·공개 페이지가 중지되었습니다 (외부 데이터 이용 중단, 2026-05). COUPAX_ETF_ENABLED=1 로만 재…)\n  6. [OK] listener (comment_scan)\n     댓글 DB 없음\n  7. [OK] rl (daily_conclusion)\n     일일 결론 (2026-06-13 23:50): 피드 897건, 대기 지시 4건. 내일 우선 — ETF sync · 댓글 FAQ · 대표님 지시 큐.\n\n■ 2. 토론 (쟁점)\n  · 보고서 간 중대한 모순 없음\n\n■ 3. 검증\n  · NG database: \\home\\ubuntu\\coupax-homepage\\board\\board.db\n\n■ 4. 결론\n  · FAIL — 위 검증·조사 실패 해결 후 재실행",
+      "division": "finance"
+    }
+  ]
+}

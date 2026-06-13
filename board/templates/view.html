@@ -14,7 +14,7 @@
   "headline": {{ post['title'] | tojson }},
   "author": {
     "@type": "Person",
-    "name": {{ post['author'] | tojson }}
+    "name": {{ post['display_author'] | tojson }}
   },
   "datePublished": {{ post['created'] | tojson }},
   "dateModified": {{ post['created'] | tojson }},
@@ -28,23 +28,30 @@
 {% endblock %}
 
 {% block content %}
+{% if post.get('is_draft') %}
+<p class="post-draft-banner" role="status">🔒 <strong>초안</strong> — 블로그 목록·검색에 노출되지 않습니다. 에이전트 사무실에서 「발행」하거나 수정 후 공개하세요.</p>
+{% endif %}
 <div class="post-view">
   <div class="post-meta">
     <h2 class="post-title">{{ post['title'] }}</h2>
     <div class="meta-row">
-      <span>작성자: <strong>{{ post['author'] }}</strong></span>
+      <span>작성자: <strong>{{ post['display_author'] }}</strong></span>
       <span>날짜: {{ post['created'] }}</span>
       <span>조회: {{ post['views'] }}</span>
     </div>
   </div>
 
-  <div class="post-content">{{ post['content'] | replace('\n', '<br>') | safe }}</div>
+  <div class="post-content">{{ post['content'] | safe_post_html }}</div>
 
+  {% if not post.get('is_question_thread') %}
   <section class="author-box">
     <h4>작성자 안내</h4>
-    <p><strong>{{ post['author'] }}</strong> · {{ site_name }} 편집팀</p>
+    <p><strong>{{ post['display_author'] }}</strong> · {{ site_name }} 편집팀</p>
     <p>실무에 적용 가능한 금융 정보를 근거 기반으로 정리합니다.</p>
   </section>
+  {% else %}
+  <p class="question-post-badge">홈 질문 · {{ post['display_author'] }} 님</p>
+  {% endif %}
 
   <div class="post-actions">
     <a href="{{ url_for('blog') }}" class="btn btn-gray">목록</a>
@@ -52,6 +59,7 @@
 
     <button class="btn btn-danger" onclick="document.getElementById('delete-form').style.display='block'">삭제</button>
     <form id="delete-form" method="post" action="{{ url_for('delete', post_id=post['id']) }}" style="display:none; margin-top:8px;">
+      {% include '_csrf_field.html' %}
       <input type="password" name="password" placeholder="비밀번호 확인" class="inline-input" required>
       <button type="submit" class="btn btn-danger">확인</button>
       <button type="button" class="btn btn-gray" onclick="document.getElementById('delete-form').style.display='none'">취소</button>
@@ -72,22 +80,37 @@
   {% endif %}
 </div>
 
-<!-- 댓글 목록 -->
-<div class="comment-section">
-  <h3>댓글 <span class="count">{{ comments | length }}</span></h3>
+<!-- 질문·답변 -->
+<div id="comments" class="comment-section">
+  {% if post.get('is_question_thread') %}
+  <h3>대화 <span class="count" id="post-thread-count">{{ comments | length }}</span></h3>
+  <p class="comment-section-lead">위 글이 질문입니다. <strong>{{ gemma24_author }}</strong> 답변과 추가 질문·답변을 댓글로 이어갑니다.</p>
+  <div class="post-thread-toolbar" aria-label="대화 실시간 갱신">
+    <span class="post-thread-live is-on" id="post-thread-live-status" title="2.5초마다 자동 갱신">● 실시간</span>
+    <button type="button" class="btn btn-gray btn-sm" id="post-thread-refresh-btn">새로고침</button>
+  </div>
+  <div class="post-thread-new-banner is-hidden" id="post-thread-new-banner" role="status">
+    <button type="button" id="post-thread-new-banner-btn">새 메시지 보기</button>
+  </div>
+  {% else %}
+  <h3>질문·답변 <span class="count">{{ comments | length }}</span></h3>
+  <p class="comment-section-lead">이 글과 관련된 궁금한 점을 남겨 주시면 참고 안내를 드립니다. (투자·세무·법률 자문이 아닙니다.)</p>
+  {% endif %}
 
+  <div id="post-thread-comments-list" class="post-thread-comments-list{% if not post.get('is_question_thread') %} post-thread-comments-list--static{% endif %}">
   {% for comment in comments %}
-  <div class="comment-item">
+  <div class="comment-item{% if comment['author'] == '젬마24' %} comment-item--gemma{% else %} comment-item--user{% endif %}" data-comment-id="{{ comment['id'] }}">
     <div class="comment-meta">
-      <strong>{{ comment['author'] }}</strong>
+      <strong>{% if comment['author'] == '젬마24' %}답변 · {% else %}질문 · {% endif %}{{ comment['author'] }}</strong>
       <span class="comment-date">{{ comment['created'] }}</span>
       <button class="btn-text btn-danger-text"
               onclick="toggleDelForm('del-{{ comment['id'] }}')">삭제</button>
     </div>
-    <div class="comment-body">{{ comment['content'] | replace('\n', '<br>') | safe }}</div>
+    <div class="comment-body">{{ comment['content'] | nl2br }}</div>
     <form id="del-{{ comment['id'] }}" method="post"
           action="{{ url_for('delete_comment', comment_id=comment['id']) }}"
           style="display:none; margin-top:6px;">
+      {% include '_csrf_field.html' %}
       <input type="password" name="password" placeholder="댓글 비밀번호" class="inline-input" required>
       <button type="submit" class="btn btn-danger btn-sm">삭제</button>
       <button type="button" class="btn btn-gray btn-sm"
@@ -95,21 +118,25 @@
     </form>
   </div>
   {% else %}
-    <p class="empty">첫 댓글을 남겨보세요.</p>
+    <p class="empty">첫 질문을 남겨 보세요.</p>
   {% endfor %}
-</div>
+  </div>
 
-<!-- 댓글 작성 -->
 <div class="comment-write">
-  <h4>댓글 작성</h4>
-  <form method="post" action="{{ url_for('add_comment', post_id=post['id']) }}">
+  <h4>{% if post.get('is_question_thread') %}대화 이어가기{% else %}질문 남기기{% endif %}</h4>
+  <p id="post-thread-compose-status" class="post-thread-compose-status" hidden role="status"></p>
+  <form method="post" action="{{ url_for('add_comment', post_id=post['id']) }}"{% if post.get('is_question_thread') %} id="post-thread-compose-form"{% endif %}>
+    {% include '_csrf_field.html' %}
     <div class="comment-top">
-      <input type="text" name="author" placeholder="작성자" required maxlength="20" class="input-sm">
+      <span class="comment-author-row">
+        <input type="text" id="comment-author" name="author" placeholder="작성자" required maxlength="20" class="input-sm">
+        <button type="button" class="btn btn-gray btn-sm" id="comment-random-author" title="무작위 닉네임">랜덤</button>
+      </span>
       <input type="password" name="password" placeholder="비밀번호" required class="input-sm">
     </div>
-    <textarea name="content" rows="3" placeholder="댓글을 입력하세요." required maxlength="500"></textarea>
+    <textarea name="content" rows="8" placeholder="예: 이 글에서 말한 ○○는 실제로 어떻게 적용되나요?" required maxlength="4000"></textarea>
     <div class="form-footer">
-      <button type="submit" class="btn btn-primary">댓글 등록</button>
+      <button type="submit" class="btn btn-primary">질문 등록</button>
     </div>
   </form>
 </div>
@@ -119,5 +146,51 @@ function toggleDelForm(id) {
   const el = document.getElementById(id);
   el.style.display = el.style.display === 'none' ? 'block' : 'none';
 }
+(function () {
+  const NICKS = [
+    "산책하는북스", "커피한잔", "동네고양이", "숫자9", "비오는날", "탐험R",
+    "파도보기", "구름위", "새벽공기", "투자새내기", "우체통12", "책읽기0",
+    "겨울햇살", "코드노트", "퇴근길7", "은하수3", "창가자리", "걷기좋은날"
+  ];
+  function delayMs(min, max) {
+    return min + Math.floor(Math.random() * (max - min + 1));
+  }
+  function pickOne(exclude) {
+    const pool = exclude
+      ? NICKS.filter(function (n) { return n !== exclude; })
+      : NICKS.slice();
+    if (!pool.length) return NICKS[Math.floor(Math.random() * NICKS.length)];
+    return pool[Math.floor(Math.random() * pool.length)];
+  }
+  const inp = document.getElementById("comment-author");
+  const btn = document.getElementById("comment-random-author");
+  if (inp && !String(inp.value || "").trim()) {
+    setTimeout(function () {
+      if (!String(inp.value || "").trim()) {
+        inp.value = pickOne();
+      }
+    }, delayMs(500, 3500));
+  }
+  btn?.addEventListener("click", function () {
+    if (!inp) return;
+    const prev = String(inp.value || "").trim();
+    btn.disabled = true;
+    setTimeout(function () {
+      inp.value = pickOne(prev || null);
+      btn.disabled = false;
+    }, delayMs(200, 1200));
+  });
+})();
 </script>
+{% if post.get('is_question_thread') %}
+<script>
+window.POST_THREAD_CHAT = {
+  postId: {{ post['id'] }},
+  csrfToken: {{ csrf_token | tojson }},
+  gemmaAuthor: {{ gemma24_author | tojson }},
+  commentUrl: {{ url_for('add_comment', post_id=post['id']) | tojson }}
+};
+</script>
+<script src="{{ url_for('static', filename='post_thread_live.js') }}?v=3"></script>
+{% endif %}
 {% endblock %}

@@ -5,15 +5,22 @@
 {% block content %}
 <section class="doc-wrap">
   <h1>개인정보처리방침</h1>
-  <p class="doc-updated">시행일: 2026년 5월 15일 · 최종 수정: 2026년 5월 15일</p>
+  <p class="doc-updated">시행일: 2026년 5월 16일 · 최종 수정: 2026년 5월 19일</p>
 
-  <p><strong>{{ site_name }}</strong>(이하 &ldquo;사이트&rdquo;)는 이용자의 개인정보를 중요하게 생각하며, 관련 법령을 준수합니다. 본 방침은 사이트 이용 시 수집·이용되는 정보와 광고 서비스(Google 애드센스 등) 이용에 대해 설명합니다.</p>
+  <p><strong>{{ site_name }}</strong>(이하 &ldquo;사이트&rdquo;, 도메인 <a href="https://coupax.co.kr">coupax.co.kr</a>)는 이용자의 개인정보를 중요하게 생각하며, 대한민국 관련 법령을 준수합니다. 본 방침은 사이트 이용 시 수집·이용되는 정보와 광고 서비스(Google 애드센스 등) 이용에 대해 설명합니다.</p>
+
+  <h2>0. 개인정보 처리에 관한 일반 안내</h2>
+  <ul class="doc-list">
+    <li><strong>처리 주체:</strong> 사이트 운영자(일반 질문은 각 글 하단 <strong>질문란</strong> · 개인정보 관련 공식 요청: <a href="mailto:{{ site_contact_email }}">{{ site_contact_email }}</a>)</li>
+    <li><strong>대상 연령:</strong> 본 사이트는 주로 성인 이용자를 대상으로 하며, 만 14세 미만 아동을 주된 이용자로 하지 않습니다.</li>
+    <li><strong>쿠키:</strong> 서비스 동작·보안·통계 분석·맞춤 광고를 위해 쿠키 및 유사 기술이 사용될 수 있습니다. 브라우저 설정에서 제한할 수 있으나 일부 기능이 달라질 수 있습니다.</li>
+  </ul>
 
   <h2>1. 수집하는 정보</h2>
   <ul class="doc-list">
     <li><strong>자동 수집:</strong> IP 주소, 브라우저 종류, 방문 일시, 참조 URL, 기기 정보 등 (서버·분석·광고 목적)</li>
     <li><strong>쿠키:</strong> 사이트 이용 편의, 트래픽 분석, 맞춤형 광고 표시를 위해 사용될 수 있습니다.</li>
-    <li><strong>이용자가 제공하는 정보:</strong> 문의 이메일, 게시글 작성 시 입력한 작성자명·내용 등</li>
+    <li><strong>이용자가 제공하는 정보:</strong> 문의 이메일, 게시글·질문 작성 시 입력한 작성자명·내용 등</li>
   </ul>
 
   <h2>2. 정보 이용 목적</h2>
@@ -26,22 +33,23 @@
   <h2>3. Google 애드센스 및 제3자 광고</h2>
   <p>사이트는 Google을 포함한 제3자 광고 사업자가 쿠키를 사용하여, 이용자의 본 사이트 및 다른 사이트 방문 기록을 바탕으로 광고를 게재할 수 있습니다.</p>
   <ul class="doc-list">
-    <li>Google의 광고 쿠키 사용으로 인해 Google 및 파트너는 이용자에게 맞춤 광고를 제공할 수 있습니다.</li>
     <li>이용자는 <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener noreferrer">Google 광고 설정</a>에서 맞춤 광고를 끌 수 있습니다.</li>
-    <li>또한 <a href="https://optout.aboutads.info/" target="_blank" rel="noopener noreferrer">aboutads.info</a>에서 제3자 광고 쿠키 사용을 거부할 수 있습니다.</li>
-    <li>광고 게재·측정 관련 자세한 내용은 <a href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener noreferrer">Google 광고 기술 정책</a>을 참고하세요.</li>
+    <li>광고 관련 자세한 내용은 <a href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener noreferrer">Google 광고 기술 정책</a>을 참고하세요.</li>
   </ul>
   {% if adsense_client %}
-  <p>본 사이트의 애드센스 게시자 ID: <code>{{ adsense_client }}</code></p>
+  <p>본 사이트의 애드센스 게시자 ID: <code>{{ adsense_client }}</code> (<a href="{{ url_for('ads_txt', _external=True) }}" target="_blank" rel="noopener">ads.txt</a>)</p>
   {% endif %}
 
   <h2>4. 정보 보관 및 파기</h2>
   <p>수집된 정보는 목적 달성 후 지체 없이 파기하거나, 관련 법령에 따라 필요한 기간 동안 보관합니다.</p>
 
   <h2>5. 이용자의 권리</h2>
-  <p>이용자는 브라우저 설정에서 쿠키 저장을 거부·삭제할 수 있습니다. 쿠키 거부 시 일부 기능이 제한될 수 있습니다.</p>
+  <p>이용자는 브라우저 설정에서 쿠키 저장을 거부·삭제할 수 있습니다. 쿠키 거부 시 일부 기능이 제한될 수 있습니다. 「개인정보 보호법」 등에 따른 열람·정정·삭제 요구는 이메일 등 공식 연락으로 요청해 주시면 관련 법령에 따라 조치합니다.</p>
 
-  <h2>6. 문의</h2>
-  <p>개인정보 관련 문의: <a href="mailto:{{ site_contact_email }}">{{ site_contact_email }}</a> · <a href="{{ url_for('contact') }}">문의하기 페이지</a></p>
+  <h2>6. 방침 변경</h2>
+  <p>법령·서비스 변경에 따라 본 방침을 수정할 수 있으며, 변경 시 시행일을 본 페이지 상단에 표시합니다.</p>
+
+  <h2>7. 문의</h2>
+  <p>일반 문의는 해당 글의 <strong>질문란(댓글)</strong>에 남겨 주세요. 개인정보 열람·정정·삭제 등 법령상 요청은 <a href="mailto:{{ site_contact_email }}">{{ site_contact_email }}</a> · <a href="{{ url_for('contact') }}">문의하기</a></p>
 </section>
 {% endblock %}

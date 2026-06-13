@@ -7,20 +7,67 @@ body {
   font-size: 14px;
 }
 
+.post-draft-banner {
+  background: #fff8e1;
+  border: 1px solid #ffc107;
+  color: #5d4037;
+  padding: 10px 14px;
+  border-radius: 6px;
+  margin-bottom: 16px;
+  font-size: 14px;
+}
+
 .wrap {
   max-width: 900px;
   margin: 0 auto;
   padding: 0 16px 40px;
 }
+.etf-sheet-hero .etf-sheet-lead {
+  margin-top: 10px;
+  line-height: 1.75;
+  color: #3d3d3d;
+}
+.etf-sheet-hero .etf-sheet-h2 {
+  font-size: 16px;
+  font-weight: 700;
+  color: #2a3360;
+  margin: 18px 0 8px;
+}
+.etf-sheet-hero .etf-sheet-seo-copy {
+  font-size: 13px;
+  line-height: 1.7;
+  color: #555;
+  margin-bottom: 4px;
+}
+.etf-sheet-hero h1 {
+  font-size: 22px;
+  margin-bottom: 8px;
+}
+body.etf-sheet-page .wrap {
+  max-width: 1280px;
+}
 
-/* ── Header ── */
+.etf-sheet-promo {
+  background: #f6f9ff;
+  border: 1px solid #c5d4f5;
+  border-radius: 8px;
+  padding: 16px 18px;
+}
+
+/* ── Header (스크롤 시 상단 고정) ── */
 header {
-  padding: 18px 0 14px;
-  border-bottom: 2px solid #4f6ef7;
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  padding: 18px 0 14px 12px;
   margin-bottom: 24px;
+  background: #f5f6fa;
+  border-bottom: 2px solid #4f6ef7;
+  box-shadow: 0 2px 8px rgba(79, 110, 247, 0.08);
 }
 .top-nav {
   margin-top: 10px;
+  padding-left: 4px;
   display: flex;
   gap: 14px;
   flex-wrap: wrap;
@@ -31,6 +78,15 @@ header {
   font-size: 13px;
 }
 .top-nav a:hover { color: #4f6ef7; }
+.top-nav a.is-active,
+.top-nav .nav-office-private.is-active {
+  color: #4f6ef7;
+  font-weight: 700;
+}
+.top-nav .nav-office-private {
+  color: #5b4fc7;
+  font-weight: 600;
+}
 .top-nav .nav-write {
   display: inline-block;
   padding: 5px 12px;
@@ -44,10 +100,24 @@ header {
   color: #fff !important;
 }
 .logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+.logo-mark {
+  display: block;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  object-fit: contain;
+}
+.logo-text {
   font-size: 22px;
   font-weight: 700;
   color: #4f6ef7;
-  text-decoration: none;
+  line-height: 1.2;
 }
 
 /* ── Alert ── */
@@ -110,6 +180,21 @@ header {
 .hero-inline-link:hover { text-decoration: underline; }
 
 .hero-box-tight { margin-bottom: 20px; }
+
+.home-trust {
+  margin-top: 14px;
+  font-size: 13px;
+  color: #5a6490;
+  line-height: 1.6;
+}
+.home-trust a {
+  color: #4f6ef7;
+  text-decoration: none;
+}
+.home-trust a:hover {
+  text-decoration: underline;
+}
+
 .hero-row {
   display: flex;
   flex-wrap: wrap;
@@ -148,6 +233,512 @@ header {
 .home-tile-cta-accent {
   color: #4f6ef7;
   font-weight: 700;
+}
+
+/* 홈 질문창 */
+.home-ask-box {
+  background: #fff;
+  border-radius: 8px;
+  padding: 20px 22px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  margin-bottom: 14px;
+  border: 1px solid #e8ecf4;
+}
+.home-ask-head h2 {
+  font-size: 18px;
+  margin: 0 0 6px;
+  color: #1a1a1a;
+}
+.home-ask-head p {
+  margin: 0 0 16px;
+  font-size: 14px;
+  color: #555;
+  line-height: 1.6;
+}
+.home-ask-label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: #444;
+  margin-bottom: 6px;
+}
+.home-ask-select {
+  width: 100%;
+  max-width: 280px;
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+  margin-bottom: 12px;
+  background: #fff;
+}
+.home-ask-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 12px;
+}
+.home-ask-form textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  line-height: 1.6;
+  resize: vertical;
+  font-family: inherit;
+  margin-bottom: 10px;
+}
+.home-ask-footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.home-ask-note {
+  margin: 0;
+  font-size: 12px;
+  color: #888;
+  line-height: 1.5;
+  flex: 1;
+  min-width: 200px;
+}
+.home-ask-recent {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid #eee;
+}
+.home-ask-recent h3 {
+  font-size: 14px;
+  margin: 0 0 10px;
+  color: #333;
+}
+.home-ask-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.home-ask-list li {
+  padding: 10px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+.home-ask-list li:last-child {
+  border-bottom: none;
+}
+.home-ask-list-meta {
+  font-size: 12px;
+  color: #999;
+}
+.home-ask-list-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+.home-ask-list-link:hover p {
+  color: #4f6ef7;
+}
+.home-ask-list p {
+  margin: 4px 0 0;
+  font-size: 14px;
+  color: #444;
+  line-height: 1.5;
+}
+.home-ask-post-link-wrap {
+  margin: 12px 0 0;
+  text-align: center;
+}
+.question-post-card {
+  background: #f6f8ff;
+  border: 1px solid #dce4ff;
+  border-radius: 8px;
+  padding: 16px 18px;
+  margin-bottom: 12px;
+}
+.question-post-topic {
+  margin: 0 0 10px;
+  font-size: 13px;
+  color: #5a6490;
+}
+.question-post-text {
+  margin: 0 0 10px;
+  font-size: 17px;
+  line-height: 1.65;
+  color: #1a1a1a;
+  font-weight: 600;
+}
+.question-post-meta,
+.question-post-hint {
+  margin: 0;
+  font-size: 13px;
+  color: #777;
+  line-height: 1.55;
+}
+.question-post-badge {
+  margin: 0 0 12px;
+  font-size: 13px;
+  color: #4f6ef7;
+  font-weight: 600;
+}
+.comment-item--user {
+  background: #f6f8ff;
+  border-left: 3px solid #4f6ef7;
+  padding: 14px 20px;
+  margin: 0 0 10px;
+  border-radius: 8px;
+}
+.comment-item--gemma {
+  background: #f4faf4;
+  border-left: 3px solid #6b9e6b;
+  padding: 14px 20px;
+  margin: 0 0 10px;
+  border-radius: 8px;
+}
+.home-ask-more {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #4f6ef7;
+  text-decoration: none;
+}
+.home-ask-more:hover {
+  text-decoration: underline;
+}
+
+/* 홈 질문 채팅 */
+.home-chat {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid #e8ecf4;
+}
+.home-chat-head h3 {
+  font-size: 15px;
+  margin: 0 0 6px;
+  color: #333;
+}
+.home-chat-head p {
+  margin: 0 0 12px;
+  font-size: 13px;
+  color: #666;
+  line-height: 1.5;
+}
+.home-chat-layout {
+  min-height: 280px;
+}
+.home-chat-main {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #e8ecf4;
+  border-radius: 8px;
+  background: #fff;
+  min-height: 280px;
+  overflow: hidden;
+}
+.home-chat-header {
+  padding: 10px 14px;
+  border-bottom: 1px solid #f0f0f0;
+  background: #fafbfc;
+}
+.home-chat-header h4 {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.4;
+  color: #222;
+}
+.home-chat-header-meta {
+  margin: 4px 0 0;
+  font-size: 12px;
+  color: #999;
+}
+.home-chat-placeholder {
+  margin: auto;
+  padding: 24px 16px;
+  text-align: center;
+  font-size: 13px;
+  color: #999;
+}
+.home-chat-messages {
+  flex: 1;
+  min-height: 160px;
+  max-height: min(320px, 42vh);
+  overflow-y: auto;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-gutter: stable;
+}
+.home-chat-messages::-webkit-scrollbar {
+  width: 6px;
+}
+.home-chat-messages::-webkit-scrollbar-thumb {
+  background: #c5cce8;
+  border-radius: 3px;
+}
+.home-chat-loading {
+  text-align: center;
+  color: #999;
+  font-size: 13px;
+  margin: 20px 0;
+}
+.home-chat-bubble {
+  max-width: 92%;
+  padding: 10px 12px;
+  border-radius: 10px;
+  font-size: 14px;
+  line-height: 1.6;
+}
+.home-chat-bubble--user {
+  align-self: flex-end;
+  background: #f0f4ff;
+  border: 1px solid #dce4ff;
+}
+.home-chat-bubble--assistant {
+  align-self: flex-start;
+  background: #f4faf4;
+  border: 1px solid #dce8dc;
+}
+.home-chat-bubble-meta {
+  margin: 0 0 6px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #6b7280;
+}
+.home-chat-bubble-body {
+  color: #333;
+  word-break: break-word;
+}
+.home-chat-compose {
+  border-top: 1px solid #f0f0f0;
+  padding: 10px 12px 12px;
+  background: #fafbfc;
+}
+.home-chat-compose-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.home-chat-compose-row .input-sm {
+  flex: 1 1 120px;
+}
+.home-chat-compose textarea {
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 8px;
+  font-size: 14px;
+  line-height: 1.5;
+  resize: vertical;
+  min-height: 72px;
+}
+.home-chat-compose-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+.home-ask-result {
+  margin-top: 20px;
+  padding-top: 18px;
+  border-top: 1px solid #e8ecf4;
+  max-height: min(420px, 52vh);
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 6px;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-gutter: stable;
+}
+.home-ask-result::-webkit-scrollbar {
+  width: 6px;
+}
+.home-ask-result::-webkit-scrollbar-thumb {
+  background: #c5cce8;
+  border-radius: 3px;
+}
+.home-ask-result::-webkit-scrollbar-track {
+  background: transparent;
+}
+.home-ask-result h3 {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  font-size: 15px;
+  margin: 0 0 12px;
+  padding-bottom: 8px;
+  color: #333;
+  background: #fff;
+}
+.home-qa-card {
+  border-radius: 8px;
+  padding: 14px 16px;
+  margin-bottom: 10px;
+}
+.home-qa-card--q {
+  background: #f6f8ff;
+  border: 1px solid #e2e8ff;
+}
+.home-qa-card--a {
+  background: #f8faf8;
+  border: 1px solid #dce8dc;
+  margin-bottom: 0;
+}
+.home-qa-card--a .home-qa-body {
+  max-height: 220px;
+  overflow-y: auto;
+  padding-right: 4px;
+  -webkit-overflow-scrolling: touch;
+}
+.home-qa-card--a .home-qa-body::-webkit-scrollbar {
+  width: 5px;
+}
+.home-qa-card--a .home-qa-body::-webkit-scrollbar-thumb {
+  background: #b8d4b8;
+  border-radius: 3px;
+}
+.home-qa-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #6b7280;
+  margin: 0 0 6px;
+}
+.home-qa-meta {
+  font-size: 12px;
+  color: #999;
+  margin: 0 0 8px;
+}
+.home-qa-body {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.7;
+  color: #333;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+.home-ask-error {
+  margin-top: 12px;
+  padding: 10px 12px;
+  border-radius: 6px;
+  background: #fff5f5;
+  border: 1px solid #f5c2c2;
+  color: #b42318;
+  font-size: 13px;
+}
+
+/* 홈 — 프로젝트 탭 */
+.home-project-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0 0 18px;
+  padding: 0;
+  border: none;
+}
+.home-project-tab {
+  flex: 1 1 200px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  padding: 12px 16px;
+  border: 1px solid #dadce0;
+  border-radius: 8px;
+  background: #fafbfc;
+  cursor: pointer;
+  text-align: left;
+  transition: border-color 0.15s, background 0.15s, box-shadow 0.15s;
+}
+.home-project-tab:hover {
+  border-color: #a8b4f0;
+  background: #f4f6ff;
+}
+.home-project-tab.is-active {
+  border-color: #4f6ef7;
+  background: #fff;
+  box-shadow: 0 2px 10px rgba(79, 110, 247, 0.12);
+}
+.home-project-tab--design.is-active {
+  border-color: #b8860b;
+  box-shadow: 0 2px 10px rgba(184, 134, 11, 0.15);
+}
+.home-project-tab-label {
+  font-size: 15px;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+.home-project-tab-tag {
+  font-size: 12px;
+  color: #666;
+}
+.home-project-panel {
+  margin-bottom: 22px;
+}
+.home-project-panel[hidden] {
+  display: none !important;
+}
+.home-project-intro {
+  margin-bottom: 14px;
+}
+.home-project-intro h2 {
+  font-size: 18px;
+  margin: 0 0 6px;
+  color: #1a1a1a;
+}
+.home-project-intro p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #4f4f4f;
+}
+.home-project-panel--design .home-project-intro h2 {
+  color: #0a1931;
+}
+.home-design-tokens {
+  list-style: none;
+  margin: 0 0 16px;
+  padding: 12px 14px;
+  background: #0a1931;
+  border-radius: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 20px;
+  font-size: 12px;
+  color: #e8ecf4;
+}
+.home-design-tokens code {
+  font-size: 11px;
+  color: #add8e6;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 1px 5px;
+  border-radius: 4px;
+}
+.home-design-tokens li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.home-swatch {
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  flex-shrink: 0;
+}
+.home-swatch--midnight { background: #0a1931; }
+.home-swatch--copper { background: #b8860b; }
+.home-swatch--sky { background: #add8e6; }
+.home-tile--static {
+  cursor: default;
+  pointer-events: none;
+}
+.home-tile--static:hover {
+  border-color: #dadce0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
 }
 
 .home-split {
@@ -270,37 +861,109 @@ header {
 
 /* 스프레드시트형 월배당 표 */
 .sheet-scroll {
+  --sheet-head-group-h: 36px;
   max-width: 100%;
+  max-height: min(72vh, 780px);
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
   border: 1px solid #dde1ee;
   border-radius: 8px;
   background: #fff;
+  box-shadow: inset -12px 0 12px -12px rgba(79, 110, 247, 0.08);
+}
+.sheet-table.board-table {
+  width: max-content;
+  min-width: 100%;
+  overflow: visible;
+  box-shadow: none;
+  border-radius: 0;
 }
 .sheet-table {
-  min-width: 1400px;
+  min-width: 1520px;
   font-size: 11px;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+.sheet-table thead .sheet-head-group th {
+  position: sticky;
+  top: 0;
+  z-index: 6;
+}
+.sheet-table thead .sheet-head-cols th {
+  position: sticky;
+  top: var(--sheet-head-group-h);
+  z-index: 5;
+}
+.sheet-table thead .sheet-head-group .sheet-freeze {
+  z-index: 8;
+}
+.sheet-table thead .sheet-head-cols .sheet-freeze {
+  z-index: 7;
+}
+/* 코드·ETF명 가로 틀 고정 (그림자 없음) */
+.sheet-table .sheet-freeze {
+  position: sticky;
+  z-index: 2;
+  background: #fff;
+  background-clip: padding-box;
+  color: #111;
+}
+.sheet-table thead .sheet-freeze {
+  z-index: 4;
+}
+.sheet-freeze--code {
+  left: 0;
+  width: 64px;
+  min-width: 64px;
+  max-width: 64px;
+}
+.sheet-freeze--name {
+  left: 64px;
+  width: 220px;
+  min-width: 220px;
+  max-width: 220px;
+  border-right: 1px solid #dde1ee;
+}
+.sheet-freeze-group {
+  left: 0;
+  z-index: 5;
+  min-width: 284px;
+  background: #fff3bf;
+}
+.sheet-head-cols .sheet-freeze {
+  background: #fffef0;
+}
+.sheet-table tbody tr:hover .sheet-freeze {
+  background: #f7f8ff;
 }
 .sheet-table th,
 .sheet-table td {
   padding: 6px 5px;
   white-space: nowrap;
+  color: #111;
+}
+.sheet-table.board-table th {
+  background: #fffef0;
+  color: #111;
+  font-weight: 600;
 }
 .sheet-head-group th {
   background: #fff3bf;
-  color: #4a3d00;
+  color: #111;
   font-weight: 700;
   font-size: 12px;
   border-bottom: 2px solid #e6d48a;
 }
 .sheet-head-cols th {
   background: #fffef0;
-  color: #333;
+  color: #111;
   font-size: 11px;
   vertical-align: bottom;
   line-height: 1.25;
 }
 .sheet-col-name {
-  min-width: 200px;
-  max-width: 280px;
   white-space: normal;
 }
 .sheet-name-cell {
@@ -309,15 +972,145 @@ header {
   font-size: 11px;
 }
 .sheet-col-m { min-width: 34px; }
+
+/* 월별 분배금 영역 — 은은한 블루 톤 */
+.sheet-head-group th.sheet-month-zone {
+  background: #e8f0fe;
+  border-bottom-color: #c5d4f5;
+  color: #2f4499;
+}
+.sheet-table thead .sheet-col-m,
+.sheet-table thead .sheet-month-total {
+  background: #e8f0fe;
+  color: #3d52a8;
+}
+.sheet-table td.sheet-month {
+  background: #f6f9ff;
+}
+.sheet-month-start {
+  border-left: 2px solid #c5d4f5;
+}
+.sheet-month-end {
+  border-right: 2px solid #c5d4f5;
+}
+.sheet-month--has {
+  background: #eef3ff;
+  color: #1e3a7a;
+  font-weight: 600;
+}
+.sheet-month--empty {
+  color: #a8b4cc;
+}
+.sheet-month-total {
+  background: #e3ebff !important;
+  color: #2f4499;
+  font-weight: 600;
+  border-right: 2px solid #c5d4f5;
+}
+.sheet-table tbody tr:hover td.sheet-month--has {
+  background: #e0eaff;
+}
+.sheet-table tbody tr:hover td.sheet-month--empty {
+  background: #f0f4fc;
+}
+.sheet-table tbody tr:hover td.sheet-month-total {
+  background: #d8e4ff !important;
+}
+
 .sheet-col-code { min-width: 52px; }
-.sheet-col-brand { min-width: 56px; }
-.sheet-col-no { width: 40px; }
 .sheet-num { font-variant-numeric: tabular-nums; }
-.sheet-total { font-weight: 600; background: #fafbff; }
+.sheet-total { font-weight: 600; }
 .sheet-pct { font-variant-numeric: tabular-nums; }
 .sheet-pct-price { background: #fff5f5; }
 .sheet-pct-total { background: #ffe4e4; font-weight: 600; }
 .sheet-th-total { background: #fff0e0; }
+#etf-sort-by-total { cursor: pointer; user-select: none; }
+#etf-sort-by-total:focus { outline: 2px solid #4f6ef7; outline-offset: 2px; }
+.sheet-col-spark { min-width: 72px; }
+.sheet-spark-cell { padding: 4px 6px !important; vertical-align: middle; }
+.sheet-spark { display: block; margin: 0 auto; }
+.sheet-spark-bar { fill: #d8e0f0; }
+.sheet-spark-bar--on { fill: #4f6ef7; }
+.sheet-spark-empty { color: #aab4cc; font-size: 11px; }
+tr.sheet-data-row[hidden] { display: none; }
+
+/* ETF 시트 도구·브랜드 요약 */
+.etf-brand-summary { margin: 16px 0 14px; }
+.etf-brand-summary-title {
+  font-size: 15px;
+  color: #2a3360;
+  margin-bottom: 10px;
+}
+.etf-brand-summary-hint { font-size: 12px; font-weight: 400; color: #888; }
+.etf-brand-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 10px;
+}
+.etf-brand-card {
+  border: 1px solid #dde1ee;
+  border-radius: 8px;
+  padding: 12px 14px;
+  background: #fbfcff;
+}
+.etf-brand-card-name {
+  font-size: 14px;
+  color: #4f6ef7;
+  margin-bottom: 8px;
+}
+.etf-brand-stats { margin: 0; font-size: 12px; }
+.etf-brand-stats div {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 3px 0;
+  border-bottom: 1px solid #f0f2f8;
+}
+.etf-brand-stats div:last-child { border-bottom: none; }
+.etf-brand-stats dt { color: #666; }
+.etf-brand-stats dd { font-weight: 600; color: #222; margin: 0; }
+
+.etf-sheet-tools {
+  margin: 12px 0 10px;
+  padding: 12px 14px;
+  background: #fff;
+  border: 1px solid #dde1ee;
+  border-radius: 8px;
+}
+.etf-sheet-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 14px;
+  align-items: flex-end;
+  margin-bottom: 10px;
+}
+.etf-filter-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 12px;
+  color: #555;
+}
+.etf-filter-item input,
+.etf-filter-item select {
+  padding: 6px 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 13px;
+  min-width: 120px;
+}
+.etf-sheet-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+.etf-filter-count {
+  font-size: 13px;
+  color: #4f6ef7;
+  font-weight: 600;
+  margin-right: auto;
+}
 
 /* 외부 ETF·배당 포털 카드 */
 .etf-ext-grid {
@@ -404,6 +1197,13 @@ header {
 .board-table .col-author{ width: 90px; }
 .board-table .col-date  { width: 110px; }
 .board-table .col-views { width: 60px; }
+.board-table .col-comments { width: 52px; }
+.comment-count-link {
+  color: #4f6ef7;
+  font-weight: 600;
+  text-decoration: none;
+}
+.comment-count-link:hover { text-decoration: underline; }
 
 .center { text-align: center; }
 .empty  { text-align: center; color: #999; padding: 24px !important; }
@@ -454,8 +1254,45 @@ header {
 .post-content {
   line-height: 1.8;
   min-height: 100px;
-  white-space: pre-wrap;
+  white-space: normal;
   word-break: break-word;
+}
+.post-content h3 {
+  margin: 1.5em 0 0.65em;
+  font-size: 1.12em;
+  font-weight: 700;
+  color: #1a2a4a;
+}
+.post-content p {
+  margin: 0 0 1em;
+}
+.post-content .stock-rl-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+  margin: 0.75em 0 1.25em;
+}
+.post-content .stock-rl-table th,
+.post-content .stock-rl-table td {
+  padding: 8px 10px;
+  border-bottom: 1px solid #e8ecf4;
+  text-align: left;
+}
+.post-content .stock-rl-table tr.rl-up td:nth-child(2) { color: #0d6b4f; }
+.post-content .stock-rl-table tr.rl-down td:nth-child(2) { color: #b42318; }
+.post-content .stock-rl-table tr.rl-flat td:nth-child(2) { color: #5a6480; }
+
+.post-content ul,
+.post-content ol {
+  margin: 0.4em 0 1em;
+  padding-left: 1.35em;
+}
+.post-content li {
+  margin-bottom: 0.35em;
+}
+.post-content a {
+  color: #4f6ef7;
+  text-decoration: underline;
 }
 .post-content .post-image {
   margin: 10px 0 18px;
@@ -527,12 +1364,22 @@ header {
   box-shadow: 0 1px 4px rgba(0,0,0,.08);
   margin-bottom: 16px;
 }
-.comment-section h3 { font-size: 15px; margin-bottom: 12px; }
+.comment-section h3 { font-size: 15px; margin-bottom: 8px; }
+.comment-section-lead {
+  font-size: 13px;
+  color: #555;
+  line-height: 1.6;
+  margin: 0 0 14px;
+}
 .comment-item {
   border-bottom: 1px solid #f0f0f0;
-  padding: 12px 0;
+  padding: 12px 4px;
 }
 .comment-item:last-child { border-bottom: none; }
+.comment-item--user,
+.comment-item--gemma {
+  border-bottom: none;
+}
 .comment-meta {
   display: flex;
   gap: 8px;
@@ -540,7 +1387,65 @@ header {
   margin-bottom: 6px;
 }
 .comment-date { color: #999; font-size: 12px; flex: 1; }
-.comment-body { line-height: 1.7; white-space: pre-wrap; word-break: break-word; }
+.comment-body {
+  line-height: 1.75;
+  white-space: pre-wrap;
+  word-break: break-word;
+  padding-right: 4px;
+}
+.comment-item--gemma .comment-body,
+.comment-item--user .comment-body {
+  max-width: 52em;
+}
+
+.post-thread-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.post-thread-live {
+  font-size: 12px;
+  font-weight: 700;
+  color: #6b7280;
+}
+.post-thread-live.is-on { color: #2e7d32; }
+.post-thread-live.is-off { color: #c62828; }
+.post-thread-new-banner {
+  margin-bottom: 10px;
+  padding: 8px 12px;
+  background: #e8f4fd;
+  border-radius: 8px;
+  text-align: center;
+}
+.post-thread-new-banner.is-hidden { display: none; }
+.post-thread-comments-list {
+  max-height: min(52vh, 520px);
+  overflow-y: auto;
+  margin: 0;
+  padding: 6px 12px 10px;
+}
+.post-thread-comments-list .comment-item--user,
+.post-thread-comments-list .comment-item--gemma {
+  margin-left: 0;
+  margin-right: 0;
+}
+.post-thread-comments-list--static {
+  max-height: none;
+  overflow: visible;
+}
+.comment-item--new {
+  animation: post-thread-flash 2s ease-out;
+}
+@keyframes post-thread-flash {
+  0% { background: #fff8e1; }
+  100% { background: transparent; }
+}
+.post-thread-compose-status {
+  font-size: 13px;
+  color: #1565c0;
+  margin: 0 0 8px;
+}
 
 .comment-write {
   background: #fff;
@@ -551,8 +1456,18 @@ header {
 .comment-write h4 { font-size: 14px; margin-bottom: 10px; }
 .comment-top {
   display: flex;
+  flex-wrap: wrap;
   gap: 8px;
   margin-bottom: 8px;
+  align-items: center;
+}
+.comment-author-row {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.comment-author-row .input-sm {
+  width: 130px;
 }
 .input-sm {
   padding: 7px 10px;

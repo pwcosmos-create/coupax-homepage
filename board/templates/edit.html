@@ -8,6 +8,7 @@
 <div class="form-wrap">
   <h2>글 수정</h2>
   <form method="post" action="{{ url_for('edit', post_id=post['id']) }}">
+    {% include '_csrf_field.html' %}
     <div class="form-row">
       <label>제목</label>
       <input type="text" name="title" required maxlength="100" value="{{ post['title'] }}">

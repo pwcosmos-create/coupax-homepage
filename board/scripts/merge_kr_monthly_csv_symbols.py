@@ -23,7 +23,7 @@ def _ter_str(raw: str) -> str:
     if not raw:
         return "—"
     if raw.endswith("%"):
-        return raw
+        return raw.replace("%%", "%")
     try:
         f = float(raw)
         if f < 1:
@@ -80,6 +80,9 @@ def load_csv(path: Path) -> list[dict[str, str]]:
 
 
 def main() -> int:
+    import etf_ops_policy
+
+    etf_ops_policy.exit_if_pipeline_disabled()
     parser = argparse.ArgumentParser()
     parser.add_argument("--csv", type=Path, required=True)
     parser.add_argument("--write", action="store_true")
@@ -103,11 +106,21 @@ def main() -> int:
             continue
         csv_codes.add(code)
         if code in existing_by_code:
-            # 기존 분배 데이터 유지, CSV에서 수익률·시세만 보강(비어 있을 때)
             row = existing_by_code[code]
             fresh = row_from_csv(rec)
-            for k in ("current_price", "dividend_yield_pct", "price_return_pct", "total_return_pct"):
-                if row.get(k) is None and fresh.get(k) is not None:
+            for k in (
+                "brand",
+                "name",
+                "cycle",
+                "listed",
+                "market_cap",
+                "expense_ratio",
+                "current_price",
+                "dividend_yield_pct",
+                "price_return_pct",
+                "total_return_pct",
+            ):
+                if fresh.get(k) is not None:
                     row[k] = fresh[k]
             row["_sort_total_yield"] = fresh["_sort_total_yield"]
             updated_meta += 1
@@ -119,18 +132,19 @@ def main() -> int:
     extras = [c for c in existing_by_code if c not in csv_codes]
 
     merged = list(existing_by_code.values())
-    merged.sort(key=lambda r: r.get("_sort_total_yield", -999.0), reverse=True)
-
-    for i, row in enumerate(merged, start=1):
-        row["no"] = i
+    for row in merged:
         if "_sort_total_yield" in row:
             del row["_sort_total_yield"]
+
+    from sync_dividend_sheet import sort_rows_by_total_return
+
+    sort_rows_by_total_return(merged, reverse=True)
 
     sheet["rows"] = merged
     sheet["note"] = (
         f"국내 월배당 ETF {len(merged)}종 "
         f"(kisstock CSV {len(csv_rows)}종 + 기존 단독 {len(extras)}종). "
-        "분배금이 있는 종목은 search-etf 기준, 없는 종목은 months null. 투자 권유가 아닙니다."
+        "분배금·수익률은 공개 자료 기준. 미지급 월은 null. 투자 권유가 아닙니다."
     )
 
     print(f"CSV rows: {len(csv_rows)}")

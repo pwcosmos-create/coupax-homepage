@@ -246,6 +246,18 @@ def set_global_always_on(enabled: bool) -> dict:
     return set_office_always_on(enabled)
 
 
+def activate_all_agents(*, skip_ids: frozenset[str] | None = None) -> dict:
+    """사무실 전체 ON + 개별 mode_on 활성화 (skip_ids 제외)."""
+    skip = skip_ids or frozenset({"etf_sync"})
+    data = set_office_always_on(True)
+    for a in data.get("agents") or []:
+        if isinstance(a, dict) and (a.get("id") or "") not in skip:
+            a["mode_on"] = True
+    save_registry(data)
+    _sync_feed_agents(merge_agents_for_office(_load_feed_light(), data))
+    return data
+
+
 def is_office_active(data: dict | None = None) -> bool:
     data = data or load_registry()
     return bool(data.get("office_always_on") or data.get("global_always_on"))

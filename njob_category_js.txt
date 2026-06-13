@@ -1,0 +1,38 @@
+
+
+
+                                                $('.sns_bg2').hide();
+                                                $(".sns_on2").off('click').on('click', function () {
+                                                    var clickedElement = $(this);
+                                                    var search_val = $(this).siblings('.input').find('input').val(); // 使用.siblings()方法来找到输入元素
+                                                    if (!search_val) {
+                                                        alert('카테고리 검색어를 입력해 주세요');
+                                                        $(this).siblings('.input').find('input').focus();
+                                                        return false;
+                                                    }
+                                                    clickedElement.parent().parent().find('.sns_bg2').html('<div class="my_txt2_1">검색 중...</div>');
+                                                    $.ajax({
+
+                                                        url: "/mybox/getMarketCategory",
+                                                        type: 'GET',
+                                                        data: {market: 'ss', search_val: search_val},
+
+                                                        success: function (data) {
+                                                            var htmlContent = '';
+                                                            data.forEach(function (item) {
+                                                                var id = item['ca_id'];
+                                                                var ca_name = item['ca_name'];
+                                                                htmlContent += '<div class="cb"></div>' +
+                                                                    '<a href="javascript:void(0);" class="sns_off">' +
+                                                                    '   <div class="my_txt2_1" id="' + id + '" value="' + ca_name + '">' + ca_name + '</div>' +
+                                                                    '</a>';
+                                                            });
+                                                            if (htmlContent == '') {
+                                                                htmlContent = '<div class="cb"></div><div class="my_txt2_1">요청에 해당하는 검색내용이 없습니다</div>';
+                                                            }
+                                                            // 找到 .sns_bg2 元素，并修改它的内容
+                                                            var sns_bg2 = clickedElement.parent().parent().find('.sns_bg2');
+                                                            sns_bg2.html(htmlContent).fadeIn(200);
+
+                                                            // 添加点击事件处理器
+                                                            sns_bg2.find('.my_txt2_1').on('click',

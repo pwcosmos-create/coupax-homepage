@@ -1,0 +1,16 @@
+{
+  "musonsil_root": {
+    "us_atr_sell_mult": 1.0,
+    "us_atr_sell_cap": 4.0,
+    "us_atr_sell_min": 1.5,
+    "us_atr_gap_musonsil_mult": 1.15,
+    "sell_fee_buffer_pct_us": 0.12
+  },
+  "atr_formula": {
+    "slot1_sell_pct": 999.0,
+    "slot2_10_sell": "clamp(ATR20 * 1.2, min=1.5, max=4.0)",
+    "buy_gap": "ATR20 gap + phase factor * 1.15 (musonsil)",
+    "qty": "atr_qty_amt / current_price"
+  },
+  "note": "원키스US 무손실 원칙 — auto_bot update_atr_settings_us"
+}

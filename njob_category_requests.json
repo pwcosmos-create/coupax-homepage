@@ -1,0 +1,38 @@
+[
+  {
+    "type": "REQUEST",
+    "url": "https://www.njobapp.com/js/category-map.js",
+    "method": "GET",
+    "post": null
+  },
+  {
+    "type": "RESPONSE",
+    "url": "https://www.njobapp.com/js/category-map.js",
+    "status": 200,
+    "body": "/**\n * Category Mapping Data\n * 用于多语言分类名称映射\n */\n\n// 韩文分类映射\nwindow.category_map_ko = [\n];\n\n// 中文分类映射\nwindow.category_map_zh = [\n    {\"id\": \"01_00_00_00_00\", \"ca_name\": \"时尚配饰\"},\n    {\"id\": \"07_00_00_00_00\", \"ca_name\": \"化妆品\"},\n    {\"id\": \"02_00_00_00_00\", \"ca_name\": \"服装/内衣\"},\n    {\"id\": \"01_09_02_00_00\", \"ca_name\": \"耳套帽\"},\n    {\"id\": \"01_09_05_00_00\", \"ca_name\": \"球饰毛帽\"},\n    {\"id\": \"01_23_01_01_00\", \"ca_name\": \"男假发\"},\n    {\"id\": \"01_23_01_02_00\", \"ca_name\": \"女假发\"},\n    {\"id\": \"01_09_00_00_00\", \"ca_"
+  },
+  {
+    "type": "REQUEST",
+    "url": "https://www.njobapp.com/js/category-map.js",
+    "method": "GET",
+    "post": null
+  },
+  {
+    "type": "RESPONSE",
+    "url": "https://www.njobapp.com/js/category-map.js",
+    "status": 200,
+    "body": "/**\n * Category Mapping Data\n * 用于多语言分类名称映射\n */\n\n// 韩文分类映射\nwindow.category_map_ko = [\n];\n\n// 中文分类映射\nwindow.category_map_zh = [\n    {\"id\": \"01_00_00_00_00\", \"ca_name\": \"时尚配饰\"},\n    {\"id\": \"07_00_00_00_00\", \"ca_name\": \"化妆品\"},\n    {\"id\": \"02_00_00_00_00\", \"ca_name\": \"服装/内衣\"},\n    {\"id\": \"01_09_02_00_00\", \"ca_name\": \"耳套帽\"},\n    {\"id\": \"01_09_05_00_00\", \"ca_name\": \"球饰毛帽\"},\n    {\"id\": \"01_23_01_01_00\", \"ca_name\": \"男假发\"},\n    {\"id\": \"01_23_01_02_00\", \"ca_name\": \"女假发\"},\n    {\"id\": \"01_09_00_00_00\", \"ca_"
+  },
+  {
+    "type": "REQUEST",
+    "url": "https://www.njobapp.com/js/category-map.js",
+    "method": "GET",
+    "post": null
+  },
+  {
+    "type": "RESPONSE",
+    "url": "https://www.njobapp.com/js/category-map.js",
+    "status": 200,
+    "body": "/**\n * Category Mapping Data\n * 用于多语言分类名称映射\n */\n\n// 韩文分类映射\nwindow.category_map_ko = [\n];\n\n// 中文分类映射\nwindow.category_map_zh = [\n    {\"id\": \"01_00_00_00_00\", \"ca_name\": \"时尚配饰\"},\n    {\"id\": \"07_00_00_00_00\", \"ca_name\": \"化妆品\"},\n    {\"id\": \"02_00_00_00_00\", \"ca_name\": \"服装/内衣\"},\n    {\"id\": \"01_09_02_00_00\", \"ca_name\": \"耳套帽\"},\n    {\"id\": \"01_09_05_00_00\", \"ca_name\": \"球饰毛帽\"},\n    {\"id\": \"01_23_01_01_00\", \"ca_name\": \"男假发\"},\n    {\"id\": \"01_23_01_02_00\", \"ca_name\": \"女假发\"},\n    {\"id\": \"01_09_00_00_00\", \"ca_"
+  }
+]

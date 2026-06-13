@@ -1,0 +1,10 @@
+ko = [
+---
+ko === 'undefined') {
+---
+ko = {};
+---
+ko.forEach(function(item) {
+---
+ko[item.id] = item.ca_name;
+---

@@ -1,0 +1,29 @@
+
+                        <th style="width:12%; border: none;">
+                            <div class="al l20">마켓별</div>
+                        </th>
+                        <td colspan="3" style="border: none;padding: 0px 3px 0px 7px;">
+                            <div class="l10 fl t05 b10">
+                                <ul class="tab_btn5 ufl">
+                                    <li class="cur"><a href="?market=ss&amp;status=SUCCESS"><img src="img/njob/bu1.png" class="vm" alt="">스마트스토어</a>
+                                    </li>
+                                    <li class=""><a href="?market=cp&amp;status=SUCCESS"><img src="img/njob/bu2.png" class="vm" alt="">쿠팡</a></li>
+                                    <li class=""><a href="?market=es&amp;status=SUCCESS#"><img src="img/njob/bu3.png" class="vm" alt="">11번가</a></li>
+                                    <li class=""><a href="?market=lo&amp;status=SUCCESS"><img src="img/njob/bu4.png" class="vm" alt="">롯데ON</a></li>
+                                    <li class=""><a href="?market=iac&amp;status=SUCCESS"><img src="img/njob/bu6.png" class="vm" alt="">옥션</a></li>
+                                    <li class=""><a href="?market=gmkt&amp;status=SUCCESS"><img src="img/njob/bu7.png" class="vm" alt="">G마켓</a></li>
+                                    <!--<li class=""><a
+                                            href="?market=itp&status=SUCCESS"><img src="img/njob/bu8.png"
+                                                                                    class="vm" alt="">바이즐</a></li>-->
+                                </ul>
+                            </div>
+                            <div class="fr r20 t20">
+        
+        <select name="sstore" onchange="location.href = this.options[this.selectedIndex].dataset.url" class="select1" style="width:112px">
+                                            <option value="0" data-url="https://www.njobapp.com/send?status=SUCCESS&amp;market=ss&amp;sstore=0" selected="">
+                    스마트스토어1                </option>
+                    </select>
+
+    </div>
+                        </td>
+                    

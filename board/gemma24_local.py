@@ -256,7 +256,7 @@ def gemma_local_reply(
     url = os.environ.get(
         "GEMMA_OLLAMA_URL", "http://127.0.0.1:11434/api/generate"
     ).strip()
-    model = os.environ.get("GEMMA_OLLAMA_MODEL", "gemma2:2b").strip()
+    model = os.environ.get("GEMMA_OLLAMA_MODEL", "gemma4:e2b-16k").strip()
     if not url or not model:
         return None
 

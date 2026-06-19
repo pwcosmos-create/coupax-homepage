@@ -10,8 +10,8 @@ import time
 from datetime import datetime
 
 def update_ai_engine():
-    # 현재 설정된 주력 모델 이름 가져오기 (기본값: gemma2:2b)
-    target_model = os.environ.get("GEMMA_OLLAMA_MODEL", "gemma2:2b").strip()
+    # 현재 설정된 주력 모델 이름 가져오기 (기본값: gemma4:e2b-16k)
+    target_model = os.environ.get("GEMMA_OLLAMA_MODEL", "gemma4:e2b-16k").strip()
     
     print(f"[{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}] 🤖 AI 엔진 자동 업데이트 시작: {target_model}")
     

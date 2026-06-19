@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block title %}{{ site_name }} | 자동차검사소 (비공개){% endblock %}
+{% block meta_description %}토스 미니앱 자동차검사소 — 앱인토스 검수용 내부 자료{% endblock %}
+{% block extra_head %}
+<meta name="robots" content="noindex, nofollow">
+{% endblock %}
+{% block body_class %}office-page{% endblock %}
+
+{% block content %}
+<section class="office-login-card" style="max-width: 720px;">
+  <p class="office-tagline office-tagline--login">앱인토스 · 비공개</p>
+  <h1>자동차검사소</h1>
+  <p class="office-login-lead">
+    토스 미니앱 <strong>자동차검사소</strong> 서비스 설명 및 검수 참고 자료입니다.
+    검색엔진·공개 메뉴에 노출되지 않으며, 사무실 로그인 후에만 접근할 수 있습니다.
+  </p>
+
+  <div style="text-align:center; margin: 24px 0;">
+    <img src="{{ url_for('private_car_inspection_logo') }}" alt="자동차검사소 앱 로고" width="120" height="120" style="border-radius: 12px; background:#f2f4f6;">
+  </div>
+
+  <h2 style="font-size:1.1rem; margin-top: 24px;">서비스 개요</h2>
+  <ul>
+    <li>전국 공단·민영·출장 자동차검사소 검색 (무료 정보 조회)</li>
+    <li>지역·유형·검사항목 필터, 내 주변 거리순 정렬</li>
+    <li>전화, 지도, 카카오내비·네이버지도·TMAP 길안내</li>
+    <li>예약·결제·중개 기능 없음</li>
+  </ul>
+
+  <h2 style="font-size:1.1rem; margin-top: 24px;">앱 정보</h2>
+  <table style="width:100%; border-collapse: collapse; font-size: 0.95rem;">
+    <tbody>
+      <tr><td style="padding:8px 0; color:#666;">한국어 이름</td><td><strong>자동차검사소</strong></td></tr>
+      <tr><td style="padding:8px 0; color:#666;">appName</td><td><code>car-inspection</code></td></tr>
+      <tr><td style="padding:8px 0; color:#666;">부제</td><td>전국 자동차검사소 한눈에 검색</td></tr>
+      <tr><td style="padding:8px 0; color:#666;">데이터 출처</td><td>공공데이터포털 · 전국자동차검사소표준데이터</td></tr>
+      <tr><td style="padding:8px 0; color:#666;">고객문의</td><td>pwcosmos@gmail.com</td></tr>
+    </tbody>
+  </table>
+
+  <h2 style="font-size:1.1rem; margin-top: 24px;">granite.config.ts 체크</h2>
+  <ul>
+    <li><code>displayName: '자동차검사소'</code></li>
+    <li><code>appName: 'car-inspection'</code></li>
+    <li><code>icon</code> — 앱인토스 콘솔 아이콘 URL (로컬 경로 불가)</li>
+  </ul>
+
+  <p class="office-login-foot" style="margin-top: 28px;">
+    <a href="{{ url_for('agent_office') }}">← 사무실로</a>
+    ·
+    <a href="{{ url_for('index') }}">공개 홈</a>
+  </p>
+</section>
+{% endblock %}

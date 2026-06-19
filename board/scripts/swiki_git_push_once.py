@@ -17,7 +17,7 @@ except ImportError:
 
 import agent_office_swiki_sync as s  # noqa: E402
 
-repo = s._repo_path()
+repo = s.ensure_repo()
 branch = s._git_branch()
 lock = repo / ".git" / "index.lock"
 if lock.is_file():

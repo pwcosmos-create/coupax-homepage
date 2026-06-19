@@ -17,7 +17,7 @@ def run_crossover_debate() -> tuple[bool, str]:
         return False, "LLM이 비활성화되어 융합 토론을 건너뜁니다."
 
     url = os.environ.get("GEMMA_OLLAMA_URL", "http://127.0.0.1:11434/api/generate").strip()
-    model = os.environ.get("GEMMA_OLLAMA_MODEL", "gemma2:2b").strip()
+    model = os.environ.get("GEMMA_OLLAMA_MODEL", "gemma4:e2b-16k").strip()
     
     topics = [
         ("사주 운세 결과 페이지 UI 개편", "모바일 환경에서 운세 결과를 어떻게 가독성 있게 보여주면서 렌더링 속도도 챙길 것인가?"),

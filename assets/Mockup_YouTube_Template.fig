@@ -1,0 +1,14 @@
+// [Figma File Placeholder] - YouTube Thumbnail Template (1280x720)
+// Primary Color: #0A1931 | Secondary CTA: #B8860B | Accent Flow: #ADD8E6
+/* 템플릿 설명: A/B 테스트 소재 그룹(A, B, C) 공통 적용. */
+*   [Area 1] 헤드라인 (Deep Copper 강조): [여기에 최종 가치 문구 삽입 필요]
+*   [Area 2] 배경 시스템 구조 (Midnight Blue): 데이터 흐름을 표현하는 연결선 (#ADD8E6) 배치 공간 확보.
+*   [Area 3] CTA/핵심 수치: 가장 중요한 KPI를 Deep Copper로 강조할 영역 지정.
+
+<create_file path="assets/Mockup_Instagram_Template.fig">
+// [Figma File Placeholder] - Instagram Post Template (1080x1080)
+// Primary Color: #0A1931 | Secondary CTA: #B8860B | Accent Flow: #ADD8E6
+/* 템플릿 설명: A/B 테스트 소재 그룹(A, B, C) 공통 적용. */
+*   [Area 1] 후크 카피 (Deep Copper 강조): 시선 강탈 문구 배치 공간.
+*   [Area 2] 본문 내용 섹션 (Midnight Blue 배경): 핵심 기능을 간결하게 설명할 레이어링 구조.
+*   [Area 3] CTA 버튼 모형: Deep Copper를 사용한 '지금 문의하기' 혹은 '더 알아보기' 버튼 영역 지정.

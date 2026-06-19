@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, flash, g, Response, session, abort, jsonify
+from flask import Flask, render_template, request, redirect, url_for, flash, g, Response, session, abort, jsonify, send_from_directory
 from functools import wraps
 import csv
 import io
@@ -1849,6 +1849,22 @@ def privacy():
 @app.route('/terms')
 def terms():
     return render_template('terms.html')
+
+
+CAR_INSPECTION_PRIVATE_DIR = os.path.join(app.root_path, "private_assets", "car-inspection")
+
+
+@app.route("/private/car-inspection")
+@require_office_access
+def private_car_inspection():
+    """토스 미니앱 자동차검사소 — 검수·내부 참고용 비공개 페이지."""
+    return render_template("private_car_inspection.html")
+
+
+@app.route("/private/car-inspection/logo.png")
+@require_office_access
+def private_car_inspection_logo():
+    return send_from_directory(CAR_INSPECTION_PRIVATE_DIR, "logo.png", mimetype="image/png")
 
 
 @app.route("/agents/office/login", methods=["GET", "POST"])
@@ -3858,6 +3874,7 @@ def robots():
         "User-agent: *\n"
         "Allow: /\n"
         "Disallow: /agents/\n"
+        "Disallow: /private/\n"
         f"Sitemap: {request.url_root.rstrip('/')}/sitemap.xml\n"
     )
     return Response(content, mimetype='text/plain')

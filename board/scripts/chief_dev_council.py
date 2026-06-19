@@ -24,7 +24,7 @@ def generate_debate_card(topic: str, context: str) -> tuple[str, str]:
         return f"{topic} 분석 결과", f"LLM이 비활성화되어 기본 텍스트를 반환합니다.\n문맥: {context}"
 
     url = os.environ.get("GEMMA_OLLAMA_URL", "http://127.0.0.1:11434/api/generate").strip()
-    model = os.environ.get("GEMMA_OLLAMA_MODEL", "gemma2:2b").strip()
+    model = os.environ.get("GEMMA_OLLAMA_MODEL", "gemma4:e2b-16k").strip()
     
     prompt = f"""<start_of_turn>user
 당신은 쿠팩스(coupax) 서비스의 수석 개발자 젬마(AI) 위원회입니다.

@@ -556,21 +556,11 @@ const businessConceptInput = document.getElementById("business-concept");
 const SHOP_DRAFT_KEY = "sf_shop_draft";
 
 function loadShopDraft() {
-  try {
-    const data = JSON.parse(localStorage.getItem(SHOP_DRAFT_KEY));
-    if (data) {
-      // 매장명(business-name)도 로드하지 않고 초기화
-      // if (businessNameInput && data.name) businessNameInput.value = data.name;
-      if (businessConceptInput && data.concept) {
-        const example = t("concept_example") || I18N.ko.concept_example || "";
-        if (data.concept === example) {
-          businessConceptInput.value = "";
-        } else {
-          businessConceptInput.value = data.concept;
-        }
-      }
-    }
-  } catch (e) {}
+  // \ud398\uc774\uc9c0 \ub85c\ub4dc / \uc0c8\ub85c\uace0\uce68 \uc2dc \ub450 \ud544\ub4dc \ubaa8\ub450 \ube48\uce78\uc73c\ub85c \uc2dc\uc791
+  // (\uc774\uc804\uc5d0 \uc800\uc7a5\ub41c draft\ub294 \uc0ac\uc6a9\ud558\uc9c0 \uc54a\uace0 \uc81c\uac70)
+  if (businessNameInput) businessNameInput.value = "";
+  if (businessConceptInput) businessConceptInput.value = "";
+  localStorage.removeItem(SHOP_DRAFT_KEY);
 }
 
 function saveShopDraft() {

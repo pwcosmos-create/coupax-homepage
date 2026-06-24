@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="{{ locale_meta.html_lang }}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ locale_meta.title }}</title>
+  <meta name="description" content="{{ locale_meta.description }}">
+  <link rel="canonical" href="{{ canonical_shorts_url }}">
+  <meta property="og:title" content="{{ locale_meta.title }}">
+  <meta property="og:description" content="{{ locale_meta.og_description }}">
+  <meta property="og:url" content="{{ canonical_shorts_url }}">
+  <meta property="og:site_name" content="숏폼공장">
+  <script>
+  window.SHORTS_CONFIG = {
+    csrfToken: {{ csrf_token | tojson }},
+    subscription: {{ subscription | tojson }},
+    stripeEnabled: {{ stripe_enabled | tojson }},
+    plans: {{ plans | tojson }},
+    defaultLocale: {{ page_lang | tojson }},
+    detectedCountry: {{ detected_country | tojson }}
+  };
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&family=Outfit:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='shorts_home.css') }}?v={{ shorts_asset_ver }}">
+</head>
+<body class="sf-page">
+  <header class="sf-header">
+    <div class="sf-container sf-header-inner">
+      <a href="{{ url_for('shorts_page') }}" class="sf-logo" aria-label="숏폼공장">
+        <span class="sf-logo-mark">숏</span>
+        <span class="sf-logo-text">숏폼공장</span>
+      </a>
+      <nav class="sf-nav">
+        <a href="#features" data-i18n="nav_features">기능</a>
+        <a href="#pricing" data-i18n="nav_pricing">요금제</a>
+        <a href="#studio" data-i18n="nav_studio">스튜디오</a>
+      </nav>
+      <div class="sf-header-actions">
+        <select id="lang-select" class="sf-lang-select" aria-label="Language">
+          <option value="ko">KO</option>
+          <option value="en">EN</option>
+          <option value="ja">JA</option>
+          <option value="zh">中文</option>
+          <option value="es">ES</option>
+        </select>
+        <a href="#pricing" class="sf-btn sf-btn-primary sf-btn-sm" data-i18n="cta_subscribe">구독하기</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="sf-hero">
+      <div class="sf-container sf-hero-grid">
+        <div class="sf-hero-copy">
+          <p class="sf-eyebrow" data-i18n="hero_eyebrow">구독 + 본인 Gemini API 키</p>
+          <h1 data-i18n="hero_title">소상공인을 위한 AI 숏폼 홍보</h1>
+          <p class="sf-hero-lead" data-i18n="hero_lead">
+            매장 정보만 입력하세요. Gemini 시나리오, Imagen 이미지, Veo 영상, Lyria BGM을 9:16 자산으로 제공합니다.
+          </p>
+          <div class="sf-hero-cta">
+            <a href="#pricing" class="sf-btn sf-btn-primary" data-i18n="hero_cta_primary">요금제 보기</a>
+            <a href="#studio" class="sf-btn sf-btn-ghost" data-i18n="hero_cta_secondary">스튜디오 열기</a>
+          </div>
+          <div class="sf-chips">
+            <span class="sf-chip"><strong>Gemini</strong> <span data-i18n="chip_script">시나리오</span></span>
+            <span class="sf-chip"><strong>Imagen 3</strong> 9:16</span>
+            <span class="sf-chip"><strong>Veo 3.1</strong> <span data-i18n="chip_video">영상</span></span>
+            <span class="sf-chip"><strong>Lyria</strong> BGM</span>
+          </div>
+        </div>
+        <div class="sf-hero-visual">
+          <div class="sf-phone" id="hero-phone">
+            <div class="sf-phone-notch"></div>
+            <div class="sf-phone-screen" id="phone-screen">
+              <div class="sf-phone-scene active">Scene 1</div>
+              <div class="sf-phone-scene">Scene 2</div>
+              <div class="sf-phone-scene">Scene 3</div>
+              <div class="sf-phone-caption" id="hero-caption">치즈 폭포의 향연!</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sf-section" id="features">
+      <div class="sf-container">
+        <h2 data-i18n="features_title">전 세계 매장 사장님을 위해</h2>
+        <div class="sf-feature-grid">
+          <article class="sf-feature-card">
+            <h3 data-i18n="f1_title">구독하고 바로 생성</h3>
+            <p data-i18n="f1_body">Google API 키 없이 월 구독 후 쿼터 내에서 숏폼을 만듭니다.</p>
+          </article>
+          <article class="sf-feature-card">
+            <h3 data-i18n="f2_title">풀 AI 파이프라인</h3>
+            <p data-i18n="f2_body">세로 홍보에 맞춘 시나리오·비주얼·모션·음악 원스톱 워크플로.</p>
+          </article>
+          <article class="sf-feature-card">
+            <h3 data-i18n="f3_title">장면별 결과물</h3>
+            <p data-i18n="f3_body">자막·내레이션·장면 자산을 캡컷·릴스에 바로 넣을 수 있습니다.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="sf-section sf-section-alt" id="pricing">
+      <div class="sf-container">
+        <h2 data-i18n="pricing_title">간단한 월 요금제</h2>
+        <p class="sf-section-lead" data-i18n="pricing_lead">모든 플랜에 전체 파이프라인 포함. 결제 주기마다 쿼터가 초기화됩니다.</p>
+        <div class="sf-pricing-grid">
+          {% for plan in plans %}
+          <article class="sf-plan-card{% if plan.id == 'pro' %} sf-plan-featured{% endif %}">
+            {% if plan.id == 'pro' %}<span class="sf-plan-badge" data-i18n="plan_popular">인기</span>{% endif %}
+            <h3 class="sf-plan-name" data-plan-id="{{ plan.id }}"
+                data-name-ko="{{ plan.name_ko }}"
+                data-name-en="{{ plan.name }}"
+                data-name-ja="{{ plan.name_ja }}"
+                data-name-zh="{{ plan.name_zh }}"
+                data-name-es="{{ plan.name_es }}">{{ plan.name_ko if page_lang == 'ko' else (plan.name_ja if page_lang == 'ja' else (plan.name_zh if page_lang == 'zh' else (plan.name_es if page_lang == 'es' else plan.name))) }}</h3>
+            <p class="sf-plan-price">
+              {% if plan.free %}
+              <span class="sf-plan-amount" data-i18n="plan_free">무료</span>
+              {% else %}
+              <span class="sf-plan-amount">${{ plan.price_usd }}</span><span class="sf-plan-period" data-i18n="plan_per_month">/월</span>
+              {% endif %}
+            </p>
+            <p class="sf-plan-quota">
+              {% if plan.unlimited %}
+              <strong data-i18n="plan_unlimited">무제한</strong>
+              {% elif plan.free %}
+              <strong>{{ plan.daily_quota }}</strong> <span data-i18n="plan_shorts_daily">숏폼 / 일</span>
+              {% else %}
+              <strong>{{ plan.quota }}</strong> <span data-i18n="plan_shorts">숏폼 / 월</span>
+              {% endif %}
+            </p>
+            <form class="sf-checkout-form" data-plan="{{ plan.id }}" data-free="{{ '1' if plan.free else '0' }}">
+              {% if not plan.free %}
+              <input type="email" name="email" class="sf-input" placeholder="you@shop.com" required autocomplete="email">
+              {% endif %}
+              <button type="submit" class="sf-btn sf-btn-primary sf-btn-block" {% if not plan.free and not stripe_enabled %}disabled{% endif %}>
+                {% if plan.free %}
+                <span data-i18n="btn_start_free">무료 시작</span>
+                {% else %}
+                <span data-i18n="plan_subscribe">구독하기</span>
+                {% endif %}
+              </button>
+            </form>
+          </article>
+          {% endfor %}
+        </div>
+        {% if not stripe_enabled %}
+        <p class="sf-pricing-note" data-i18n="payments_paid_soon">Pro·Business 결제는 준비 중입니다. 스타터는 무료로 이용할 수 있습니다.</p>
+        {% endif %}
+      </div>
+    </section>
+
+    <section class="sf-section" id="studio">
+      <div class="sf-container">
+        <div class="sf-studio-head">
+          <div>
+            <h2 data-i18n="studio_title">스튜디오</h2>
+            <p class="sf-section-lead" data-i18n="studio_lead">구독 회원은 본인 Google AI API 키로 숏폼을 생성합니다.</p>
+          </div>
+          <div id="sub-status" class="sf-sub-status{% if subscription and subscription.active %} sf-sub-active{% endif %}">
+            {% if subscription and subscription.active %}
+            <span class="sf-sub-plan">{{ subscription.plan_name }}</span>
+            {% if subscription.limit_type == 'unlimited' %}
+            <span class="sf-sub-quota" data-i18n="quota_unlimited">무제한</span>
+            {% else %}
+            <span class="sf-sub-quota" data-i18n="{% if subscription.limit_type == 'daily' %}quota_remaining_daily{% else %}quota_remaining{% endif %}" data-remaining="{{ subscription.remaining }}" data-quota="{{ subscription.quota }}">
+              {% if subscription.limit_type == 'daily' %}
+              오늘 잔여 {{ subscription.remaining }} / {{ subscription.quota }}
+              {% else %}
+              잔여 {{ subscription.remaining }} / {{ subscription.quota }}
+              {% endif %}
+            </span>
+            {% endif %}
+            {% else %}
+            <span data-i18n="sub_required">구독이 필요합니다</span>
+            {% endif %}
+          </div>
+        </div>
+
+        <div class="sf-studio-grid">
+          <section class="sf-panel">
+            <h3 data-i18n="form_title">숏폼 생성</h3>
+            <form id="generate-form" class="sf-form">
+              <label for="api-key" data-i18n="label_api_key">Google AI API 키 (본인 키)</label>
+              <div class="sf-api-row">
+                <input type="password" id="api-key" class="sf-input" placeholder="AIza..." autocomplete="off" required>
+                <button type="button" id="toggle-key" class="sf-toggle-key" data-i18n="btn_show_key">보기</button>
+              </div>
+              <p class="sf-field-note" data-i18n="api_key_privacy">서버에는 저장하지 않으며, 편의를 위해 이 기기(휴대폰·PC)에만 기억할 수 있습니다.</p>
+
+              <details class="sf-key-guide" id="api-key-guide">
+                <summary data-i18n="api_key_guide_title">Gemini API 키 발급 방법</summary>
+                <ol class="sf-key-steps">
+                  <li data-i18n="api_key_step1">Google AI Studio (aistudio.google.com/apikey)에 접속합니다.</li>
+                  <li data-i18n="api_key_step2">Google 계정으로 로그인합니다.</li>
+                  <li data-i18n="api_key_step3">「API 키 만들기」 또는 「Create API key」를 클릭합니다.</li>
+                  <li data-i18n="api_key_step4">생성된 키(AIza...)를 복사해 위 입력란에 붙여넣습니다.</li>
+                </ol>
+                <p class="sf-field-note" data-i18n="api_key_billing_note">API 사용 요금은 Google 계정(본인)에 청구됩니다.</p>
+              </details>
+
+              <label for="business-name" data-i18n="label_shop">매장명</label>
+              <input type="text" id="business-name" class="sf-input" required>
+
+              <div class="sf-concept-block">
+                <div class="sf-label-row">
+                  <label for="business-concept" class="sf-label-inline">
+                    <span data-i18n="label_concept">컨셉 / 대표 메뉴</span>
+                    <span class="sf-label-badge" data-i18n="label_concept_badge">가장 중요</span>
+                  </label>
+                  <button type="button" id="load-concept-example" class="sf-btn sf-btn-sm sf-btn-ghost" data-i18n="btn_load_example">
+                    예시 불러오기
+                  </button>
+                </div>
+                <p class="sf-field-note sf-concept-hint" data-i18n="concept_hint">한 줄이 아니라 3~5문장으로 쓰는 게 좋습니다.</p>
+                <textarea id="business-concept" class="sf-input sf-textarea" required rows="6" placeholder=""></textarea>
+                <div class="sf-concept-example-wrap" aria-hidden="true" style="display: none !important;">
+                  <p class="sf-concept-example-label" data-i18n="concept_example_label">작성 예시</p>
+                  <pre class="sf-concept-example" id="concept-example-preview"></pre>
+                </div>
+              </div>
+
+              <div class="sf-form-row">
+                <div>
+                  <label for="video-style" data-i18n="label_style">영상 스타일</label>
+                  <select id="video-style" class="sf-input">
+                    <option value="Trendy & Dynamic">Trendy & Dynamic</option>
+                    <option value="Warm">Warm</option>
+                    <option value="Cinematic">Cinematic</option>
+                    <option value="Retro">Retro</option>
+                    <option value="Minimal">Minimal</option>
+                  </select>
+                </div>
+                <div>
+                  <label for="duration" data-i18n="label_duration">길이</label>
+                  <select id="duration" class="sf-input">
+                    <option value="15" selected>15s</option>
+                    <option value="30">30s</option>
+                    <option value="60">60s</option>
+                  </select>
+                </div>
+              </div>
+
+              <button type="submit" class="sf-btn sf-btn-primary sf-btn-block" id="submit-btn" data-i18n="btn_generate">
+                파이프라인 실행
+              </button>
+            </form>
+          </section>
+
+          <section class="sf-panel">
+            <h3 data-i18n="results_title">생성 결과</h3>
+            <div id="results-empty" class="sf-results-empty">
+              <p data-i18n="results_empty">아직 생성된 숏폼이 없습니다. 폼을 작성하고 실행해 보세요.</p>
+            </div>
+            <div id="results-panel" class="sf-results-panel">
+              <div id="status-banner" class="sf-status ok"></div>
+              <div id="meta-row" class="sf-meta"></div>
+              <div id="scene-list" class="sf-scene-list"></div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="sf-footer">
+    <div class="sf-container sf-footer-inner">
+      <p>&copy; {{ now_year }} 숏폼공장 · <a href="https://coupax.co.kr/">Coupax</a></p>
+      <p class="sf-footer-note" data-i18n="footer_note">Google AI 기반 · 소상공인 홍보용</p>
+      <p class="sf-footer-privacy" data-i18n="privacy_note">서버에는 개인정보·API 키를 저장하지 않습니다. 사용자 기기(휴대폰·PC)에만 저장될 수 있습니다.</p>
+    </div>
+  </footer>
+
+  <div class="sf-loading" id="loading-overlay">
+    <div class="sf-loading-box">
+      <div class="sf-spinner"></div>
+      <p data-i18n="loading">AI 파이프라인 실행 중…</p>
+      <p class="sf-loading-step" id="loading-step"></p>
+    </div>
+  </div>
+
+  <script src="{{ url_for('static', filename='shorts.js') }}?v={{ shorts_asset_ver }}"></script>
+</body>
+</html>

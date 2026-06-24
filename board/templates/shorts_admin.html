@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>숏폼공장 — Gemini API 설정</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="stylesheet" href="{{ url_for('static', filename='shorts_home.css') }}">
+  <style>
+    .sf-admin-wrap { max-width: 480px; margin: 3rem auto; padding: 0 1rem; }
+    .sf-admin-card {
+      background: var(--sf-surface);
+      border: 1px solid var(--sf-border);
+      border-radius: var(--sf-radius);
+      padding: 1.5rem 1.75rem;
+    }
+    .sf-admin-card h1 { font-size: 1.25rem; margin: 0 0 0.5rem; }
+    .sf-admin-lead { color: var(--sf-muted); font-size: 0.9rem; margin: 0 0 1.25rem; line-height: 1.6; }
+    .sf-admin-status {
+      padding: 0.65rem 0.85rem;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      margin-bottom: 1rem;
+      background: var(--sf-bg);
+      border: 1px solid var(--sf-border);
+    }
+    .sf-admin-status.ok { border-color: rgba(61, 214, 140, 0.4); color: var(--sf-ok); }
+    .sf-admin-status.warn { border-color: rgba(255, 193, 7, 0.4); color: #ffc107; }
+    .sf-admin-note { font-size: 0.78rem; color: var(--sf-muted); margin-top: 0.5rem; line-height: 1.5; }
+    .sf-admin-back { display: inline-block; margin-top: 1.25rem; font-size: 0.85rem; }
+    .sf-flash { padding: 0.6rem 0.8rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.85rem; }
+    .sf-flash.error { background: rgba(255, 107, 107, 0.12); color: var(--sf-err); }
+  </style>
+</head>
+<body class="sf-page">
+  <div class="sf-admin-wrap">
+    <div class="sf-admin-card">
+      <h1>숏폼공장 · Gemini API</h1>
+
+      {% if not access_configured %}
+      <p class="sf-admin-lead">관리자 비밀번호가 설정되지 않았습니다. 서버 <code>SHORTS_ADMIN_PASSWORD</code> 또는 <code>AGENT_OFFICE_ACCESS_PASSWORD</code>를 설정하세요.</p>
+      {% elif not logged_in %}
+      <p class="sf-admin-lead">Google AI (Gemini) API 키를 등록해야 숏폼 구독·생성을 사용할 수 있습니다.</p>
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% for cat, msg in messages %}
+        <div class="sf-flash {{ cat }}">{{ msg }}</div>
+        {% endfor %}
+      {% endwith %}
+      <form method="post" action="{{ url_for('shorts_admin_page') }}">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+        <label for="password" class="sf-admin-note" style="display:block;font-weight:600;margin-bottom:0.35rem;">관리자 비밀번호</label>
+        <input type="password" id="password" name="password" class="sf-input" required autocomplete="current-password">
+        <button type="submit" class="sf-btn sf-btn-primary sf-btn-block" style="margin-top:0.75rem;">입장</button>
+      </form>
+      {% else %}
+      <p class="sf-admin-lead">구독자 숏폼 생성에 사용되는 서버 API 키입니다. <strong>키 없이는 서비스를 이용할 수 없습니다.</strong></p>
+
+      <div id="key-status" class="sf-admin-status {% if key_info.configured %}ok{% else %}warn{% endif %}">
+        {% if key_info.configured %}
+        등록됨 · {{ key_info.masked }}
+        {% if key_info.source == 'admin' %}(관리자 저장){% elif key_info.source == 'env_shorts' %}(환경변수 SHORTS_GOOGLE_AI_API_KEY){% elif key_info.source == 'env_gemini' %}(환경변수 GEMINI_API_KEY){% endif %}
+        {% else %}
+        API 키가 설정되지 않았습니다. 아래에 Google AI Studio 키를 입력하세요.
+        {% endif %}
+      </div>
+
+      <form id="gemini-key-form">
+        <label for="api-key">Google AI API 키</label>
+        <div style="position:relative;">
+          <input type="password" id="api-key" class="sf-input" placeholder="AIza..." autocomplete="off" required>
+          <button type="button" id="toggle-key" class="sf-admin-note" style="position:absolute;right:10px;top:10px;background:none;border:none;color:var(--sf-accent);cursor:pointer;font-weight:600;">보기</button>
+        </div>
+        <p class="sf-admin-note"><a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener">Google AI Studio</a>에서 발급 · 숏폼공장 전용 키 권장</p>
+        <button type="submit" class="sf-btn sf-btn-primary sf-btn-block" id="save-btn">키 저장</button>
+      </form>
+      <p id="save-msg" class="sf-admin-note" style="margin-top:0.75rem;"></p>
+
+      <form method="post" action="{{ url_for('shorts_admin_logout') }}" style="margin-top:1rem;">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+        <button type="submit" class="sf-btn sf-btn-ghost sf-btn-sm">로그아웃</button>
+      </form>
+      {% endif %}
+
+      <a href="{{ url_for('shorts_page') }}" class="sf-admin-back">← 숏폼공장으로</a>
+    </div>
+  </div>
+
+  {% if logged_in %}
+  <script>
+  window.SHORTS_CONFIG = { csrfToken: {{ csrf_token | tojson }} };
+  </script>
+  <script>
+  (function () {
+    const form = document.getElementById("gemini-key-form");
+    const input = document.getElementById("api-key");
+    const toggle = document.getElementById("toggle-key");
+    const msg = document.getElementById("save-msg");
+    const status = document.getElementById("key-status");
+    const cfg = window.SHORTS_CONFIG || {};
+
+    toggle?.addEventListener("click", () => {
+      const show = input.type === "password";
+      input.type = show ? "text" : "password";
+      toggle.textContent = show ? "숨기기" : "보기";
+    });
+
+    form?.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      msg.textContent = "";
+      const btn = document.getElementById("save-btn");
+      btn.disabled = true;
+      try {
+        const res = await fetch("/api/v1/shorts/admin/gemini-key", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "X-Requested-With": "XMLHttpRequest",
+            "X-CSRF-Token": cfg.csrfToken || "",
+          },
+          body: JSON.stringify({ api_key: input.value.trim() }),
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.detail || "저장 실패");
+        const k = data.key || {};
+        status.className = "sf-admin-status ok";
+        status.textContent = "등록됨 · " + (k.masked || "") + " (관리자 저장)";
+        input.value = "";
+        msg.style.color = "var(--sf-ok)";
+        msg.textContent = "저장되었습니다. 스튜디오에서 바로 사용할 수 있습니다.";
+      } catch (err) {
+        msg.style.color = "var(--sf-err)";
+        msg.textContent = err.message;
+      } finally {
+        btn.disabled = false;
+      }
+    });
+  })();
+  </script>
+  {% endif %}
+</body>
+</html>

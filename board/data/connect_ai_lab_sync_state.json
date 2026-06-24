@@ -1,0 +1,50 @@
+{
+  "at": "2026-06-19 21:55",
+  "brain": {
+    "ok": true,
+    "lab": "C:\\Users\\pwcos\\Desktop\\connect ai lab",
+    "files": [
+      "C:\\Users\\pwcos\\Desktop\\connect ai lab\\connect-ai-brain.jsonl",
+      "C:\\Users\\pwcos\\Desktop\\connect ai lab\\connect-ai-dpo.jsonl"
+    ],
+    "scanned": 672,
+    "skipped": 626,
+    "added": 46,
+    "updated": 0,
+    "skip_reasons": {
+      "short": 22,
+      "dup_title": 255,
+      "format": 349
+    }
+  },
+  "docs": {
+    "ingested": [
+      {
+        "file": "CURSOR_RAG_AI1_LEARN.md",
+        "id": 2,
+        "title": "Connect AI · RAG 1일차 (AI 1인 기업)",
+        "revised": true
+      },
+      {
+        "file": "CURSOR_RAG_AI5_LEARN.md",
+        "id": 3,
+        "title": "Connect AI · Antigravity SDK 5강",
+        "revised": true
+      },
+      {
+        "file": "assets/design_briefs/style_reference_masterclass_midnight.md",
+        "id": 120,
+        "title": "디자인 레퍼런스 · MasterClass Midnight",
+        "revised": true
+      }
+    ],
+    "skipped": [],
+    "errors": []
+  },
+  "swiki": {},
+  "packs": {
+    "finance": "ok",
+    "homepage_design": "ok",
+    "saju": "ok"
+  }
+}

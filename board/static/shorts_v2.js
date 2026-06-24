@@ -701,28 +701,76 @@ function showResults(data) {
   statusBanner.textContent = data.message || t("done");
 
   const meta = data.meta || {};
+  const assets = data.assets || {};
+
+  // 메타정보 행
   metaRow.innerHTML = `
     <span>${escapeHtml(meta.business_name || "")}</span>
     <span>${escapeHtml(meta.style || "")}</span>
-    <span>${meta.total_duration || 0}s</span>
-    <span>BGM</span>
+    <span>${meta.total_duration || 0}s · ${meta.scene_count || 0}씨</span>
+    <span>${meta.bgm ? "🎵 BGM" : "BGM 없음"}</span>
   `;
 
-  const scenes = data.assets?.timeline_scenes || [];
-  sceneList.innerHTML = scenes
-    .map(
-      (scene) => `
+  // BGM 오디오 플레이어
+  const bgmB64 = assets.bgm_b64 || "";
+  const bgmMime = assets.bgm_mime || "audio/wav";
+  let bgmHtml = "";
+  if (bgmB64) {
+    bgmHtml = `
+      <div class="sf-bgm-player">
+        <div class="sf-bgm-label">🎵 BGM</div>
+        <audio controls style="width:100%;margin-top:6px;">
+          <source src="data:${bgmMime};base64,${bgmB64}" type="${bgmMime}">
+        </audio>
+      </div>`;
+  }
+
+  // 씩별 카드
+  const scenes = assets.timeline_scenes || [];
+  const scenesHtml = scenes.map((scene) => {
+    const imgSrc = scene.image_b64 ? `data:image/png;base64,${scene.image_b64}` : "";
+    const vidSrc = scene.video_b64 ? `data:video/mp4;base64,${scene.video_b64}` : "";
+
+    const mediaHtml = vidSrc
+      ? `<video controls playsinline loop class="sf-scene-media">
+           <source src="${vidSrc}" type="video/mp4">
+         </video>`
+      : imgSrc
+        ? `<img src="${imgSrc}" class="sf-scene-media" alt="Scene ${scene.scene_number}">`
+        : `<div class="sf-scene-media sf-scene-placeholder">Scene ${scene.scene_number}</div>`;
+
+    // 다운로드 버튼
+    const dlButtons = [];
+    if (imgSrc) dlButtons.push(`<a class="sf-btn sf-btn-sm sf-btn-ghost sf-dl-btn" href="${imgSrc}" download="scene${scene.scene_number}.png">🖼 이미지 다운로드</a>`);
+    if (vidSrc) dlButtons.push(`<a class="sf-btn sf-btn-sm sf-btn-primary sf-dl-btn" href="${vidSrc}" download="scene${scene.scene_number}.mp4">🎬 영상 다운로드</a>`);
+
+    return `
     <div class="sf-scene-card">
       <div class="sf-scene-head">
         <span class="sf-scene-num">Scene ${scene.scene_number}</span>
-        <span class="sf-scene-badge">${t("scene_rendered")}</span>
+        <span class="sf-scene-badge">${vidSrc ? "🎬 영상" : imgSrc ? "🖼 이미지" : t("scene_rendered")}</span>
       </div>
+      ${mediaHtml}
       <div class="sf-scene-caption">${escapeHtml(scene.caption)}</div>
       <div class="sf-scene-narration">${escapeHtml(scene.narration)}</div>
-    </div>
-  `
-    )
-    .join("");
+      ${dlButtons.length ? `<div class="sf-dl-row">${dlButtons.join("")}</div>` : ""}
+    </div>`;
+  }).join("");
+
+  // BGM 다운로드 버튼
+  let bgmDlBtn = "";
+  if (bgmB64) bgmDlBtn = `<a class="sf-btn sf-btn-sm sf-btn-ghost sf-dl-btn" href="data:${bgmMime};base64,${bgmB64}" download="bgm.wav">🎵 BGM 다운로드</a>`;
+
+  const bgmSection = bgmB64 ? `
+    <div class="sf-bgm-player">
+      <div class="sf-bgm-label">🎵 BGM</div>
+      <audio controls style="width:100%;margin-top:6px;">
+        <source src="data:${bgmMime};base64,${bgmB64}" type="${bgmMime}">
+      </audio>
+      <div class="sf-dl-row">${bgmDlBtn}</div>
+    </div>` : "";
+
+  sceneList.innerHTML = bgmSection + scenesHtml;
 }
 
 function startPhonePreview(scenes) {
@@ -731,25 +779,24 @@ function startPhonePreview(scenes) {
 
   clearInterval(phoneRotateInterval);
 
-  screen.innerHTML = scenes
-    .map(
-      (s, i) => `
-    <div class="sf-phone-scene${i === 0 ? " active" : ""}">Scene ${s.scene_number}</div>
-  `
-    )
-    .join(`
-    <div class="sf-phone-caption" id="phone-caption">${escapeHtml(scenes[0].caption)}</div>
-  `);
+  // 이미지 또는 플레이스홀더로 폰 프리뷰 구성
+  screen.innerHTML = scenes.map((s, i) => {
+    const imgSrc = s.image_b64 ? `data:image/png;base64,${s.image_b64}` : "";
+    const style = imgSrc
+      ? `background-image:url('${imgSrc}');background-size:cover;background-position:center;`
+      : "";
+    return `<div class="sf-phone-scene${i === 0 ? " active" : ""}" style="${style}">
+      <div class="sf-phone-overlay-caption">${escapeHtml(s.caption)}</div>
+    </div>`;
+  }).join("");
 
   let current = 0;
   const phoneScenes = screen.querySelectorAll(".sf-phone-scene");
-  const captionEl = document.getElementById("phone-caption");
 
   phoneRotateInterval = setInterval(() => {
     phoneScenes[current]?.classList.remove("active");
     current = (current + 1) % scenes.length;
     phoneScenes[current]?.classList.add("active");
-    if (captionEl) captionEl.textContent = scenes[current].caption;
   }, 3000);
 }
 

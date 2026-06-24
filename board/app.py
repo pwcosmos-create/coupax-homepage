@@ -1352,7 +1352,7 @@ def shorts_page():
         sub = dict(sub)
         sub["plan_name"] = ss.plan_display_name(sub["plan"], page_lang)
     static_dir = os.path.join(app.root_path, "static")
-    asset_files = [os.path.join(static_dir, name) for name in ("shorts_v2.js", "shorts_home_v2.css", "shorts.js", "shorts_home.css") if os.path.isfile(os.path.join(static_dir, name))]
+    asset_files = [os.path.join(static_dir, name) for name in ("shorts_v2.js", "device-save.js", "shorts_home_v2.css", "shorts.js", "shorts_home.css") if os.path.isfile(os.path.join(static_dir, name))]
     shorts_asset_ver = max((int(os.path.getmtime(f)) for f in asset_files), default=1) if asset_files else 1
     return render_template(
         "shorts.html",
@@ -1504,9 +1504,14 @@ def shorts_generate_pipeline():
         return jsonify(result)
     except ValueError as e:
         return jsonify({"detail": str(e)}), 400
-    except Exception:
+    except Exception as e:
         app.logger.exception("shorts_generate_pipeline failed")
-        return jsonify({"detail": "Pipeline error. Please try again."}), 500
+        return jsonify({"detail": f"숏폼 생성 실패: {e}"}), 500
+
+
+@app.route("/api/v1/shorts/health", methods=["GET"])
+def shorts_health():
+    return jsonify({"status": "ok", "service": "coupax-shorts", "pipeline": "generate-pipeline"})
 
 
 @app.route("/shorts/admin", methods=["GET", "POST"])

@@ -261,6 +261,12 @@
             <div id="results-panel" class="sf-results-panel">
               <div id="status-banner" class="sf-status ok"></div>
               <div id="meta-row" class="sf-meta"></div>
+              <div id="final-video-container" class="sf-final-video" style="display:none;">
+                <h4>완성된 숏폼 영상</h4>
+                <video id="final-video-player" controls playsinline class="sf-final-player"></video>
+                <button type="button" id="final-video-download" class="sf-btn sf-btn-primary sf-btn-sm">기기에 다시 저장</button>
+                <p class="sf-note">생성 직후 기기에 자동 저장됩니다 (PC: 다운로드 · 휴대폰: 공유 → 파일에 저장)</p>
+              </div>
               <div id="scene-list" class="sf-scene-list"></div>
             </div>
           </section>
@@ -285,6 +291,7 @@
     </div>
   </div>
 
+  <script src="{{ url_for('static', filename='device-save.js') }}?v={{ shorts_asset_ver }}"></script>
   <script src="{{ url_for('static', filename='shorts_v2.js') }}?v={{ shorts_asset_ver }}"></script>
 </body>
 </html>

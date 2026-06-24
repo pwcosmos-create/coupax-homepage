@@ -253,6 +253,58 @@ def _lyria_generate(api_key: str, prompt: str, duration: int) -> str:
         return ""
 
 
+def _fallback_blueprint(
+    name: str, concept: str, style: str, duration: int
+) -> ShortsBlueprint:
+    if duration <= 15:
+        ratios = [0.35, 0.35, 0.30]
+        narrations = [
+            f"안녕하세요, {name}입니다.",
+            f"{concept} — 맛과 품질을 자신합니다.",
+            "지금 바로 방문해 보세요!",
+        ]
+        captions = ["우리 가게", "시그니처", "방문 유도"]
+    else:
+        ratios = [0.20, 0.30, 0.30, 0.20]
+        narrations = [
+            f"{name}, 잠깐만 주목해 주세요.",
+            f"저희는 {concept}을(를) 자랑합니다.",
+            "정성과 맛, 합리적인 가격까지.",
+            "오늘 꼭 한번 들러 주세요!",
+        ]
+        captions = ["오프닝", "대표 메뉴", "매장 분위기", "방문 유도"]
+
+    scenes = [
+        SceneScript(
+            scene_number=i + 1,
+            duration_ratio=ratios[i],
+            narration=narrations[i],
+            caption=captions[i],
+            imagen_prompt=(
+                f"Vertical 9:16 photorealistic promo photo, {concept}, "
+                f"{style} style, scene {i + 1}, no text"
+            ),
+            veo_prompt="Slow cinematic camera movement, vertical video",
+        )
+        for i in range(len(ratios))
+    ]
+    return ShortsBlueprint(
+        bgm_lyria_prompt=f"Upbeat {style} background music for local shop, {duration}s",
+        scenes=scenes,
+    )
+
+
+def _normalize_ratios(scenes: List[SceneScript]) -> None:
+    total = sum(s.duration_ratio for s in scenes)
+    if total <= 0:
+        equal = 1.0 / max(len(scenes), 1)
+        for s in scenes:
+            s.duration_ratio = equal
+    else:
+        for s in scenes:
+            s.duration_ratio = s.duration_ratio / total
+
+
 # ─────────────────────────────────────────
 # 메인 파이프라인
 # ─────────────────────────────────────────
@@ -277,54 +329,75 @@ def run_pipeline(payload: dict[str, Any], *, api_key: str) -> dict[str, Any]:
     if duration_seconds not in ALLOWED_DURATIONS:
         duration_seconds = 15
 
-    clip_duration = max(5, duration_seconds // 3)
+    clip_duration = max(5, duration_seconds // max(3, duration_seconds // 10))
 
-    # ── Step 1: Gemini로 씬 구성 ──
-    blueprint = _gemini_generate_blueprint(
-        api_key, business_name, business_concept, video_style, duration_seconds
-    )
+    try:
+        blueprint = _gemini_generate_blueprint(
+            api_key, business_name, business_concept, video_style, duration_seconds
+        )
+    except Exception as exc:
+        print(f"[Fallback] Gemini blueprint: {exc}")
+        blueprint = _fallback_blueprint(
+            business_name, business_concept, video_style, duration_seconds
+        )
 
-    # ── Step 2 & 3 & 4: 씬별 이미지 + 영상 생성 ──
+    if not blueprint.scenes:
+        blueprint = _fallback_blueprint(
+            business_name, business_concept, video_style, duration_seconds
+        )
+    _normalize_ratios(blueprint.scenes)
+
+    generated_scenes_assets = []
     timeline_scenes = []
-    for scene in blueprint.scenes:
-        # 이미지 생성
-        try:
-            img_b64 = _imagen_generate(api_key, scene.imagen_prompt)
-        except Exception as exc:
-            img_b64 = ""
-            scene.caption = f"[이미지 생성 실패: {exc}]"
 
-        # 영상 생성 (이미지 기반)
+    for scene in blueprint.scenes:
+        img_b64 = ""
+        try:
+            if scene.imagen_prompt:
+                img_b64 = _imagen_generate(api_key, scene.imagen_prompt)
+        except Exception as exc:
+            print(f"[Skip] Imagen scene {scene.scene_number}: {exc}")
+
         video_b64 = ""
         if img_b64 and scene.veo_prompt:
             video_b64 = _veo_generate(api_key, img_b64, scene.veo_prompt, clip_duration)
 
+        generated_scenes_assets.append({
+            "scene_number": scene.scene_number,
+            "narration": scene.narration,
+            "caption": scene.caption,
+            "duration_ratio": scene.duration_ratio,
+            "image_data_preview": img_b64 or "MOCK_IMAGE",
+            "video_data_render": video_b64 or img_b64 or "MOCK_IMAGE",
+        })
         timeline_scenes.append({
             "scene_number": scene.scene_number,
             "narration": scene.narration,
             "caption": scene.caption,
-            "imagen_prompt": scene.imagen_prompt,
-            "veo_prompt": scene.veo_prompt,
-            "image_b64": img_b64,         # Imagen 결과
-            "video_b64": video_b64,        # Veo 결과 (없으면 빈 문자열 → 이미지 폴백)
         })
 
-    # ── Step 4: BGM 생성 ──
     bgm_b64 = _lyria_generate(api_key, blueprint.bgm_lyria_prompt, duration_seconds)
+
+    from video_assembler import VideoAssembler
+
+    assembler = VideoAssembler()
+    final_video_url = assembler.assemble(
+        bgm_b64 or "MOCK_AUDIO",
+        generated_scenes_assets,
+        duration_seconds,
+    )
 
     return {
         "status": "success",
-        "message": f"✅ {len(timeline_scenes)}개 씬 · 이미지 · 영상 · 음악 생성 완료!",
+        "message": f"{duration_seconds}초 숏폼 영상 생성 완료",
         "meta": {
             "business_name": business_name,
             "style": video_style,
             "total_duration": duration_seconds,
             "scene_count": len(timeline_scenes),
-            "bgm": bool(bgm_b64),
         },
         "assets": {
-            "bgm_b64": bgm_b64,
-            "bgm_mime": "audio/wav",
             "timeline_scenes": timeline_scenes,
         },
+        "final_video_url": final_video_url,
     }

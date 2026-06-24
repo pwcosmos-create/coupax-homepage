@@ -553,6 +553,18 @@ const apiKeyInput = document.getElementById("api-key");
 const toggleKeyBtn = document.getElementById("toggle-key");
 const businessNameInput = document.getElementById("business-name");
 const businessConceptInput = document.getElementById("business-concept");
+const DS = window.ShortsDeviceSave;
+const finalVideoContainer = document.getElementById("final-video-container");
+const finalVideoPlayer = document.getElementById("final-video-player");
+const finalVideoDownload = document.getElementById("final-video-download");
+let currentVideoUrl = null;
+let currentVideoMeta = {};
+
+if (DS) {
+  DS.loadApiKey(apiKeyInput);
+  DS.loadShopDraft(businessNameInput, businessConceptInput);
+  DS.bindDownloadButton(finalVideoDownload, () => currentVideoUrl, () => currentVideoMeta);
+}
 const SHOP_DRAFT_KEY = "sf_shop_draft";
 
 function loadShopDraft() {
@@ -645,11 +657,14 @@ form?.addEventListener("submit", async (e) => {
       throw new Error(data.detail || "Server error");
     }
 
-    showResults(data);
+    await showResults(data);
     startPhonePreview(data.assets?.timeline_scenes || []);
     refreshSubscription();
-    if (apiKey) localStorage.setItem("sf_gemini_key", apiKey);
-    saveShopDraft();
+    if (apiKey) {
+      localStorage.setItem("sf_gemini_key", apiKey);
+      DS?.saveApiKey(apiKey);
+    }
+    DS?.saveShopDraft(businessNameInput, businessConceptInput);
   } catch (err) {
     showError(err.message);
   } finally {
@@ -682,85 +697,63 @@ function showError(message) {
   statusBanner.textContent = message;
   metaRow.innerHTML = "";
   sceneList.innerHTML = "";
+  if (finalVideoContainer) finalVideoContainer.style.display = "none";
 }
 
-function showResults(data) {
+async function showResults(data) {
+  if (!data.final_video_url) {
+    showError("영상이 생성되지 않았습니다. 잠시 후 다시 시도해 주세요.");
+    return;
+  }
+
+  currentVideoUrl = data.final_video_url;
+  currentVideoMeta = {
+    businessName: data.meta?.business_name || businessNameInput?.value?.trim(),
+    durationSeconds: data.meta?.total_duration || 30,
+  };
+
   resultsEmpty.style.display = "none";
   resultsPanel.classList.add("visible");
   statusBanner.className = "sf-status ok";
   statusBanner.textContent = data.message || t("done");
 
   const meta = data.meta || {};
-  const assets = data.assets || {};
-
-  // 메타정보 행
   metaRow.innerHTML = `
     <span>${escapeHtml(meta.business_name || "")}</span>
     <span>${escapeHtml(meta.style || "")}</span>
-    <span>${meta.total_duration || 0}s · ${meta.scene_count || 0}씨</span>
-    <span>${meta.bgm ? "🎵 BGM" : "BGM 없음"}</span>
+    <span>${meta.total_duration || 0}s</span>
   `;
 
-  // BGM 오디오 플레이어
-  const bgmB64 = assets.bgm_b64 || "";
-  const bgmMime = assets.bgm_mime || "audio/wav";
-  let bgmHtml = "";
-  if (bgmB64) {
-    bgmHtml = `
-      <div class="sf-bgm-player">
-        <div class="sf-bgm-label">🎵 BGM</div>
-        <audio controls style="width:100%;margin-top:6px;">
-          <source src="data:${bgmMime};base64,${bgmB64}" type="${bgmMime}">
-        </audio>
-      </div>`;
+  if (finalVideoContainer && finalVideoPlayer) {
+    finalVideoContainer.style.display = "block";
+    finalVideoPlayer.src = data.final_video_url;
   }
 
-  // 씩별 카드
-  const scenes = assets.timeline_scenes || [];
-  const scenesHtml = scenes.map((scene) => {
-    const imgSrc = scene.image_b64 ? `data:image/png;base64,${scene.image_b64}` : "";
-    const vidSrc = scene.video_b64 ? `data:video/mp4;base64,${scene.video_b64}` : "";
-
-    const mediaHtml = vidSrc
-      ? `<video controls playsinline loop class="sf-scene-media">
-           <source src="${vidSrc}" type="video/mp4">
-         </video>`
-      : imgSrc
-        ? `<img src="${imgSrc}" class="sf-scene-media" alt="Scene ${scene.scene_number}">`
-        : `<div class="sf-scene-media sf-scene-placeholder">Scene ${scene.scene_number}</div>`;
-
-    // 다운로드 버튼
-    const dlButtons = [];
-    if (imgSrc) dlButtons.push(`<a class="sf-btn sf-btn-sm sf-btn-ghost sf-dl-btn" href="${imgSrc}" download="scene${scene.scene_number}.png">🖼 이미지 다운로드</a>`);
-    if (vidSrc) dlButtons.push(`<a class="sf-btn sf-btn-sm sf-btn-primary sf-dl-btn" href="${vidSrc}" download="scene${scene.scene_number}.mp4">🎬 영상 다운로드</a>`);
-
-    return `
+  const scenes = data.assets?.timeline_scenes || [];
+  sceneList.innerHTML = scenes.map((scene) => `
     <div class="sf-scene-card">
       <div class="sf-scene-head">
         <span class="sf-scene-num">Scene ${scene.scene_number}</span>
-        <span class="sf-scene-badge">${vidSrc ? "🎬 영상" : imgSrc ? "🖼 이미지" : t("scene_rendered")}</span>
+        <span class="sf-scene-badge">${t("scene_rendered")}</span>
       </div>
-      ${mediaHtml}
       <div class="sf-scene-caption">${escapeHtml(scene.caption)}</div>
       <div class="sf-scene-narration">${escapeHtml(scene.narration)}</div>
-      ${dlButtons.length ? `<div class="sf-dl-row">${dlButtons.join("")}</div>` : ""}
-    </div>`;
-  }).join("");
+    </div>
+  `).join("");
 
-  // BGM 다운로드 버튼
-  let bgmDlBtn = "";
-  if (bgmB64) bgmDlBtn = `<a class="sf-btn sf-btn-sm sf-btn-ghost sf-dl-btn" href="data:${bgmMime};base64,${bgmB64}" download="bgm.wav">🎵 BGM 다운로드</a>`;
-
-  const bgmSection = bgmB64 ? `
-    <div class="sf-bgm-player">
-      <div class="sf-bgm-label">🎵 BGM</div>
-      <audio controls style="width:100%;margin-top:6px;">
-        <source src="data:${bgmMime};base64,${bgmB64}" type="${bgmMime}">
-      </audio>
-      <div class="sf-dl-row">${bgmDlBtn}</div>
-    </div>` : "";
-
-  sceneList.innerHTML = bgmSection + scenesHtml;
+  if (DS) {
+    try {
+      const result = await DS.saveVideoToDevice(data.final_video_url, currentVideoMeta);
+      if (result.method === "download") {
+        statusBanner.textContent += " · 기기에 저장됨";
+        if (finalVideoPlayer && result.blobUrl) finalVideoPlayer.src = result.blobUrl;
+      } else if (result.method === "share") {
+        statusBanner.textContent += " · 공유 메뉴에서 저장하세요";
+      }
+    } catch (err) {
+      statusBanner.textContent += ` · 저장: ${err.message}`;
+    }
+  }
 }
 
 function startPhonePreview(scenes) {

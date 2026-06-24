@@ -1,4 +1,5 @@
-const API_URL = "/api/v1/shorts/generate-pipeline";
+const API_URL = "/api/v1/shorts/generate-stream";
+const API_URL_LEGACY = "/api/v1/shorts/generate-pipeline";
 const CHECKOUT_URL = "/api/v1/shorts/checkout";
 const SUB_URL = "/api/v1/shorts/subscription";
 const cfg = window.SHORTS_CONFIG || {};
@@ -547,6 +548,7 @@ const resultsEmpty = document.getElementById("results-empty");
 const resultsPanel = document.getElementById("results-panel");
 const statusBanner = document.getElementById("status-banner");
 const metaRow = document.getElementById("meta-row");
+const pipelineStepsEl = document.getElementById("pipeline-steps");
 const sceneList = document.getElementById("scene-list");
 const submitBtn = document.getElementById("submit-btn");
 const apiKeyInput = document.getElementById("api-key");
@@ -608,6 +610,72 @@ toggleKeyBtn?.addEventListener("click", () => {
 let loadingInterval = null;
 let phoneRotateInterval = null;
 
+const PIPELINE_UI_STEPS = [
+  { id: "s1", label: "① 시나리오 작성", match: /^step1/ },
+  { id: "s2", label: "② 장면별 이미지", match: /^step2/ },
+  { id: "s3", label: "③ BGM 생성", match: /^step3/ },
+  { id: "s4", label: "④ 영상 조립", match: /^step4/ },
+  { id: "s5", label: "⑤ 기기에 저장", match: /^step5|save/ },
+];
+
+function initPipelineSteps() {
+  if (!pipelineStepsEl) return;
+  pipelineStepsEl.innerHTML = PIPELINE_UI_STEPS.map(
+    (s, i) => `
+    <li class="sf-pipeline-step" id="pipe-${s.id}" data-step-id="${s.id}">
+      <span class="sf-pipeline-step-num">${i + 1}</span>
+      <div class="sf-pipeline-step-body">
+        <div class="sf-pipeline-step-label">${s.label}</div>
+        <div class="sf-pipeline-step-msg" id="pipe-msg-${s.id}">대기 중</div>
+      </div>
+    </li>`
+  ).join("");
+}
+
+function updatePipelineStep(serverStep, message) {
+  if (!pipelineStepsEl) return;
+  const idx = PIPELINE_UI_STEPS.findIndex((s) => s.match.test(serverStep));
+  if (idx < 0) return;
+
+  PIPELINE_UI_STEPS.forEach((s, i) => {
+    const el = document.getElementById(`pipe-${s.id}`);
+    const msgEl = document.getElementById(`pipe-msg-${s.id}`);
+    if (!el) return;
+    el.classList.remove("is-active", "is-done", "is-error");
+    if (i < idx) {
+      el.classList.add("is-done");
+      if (msgEl && msgEl.textContent === "대기 중") msgEl.textContent = "완료";
+    } else if (i === idx) {
+      el.classList.add(serverStep.endsWith("_done") || serverStep === "step5" ? "is-done" : "is-active");
+      if (msgEl) msgEl.textContent = message || "진행 중…";
+    }
+  });
+}
+
+function markPipelineError(message) {
+  PIPELINE_UI_STEPS.forEach((s) => {
+    const el = document.getElementById(`pipe-${s.id}`);
+    if (el?.classList.contains("is-active")) {
+      el.classList.remove("is-active");
+      el.classList.add("is-error");
+      const msgEl = document.getElementById(`pipe-msg-${s.id}`);
+      if (msgEl) msgEl.textContent = message;
+    }
+  });
+}
+
+function markPipelineSaveDone(message) {
+  const el = document.getElementById("pipe-s5");
+  const msgEl = document.getElementById("pipe-msg-s5");
+  if (el) {
+    el.classList.remove("is-active");
+    el.classList.add("is-done");
+  }
+  if (msgEl) msgEl.textContent = message || "저장 완료";
+}
+
+initPipelineSteps();
+
 form?.addEventListener("submit", async (e) => {
   e.preventDefault();
 
@@ -634,6 +702,20 @@ form?.addEventListener("submit", async (e) => {
     return;
   }
 
+  currentVideoMeta = {
+    businessName: payload.business_name,
+    durationSeconds: payload.duration_seconds,
+  };
+
+  resultsEmpty.style.display = "none";
+  resultsPanel.classList.add("visible");
+  statusBanner.className = "sf-status ok";
+  statusBanner.textContent = "생성 진행 중…";
+  metaRow.innerHTML = "";
+  sceneList.innerHTML = "";
+  if (finalVideoContainer) finalVideoContainer.style.display = "none";
+  initPipelineSteps();
+
   startLoading();
   submitBtn.disabled = true;
 
@@ -645,33 +727,91 @@ form?.addEventListener("submit", async (e) => {
       body: JSON.stringify(payload),
     });
 
-    const data = await res.json();
-
     if (!res.ok) {
-      if (data.code === "api_key_required") {
-        throw new Error(t("err_api_key"));
-      }
-      if (res.status === 402 || res.status === 403) {
-        throw new Error(data.detail || t("err_subscribe"));
-      }
-      throw new Error(data.detail || "Server error");
+      const errData = await parseResponseJson(res);
+      throw new Error(errData.detail || `서버 오류 (${res.status})`);
     }
 
-    await showResults(data);
-    startPhonePreview(data.assets?.timeline_scenes || []);
-    refreshSubscription();
-    if (apiKey) {
-      localStorage.setItem("sf_gemini_key", apiKey);
-      DS?.saveApiKey(apiKey);
+    const reader = res.body.getReader();
+    const decoder = new TextDecoder("utf-8");
+    let buffer = "";
+
+    while (true) {
+      const { value, done } = await reader.read();
+      if (done) break;
+      buffer += decoder.decode(value, { stream: true });
+      const lines = buffer.split("\n");
+      buffer = lines.pop() || "";
+      for (const line of lines) {
+        if (!line.startsWith("data: ")) continue;
+        const data = JSON.parse(line.slice(6));
+        await handleStreamEvent(data);
+      }
     }
-    DS?.saveShopDraft(businessNameInput, businessConceptInput);
   } catch (err) {
+    markPipelineError(err.message);
     showError(err.message);
   } finally {
     stopLoading();
     submitBtn.disabled = false;
   }
 });
+
+async function parseResponseJson(res) {
+  const text = await res.text();
+  try {
+    return JSON.parse(text);
+  } catch {
+    if (text.trim().startsWith("<")) {
+      throw new Error(
+        "서버 응답 시간이 초과되었습니다. 30초 영상은 2~3분 걸릴 수 있습니다. 잠시 후 다시 시도해 주세요."
+      );
+    }
+    throw new Error(text.slice(0, 160) || "서버 오류");
+  }
+}
+
+async function handleStreamEvent(data) {
+  if (data.message && loadingStep) loadingStep.textContent = data.message;
+  if (data.step && data.step !== "init" && data.step !== "complete" && data.step !== "error") {
+    updatePipelineStep(data.step, data.message);
+  }
+
+  if (data.step === "step1_done" && data.scenes?.length) {
+    renderSceneCards(data.scenes);
+    startPhonePreview(data.scenes);
+  }
+
+  if (data.step === "complete") {
+    updatePipelineStep("step4_done", data.message);
+    await showResults(data);
+    refreshSubscription();
+    const apiKey = apiKeyInput?.value.trim();
+    if (apiKey) {
+      localStorage.setItem("sf_gemini_key", apiKey);
+      DS?.saveApiKey(apiKey);
+    }
+    DS?.saveShopDraft(businessNameInput, businessConceptInput);
+  } else if (data.step === "error") {
+    markPipelineError(data.message);
+    showError(data.message);
+  }
+}
+
+function renderSceneCards(scenes) {
+  if (!sceneList) return;
+  sceneList.innerHTML = scenes.map((scene) => `
+    <div class="sf-scene-card">
+      <div class="sf-scene-head">
+        <span class="sf-scene-num">Scene ${scene.scene_number}</span>
+        <span class="sf-scene-badge">${t("scene_rendered")}</span>
+      </div>
+      <div class="sf-scene-caption">${escapeHtml(scene.caption)}</div>
+      <div class="sf-scene-narration">${escapeHtml(scene.narration)}</div>
+    </div>
+  `).join("");
+}
+
 
 function startLoading() {
   const steps = t("loading_steps");
@@ -743,14 +883,20 @@ async function showResults(data) {
 
   if (DS) {
     try {
+      updatePipelineStep("step5", "⑤ 기기에 저장 중…");
       const result = await DS.saveVideoToDevice(data.final_video_url, currentVideoMeta);
       if (result.method === "download") {
         statusBanner.textContent += " · 기기에 저장됨";
+        markPipelineSaveDone("PC 다운로드 폴더에 저장됨");
         if (finalVideoPlayer && result.blobUrl) finalVideoPlayer.src = result.blobUrl;
       } else if (result.method === "share") {
         statusBanner.textContent += " · 공유 메뉴에서 저장하세요";
+        markPipelineSaveDone("공유 메뉴 → 파일에 저장");
+      } else if (result.method === "cancelled") {
+        markPipelineSaveDone("다시 저장하려면 버튼을 누르세요");
       }
     } catch (err) {
+      markPipelineSaveDone(`저장 실패: ${err.message}`);
       statusBanner.textContent += ` · 저장: ${err.message}`;
     }
   }

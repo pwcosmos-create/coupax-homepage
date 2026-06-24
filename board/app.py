@@ -1469,11 +1469,81 @@ def shorts_stripe_webhook():
 @app.route("/api/v1/shorts/generate-pipeline", methods=["POST"])
 def shorts_generate_pipeline():
     import shorts_pipeline as sp
+
+    err_resp, ctx = _shorts_prepare_generate()
+    if err_resp:
+        return err_resp
+    data, api_key, row, db = ctx
+
+    try:
+        result = sp.run_pipeline(data, api_key=api_key)
+        _shorts_record_usage(db, row)
+        return jsonify(result)
+    except ValueError as e:
+        return jsonify({"detail": str(e)}), 400
+    except Exception as e:
+        app.logger.exception("shorts_generate_pipeline failed")
+        return jsonify({"detail": f"숏폼 생성 실패: {e}"}), 500
+
+
+@app.route("/api/v1/shorts/generate-stream", methods=["POST"])
+def shorts_generate_stream():
+    """단계별 진행(SSE) — 긴 작업 시 HTML 타임아웃 오류 방지."""
+    import json
+    import queue
+    import threading
+
+    import shorts_pipeline as sp
+
+    err_resp, ctx = _shorts_prepare_generate()
+    if err_resp:
+        return err_resp
+    data, api_key, row, db = ctx
+
+    def event_stream():
+        q: queue.Queue = queue.Queue()
+
+        def on_progress(step: str, message: str, **extra):
+            payload = {"step": step, "message": message}
+            payload.update(extra)
+            q.put(payload)
+
+        def worker():
+            try:
+                result = sp.run_pipeline(data, api_key=api_key, on_progress=on_progress)
+                q.put({
+                    "step": "complete",
+                    "message": result.get("message"),
+                    "meta": result.get("meta"),
+                    "assets": result.get("assets"),
+                    "final_video_url": result.get("final_video_url"),
+                })
+                _shorts_record_usage(db, row)
+            except Exception as e:
+                app.logger.exception("shorts_generate_stream failed")
+                q.put({"step": "error", "message": f"숏폼 생성 실패: {e}"})
+            finally:
+                q.put(None)
+
+        threading.Thread(target=worker, daemon=True).start()
+        yield f"data: {json.dumps({'step': 'init', 'message': '파이프라인을 시작합니다…'}, ensure_ascii=False)}\n\n"
+
+        while True:
+            item = q.get()
+            if item is None:
+                break
+            yield f"data: {json.dumps(item, ensure_ascii=False)}\n\n"
+
+    return Response(event_stream(), mimetype="text/event-stream")
+
+
+def _shorts_prepare_generate():
+    """숏폼 생성 공통 검증. (error_response|None, (data, api_key, row, db))"""
     import shorts_subscription as ss
 
     security_utils.validate_same_origin()
     if request.content_length and request.content_length > security_utils.SHORTS_MAX_BODY_BYTES:
-        return jsonify({"detail": "Request body too large."}), 413
+        return (jsonify({"detail": "Request body too large."}), 413), None
 
     token = request.cookies.get(ss.COOKIE_NAME, "")
     db = get_db()
@@ -1481,32 +1551,32 @@ def shorts_generate_pipeline():
     ok, msg, row = ss.can_generate(db, token)
     if not ok:
         code = 402 if row else 403
-        return jsonify({"detail": msg}), code
+        return (jsonify({"detail": msg}), code), None
 
     data = request.get_json(force=True, silent=True) or {}
     creds = data.get("credentials") or {}
     if not isinstance(creds, dict):
-        return jsonify({"detail": "Invalid credentials."}), 400
+        return (jsonify({"detail": "Invalid credentials."}), 400), None
     api_key = security_utils.clamp_text(creds.get("api_key"), 120)
     if not api_key:
-        return jsonify({"detail": "Google AI API key is required.", "code": "api_key_required"}), 400
+        return (jsonify({"detail": "Google AI API key is required.", "code": "api_key_required"}), 400), None
     if not security_utils.validate_google_api_key_shape(api_key):
-        return jsonify({"detail": "Invalid Google AI API key format."}), 400
+        return (jsonify({"detail": "Invalid Google AI API key format."}), 400), None
 
     if not security_utils.check_shorts_rate_limit():
-        return jsonify(
-            {"detail": f"Please wait {security_utils.SHORTS_MIN_INTERVAL_SEC}s between generations."}
-        ), 429
+        return (
+            jsonify({"detail": f"Please wait {security_utils.SHORTS_MIN_INTERVAL_SEC}s between generations."}),
+            429,
+        ), None
 
-    try:
-        result = sp.run_pipeline(data, api_key=api_key)
+    return None, (data, api_key, row, db)
+
+
+def _shorts_record_usage(db, row) -> None:
+    import shorts_subscription as ss
+
+    if row and row.get("id"):
         ss.record_usage(db, int(row["id"]))
-        return jsonify(result)
-    except ValueError as e:
-        return jsonify({"detail": str(e)}), 400
-    except Exception as e:
-        app.logger.exception("shorts_generate_pipeline failed")
-        return jsonify({"detail": f"숏폼 생성 실패: {e}"}), 500
 
 
 @app.route("/api/v1/shorts/health", methods=["GET"])

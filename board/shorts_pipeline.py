@@ -15,7 +15,7 @@ import base64
 import json
 import time
 from dataclasses import dataclass, field
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Callable
 
 import urllib.request
 import urllib.error
@@ -309,7 +309,16 @@ def _normalize_ratios(scenes: List[SceneScript]) -> None:
 # 메인 파이프라인
 # ─────────────────────────────────────────
 
-def run_pipeline(payload: dict[str, Any], *, api_key: str) -> dict[str, Any]:
+def run_pipeline(
+    payload: dict[str, Any],
+    *,
+    api_key: str,
+    on_progress: Optional[Callable[..., None]] = None,
+) -> dict[str, Any]:
+    def progress(step: str, message: str, **extra: Any) -> None:
+        if on_progress:
+            on_progress(step, message, extra)
+
     if not api_key:
         raise ValueError("AI service unavailable.")
 
@@ -331,6 +340,7 @@ def run_pipeline(payload: dict[str, Any], *, api_key: str) -> dict[str, Any]:
 
     clip_duration = max(5, duration_seconds // max(3, duration_seconds // 10))
 
+    progress("step1", "① 시나리오 작성 중… (Gemini)")
     try:
         blueprint = _gemini_generate_blueprint(
             api_key, business_name, business_concept, video_style, duration_seconds
@@ -346,11 +356,18 @@ def run_pipeline(payload: dict[str, Any], *, api_key: str) -> dict[str, Any]:
             business_name, business_concept, video_style, duration_seconds
         )
     _normalize_ratios(blueprint.scenes)
+    progress(
+        "step1_done",
+        f"① 시나리오 완료 — {len(blueprint.scenes)}개 장면",
+        scenes=[{"scene_number": s.scene_number, "caption": s.caption, "narration": s.narration} for s in blueprint.scenes],
+    )
 
     generated_scenes_assets = []
     timeline_scenes = []
 
+    progress("step2", "② 장면별 이미지 생성 중… (Imagen)")
     for scene in blueprint.scenes:
+        progress("step2_scene", f"② 장면 {scene.scene_number} 이미지 생성 중…", scene_number=scene.scene_number)
         img_b64 = ""
         try:
             if scene.imagen_prompt:
@@ -375,9 +392,13 @@ def run_pipeline(payload: dict[str, Any], *, api_key: str) -> dict[str, Any]:
             "narration": scene.narration,
             "caption": scene.caption,
         })
+        progress("step2_done", f"② 장면 {scene.scene_number} 준비 완료", scene_number=scene.scene_number)
 
+    progress("step3", "③ BGM 생성 중… (Lyria)")
     bgm_b64 = _lyria_generate(api_key, blueprint.bgm_lyria_prompt, duration_seconds)
+    progress("step3_done", "③ BGM 준비 완료" if bgm_b64 else "③ BGM 건너뜀 (TTS만 사용)")
 
+    progress("step4", f"④ {duration_seconds}초 영상 조립 중… (MoviePy)")
     from video_assembler import VideoAssembler
 
     assembler = VideoAssembler()
@@ -386,8 +407,9 @@ def run_pipeline(payload: dict[str, Any], *, api_key: str) -> dict[str, Any]:
         generated_scenes_assets,
         duration_seconds,
     )
+    progress("step4_done", f"④ {duration_seconds}초 MP4 생성 완료", final_video_url=final_video_url)
 
-    return {
+    result = {
         "status": "success",
         "message": f"{duration_seconds}초 숏폼 영상 생성 완료",
         "meta": {
@@ -401,3 +423,5 @@ def run_pipeline(payload: dict[str, Any], *, api_key: str) -> dict[str, Any]:
         },
         "final_video_url": final_video_url,
     }
+    progress("step5", "⑤ 기기에 저장 준비 완료")
+    return result

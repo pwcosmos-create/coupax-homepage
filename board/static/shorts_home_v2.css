@@ -515,6 +515,92 @@ a:hover {
   border-left: 3px solid var(--sf-err);
 }
 
+.sf-pipeline-steps {
+  list-style: none;
+  margin: 0 0 1rem;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.sf-pipeline-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  padding: 0.55rem 0.7rem;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  font-size: 0.82rem;
+  color: var(--sf-muted, #8b8b9e);
+}
+
+.sf-pipeline-step.is-active {
+  border-color: rgba(124, 92, 255, 0.55);
+  background: rgba(124, 92, 255, 0.1);
+  color: var(--sf-text, #f4f4f8);
+}
+
+.sf-pipeline-step.is-done {
+  border-color: rgba(61, 214, 140, 0.35);
+  color: var(--sf-ok, #3dd68c);
+}
+
+.sf-pipeline-step.is-error {
+  border-color: rgba(255, 107, 107, 0.45);
+  color: var(--sf-err, #ff6b6b);
+}
+
+.sf-pipeline-step-num {
+  flex: 0 0 auto;
+  width: 1.35rem;
+  height: 1.35rem;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.72rem;
+  font-weight: 700;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.sf-pipeline-step.is-active .sf-pipeline-step-num {
+  background: rgba(124, 92, 255, 0.35);
+}
+
+.sf-pipeline-step.is-done .sf-pipeline-step-num {
+  background: rgba(61, 214, 140, 0.25);
+}
+
+.sf-pipeline-step-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.sf-pipeline-step-label {
+  font-weight: 600;
+  margin-bottom: 0.1rem;
+}
+
+.sf-pipeline-step-msg {
+  font-size: 0.78rem;
+  opacity: 0.9;
+  word-break: keep-all;
+}
+
+.sf-final-video {
+  margin-bottom: 1rem;
+}
+
+.sf-final-player {
+  width: 100%;
+  max-width: 280px;
+  border-radius: 12px;
+  display: block;
+  margin: 0.5rem auto;
+}
+
 .sf-meta {
   display: flex;
   flex-wrap: wrap;

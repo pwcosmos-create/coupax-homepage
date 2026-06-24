@@ -559,7 +559,8 @@ function loadShopDraft() {
   try {
     const data = JSON.parse(localStorage.getItem(SHOP_DRAFT_KEY));
     if (data) {
-      if (businessNameInput && data.name) businessNameInput.value = data.name;
+      // 매장명(business-name)도 로드하지 않고 초기화
+      // if (businessNameInput && data.name) businessNameInput.value = data.name;
       if (businessConceptInput && data.concept) {
         const example = t("concept_example") || I18N.ko.concept_example || "";
         if (data.concept === example) {

@@ -1352,11 +1352,8 @@ def shorts_page():
         sub = dict(sub)
         sub["plan_name"] = ss.plan_display_name(sub["plan"], page_lang)
     static_dir = os.path.join(app.root_path, "static")
-    shorts_asset_ver = max(
-        int(os.path.getmtime(os.path.join(static_dir, name)))
-        for name in ("shorts.js", "shorts_home.css")
-        if os.path.isfile(os.path.join(static_dir, name))
-    )
+    asset_files = [os.path.join(static_dir, name) for name in ("shorts_v2.js", "shorts_home_v2.css", "shorts.js", "shorts_home.css") if os.path.isfile(os.path.join(static_dir, name))]
+    shorts_asset_ver = max((int(os.path.getmtime(f)) for f in asset_files), default=1) if asset_files else 1
     return render_template(
         "shorts.html",
         plans=ss.list_plans_public(),

@@ -22,10 +22,24 @@ app.config.update(
     SESSION_COOKIE_SAMESITE="Lax",
     SESSION_COOKIE_SECURE=os.environ.get("SESSION_COOKIE_SECURE", "1").strip().lower()
     in ("1", "true", "yes"),
+    MAX_CONTENT_LENGTH=int(os.environ.get("MAX_CONTENT_LENGTH", str(2 * 1024 * 1024))),
 )
 
+if security_utils.using_default_flask_secret(app.secret_key):
+    app.logger.warning(
+        "FLASK_SECRET_KEY is not set or uses the default. Set a strong secret in production."
+    )
 
-_CSRF_EXEMPT_ENDPOINTS = frozenset({"agent_office_local_code_sync"})
+
+@app.after_request
+def _security_after_request(response):
+    return security_utils.apply_security_headers(response)
+
+
+_CSRF_EXEMPT_ENDPOINTS = frozenset({
+    "agent_office_local_code_sync",
+    "shorts_stripe_webhook",
+})
 
 
 @app.before_request
@@ -74,6 +88,10 @@ AGENT_OFFICE_CONTROL_TOKEN = os.environ.get("AGENT_OFFICE_CONTROL_TOKEN", "").st
 AGENT_OFFICE_ACCESS_PASSWORD = (
     os.environ.get("AGENT_OFFICE_ACCESS_PASSWORD", "").strip()
     or AGENT_OFFICE_CONTROL_TOKEN
+)
+SHORTS_ADMIN_PASSWORD = (
+    os.environ.get("SHORTS_ADMIN_PASSWORD", "").strip()
+    or AGENT_OFFICE_ACCESS_PASSWORD
 )
 
 _SCRIPTS_DIR = os.path.join(os.path.dirname(__file__), "scripts")
@@ -884,6 +902,14 @@ def _office_session_ok() -> bool:
     return session.get("agent_office_auth") is True
 
 
+def _shorts_admin_ok() -> bool:
+    return session.get("shorts_admin_auth") is True or _office_session_ok()
+
+
+def _shorts_admin_configured() -> bool:
+    return bool(SHORTS_ADMIN_PASSWORD)
+
+
 def _blog_write_allowed() -> bool:
     if security_utils.blog_write_open():
         return True
@@ -1209,6 +1235,10 @@ def init_db():
             )
         ''')
         db.commit()
+    import shorts_subscription as _ss
+
+    with sqlite3.connect(DB_PATH) as db:
+        _ss.ensure_tables(db)
 
 
 @app.context_processor
@@ -1299,6 +1329,246 @@ def index():
         qa_topics=HOME_QA_TOPICS,
         gemma24_author=home_qa_reply.GEMMA24_AUTHOR,
     )
+
+
+@app.route("/shorts")
+@app.route("/숏폼공장")
+def shorts_page():
+    import shorts_locale as sl
+    import shorts_subscription as ss
+
+    site_base = os.getenv("SHORTS_SITE_URL", "https://coupax.co.kr").rstrip("/")
+    page_lang = sl.detect_locale(request)
+    locale_meta = sl.meta_for(page_lang)
+    detected_country = sl._country_from_request(request)
+    token = request.cookies.get(ss.COOKIE_NAME, "")
+    db = get_db()
+    ss.ensure_tables(db)
+    sub = ss.get_subscriber_by_token(db, token)
+    if sub:
+        sub = ss._sync_daily_usage(db, sub)
+    sub = ss.subscriber_status(sub)
+    if sub and sub.get("active"):
+        sub = dict(sub)
+        sub["plan_name"] = ss.plan_display_name(sub["plan"], page_lang)
+    static_dir = os.path.join(app.root_path, "static")
+    shorts_asset_ver = max(
+        int(os.path.getmtime(os.path.join(static_dir, name)))
+        for name in ("shorts.js", "shorts_home.css")
+        if os.path.isfile(os.path.join(static_dir, name))
+    )
+    return render_template(
+        "shorts.html",
+        plans=ss.list_plans_public(),
+        stripe_enabled=ss.stripe_enabled() or ss.DEV_SUBSCRIBE,
+        subscription=sub,
+        now_year=datetime.now().year,
+        canonical_shorts_url=f"{site_base}/shorts",
+        page_lang=page_lang,
+        locale_meta=locale_meta,
+        detected_country=detected_country,
+        shorts_asset_ver=shorts_asset_ver,
+    )
+
+
+@app.route("/api/v1/shorts/locale", methods=["GET"])
+def shorts_locale_api():
+    import shorts_locale as sl
+
+    country = sl._country_from_request(request)
+    accept = sl._lang_from_accept_language(request)
+    return jsonify(
+        {
+            "locale": sl.detect_locale(request),
+            "accept_language": accept,
+            "country": country,
+            "ip": sl._client_ip(request),
+            "geo_enabled": sl._GEO_ENABLED,
+            "supported": sorted(sl.SUPPORTED),
+        }
+    )
+
+
+@app.route("/shorts/success")
+@app.route("/숏폼공장/success")
+def shorts_success():
+    import shorts_subscription as ss
+
+    token = request.args.get("token", "")
+    session_id = request.args.get("session_id", "")
+    if session_id:
+        token = ss.fulfill_checkout_session(session_id) or token
+    resp = redirect(url_for("shorts_page", _anchor="studio"))
+    if token:
+        resp.set_cookie(
+            ss.COOKIE_NAME,
+            token,
+            max_age=60 * 60 * 24 * 400,
+            httponly=True,
+            secure=app.config.get("SESSION_COOKIE_SECURE", True),
+            samesite="Lax",
+        )
+    return resp
+
+
+@app.route("/api/v1/shorts/subscription", methods=["GET"])
+def shorts_subscription_status():
+    import shorts_subscription as ss
+
+    token = request.cookies.get(ss.COOKIE_NAME, "")
+    db = get_db()
+    ss.ensure_tables(db)
+    row = ss.get_subscriber_by_token(db, token)
+    if row:
+        row = ss._sync_daily_usage(db, row)
+    st = ss.subscriber_status(row)
+    return jsonify({"subscription": st})
+
+
+@app.route("/api/v1/shorts/checkout", methods=["POST"])
+def shorts_checkout():
+    import shorts_subscription as ss
+
+    data = request.get_json(force=True, silent=True) or {}
+    plan_id = (data.get("plan") or "").strip().lower()
+    email = (data.get("email") or "").strip().lower()
+    plan = ss.PLANS.get(plan_id)
+    if plan and plan.get("free"):
+        token = request.cookies.get(ss.COOKIE_NAME, "")
+        db = get_db()
+        ss.ensure_tables(db)
+        row = ss.get_subscriber_by_token(db, token) if token else None
+        if row:
+            row = ss._sync_daily_usage(db, row)
+            st = ss.subscriber_status(row)
+            if st and st.get("active"):
+                return jsonify(
+                    {"checkout_url": url_for("shorts_page", _external=True, _anchor="studio")}
+                )
+    try:
+        url = ss.create_checkout_session(
+            plan_id,
+            email,
+            success_url=url_for("shorts_success", _external=True),
+            cancel_url=url_for("shorts_page", _external=True, _anchor="pricing"),
+        )
+        return jsonify({"checkout_url": url})
+    except ValueError as e:
+        return jsonify({"detail": str(e)}), 400
+
+
+@app.route("/api/v1/shorts/webhook/stripe", methods=["POST"])
+def shorts_stripe_webhook():
+    import shorts_subscription as ss
+
+    try:
+        ss.handle_stripe_webhook(request.get_data(), request.headers.get("Stripe-Signature", ""))
+        return jsonify({"ok": True})
+    except Exception as e:
+        app.logger.exception("stripe webhook")
+        return jsonify({"detail": str(e)}), 400
+
+
+@app.route("/api/v1/shorts/generate-pipeline", methods=["POST"])
+def shorts_generate_pipeline():
+    import shorts_pipeline as sp
+    import shorts_subscription as ss
+
+    security_utils.validate_same_origin()
+    if request.content_length and request.content_length > security_utils.SHORTS_MAX_BODY_BYTES:
+        return jsonify({"detail": "Request body too large."}), 413
+
+    token = request.cookies.get(ss.COOKIE_NAME, "")
+    db = get_db()
+    ss.ensure_tables(db)
+    ok, msg, row = ss.can_generate(db, token)
+    if not ok:
+        code = 402 if row else 403
+        return jsonify({"detail": msg}), code
+
+    data = request.get_json(force=True, silent=True) or {}
+    creds = data.get("credentials") or {}
+    if not isinstance(creds, dict):
+        return jsonify({"detail": "Invalid credentials."}), 400
+    api_key = security_utils.clamp_text(creds.get("api_key"), 120)
+    if not api_key:
+        return jsonify({"detail": "Google AI API key is required.", "code": "api_key_required"}), 400
+    if not security_utils.validate_google_api_key_shape(api_key):
+        return jsonify({"detail": "Invalid Google AI API key format."}), 400
+
+    if not security_utils.check_shorts_rate_limit():
+        return jsonify(
+            {"detail": f"Please wait {security_utils.SHORTS_MIN_INTERVAL_SEC}s between generations."}
+        ), 429
+
+    try:
+        result = sp.run_pipeline(data, api_key=api_key)
+        ss.record_usage(db, int(row["id"]))
+        return jsonify(result)
+    except ValueError as e:
+        return jsonify({"detail": str(e)}), 400
+    except Exception:
+        app.logger.exception("shorts_generate_pipeline failed")
+        return jsonify({"detail": "Pipeline error. Please try again."}), 500
+
+
+@app.route("/shorts/admin", methods=["GET", "POST"])
+def shorts_admin_page():
+    import shorts_settings as sset
+
+    if not _shorts_admin_configured():
+        return render_template("shorts_admin.html", access_configured=False), 503
+
+    if request.method == "POST" and not _shorts_admin_ok():
+        if not security_utils.check_office_login_allowed():
+            flash("로그인 시도가 너무 많습니다. 잠시 후 다시 시도해 주세요.", "error")
+        else:
+            pw = request.form.get("password", "")
+            if SHORTS_ADMIN_PASSWORD and secrets.compare_digest(pw, SHORTS_ADMIN_PASSWORD):
+                security_utils.clear_office_login_failures()
+                session["shorts_admin_auth"] = True
+                session.permanent = True
+                return redirect(url_for("shorts_admin_page"))
+            security_utils.record_office_login_failure()
+            flash("비밀번호가 올바르지 않습니다.", "error")
+
+    if not _shorts_admin_ok():
+        return render_template("shorts_admin.html", access_configured=True, logged_in=False)
+
+    return render_template(
+        "shorts_admin.html",
+        access_configured=True,
+        logged_in=True,
+        key_info=sset.key_info(),
+    )
+
+
+@app.route("/shorts/admin/logout", methods=["POST"])
+def shorts_admin_logout():
+    session.pop("shorts_admin_auth", None)
+    return redirect(url_for("shorts_admin_page"))
+
+
+@app.route("/api/v1/shorts/admin/gemini-key", methods=["GET", "POST"])
+def shorts_admin_gemini_key():
+    import shorts_settings as sset
+
+    if not _shorts_admin_ok():
+        return jsonify({"detail": "Admin login required."}), 403
+
+    if request.method == "GET":
+        return jsonify({"key": sset.key_info()})
+
+    security_utils.validate_same_origin()
+    data = request.get_json(force=True, silent=True) or {}
+    api_key = (data.get("api_key") or "").strip()
+    if not api_key:
+        return jsonify({"detail": "API key is required."}), 400
+    if not security_utils.validate_google_api_key_shape(api_key):
+        return jsonify({"detail": "Invalid Google AI API key format."}), 400
+
+    sset.save_google_api_key(api_key)
+    return jsonify({"ok": True, "key": sset.key_info()})
 
 
 def _request_wants_json() -> bool:
@@ -2337,6 +2607,70 @@ def saju_reading_compose():
         mimetype="application/json; charset=utf-8",
         headers={"Cache-Control": "no-cache"},
     )
+
+
+@app.route("/api/gemma/knowledge-hits")
+def gemma_knowledge_hits():
+    """RAG 매칭 미리보기 — Connect AI Lab 포함 gemma_knowledge."""
+    q = (request.args.get("q") or request.args.get("query") or "").strip()
+    topic = (request.args.get("topic") or "").strip()
+    if len(q) < 2:
+        return Response(
+            json.dumps({"ok": False, "error": "q required"}, ensure_ascii=False),
+            status=400,
+            mimetype="application/json; charset=utf-8",
+        )
+    import gemma24_local
+
+    domain = gemma24_local.infer_rag_domain(q, topic)
+    cards = gemma24_local.search_injected_knowledge(
+        q, topic, domain=domain, public_only=True, limit=5
+    )
+    return Response(
+        json.dumps(
+            {
+                "ok": True,
+                "domain": domain,
+                "count": len(cards),
+                "sources": gemma24_local.format_knowledge_sources(cards, max_titles=5),
+                "hits": [
+                    {
+                        "id": c.get("id"),
+                        "title": c.get("title"),
+                        "summary": (c.get("summary") or "")[:240],
+                        "source": c.get("source"),
+                        "tags": (c.get("tags") or [])[:8],
+                    }
+                    for c in cards
+                ],
+            },
+            ensure_ascii=False,
+        ),
+        mimetype="application/json; charset=utf-8",
+        headers={"Cache-Control": "no-cache"},
+    )
+
+
+@app.route("/api/agents/office/connect-ai-lab-sync", methods=["POST"])
+@require_office_access
+def agent_office_connect_ai_lab_sync():
+    """Connect AI Lab brain + 문서 → Coupax RAG (사무실 수동)."""
+    payload = request.get_json(silent=True) or {}
+    skip_swiki = str(payload.get("skip_swiki", "")).lower() in ("1", "true", "yes")
+    try:
+        import sync_connect_ai_lab
+
+        report = sync_connect_ai_lab.cmd_full(skip_swiki=skip_swiki)
+        return Response(
+            json.dumps({"ok": True, "report": report}, ensure_ascii=False),
+            mimetype="application/json; charset=utf-8",
+        )
+    except Exception as e:
+        return Response(
+            json.dumps({"ok": False, "error": str(e)[:300]}, ensure_ascii=False),
+            status=500,
+            mimetype="application/json; charset=utf-8",
+        )
 
 
 @app.route("/api/agents/office/saju-learn/export.json")

@@ -221,6 +221,18 @@ def search_injected_knowledge(
     return [w for _, w in fallback[:limit]]
 
 
+def format_knowledge_sources(cards: list[dict], *, max_titles: int = 3) -> str:
+    """RAG 출처 — 답변 하단에 표시."""
+    titles: list[str] = []
+    for w in cards[:max_titles]:
+        t = (w.get("title") or "").strip()
+        if t and t not in titles:
+            titles.append(t[:60])
+    if not titles:
+        return ""
+    return "참고 지식: " + " · ".join(titles)
+
+
 def format_knowledge_context(cards: list[dict], *, domain: str = wiki_store.DOMAIN_FINANCE) -> str:
     if not cards:
         hint = "일반 참고 상식 범위에서 답변하세요."
@@ -307,7 +319,12 @@ def gemma_local_reply(
         with urllib.request.urlopen(req, timeout=timeout) as resp:
             data = json.loads(resp.read().decode("utf-8"))
         text = (data.get("response") or "").strip()
-        return text if len(text) >= 20 else None
+        if len(text) < 20:
+            return None
+        src = format_knowledge_sources(cards)
+        if src and src not in text:
+            text = text.rstrip() + "\n\n" + src
+        return text
     except (
         urllib.error.URLError,
         TimeoutError,
@@ -363,4 +380,7 @@ def knowledge_snippet_reply(
         paras.append(
             "더 구체적인 금액·기간·상품명을 알려 주시면 댓글로 이어서 설명드리겠습니다."
         )
+    src = format_knowledge_sources(cards)
+    if src:
+        paras.append(src)
     return "\n\n".join(paras)

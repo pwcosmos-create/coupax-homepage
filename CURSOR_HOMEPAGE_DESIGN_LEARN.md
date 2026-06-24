@@ -1,14 +1,8 @@
 # Cursor — 홈페이지 디자인 학습부
 
-갱신: 2026-06-05 19:55 · 확정 93건
+갱신: 2026-06-19 21:55 · 확정 94건
 
 다음 홈페이지 제작 시 재사용할 디자인·핸드오프 카드 요약.
-
-## #70 웹리서치·헤더 sticky — 스크롤 축소 sticky vs 비고정 헤더
-
-【웹 리서치 · 2026-06-05】 검색: sticky header shrink on scroll UX 외부 검색 결과 없음 — 내장 축·위원회 규칙만으로 토론. 【주제】 헤더 sticky: 스크롤 축소 sticky vs 비고정 헤더 【브랜드】 Midnight #0A1931 / Cop…
-
-태그: 토큰, 타이포, 레이아웃, 그리드, 컴포넌트, CTA, Copper, Midnight, Accent, style.css, 핸드오프, 접근성
 
 ## #71 토론·빈 상태 — 일러스트+CTA vs 텍스트만
 
@@ -303,3 +297,9 @@
 【웹 리서치 · 2026-06-05】 검색: knowledge graph network visualization UI dark 외부 검색 결과 없음 — 내장 축·위원회 규칙만으로 토론. 【주제】 지식 네트워크: 노드·엣지 그래프 vs 리스트+태그 【브랜드】 Midnight #0A1931…
 
 태그: 토큰, 타이포, 레이아웃, 그리드, 반응형, 375, 컴포넌트, CTA, Copper, Midnight, Accent, style.css
+
+## #120 디자인 레퍼런스 · MasterClass Midnight
+
+# MasterClass — Style Reference > Midnight Stage Presence **Theme:** dark **Source:** https://www.masterclass.com **Category:** education / premium streaming **…
+
+태그: Midnight

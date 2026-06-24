@@ -204,8 +204,11 @@
                 <p class="sf-field-note" data-i18n="api_key_billing_note">API 사용 요금은 Google 계정(본인)에 청구됩니다.</p>
               </details>
 
-              <label for="business-name" data-i18n="label_shop">매장명</label>
-              <input type="text" id="business-name" class="sf-input" required>
+              <div class="sf-label-row">
+                <label for="business-name" data-i18n="label_shop">매장명 (또는 주요 키워드)</label>
+                <button type="button" id="auto-concept-btn" class="sf-btn sf-btn-sm sf-btn-ghost">✨ AI 자동 작성</button>
+              </div>
+              <input type="text" id="business-name" class="sf-input" required placeholder="예: 뚜뚜 미용실, 40년 경력, 저렴한 가격">
 
               <div class="sf-concept-block">
                 <div class="sf-label-row">

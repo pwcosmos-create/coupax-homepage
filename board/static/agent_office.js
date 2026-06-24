@@ -2067,6 +2067,40 @@
   const sajuRefresh = document.getElementById("saju-learn-refresh-btn");
   if (sajuRefresh) sajuRefresh.addEventListener("click", refreshSajuLearn);
 
+  const labSyncBtn = document.getElementById("btn-connect-ai-lab-sync");
+  const labSyncStatus = document.getElementById("connect-ai-lab-sync-status");
+  if (labSyncBtn) {
+    labSyncBtn.addEventListener("click", function () {
+      labSyncBtn.disabled = true;
+      if (labSyncStatus) labSyncStatus.textContent = "동기화 중…";
+      fetch("/api/agents/office/connect-ai-lab-sync", {
+        method: "POST",
+        credentials: "same-origin",
+        headers: csrfHeaders({ "Content-Type": "application/json" }),
+        body: JSON.stringify({ skip_swiki: false }),
+      })
+        .then(function (r) {
+          return r.json();
+        })
+        .then(function (data) {
+          if (!data.ok) throw new Error(data.error || "sync failed");
+          const brain = (data.report && data.report.brain) || {};
+          const added = brain.added != null ? brain.added : "?";
+          if (labSyncStatus) {
+            labSyncStatus.textContent =
+              "완료 — brain +" + added + "건 (로컬/서버 Lab 경로 필요)";
+          }
+          refreshKnowledge();
+        })
+        .catch(function (err) {
+          if (labSyncStatus) labSyncStatus.textContent = "실패: " + (err.message || err);
+        })
+        .finally(function () {
+          labSyncBtn.disabled = false;
+        });
+    });
+  }
+
   syncModeCheckboxes();
   startRealtime();
 })();

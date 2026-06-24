@@ -34,6 +34,7 @@
     <nav class="top-nav">
       <a href="{{ url_for('index') }}">홈</a>
       <a href="{{ url_for('blog') }}">블로그</a>
+      <a href="{{ url_for('shorts_page') }}"{% if request.endpoint == 'shorts_page' %} class="is-active"{% endif %}>숏폼공장</a>
       {% if etf_ops_enabled %}
       <a href="{{ url_for('etf_hub') }}">ETF·월배당</a>
       <a href="{{ url_for('etf_monthly_sheet') }}">월배당 시트</a>

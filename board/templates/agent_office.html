@@ -62,6 +62,12 @@
     {% include '_csrf_field.html' %}
     <button type="submit" class="btn btn-gray btn-sm">사무실 나가기</button>
   </form>
+  <p class="agent-office-meta" style="margin-top:0.75rem">
+    <button type="button" class="btn btn-sm btn-primary" id="btn-connect-ai-lab-sync" title="Connect AI Lab brain.jsonl + CURSOR 문서 → RAG">
+      Connect AI Lab 동기화
+    </button>
+    <span id="connect-ai-lab-sync-status" class="control-hint"></span>
+  </p>
 </section>
 
 <nav class="office-division-tabs" aria-label="사업부 팀장 선택">

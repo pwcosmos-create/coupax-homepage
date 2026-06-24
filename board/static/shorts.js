@@ -819,3 +819,51 @@ if (window.location.hash) {
   const target = document.querySelector(window.location.hash);
   target?.scrollIntoView({ behavior: "smooth" });
 }
+
+document.getElementById("auto-concept-btn")?.addEventListener("click", async () => {
+  const shopKeywords = document.getElementById("business-name").value.trim();
+  const apiKey = document.getElementById("api-key")?.value.trim();
+  const conceptInput = document.getElementById("business-concept");
+  const btn = document.getElementById("auto-concept-btn");
+
+  if (!shopKeywords) {
+    alert("매장명(또는 키워드)을 먼저 입력해주세요.");
+    document.getElementById("business-name").focus();
+    return;
+  }
+  if (!apiKey) {
+    alert("위에서 Gemini API 키를 먼저 입력해주세요.");
+    document.getElementById("api-key")?.focus();
+    return;
+  }
+
+  const originalText = btn.textContent;
+  btn.textContent = "작성 중...";
+  btn.disabled = true;
+
+  try {
+    const prompt = `다음 매장/키워드 정보를 바탕으로 숏폼 영상 제작을 위한 매장 컨셉 및 핵심 어필 포인트를 3~5문장으로 매력적이고 자연스럽게 작성해줘. 줄바꿈을 적절히 사용해줘.\n\n매장/키워드: ${shopKeywords}`;
+    const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        contents: [{ parts: [{ text: prompt }] }]
+      })
+    });
+
+    if (!res.ok) throw new Error("API 요청 실패");
+    const data = await res.json();
+    const text = data.candidates?.[0]?.content?.parts?.[0]?.text;
+    if (text) {
+      conceptInput.value = text.trim();
+      if (typeof saveShopDraft === "function") saveShopDraft();
+    }
+  } catch (err) {
+    alert("AI 작성에 실패했습니다. API 키가 유효한지 확인해주세요.");
+    console.error(err);
+  } finally {
+    btn.textContent = originalText;
+    btn.disabled = false;
+  }
+});
+

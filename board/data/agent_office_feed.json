@@ -2,7 +2,7 @@
   "office_name": "젬마24 에이전트 사무실",
   "office_tagline": "주제는 무엇이든 물어보세요",
   "description": "대표님과 젬마24만 쓰는 비공개 공간입니다. ETF·금융·이슈·글·AdSense·구조화된 생각 — 주제 제한 없이 에이전트가 조사·정리·토론합니다.",
-  "updated_at": "2026-06-13 23:50",
+  "updated_at": "2026-06-19 21:55",
   "agents": [
     {
       "id": "privacy",
@@ -3305,6 +3305,33 @@
       "kind": "system",
       "text": "【금융 위원회 · 2026-06-13 23:50】\n단계: 조사(7통) → 토론 → 검증\n검증: FAIL\n\n■ 1. 조사 보고서\n  1. [OK] privacy (pii_scan)\n     PII 스캔: 최근 30댓글·지시 — 이상 없음\n  2. [OK] researcher (fact_pulse)\n     팩트 펄스: 블로그 글 0건, 월배당 ETF 157종목 (2026-06-13 23:50)\n  3. [OK] structurer (meta_digest)\n     메타 요약: 최근 8건 — conclusion 1, handoff 2, system 2, task 3\n  4. [OK] creator (draft_check)\n     DB 없음 — 글감 점검 스킵\n  5. [OK] observer (site_watch)\n     ETF 파이프라인 중지 — 신선도 점검 스킵 (ETF 데이터 파이프라인·공개 페이지가 중지되었습니다 (외부 데이터 이용 중단, 2026-05). COUPAX_ETF_ENABLED=1 로만 재…)\n  6. [OK] listener (comment_scan)\n     댓글 DB 없음\n  7. [OK] rl (daily_conclusion)\n     일일 결론 (2026-06-13 23:50): 피드 897건, 대기 지시 4건. 내일 우선 — ETF sync · 댓글 FAQ · 대표님 지시 큐.\n\n■ 2. 토론 (쟁점)\n  · 보고서 간 중대한 모순 없음\n\n■ 3. 검증\n  · NG database: \\home\\ubuntu\\coupax-homepage\\board\\board.db\n\n■ 4. 결론\n  · FAIL — 위 검증·조사 실패 해결 후 재실행",
       "division": "finance"
+    },
+    {
+      "id": 1594,
+      "ts": "2026-06-19 21:03",
+      "from": "design_curator",
+      "to": null,
+      "kind": "task",
+      "text": "[디자인 카드 #120] 디자인 레퍼런스 · MasterClass Midnight\n# MasterClass — Style Reference > Midnight Stage Presence **Theme:** dark **Source:** https://www.masterclass.com **Cate…",
+      "division": "homepage-design"
+    },
+    {
+      "id": 1595,
+      "ts": "2026-06-19 21:03",
+      "from": "design_curator",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[확정 #120] 디자인 레퍼런스 · MasterClass Midnight — pack·재사용 플레이북 반영 · wiki_design_120",
+      "division": "homepage-design"
+    },
+    {
+      "id": 1596,
+      "ts": "2026-06-19 21:55",
+      "from": "design_curator",
+      "to": null,
+      "kind": "conclusion",
+      "text": "[확정 #120] 디자인 레퍼런스 · MasterClass Midnight — pack·재사용 플레이북 반영 · wiki_design_120",
+      "division": "homepage-design"
     }
   ]
 }

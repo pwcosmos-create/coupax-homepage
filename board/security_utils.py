@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import os
+import re
 import secrets
 import time
 from collections import defaultdict
@@ -49,7 +50,29 @@ _POST_ALLOWED_ATTRS = {
 COMMENT_MIN_INTERVAL_SEC = max(
     5, int(os.getenv("COMMENT_MIN_INTERVAL_SEC", "30") or "30")
 )
+SHORTS_MIN_INTERVAL_SEC = max(
+    30, int(os.getenv("SHORTS_MIN_INTERVAL_SEC", "60") or "60")
+)
+SHORTS_MAX_BODY_BYTES = max(
+    4096, int(os.getenv("SHORTS_MAX_BODY_BYTES", "32768") or "32768")
+)
+ALLOWED_ORIGIN_HOSTS = tuple(
+    h.strip().lower()
+    for h in os.getenv(
+        "ALLOWED_ORIGIN_HOSTS",
+        "coupax.co.kr,www.coupax.co.kr,localhost,127.0.0.1",
+    ).split(",")
+    if h.strip()
+)
+SECURITY_HEADERS = {
+    "X-Frame-Options": "SAMEORIGIN",
+    "X-Content-Type-Options": "nosniff",
+    "Referrer-Policy": "strict-origin-when-cross-origin",
+    "Permissions-Policy": "geolocation=(), microphone=(), camera=()",
+    "X-Permitted-Cross-Domain-Policies": "none",
+}
 _comment_last_by_ip: dict[str, float] = defaultdict(float)
+_shorts_last_by_ip: dict[str, float] = defaultdict(float)
 
 
 def client_ip() -> str:
@@ -63,14 +86,25 @@ def ensure_csrf_token() -> str:
     return session["csrf_token"]
 
 
-def validate_csrf_request() -> None:
-    ensure_csrf_token()
-    expected = session.get("csrf_token") or ""
-    token = request.form.get("csrf_token") or request.headers.get("X-CSRF-Token")
+def _csrf_token_from_request() -> str:
+    token = request.form.get("csrf_token") or ""
+    if not token:
+        token = (
+            request.headers.get("X-CSRF-Token")
+            or request.headers.get("X-CSRFToken")
+            or ""
+        )
     if request.is_json:
         body = request.get_json(silent=True) or {}
         if isinstance(body, dict):
-            token = token or body.get("csrf_token")
+            token = token or str(body.get("csrf_token") or "")
+    return str(token)
+
+
+def validate_csrf_request() -> None:
+    ensure_csrf_token()
+    expected = session.get("csrf_token") or ""
+    token = _csrf_token_from_request()
     if not token or not secrets.compare_digest(str(token), str(expected)):
         abort(403)
 
@@ -102,18 +136,72 @@ def safe_post_html(value) -> Markup:
 
 
 def check_comment_rate_limit() -> bool:
+    return _check_rate_limit(_comment_last_by_ip, COMMENT_MIN_INTERVAL_SEC)
+
+
+def check_shorts_rate_limit() -> bool:
+    return _check_rate_limit(_shorts_last_by_ip, SHORTS_MIN_INTERVAL_SEC)
+
+
+def _check_rate_limit(store: dict[str, float], min_interval: int) -> bool:
     ip = client_ip()
     now = time.time()
-    last = _comment_last_by_ip.get(ip, 0.0)
-    if last and (now - last) < COMMENT_MIN_INTERVAL_SEC:
+    last = store.get(ip, 0.0)
+    if last and (now - last) < min_interval:
         return False
-    _comment_last_by_ip[ip] = now
-    if len(_comment_last_by_ip) > 5000:
+    store[ip] = now
+    if len(store) > 5000:
         cutoff = now - 3600
-        stale = [k for k, v in _comment_last_by_ip.items() if v < cutoff]
+        stale = [k for k, v in store.items() if v < cutoff]
         for k in stale:
-            del _comment_last_by_ip[k]
+            del store[k]
     return True
+
+
+def validate_same_origin() -> None:
+    """브라우저 cross-site POST 완화. Origin/Referer가 있으면 허용 호스트만 통과."""
+    origin = (request.headers.get("Origin") or "").strip()
+    referer = (request.headers.get("Referer") or "").strip()
+    if not origin and not referer:
+        return
+    for value in (origin, referer):
+        if not value:
+            continue
+        host = _host_from_url(value)
+        if host and host not in ALLOWED_ORIGIN_HOSTS:
+            abort(403)
+
+
+def _host_from_url(value: str) -> str:
+    value = value.strip().lower()
+    if "://" in value:
+        value = value.split("://", 1)[1]
+    return value.split("/", 1)[0].split(":", 1)[0]
+
+
+def apply_security_headers(response):
+    for key, val in SECURITY_HEADERS.items():
+        if key not in response.headers:
+            response.headers[key] = val
+    return response
+
+
+def clamp_text(value: object, max_len: int) -> str:
+    text = str(value or "").strip()
+    if len(text) > max_len:
+        text = text[:max_len]
+    return text
+
+
+_API_KEY_RE = re.compile(r"^AIza[0-9A-Za-z_-]{20,}$")
+
+
+def validate_google_api_key_shape(api_key: str) -> bool:
+    return bool(_API_KEY_RE.match(api_key))
+
+
+def using_default_flask_secret(secret: str) -> bool:
+    return secret in ("", "board-secret-key-2026", "dev-secret-change-me")
 
 
 def blog_write_open() -> bool:

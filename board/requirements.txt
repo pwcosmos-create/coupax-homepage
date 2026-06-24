@@ -1,3 +1,4 @@
 Flask
 gunicorn
 bleach
+stripe>=8.0,<10

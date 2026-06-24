@@ -392,11 +392,26 @@ def run_pipeline(
             "narration": scene.narration,
             "caption": scene.caption,
         })
-        progress("step2_done", f"② 장면 {scene.scene_number} 준비 완료", scene_number=scene.scene_number)
+        scene_preview = {
+            "scene_number": scene.scene_number,
+            "caption": scene.caption,
+            "narration": scene.narration,
+        }
+        if img_b64 and img_b64 not in ("MOCK_IMAGE", ""):
+            scene_preview["image_b64"] = img_b64
+        progress(
+            "step2_done",
+            f"② 장면 {scene.scene_number} 준비 완료",
+            scene=scene_preview,
+        )
 
     progress("step3", "③ BGM 생성 중… (Lyria)")
     bgm_b64 = _lyria_generate(api_key, blueprint.bgm_lyria_prompt, duration_seconds)
-    progress("step3_done", "③ BGM 준비 완료" if bgm_b64 else "③ BGM 건너뜀 (TTS만 사용)")
+    progress(
+        "step3_done",
+        "③ BGM 준비 완료" if bgm_b64 else "③ BGM 건너뜀 (TTS만 사용)",
+        has_bgm=bool(bgm_b64),
+    )
 
     progress("step4", f"④ {duration_seconds}초 영상 조립 중… (MoviePy)")
     from video_assembler import VideoAssembler

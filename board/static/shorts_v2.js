@@ -627,9 +627,92 @@ function initPipelineSteps() {
       <div class="sf-pipeline-step-body">
         <div class="sf-pipeline-step-label">${s.label}</div>
         <div class="sf-pipeline-step-msg" id="pipe-msg-${s.id}">대기 중</div>
+        <div class="sf-pipeline-step-result" id="pipe-result-${s.id}" hidden></div>
       </div>
     </li>`
   ).join("");
+}
+
+function showStepResult(stepId) {
+  const el = document.getElementById(`pipe-result-${stepId}`);
+  if (el) el.hidden = false;
+}
+
+function renderStep1Result(scenes) {
+  const el = document.getElementById("pipe-result-s1");
+  if (!el || !scenes?.length) return;
+  el.innerHTML = `
+    <div class="sf-step-scenes">
+      ${scenes
+        .map(
+          (scene) => `
+        <div class="sf-scene-card sf-scene-card-compact">
+          <div class="sf-scene-head">
+            <span class="sf-scene-num">Scene ${scene.scene_number}</span>
+            <span class="sf-scene-badge">시나리오</span>
+          </div>
+          <div class="sf-scene-caption">${escapeHtml(scene.caption)}</div>
+          <div class="sf-scene-narration">${escapeHtml(scene.narration)}</div>
+        </div>`
+        )
+        .join("")}
+    </div>`;
+  showStepResult("s1");
+  stopLoading();
+}
+
+function appendStep2Image(scene) {
+  const el = document.getElementById("pipe-result-s2");
+  if (!el || !scene) return;
+  if (!el.querySelector(".sf-step-image-grid")) {
+    el.innerHTML = '<div class="sf-step-image-grid"></div>';
+    showStepResult("s2");
+  }
+  const grid = el.querySelector(".sf-step-image-grid");
+  const imgHtml = scene.image_b64
+    ? `<img src="data:image/png;base64,${scene.image_b64}" alt="Scene ${scene.scene_number}" loading="lazy" />`
+    : `<div class="sf-step-image-placeholder">장면 ${scene.scene_number}</div>`;
+  grid.insertAdjacentHTML(
+    "beforeend",
+    `<div class="sf-step-image-card">
+      ${imgHtml}
+      <p class="sf-step-image-caption">${escapeHtml(scene.caption || "")}</p>
+    </div>`
+  );
+}
+
+function renderStep3Result(hasBgm, message) {
+  const el = document.getElementById("pipe-result-s3");
+  if (!el) return;
+  el.innerHTML = `
+    <div class="sf-step-bgm ${hasBgm ? "has-bgm" : "no-bgm"}">
+      <span class="sf-step-bgm-icon">${hasBgm ? "🎵" : "🎙️"}</span>
+      <span>${escapeHtml(message || "")}</span>
+    </div>`;
+  showStepResult("s3");
+}
+
+function renderStep4Result(url) {
+  const el = document.getElementById("pipe-result-s4");
+  if (!el || !url) return;
+  currentVideoUrl = url;
+  el.innerHTML = `<video class="sf-step-video" controls playsinline src="${escapeHtml(url)}"></video>`;
+  showStepResult("s4");
+  if (finalVideoContainer) finalVideoContainer.style.display = "none";
+}
+
+function renderStep5Result(message, showDownload = false) {
+  const el = document.getElementById("pipe-result-s5");
+  if (!el) return;
+  el.innerHTML = `
+    <p class="sf-step-save-msg">${escapeHtml(message || "저장 완료")}</p>
+    ${showDownload ? '<button type="button" class="sf-btn sf-btn-primary sf-btn-sm sf-step-save-btn" id="pipe-save-btn">기기에 다시 저장</button>' : ""}`;
+  showStepResult("s5");
+  if (showDownload && DS) {
+    document.getElementById("pipe-save-btn")?.addEventListener("click", () => {
+      DS.saveVideoToDevice(currentVideoUrl, currentVideoMeta);
+    });
+  }
 }
 
 function updatePipelineStep(serverStep, message) {
@@ -646,7 +729,12 @@ function updatePipelineStep(serverStep, message) {
       el.classList.add("is-done");
       if (msgEl && msgEl.textContent === "대기 중") msgEl.textContent = "완료";
     } else if (i === idx) {
-      el.classList.add(serverStep.endsWith("_done") || serverStep === "step5" ? "is-done" : "is-active");
+      const step2InProgress = /^step2(_scene|_done)?$/.test(serverStep) || serverStep === "step2";
+      if (step2InProgress) {
+        el.classList.add("is-active");
+      } else {
+        el.classList.add(serverStep.endsWith("_done") || serverStep === "step5" ? "is-done" : "is-active");
+      }
       if (msgEl) msgEl.textContent = message || "진행 중…";
     }
   });
@@ -773,13 +861,30 @@ async function parseResponseJson(res) {
 
 async function handleStreamEvent(data) {
   if (data.message && loadingStep) loadingStep.textContent = data.message;
+
+  if (data.step === "init") {
+    stopLoading();
+  }
+
   if (data.step && data.step !== "init" && data.step !== "complete" && data.step !== "error") {
     updatePipelineStep(data.step, data.message);
   }
 
   if (data.step === "step1_done" && data.scenes?.length) {
-    renderSceneCards(data.scenes);
+    renderStep1Result(data.scenes);
     startPhonePreview(data.scenes);
+  }
+
+  if (data.step === "step2_done" && data.scene) {
+    appendStep2Image(data.scene);
+  }
+
+  if (data.step === "step3_done") {
+    renderStep3Result(!!data.has_bgm, data.message);
+  }
+
+  if (data.step === "step4_done" && data.final_video_url) {
+    renderStep4Result(data.final_video_url);
   }
 
   if (data.step === "complete") {
@@ -796,20 +901,6 @@ async function handleStreamEvent(data) {
     markPipelineError(data.message);
     showError(data.message);
   }
-}
-
-function renderSceneCards(scenes) {
-  if (!sceneList) return;
-  sceneList.innerHTML = scenes.map((scene) => `
-    <div class="sf-scene-card">
-      <div class="sf-scene-head">
-        <span class="sf-scene-num">Scene ${scene.scene_number}</span>
-        <span class="sf-scene-badge">${t("scene_rendered")}</span>
-      </div>
-      <div class="sf-scene-caption">${escapeHtml(scene.caption)}</div>
-      <div class="sf-scene-narration">${escapeHtml(scene.narration)}</div>
-    </div>
-  `).join("");
 }
 
 
@@ -841,12 +932,15 @@ function showError(message) {
 }
 
 async function showResults(data) {
-  if (!data.final_video_url) {
+  if (!data.final_video_url && !currentVideoUrl) {
     showError("영상이 생성되지 않았습니다. 잠시 후 다시 시도해 주세요.");
     return;
   }
 
-  currentVideoUrl = data.final_video_url;
+  if (data.final_video_url && !currentVideoUrl) {
+    renderStep4Result(data.final_video_url);
+  }
+
   currentVideoMeta = {
     businessName: data.meta?.business_name || businessNameInput?.value?.trim(),
     durationSeconds: data.meta?.total_duration || 30,
@@ -864,41 +958,36 @@ async function showResults(data) {
     <span>${meta.total_duration || 0}s</span>
   `;
 
-  if (finalVideoContainer && finalVideoPlayer) {
-    finalVideoContainer.style.display = "block";
-    finalVideoPlayer.src = data.final_video_url;
-  }
+  sceneList.innerHTML = "";
+  if (finalVideoContainer) finalVideoContainer.style.display = "none";
 
-  const scenes = data.assets?.timeline_scenes || [];
-  sceneList.innerHTML = scenes.map((scene) => `
-    <div class="sf-scene-card">
-      <div class="sf-scene-head">
-        <span class="sf-scene-num">Scene ${scene.scene_number}</span>
-        <span class="sf-scene-badge">${t("scene_rendered")}</span>
-      </div>
-      <div class="sf-scene-caption">${escapeHtml(scene.caption)}</div>
-      <div class="sf-scene-narration">${escapeHtml(scene.narration)}</div>
-    </div>
-  `).join("");
+  updatePipelineStep("step5", "⑤ 기기에 저장 중…");
 
-  if (DS) {
+  if (DS && currentVideoUrl) {
     try {
-      updatePipelineStep("step5", "⑤ 기기에 저장 중…");
-      const result = await DS.saveVideoToDevice(data.final_video_url, currentVideoMeta);
+      const result = await DS.saveVideoToDevice(currentVideoUrl, currentVideoMeta);
       if (result.method === "download") {
         statusBanner.textContent += " · 기기에 저장됨";
         markPipelineSaveDone("PC 다운로드 폴더에 저장됨");
-        if (finalVideoPlayer && result.blobUrl) finalVideoPlayer.src = result.blobUrl;
+        renderStep5Result("PC 다운로드 폴더에 저장됨", true);
+        const video = document.querySelector(".sf-step-video");
+        if (video && result.blobUrl) video.src = result.blobUrl;
       } else if (result.method === "share") {
         statusBanner.textContent += " · 공유 메뉴에서 저장하세요";
         markPipelineSaveDone("공유 메뉴 → 파일에 저장");
+        renderStep5Result("공유 메뉴 → 파일에 저장", true);
       } else if (result.method === "cancelled") {
         markPipelineSaveDone("다시 저장하려면 버튼을 누르세요");
+        renderStep5Result("다시 저장하려면 버튼을 누르세요", true);
       }
     } catch (err) {
       markPipelineSaveDone(`저장 실패: ${err.message}`);
+      renderStep5Result(`저장 실패: ${err.message}`, true);
       statusBanner.textContent += ` · 저장: ${err.message}`;
     }
+  } else {
+    renderStep5Result("영상 준비 완료", true);
+    markPipelineSaveDone("완료");
   }
 }
 
